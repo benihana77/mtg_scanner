@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: mtg_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: mtg_admin
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: mtg_inventory
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
