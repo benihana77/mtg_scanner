@@ -10,6 +10,7 @@ Provides an interactive console dashboard for:
 6. Relocating sets or sections between boxes (Box Shuffle when space runs out).
 7. Regenerating physical box divider slips.
 8. Connection diagnostics.
+9. Refreshing the local Scryfall mirror (scryfall_cards).
 """
 
 import curses
@@ -22,6 +23,7 @@ import db
 import csv_pipeline
 import manapool_client
 import pull_list_optimizer
+import scryfall_mirror
 
 
 def prompt_input(stdscr, prompt_text: str, default_val: str = "") -> str:
@@ -423,6 +425,23 @@ def action_diagnostics(stdscr) -> None:
     show_message_box(stdscr, "Diagnostics", lines)
 
 
+def action_refresh_mirror(stdscr) -> None:
+    """Downloads Scryfall's Default Cards bulk file into the local scryfall_cards mirror."""
+    stdscr.clear()
+    draw_header(stdscr, "Refreshing Scryfall Mirror")
+    show_message_box(stdscr, "Scryfall Mirror", ["Downloading and loading Default Cards bulk file...", "This takes a few minutes."], wait_key=False)
+    try:
+        result = scryfall_mirror.refresh_mirror()
+        status = scryfall_mirror.get_mirror_status()
+        lines = [
+            f"Loaded {result['cards_written']:,} cards (Scryfall bulk updated {result['bulk_updated_at'] or 'n/a'}).",
+            f"Mirror now holds {status['card_count']:,} cards.",
+        ]
+    except Exception as e:
+        lines = [f"Refresh FAILED: {e}"]
+    show_message_box(stdscr, "Scryfall Mirror", lines)
+
+
 def main_loop(stdscr) -> None:
     """Main Curses event loop."""
     curses.curs_set(0)
@@ -444,6 +463,7 @@ def main_loop(stdscr) -> None:
         ("[5]", "Browse Physical Inventory (Boxes, Sets, Sections)"),
         ("[6]", "Relocate Set / Section (Box Shuffle when space runs out)"),
         ("[7]", "Run System Diagnostics & Connection Check"),
+        ("[8]", "Refresh Local Scryfall Mirror (Default Cards bulk file)"),
         ("[Q]", "Quit"),
     ]
 
@@ -451,7 +471,7 @@ def main_loop(stdscr) -> None:
 
     while True:
         stdscr.clear()
-        draw_header(stdscr, "Select an action using Arrow Keys or Number Keys (1-7, Q)")
+        draw_header(stdscr, "Select an action using Arrow Keys or Number Keys (1-8, Q)")
 
         max_y, max_x = stdscr.getmaxyx()
         start_y = 4
@@ -473,7 +493,7 @@ def main_loop(stdscr) -> None:
                 stdscr.addstr(y, 12, f"{label}"[: max_x - 14], curses.color_pair(1))
 
         # Hotkey guide at bottom
-        guide = "[ENTER] Select  |  [1-7] Direct Jump  |  [Q] Exit Station"
+        guide = "[ENTER] Select  |  [1-8] Direct Jump  |  [Q] Exit Station"
         stdscr.addstr(max_y - 2, max(2, (max_x - len(guide)) // 2), guide, curses.color_pair(1) | curses.A_DIM)
 
         stdscr.refresh()
@@ -503,6 +523,8 @@ def main_loop(stdscr) -> None:
             elif choice == 7:
                 action_diagnostics(stdscr)
             elif choice == 8:
+                action_refresh_mirror(stdscr)
+            elif choice == 9:
                 break
         elif ch == ord("1"):
             action_ingest_batch(stdscr)
@@ -518,6 +540,8 @@ def main_loop(stdscr) -> None:
             action_relocate_box(stdscr)
         elif ch == ord("7"):
             action_diagnostics(stdscr)
+        elif ch == ord("8"):
+            action_refresh_mirror(stdscr)
 
 
 def main():
