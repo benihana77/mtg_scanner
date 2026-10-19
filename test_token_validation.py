@@ -4,6 +4,7 @@ import unittest
 
 from unittest import mock
 
+import collection_pull
 import import_live_inventory as ili
 import special_cases_report as scr
 import scryfall_mirror
@@ -165,6 +166,24 @@ class TestShelfSortKeys(unittest.TestCase):
     def test_regular_printing_before_showcase(self):
         rows = [{"name": "Cloister Gargoyle", "number": n, "finish": "NF"} for n in ["302", "7"]]
         self.assertEqual([r["number"] for r in sorted(rows, key=ili._set_sort_key)], ["7", "302"])
+
+
+class TestDecklistParsing(unittest.TestCase):
+    def test_formats(self):
+        reqs, bad = collection_pull.parse_decklist([
+            "Commander", "1 Atraxa, Praetors' Voice", "4x Lightning Bolt (M10) 146",
+            "1 Beast // Spider (TMID) 8-11", "2 Gandalf, Friend of the Shire *F*", "", "# note", "junk line",
+        ])
+        self.assertEqual(bad, ["junk line"])
+        self.assertEqual(reqs[0], {"qty": 1, "name": "Atraxa, Praetors' Voice", "set_code": None, "number": None, "foil": None})
+        self.assertEqual((reqs[1]["qty"], reqs[1]["set_code"], reqs[1]["number"]), (4, "M10", "146"))
+        self.assertEqual((reqs[2]["name"], reqs[2]["number"]), ("Beast // Spider", "8-11"))
+        self.assertTrue(reqs[3]["foil"])
+
+    def test_name_matching_accepts_front_face_and_accents(self):
+        self.assertTrue(collection_pull.name_matches("Delver of Secrets // Insectile Aberration", "delver of secrets"))
+        self.assertTrue(collection_pull.name_matches("\u00c9omer of the Riddermark", "Eomer of the Riddermark"))
+        self.assertFalse(collection_pull.name_matches("Lightning Bolt", "Lightning"))
 
 
 if __name__ == "__main__":

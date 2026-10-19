@@ -19,7 +19,7 @@ A high-velocity inventory management station and fulfillment optimizer for Magic
 
 1. **Interactive Curses TUI (`tui.py`)**:
    - Keyboard-driven terminal console with real-time database and API indicators.
-   - Menu: batch intake, push inventory to ManaPool, pick sheet from live API orders, pick sheet from a picklist CSV, browse inventory, box shuffle, diagnostics, and Scryfall mirror refresh.
+   - Menu: batch intake, push inventory to ManaPool, pick sheet from live API orders, pick sheet from a picklist CSV, browse inventory, box shuffle, diagnostics, Scryfall mirror refresh, and personal collection pulls.
 
 2. **ManaPool Batch Ingestion (`csv_pipeline.py`)**:
    - Ingests ManaPool set spreadsheets (`multiple_sets_all_products_*.csv`).
@@ -47,10 +47,16 @@ A high-velocity inventory management station and fulfillment optimizer for Magic
    - Automated unfulfilled order retrieval and item parsing.
    - Graceful fallback to offline CSV mode when API credentials are not set.
 
-6. **Scryfall Mirror (`scryfall_mirror.py`)**:
+6. **Personal Collection Pulls (`collection_pull.py`)**:
+   - Search in-stock cards by name (case/accent-insensitive), or pull one card or a whole decklist (`4 Lightning Bolt`, `1 Name (SET) 123`, `*F*` for foil).
+   - Takes the cheapest in-stock printing first (oldest section first), prints a pull sheet in walk order (`exports/personal_pull_*.txt`), and lists anything missing or short.
+   - Holds back copies needed by unfulfilled ManaPool orders unless `--force`.
+   - On confirmation, deducts the cards and pushes the new absolute totals for just those products to ManaPool; without API credentials (or if the push fails) it writes `exports/manapool_sync_*.csv` to upload by hand.
+
+7. **Scryfall Mirror (`scryfall_mirror.py`)**:
    - `python scryfall_mirror.py refresh` loads Scryfall's Default Cards bulk file (about a minute); `status` shows its size and age. Refresh before intaking a newly released set.
 
-7. **Setup & Audit Tools**:
+8. **Setup & Audit Tools**:
    - `import_live_inventory.py`: fresh import of a ManaPool inventory export against the Scryfall mirror and Set/Box map. Previews by default; `--rebuild` drops and recreates the inventory tables atomically.
    - `token_validation_report.py`: read-only report of tokens filed in set sections, non-tokens in token sections, and rows missing from the mirror.
    - `special_cases_report.py`: printable check sheet of unusual cards (combos, emblems, helper cards, promos, accent/symbol names, same-name printings, The List) at their planned locations.
@@ -121,6 +127,13 @@ python csv_pipeline.py relocate --source M3 --target M4 --set ZNR --section Sec-
 
 # Move every token chunk to a new box
 python csv_pipeline.py relocate --source M19 --target M20 --set TOKENS
+```
+
+### Pull Cards for a Personal Collection
+```bash
+python collection_pull.py search "lightning bolt"
+python collection_pull.py pull "Lightning Bolt" --qty 4
+python collection_pull.py pull --decklist mydeck.txt
 ```
 
 ### Browse Physical Inventory

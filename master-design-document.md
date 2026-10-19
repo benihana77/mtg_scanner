@@ -53,6 +53,7 @@ benihana77/mtg_scanner/
 ├── scryfall_mirror.py       # Local Scryfall mirror: bulk refresh, set/number + token-combo resolution
 ├── token_validation_report.py # Read-only report of tokens / non-tokens filed in the wrong place
 ├── special_cases_report.py # Printable check sheet of unusual cards at their planned locations
+├── collection_pull.py       # Search / pull cards (or a decklist) for a personal collection, then sync ManaPool
 ├── audit_inventory.py       # One-time audit: unmapped set assignment + token extraction sheet (to be superseded by the token validation report)
 ├── test_interim_pipeline.py # unittest suite for the interim pipeline
 └── Manapool Print Format - Set_Box Map.csv  # Set -> physical box (M1..M19) mapping
@@ -66,6 +67,7 @@ Scryfall mirror refresh (planned): downloads Scryfall's "Default Cards" bulk fil
 `csv_pipeline.py`: Manages temporary spreadsheet ingestion and ManaPool inventory sync prior to hardware CV integration.
 `import_live_inventory.py`: Fresh import of a ManaPool inventory export against `scryfall_cards`, using the Set/Box map to assign boxes (preview by default, `--rebuild` to write).
 `audit_inventory.py`: One-time audit that assigned boxes to unmapped sets and produced the token extraction walk sheet.
+`collection_pull.py`: Pulls cards out of store inventory for a personal collection or deck (CLI and TUI). Picks the cheapest in-stock printing, oldest section first; holds back copies needed by unfulfilled ManaPool orders unless forced; deducts on confirmation and pushes new absolute totals for only the affected products (rows that reach 0 are kept at quantity 0 so the push sends 0). Without API credentials it writes a CSV of absolute quantities instead. Pulled cards are not tracked; returns go back through normal intake.
 `pull_list_optimizer.py`: Ingests nightly order reports from ManaPool, joins with PostgreSQL inventory location metadata (`box_label`, `section_label`, `index_num`), calculates an optimal physical traversal path, and exports print-ready spreadsheets for fulfillment.
 `docker-compose.yml`: Provisions the persistent PostgreSQL instance.
 ---

@@ -21,6 +21,7 @@ import unittest
 import psycopg2
 from psycopg2 import extras
 
+import collection_pull
 import db
 import csv_pipeline
 import manapool_client
@@ -915,6 +916,67 @@ class TestMTGInterimPipeline(unittest.TestCase):
             [(p["section_label"], p["index_num"]) for p in allocated],
             [("TOKEN-1", 1), ("TOKEN-1", 2), ("TOKEN-2", 1)],
         )
+
+
+    def test_12_personal_pull_decklist_reservations_and_sync(self):
+        """Decklist pull takes the cheapest copies, holds open-order copies, deducts, and syncs totals."""
+        rows = [
+            {**self.token_row("TESTP", "1", "Lightning Bolt", layout="normal", qty="3"), "price": "0.50", "product_id": "pid-bolt-1"},
+            {**self.token_row("TESTP", "2", "Lightning Bolt", layout="normal", qty="2"), "price": "0.25", "product_id": "pid-bolt-2"},
+            {**self.token_row("TESTP", "3", "Counterspell", layout="normal", qty="1"), "price": "1.00", "product_id": "pid-cs"},
+        ]
+        csv_file = self.create_mock_manapool_csv("personal.csv", rows)
+        csv_pipeline.ingest_csv_batch(csv_file, box_label="TestBox-1", output_dir=self.test_dir)
+
+        reqs, unparsed = collection_pull.parse_decklist(["Deck", "3 Lightning Bolt", "1x Counterspell", "2 Missing Card", "???"])
+        self.assertEqual(unparsed, ["???"])
+
+        # Counterspell's only copy is on an open order -> held back.
+        picks, short = collection_pull.plan_pulls(collection_pull.load_stock(), reqs, reserved={"pid-cs": 1})
+        self.assertEqual([(p["collector_number"], p["qty_to_pull"]) for p in picks], [("2", 2), ("1", 1)])
+        held = {s["request"]["name"]: s for s in short}
+        self.assertTrue(held["Counterspell"]["held_for_orders"])
+        self.assertFalse(held["Missing Card"]["found_any"])
+
+        # Commit with the API mocked: ManaPool receives new absolute totals and prices.
+        with patch.object(collection_pull, "reserved_by_open_orders", return_value=({"pid-cs": 1}, "checked")), \
+             patch.object(manapool_client, "is_configured", return_value=True), \
+             patch("requests.post") as mock_post:
+            mock_post.return_value = MagicMock(status_code=200)
+            res = collection_pull.run_pull(reqs, "deck.txt", confirm=lambda lines: True, output_dir=self.test_dir)
+
+        self.assertTrue(res["committed"])
+        self.assertEqual(res["sync"]["mode"], "api")
+        payload = {e["product_id"]: e for e in mock_post.call_args[1]["json"]}
+        self.assertEqual(payload["pid-bolt-2"]["quantity"], 0)  # sold out, row kept at 0
+        self.assertEqual(payload["pid-bolt-1"]["quantity"], 2)
+        self.assertEqual(payload["pid-bolt-1"]["price_cents"], 50)
+        self.assertNotIn("pid-cs", payload)
+        self.assertEqual(db.get_total_quantities_by_product_ids(["pid-bolt-2", "pid-cs"]), {"pid-bolt-2": 0, "pid-cs": 1})
+
+    def test_13_personal_pull_without_api_writes_sync_csv(self):
+        """Without ManaPool credentials the pull still deducts and writes a CSV of absolute quantities."""
+        rows = [{**self.token_row("TESTP", "9", "Island", layout="normal", qty="5"), "product_id": "pid-island"}]
+        csv_file = self.create_mock_manapool_csv("island.csv", rows)
+        csv_pipeline.ingest_csv_batch(csv_file, box_label="TestBox-1", output_dir=self.test_dir)
+
+        with patch.object(manapool_client, "is_configured", return_value=False):
+            res = collection_pull.run_pull(
+                [{"qty": 2, "name": "island", "set_code": None, "number": None, "foil": None}],
+                "single", confirm=None, output_dir=self.test_dir,
+            )
+            declined = collection_pull.run_pull(
+                [{"qty": 1, "name": "Island", "set_code": None, "number": None, "foil": None}],
+                "single", confirm=lambda lines: False, output_dir=self.test_dir,
+            )
+
+        self.assertEqual(res["sync"]["mode"], "csv")
+        self.assertIn("not configured", res["order_status"])
+        with open(res["sync"]["csv_path"], encoding="utf-8") as f:
+            synced = list(csv.DictReader(f))
+        self.assertEqual([(r["product_id"], r["quantity"]) for r in synced], [("pid-island", "3")])
+        self.assertFalse(declined["committed"])
+        self.assertEqual(db.get_total_quantities_by_product_ids(["pid-island"]), {"pid-island": 3})
 
 
 if __name__ == "__main__":

@@ -10,6 +10,7 @@ Provides an interactive console dashboard for:
 6. Relocating sets, sections or all TOKENS between boxes (Box Shuffle when space runs out).
 7. Connection diagnostics.
 8. Refreshing the local Scryfall mirror (scryfall_cards).
+9. Pulling cards for a personal collection / deck (search, decklist, ManaPool sync).
 """
 
 import curses
@@ -19,6 +20,7 @@ import time
 from typing import Any, Dict, List, Optional, Tuple
 
 import db
+import collection_pull
 import csv_pipeline
 import manapool_client
 import pull_list_optimizer
@@ -439,6 +441,78 @@ def action_refresh_mirror(stdscr) -> None:
     show_message_box(stdscr, "Scryfall Mirror", lines)
 
 
+def action_personal_pull(stdscr) -> None:
+    """Search inventory or load a decklist, pull cards for a personal collection, and sync ManaPool."""
+    stdscr.clear()
+    draw_header(stdscr, "Personal Collection Pull")
+    stdscr.addstr(3, 2, "=== PULL CARDS FOR A PERSONAL COLLECTION / DECK ===", curses.A_BOLD)
+    stdscr.addstr(4, 2, "Enter a card name, part of a name to search, or a path to a decklist file.")
+
+    query = prompt_input(stdscr, "Card name / search text / decklist path", "")
+    if not query:
+        return
+
+    if os.path.isfile(query):
+        with open(query, encoding="utf-8") as f:
+            requests_, unparsed = collection_pull.parse_decklist(f)
+        label = os.path.basename(query)
+        if unparsed:
+            show_message_box(stdscr, "Skipped Lines", [f"Could not parse {len(unparsed)} lines:"] + unparsed[:10])
+    else:
+        hits = collection_pull.search_stock(collection_pull.load_stock(), query)
+        if not hits:
+            show_message_box(stdscr, "No Match", [f"No in-stock cards match '{query}'."])
+            return
+        lines = []
+        for n, r in enumerate(hits[:15], start=1):
+            price = f"${float(r['manapool_listed_price']):.2f}" if r["manapool_listed_price"] is not None else "-"
+            finish = "FOIL" if r["is_foil"] else "NF"
+            lines.append(f"{n:>2}. {r['name'][:30]:<30} {r['set_code']:<5} {r['collector_number']:<6} {finish:<4} x{r['quantity']:<3} {price:<7} {r['box_label']} {r['section_label']} #{r['index_num']:03d}")
+        if len(hits) > 15:
+            lines.append(f"... {len(hits) - 15} more; refine the search to see them.")
+        show_message_box(stdscr, f"{len(hits)} In-Stock Matches", lines)
+
+        choice = prompt_input(stdscr, "Row number to pull (empty = cancel)", "1")
+        if not choice.isdigit() or not 1 <= int(choice) <= min(len(hits), 15):
+            return
+        row = hits[int(choice) - 1]
+        qty_str = prompt_input(stdscr, f"Copies of {row['name']} to pull (max {row['quantity']})", "1")
+        if not qty_str.isdigit() or int(qty_str) < 1:
+            return
+        requests_ = [{"qty": int(qty_str), "name": row["name"], "set_code": row["set_code"],
+                      "ids": (row["scryfall_id"], row["back_scryfall_id"]), "foil": row["is_foil"]}]
+        label = f"{qty_str} x {row['name']} ({row['set_code']} {row['collector_number']})"
+
+    def confirm(summary: List[str]) -> bool:
+        show_message_box(stdscr, "Confirm Pull", summary, wait_key=False)
+        return prompt_input(stdscr, "Deduct from inventory and sync ManaPool? (y/n)", "n").lower() == "y"
+
+    show_message_box(stdscr, "Planning", ["Checking open orders and choosing copies..."], wait_key=False)
+    try:
+        res = collection_pull.run_pull(requests_, label, confirm=confirm)
+    except Exception as e:
+        show_message_box(stdscr, "Pull Error", [f"Error: {e}"])
+        return
+
+    lines = [f"Pull sheet: {res['sheet_path']}", res["order_status"]]
+    for s in res["shortfalls"][:8]:
+        why = "held for open order" if s["held_for_orders"] else ("not enough in stock" if s["found_any"] else "not in stock")
+        lines.append(f"Short: {s['request']['name'][:30]} missing {s['missing_qty']} ({why})")
+    if res["committed"]:
+        lines.append(f"Deducted {sum(p['qty_to_pull'] for p in res['picks'])} cards from inventory.")
+        sync = res["sync"]
+        if sync["mode"] == "api":
+            lines.append(f"ManaPool: updated {sync['updated']} products.")
+        elif sync["mode"] == "csv":
+            lines.append("ManaPool NOT updated. Upload absolute quantities by hand:")
+            lines.append(f"  {sync['csv_path']}")
+    elif res["picks"]:
+        lines.append("Not confirmed: inventory unchanged.")
+    else:
+        lines.append("Nothing available to pull.")
+    show_message_box(stdscr, "Personal Pull", lines)
+
+
 def main_loop(stdscr) -> None:
     """Main Curses event loop."""
     curses.curs_set(0)
@@ -461,6 +535,7 @@ def main_loop(stdscr) -> None:
         ("[6]", "Relocate Set / Section (Box Shuffle when space runs out)"),
         ("[7]", "Run System Diagnostics & Connection Check"),
         ("[8]", "Refresh Local Scryfall Mirror (Default Cards bulk file)"),
+        ("[9]", "Pull Cards for Personal Collection / Deck (search or decklist)"),
         ("[Q]", "Quit"),
     ]
 
@@ -468,7 +543,7 @@ def main_loop(stdscr) -> None:
 
     while True:
         stdscr.clear()
-        draw_header(stdscr, "Select an action using Arrow Keys or Number Keys (1-8, Q)")
+        draw_header(stdscr, "Select an action using Arrow Keys or Number Keys (1-9, Q)")
 
         max_y, max_x = stdscr.getmaxyx()
         start_y = 4
@@ -490,7 +565,7 @@ def main_loop(stdscr) -> None:
                 stdscr.addstr(y, 12, f"{label}"[: max_x - 14], curses.color_pair(1))
 
         # Hotkey guide at bottom
-        guide = "[ENTER] Select  |  [1-8] Direct Jump  |  [Q] Exit Station"
+        guide = "[ENTER] Select  |  [1-9] Direct Jump  |  [Q] Exit Station"
         stdscr.addstr(max_y - 2, max(2, (max_x - len(guide)) // 2), guide, curses.color_pair(1) | curses.A_DIM)
 
         stdscr.refresh()
@@ -522,6 +597,8 @@ def main_loop(stdscr) -> None:
             elif choice == 8:
                 action_refresh_mirror(stdscr)
             elif choice == 9:
+                action_personal_pull(stdscr)
+            elif choice == 10:
                 break
         elif ch == ord("1"):
             action_ingest_batch(stdscr)
@@ -539,6 +616,8 @@ def main_loop(stdscr) -> None:
             action_diagnostics(stdscr)
         elif ch == ord("8"):
             action_refresh_mirror(stdscr)
+        elif ch == ord("9"):
+            action_personal_pull(stdscr)
 
 
 def main():
