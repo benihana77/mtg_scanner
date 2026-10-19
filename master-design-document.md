@@ -62,7 +62,7 @@ Module Responsibilities
 `hashing_engine.py`: Intercepts camera frames, crops card boundaries using contour detection, generates perceptual hashes, and computes Hamming distance against Scryfall hash caches.
 `db.py`: Executes parameterized SQL operations (`INSERT`/`UPDATE`) against the `scryfall_cards`, `inventory`, and `price_history` tables, and initializes the schema from `schema.sql`.
 Scryfall mirror refresh (planned): downloads Scryfall's "Default Cards" bulk file and upserts it into `scryfall_cards`. Run manually from the TUI or CLI, e.g. before an intake that contains a new set.
-`manapool_client.py`: Fetches unfulfilled orders and pushes absolute inventory quantities to the ManaPool API.
+`manapool_client.py`: Fetches unfulfilled orders and pushes absolute inventory quantities to the ManaPool API. `build_inventory_payload` builds the exact push payload (failing if database totals cannot be read, rather than falling back to per-item quantities); `preview-push` is a dry run that compares it with a baseline export and sends nothing.
 `tui.py`: Keyboard-driven terminal front end for intake, fulfillment, browsing and relocation.
 `csv_pipeline.py`: Manages temporary spreadsheet ingestion and ManaPool inventory sync prior to hardware CV integration.
 `import_live_inventory.py`: Fresh import of a ManaPool inventory export against `scryfall_cards`, using the Set/Box map to assign boxes (preview by default, `--rebuild` to write).

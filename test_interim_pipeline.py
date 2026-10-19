@@ -979,6 +979,36 @@ class TestMTGInterimPipeline(unittest.TestCase):
         self.assertEqual(db.get_total_quantities_by_product_ids(["pid-island"]), {"pid-island": 3})
 
 
+    def test_14_preview_push_sends_nothing_and_compares_baseline(self):
+        """preview_push builds the real payload, compares it with a baseline export, and never POSTs."""
+        rows = [
+            {**self.token_row("TESTV", "1", "Kept Card", layout="normal", qty="2"), "price": "0.30", "product_id": "pid-kept"},
+            {**self.token_row("TESTV", "2", "Grown Card", layout="normal", qty="3"), "price": "0.40", "product_id": "pid-grown"},
+            {**self.token_row("TESTV", "3", "New Card", layout="normal", qty="1"), "price": "0.50", "product_id": "pid-new"},
+        ]
+        csv_file = self.create_mock_manapool_csv("preview.csv", rows)
+        csv_pipeline.ingest_csv_batch(csv_file, box_label="TestBox-1", output_dir=self.test_dir)
+
+        baseline = os.path.join(self.test_dir, "baseline.csv")
+        with open(baseline, "w", newline="", encoding="utf-8") as f:
+            writer = csv.writer(f)
+            writer.writerow(["product_id", "quantity", "price"])
+            writer.writerow(["pid-kept", "2", "0.30"])
+            writer.writerow(["pid-grown", "1", "0.40"])
+
+        with patch("requests.post") as mock_post:
+            res = manapool_client.preview_push(["TESTV"], baseline, self.test_dir)
+        mock_post.assert_not_called()
+
+        flags = {r["product_id"]: r["flags"] for r in res["rows"]}
+        self.assertEqual(flags, {"pid-kept": "", "pid-grown": "QTY CHANGE", "pid-new": "NOT IN BASELINE"})
+        self.assertEqual(res["counts"]["unchanged"], 1)
+        with open(res["json_path"], encoding="utf-8") as f:
+            import json
+            payload = {e["product_id"]: e["quantity"] for e in json.load(f)}
+        self.assertEqual(payload, {"pid-kept": 2, "pid-grown": 3, "pid-new": 1})
+
+
 if __name__ == "__main__":
     unittest.main()
 

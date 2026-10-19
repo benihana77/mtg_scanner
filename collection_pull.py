@@ -339,7 +339,10 @@ def sync_manapool(picks: List[Dict[str, Any]], output_dir: str = "exports") -> D
 
     errors: List[str] = []
     if manapool_client.is_configured():
-        updated, errors = manapool_client.push_inventory_batch(items, aggregate_with_db=True)
+        try:
+            updated, errors = manapool_client.push_inventory_batch(items, aggregate_with_db=True)
+        except Exception as e:  # keep the deduction; fall back to the CSV below
+            updated, errors = 0, [f"Push failed: {e}"]
         if not errors:
             return {"mode": "api", "updated": updated, "errors": [], "csv_path": None}
 
