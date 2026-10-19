@@ -26,6 +26,7 @@ import db
 import csv_pipeline
 import manapool_client
 import pull_list_optimizer
+import repricer
 from unittest.mock import MagicMock, patch
 
 
@@ -65,7 +66,7 @@ class TestMTGInterimPipeline(unittest.TestCase):
     def setUp(self):
         """Empties the test database's inventory and catalog before each test."""
         with db.get_db_cursor() as cur:
-            cur.execute("TRUNCATE inventory, price_history, scryfall_cards RESTART IDENTITY;")
+            cur.execute("TRUNCATE inventory, price_history, price_pins, scryfall_cards RESTART IDENTITY;")
         # Use a test Set/Box map (no TOKENS row) instead of the real one.
         self.write_set_box_map({})
 
@@ -1063,6 +1064,86 @@ class TestMTGInterimPipeline(unittest.TestCase):
         self.assertEqual(sorted(e["product_id"] for e in dry["to_push"]), ["pid-new", "pid-up"])
         self.assertEqual(sorted(e["product_id"] for e in mock_post.call_args[1]["json"]), ["pid-new", "pid-up"])
         self.assertEqual([m["product_id"] for m in res["mismatches"]], ["pid-new"])  # live qty 0 != sent 1
+
+
+    def repricer_fixture(self):
+        """Two in-stock products with a fresh fake feed; returns (config, feed rows, scryfall ids)."""
+        rows = [
+            {**self.token_row("TESTZ", "1", "Bulk Card", layout="normal", qty="3"), "price": "0.15", "product_id": "pid-bulk"},
+            {**self.token_row("TESTZ", "2", "Spike Card", layout="normal", qty="1"), "price": "0.20", "product_id": "pid-spike"},
+        ]
+        csv_file = self.create_mock_manapool_csv("reprice.csv", rows)
+        csv_pipeline.ingest_csv_batch(csv_file, box_label="TestBox-1", output_dir=self.test_dir)
+        config = repricer.load_config()
+        now = __import__("datetime").datetime.now(__import__("datetime").timezone.utc).isoformat()
+        feed = [
+            {"scryfall_id": "sf-testz-1", "price_cents_nm": 15, "price_market": 23, "price_cents_nm_foil": None,
+             "price_market_foil": None, "available_quantity": 500},
+            {"scryfall_id": "sf-testz-2", "price_cents_nm": 120, "price_market": 40, "price_cents_nm_foil": None,
+             "price_market_foil": None, "available_quantity": 4},
+        ]
+        return config, now, feed
+
+    def test_17_snapshot_records_history_once_per_day(self):
+        config, now, feed = self.repricer_fixture()
+        with patch.object(manapool_client, "fetch_price_feed", return_value=(now, feed)):
+            first = repricer.snapshot(config)
+            again = repricer.snapshot(config)
+        self.assertEqual((first["recorded"], again["recorded"]), (2, 2))
+        with db.get_db_cursor(commit=False) as cur:
+            cur.execute("SELECT scryfall_id, market_price_normal, low_price_normal, available_quantity, listed_price_normal "
+                        "FROM price_history ORDER BY scryfall_id;")
+            hist = [dict(r) for r in cur.fetchall()]
+        self.assertEqual(len(hist), 2)  # upserted, not duplicated
+        self.assertEqual((float(hist[1]["low_price_normal"]), hist[1]["available_quantity"], float(hist[1]["listed_price_normal"])),
+                         (1.20, 4, 0.20))
+
+    def test_18_reprice_blocks_on_drift_then_reviews_pushes_and_verifies(self):
+        config, now, feed = self.repricer_fixture()
+        live = {"pid-bulk": 15, "pid-spike": 25}  # spike's live price drifted from the DB's $0.20
+
+        def fake_inventory():
+            return [{"product_id": pid, "price_cents": c, "quantity": 1} for pid, c in live.items()]
+
+        with patch.object(manapool_client, "fetch_price_feed", return_value=(now, feed)), \
+             patch.object(manapool_client, "fetch_seller_inventory", side_effect=fake_inventory), \
+             patch.object(manapool_client, "is_configured", return_value=True), \
+             patch("requests.request") as mock_req:
+            blocked = repricer.run_reprice(config=config, output_dir=self.test_dir)
+            self.assertIn("differ", blocked["blocked"])
+            self.assertEqual(repricer.apply_drift(repricer.check_drift()["price_drift"]), 1)
+
+            # bulk: 0.15 -> 0.23 automatic; spike: 0.25 -> 1.19 needs review (LOW>MARKET riser), accepted at $1.00.
+            def post(method, url, **kw):
+                for e in kw["json"]:
+                    live[e["product_id"]] = e["price_cents"]
+                return MagicMock(status_code=200)
+            mock_req.side_effect = post
+            res = repricer.run_reprice(review=lambda items: {i["product_id"]: 100 for i in items},
+                                       confirm=lambda lines: True, config=config, output_dir=self.test_dir)
+
+        plan = {i["product_id"]: i for i in res["plan"]}
+        self.assertEqual((plan["pid-bulk"]["status"], plan["pid-bulk"]["target_cents"]), ("auto", 23))
+        self.assertEqual((plan["pid-spike"]["status"], plan["pid-spike"]["signals"]), ("review", ["LOW>MARKET"]))
+        sent = mock_req.call_args[1]["json"]
+        self.assertTrue(all(e["quantity"] is None for e in sent))  # price-only push
+        self.assertEqual(res["applied"], {"pid-bulk": 23, "pid-spike": 100})
+        prices = {p["product_id"]: p["listed_cents"] for p in repricer.load_products()}
+        self.assertEqual(prices, {"pid-bulk": 23, "pid-spike": 100})
+
+    def test_19_pins_hold_or_fix_prices(self):
+        config, now, feed = self.repricer_fixture()
+        repricer.add_pin("pid-bulk", None, "hold")
+        repricer.add_pin("pid-spike", 0.50)
+        with self.assertRaises(ValueError):
+            repricer.add_pin("pid-spike", 0.10)
+        plan = {i["product_id"]: i for i in repricer.plan_reprice(
+            repricer.load_products(), {f["scryfall_id"]: f for f in feed}, repricer.load_pins(), {}, config)}
+        self.assertEqual(plan["pid-bulk"]["status"], "pinned")
+        self.assertEqual((plan["pid-spike"]["status"], plan["pid-spike"]["target_cents"]), ("auto", 50))
+        self.assertEqual(len(repricer.list_pins()), 2)
+        self.assertTrue(repricer.remove_pin("pid-bulk"))
+        self.assertFalse(repricer.remove_pin("pid-bulk"))
 
 
 if __name__ == "__main__":

@@ -11,6 +11,8 @@ Provides an interactive console dashboard for:
 7. Connection diagnostics.
 8. Refreshing the local Scryfall mirror (scryfall_cards).
 9. Pulling cards for a personal collection / deck (search, decklist, ManaPool sync).
+R. Repricing listings from ManaPool market data (preview, review, push).
+P. Managing repricer price pins.
 """
 
 import curses
@@ -24,6 +26,7 @@ import collection_pull
 import csv_pipeline
 import manapool_client
 import pull_list_optimizer
+import repricer
 import scryfall_mirror
 
 
@@ -513,6 +516,95 @@ def action_personal_pull(stdscr) -> None:
     show_message_box(stdscr, "Personal Pull", lines)
 
 
+def action_reprice(stdscr) -> None:
+    """Runs the repricer: drift check, plan, review over-limit changes, confirm, push, verify."""
+    stdscr.clear()
+    draw_header(stdscr, "Reprice Listings")
+    stdscr.addstr(3, 2, "=== REPRICE FROM MANAPOOL MARKET DATA ===", curses.A_BOLD)
+    preview_only = prompt_input(stdscr, "Preview only, push nothing? (y/n)", "y").lower() == "y"
+
+    def review(items: List[Dict[str, Any]]) -> Dict[str, Optional[int]]:
+        lines = [f"{n:>2}. {i['name'][:28]:<28} {i['set_code']:<5} {'FOIL' if i['is_foil'] else 'NF':<4} "
+                 f"{repricer._fmt(i['listed_cents']):>7} -> {repricer._fmt(i['target_cents']):<7} "
+                 f"low {repricer._fmt(i['low'])} mkt {repricer._fmt(i['market'])} {' '.join(i['signals'])}"
+                 for n, i in enumerate(items[:20], start=1)]
+        if len(items) > 20:
+            lines.append(f"... {len(items) - 20} more (see the report CSV)")
+        show_message_box(stdscr, f"{len(items)} Changes Need Review", lines)
+        choice = prompt_input(stdscr, "[a]ccept all, [r]eject all, [o]ne by one", "r").lower()
+        if choice == "a":
+            return {i["product_id"]: i["target_cents"] for i in items}
+        if choice != "o":
+            return {i["product_id"]: None for i in items}
+        floor = repricer._cents(repricer.load_config()["pricing"]["floor"])
+        decisions: Dict[str, Optional[int]] = {}
+        for i in items:
+            ans = prompt_input(
+                stdscr, f"{i['name'][:30]} {repricer._fmt(i['listed_cents'])} -> {repricer._fmt(i['target_cents'])}: "
+                "[a]ccept, [s]kip, or a price", "s").lower()
+            if ans == "a":
+                decisions[i["product_id"]] = i["target_cents"]
+            elif ans.replace(".", "", 1).isdigit():
+                decisions[i["product_id"]] = max(repricer._cents(ans), floor)
+            else:
+                decisions[i["product_id"]] = None
+        return decisions
+
+    def confirm(lines: List[str]) -> bool:
+        show_message_box(stdscr, "Confirm Reprice", lines, wait_key=False)
+        return prompt_input(stdscr, "Push these price changes to ManaPool? (y/n)", "n").lower() == "y"
+
+    show_message_box(stdscr, "Repricing", ["Checking live prices, downloading the ManaPool price feed...",
+                                           "This takes about a minute."], wait_key=False)
+    try:
+        res = repricer.run_reprice(review=review, confirm=confirm, preview=preview_only)
+    except Exception as e:
+        show_message_box(stdscr, "Reprice Error", [f"Error: {e}"])
+        return
+    if res["blocked"]:
+        show_message_box(stdscr, "Reprice Blocked", [res["blocked"]])
+        return
+    lines = list(res["header"]) + ["", f"Report: {res['txt_path']}"]
+    if res["pushed"] or res["errors"]:
+        lines.append(f"Pushed {res['pushed']} prices; verified {len(res['applied'])}; {len(res['mismatches'])} mismatches.")
+        lines.extend(f"Error: {e[:80]}" for e in res["errors"][:3])
+    show_message_box(stdscr, "Reprice Result", lines)
+
+
+def action_price_pins(stdscr) -> None:
+    """Lists, adds and removes repricer pins."""
+    while True:
+        stdscr.clear()
+        draw_header(stdscr, "Repricer Price Pins")
+        pins = repricer.list_pins()
+        lines = [f"{n:>2}. {(p['name'] or '?')[:28]:<28} {p['set_code'] or '':<5} {p['collector_number'] or '':<6} "
+                 f"{'FOIL' if p['is_foil'] else 'NF':<4} listed {p['listed_price']} "
+                 f"{'fixed $' + str(p['fixed_price']) if p['fixed_price'] is not None else '(hold)'} {p['note'] or ''}"
+                 for n, p in enumerate(pins, start=1)] or ["No pins."]
+        show_message_box(stdscr, f"{len(pins)} Pinned Products", lines)
+        action = prompt_input(stdscr, "[a]dd pin, [r]emove pin, or [q]uit", "q").lower()
+        if action == "a":
+            set_code = prompt_input(stdscr, "Set code", "").upper()
+            number = prompt_input(stdscr, "Collector number", "")
+            foil = prompt_input(stdscr, "Foil? (y/n)", "n").lower() == "y"
+            ids = repricer.find_product_ids(set_code, number, foil)
+            if len(ids) != 1:
+                show_message_box(stdscr, "Not Found", [f"{len(ids)} products match {set_code} {number} {'FOIL' if foil else 'NF'}."])
+                continue
+            price = prompt_input(stdscr, "Fixed price in dollars (empty = hold listed price)", "")
+            note = prompt_input(stdscr, "Note (optional)", "")
+            try:
+                repricer.add_pin(ids[0], float(price) if price else None, note or None)
+            except ValueError as e:
+                show_message_box(stdscr, "Pin Error", [str(e)])
+        elif action == "r" and pins:
+            n = prompt_input(stdscr, "Pin number to remove", "")
+            if n.isdigit() and 1 <= int(n) <= len(pins):
+                repricer.remove_pin(pins[int(n) - 1]["manapool_product_id"])
+        else:
+            return
+
+
 def main_loop(stdscr) -> None:
     """Main Curses event loop."""
     curses.curs_set(0)
@@ -536,6 +628,8 @@ def main_loop(stdscr) -> None:
         ("[7]", "Run System Diagnostics & Connection Check"),
         ("[8]", "Refresh Local Scryfall Mirror (Default Cards bulk file)"),
         ("[9]", "Pull Cards for Personal Collection / Deck (search or decklist)"),
+        ("[R]", "Reprice Listings from ManaPool Market Data (preview / review / push)"),
+        ("[P]", "Manage Repricer Price Pins"),
         ("[Q]", "Quit"),
     ]
 
@@ -543,15 +637,16 @@ def main_loop(stdscr) -> None:
 
     while True:
         stdscr.clear()
-        draw_header(stdscr, "Select an action using Arrow Keys or Number Keys (1-9, Q)")
+        draw_header(stdscr, "Select an action using Arrow Keys or Keys (1-9, R, P, Q)")
 
         max_y, max_x = stdscr.getmaxyx()
         start_y = 4
 
         stdscr.addstr(start_y, 4, "ACTIONS:", curses.color_pair(3) | curses.A_BOLD)
 
+        spacing = 2 if start_y + 2 + len(menu_items) * 2 < max_y - 3 else 1
         for idx, (shortcut, label) in enumerate(menu_items):
-            y = start_y + 2 + (idx * 2)
+            y = start_y + 2 + (idx * spacing)
             if y >= max_y - 3:
                 break
 
@@ -565,7 +660,7 @@ def main_loop(stdscr) -> None:
                 stdscr.addstr(y, 12, f"{label}"[: max_x - 14], curses.color_pair(1))
 
         # Hotkey guide at bottom
-        guide = "[ENTER] Select  |  [1-9] Direct Jump  |  [Q] Exit Station"
+        guide = "[ENTER] Select  |  [1-9/R/P] Direct Jump  |  [Q] Exit Station"
         stdscr.addstr(max_y - 2, max(2, (max_x - len(guide)) // 2), guide, curses.color_pair(1) | curses.A_DIM)
 
         stdscr.refresh()
@@ -599,6 +694,10 @@ def main_loop(stdscr) -> None:
             elif choice == 9:
                 action_personal_pull(stdscr)
             elif choice == 10:
+                action_reprice(stdscr)
+            elif choice == 11:
+                action_price_pins(stdscr)
+            elif choice == 12:
                 break
         elif ch == ord("1"):
             action_ingest_batch(stdscr)
@@ -618,6 +717,10 @@ def main_loop(stdscr) -> None:
             action_refresh_mirror(stdscr)
         elif ch == ord("9"):
             action_personal_pull(stdscr)
+        elif ch in [ord("r"), ord("R")]:
+            action_reprice(stdscr)
+        elif ch in [ord("p"), ord("P")]:
+            action_price_pins(stdscr)
 
 
 def main():

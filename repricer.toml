@@ -1,0 +1,29 @@
+# Repricer settings. Read on every run; edit and re-run, no code changes needed.
+# Prices are in dollars.
+
+[pricing]
+# Base price = max(lowest NM listing, market price) * (1 + adjustment_pct / 100)
+adjustment_pct = -1.0
+# ManaPool's minimum listing price; nothing is priced below this.
+floor = 0.15
+
+[review]
+# A change is applied automatically unless it exceeds BOTH limits; then it needs review.
+max_auto_change_pct = 30.0
+max_auto_change_dollars = 0.50
+
+[risers]
+# A card is flagged as a riser if ANY signal fires. Risers use the normal formula;
+# the flag is shown in the report and history.
+window_days = 7
+# Lowest listing is at least this multiple of the market price.
+low_vs_market_ratio = 1.5
+# ManaPool-wide available quantity fell by at least this percent within the window.
+supply_drop_pct = 50.0
+# Market price rose by at least this percent AND this many dollars within the window.
+market_rise_pct = 50.0
+market_rise_dollars = 0.25
+
+[feed]
+# Refuse to price from (or snapshot) feed data older than this.
+max_age_hours = 24

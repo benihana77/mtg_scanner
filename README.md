@@ -58,10 +58,16 @@ A high-velocity inventory management station and fulfillment optimizer for Magic
    - Holds back copies needed by unfulfilled ManaPool orders unless `--force`.
    - On confirmation, deducts the cards and pushes the new absolute totals for just those products to ManaPool; without API credentials (or if the push fails) it writes `exports/manapool_sync_*.csv` to upload by hand.
 
-7. **Scryfall Mirror (`scryfall_mirror.py`)**:
+7. **Repricer (`repricer.py`, settings in `repricer.toml`)**:
+   - Prices every in-stock listing at max(lowest NM listing, market) −1%, floor $0.15, from ManaPool's public price feed (one request per run).
+   - Changes over both review limits (30% and $0.50) need your review; everything else is applied automatically. Risers (lowest listing far above market, supply draining, market climbing) are flagged in the report.
+   - Refuses to push while live ManaPool prices differ from the database (`sync --apply` fixes that); pushes price only, then reads prices back to verify.
+   - `snapshot` records daily price history (run nightly from cron); pins hold or fix individual prices. TUI: [R] reprice, [P] pins.
+
+8. **Scryfall Mirror (`scryfall_mirror.py`)**:
    - `python scryfall_mirror.py refresh` loads Scryfall's Default Cards bulk file (about a minute); `status` shows its size and age. Refresh before intaking a newly released set.
 
-8. **Setup & Audit Tools**:
+9. **Setup & Audit Tools**:
    - `import_live_inventory.py`: fresh import of a ManaPool inventory export against the Scryfall mirror and Set/Box map. Previews by default; `--rebuild` drops and recreates the inventory tables atomically.
    - `token_validation_report.py`: read-only report of tokens filed in set sections, non-tokens in token sections, and rows missing from the mirror.
    - `special_cases_report.py`: printable check sheet of unusual cards (combos, emblems, helper cards, promos, accent/symbol names, same-name printings, The List) at their planned locations.
@@ -141,6 +147,15 @@ python collection_pull.py pull "Lightning Bolt" --qty 4
 python collection_pull.py pull --decklist mydeck.txt
 ```
 
+### Reprice
+```bash
+python repricer.py run --preview     # plan and report only
+python repricer.py run               # drift check, review, confirm, push, verify
+python repricer.py sync [--apply]    # compare / copy live ManaPool prices into the database
+python repricer.py snapshot          # record today's price history (nightly via cron)
+python repricer.py pin --set CMR --number 123 [--foil] [--price 2.50]
+```
+
 ### Browse Physical Inventory
 ```bash
 python csv_pipeline.py list
@@ -163,7 +178,7 @@ python pull_list_optimizer.py --api --commit
 
 ## Running Automated Tests
 ```bash
-python -m unittest test_interim_pipeline test_token_validation -v
+python -m unittest test_interim_pipeline test_token_validation test_repricer -v
 ```
 The integration tests run against a separate `mtg_inventory_test` database (override with `TEST_DB_NAME`), which they create and reset themselves; the live database is never touched.
 

@@ -277,6 +277,90 @@ def push_inventory_batch(
     return total_updated, errors
 
 
+def _request(method: str, url: str, max_retries: int = 3, **kwargs: Any) -> requests.Response:
+    """Sends a request, waiting and retrying when ManaPool rate-limits it (HTTP 429 + Retry-After)."""
+    for attempt in range(max_retries + 1):
+        resp = requests.request(method, url, **kwargs)
+        if resp.status_code != 429 or attempt == max_retries:
+            return resp
+        wait = resp.headers.get("Retry-After", "5")
+        time.sleep(min(float(wait) if wait.replace(".", "", 1).isdigit() else 5.0, 120.0))
+    return resp
+
+
+def fetch_price_feed() -> Tuple[Optional[str], List[Dict[str, Any]]]:
+    """Downloads ManaPool's public price feed for every in-stock single (one request, no auth).
+
+    Prices in the feed are integer cents. The feed is refreshed roughly hourly.
+
+    Returns:
+        Tuple[Optional[str], List[Dict[str, Any]]]: (feed 'as_of' ISO timestamp, rows keyed
+            by scryfall_id with price_cents_nm, price_cents_nm_foil, price_market,
+            price_market_foil and available_quantity).
+
+    Raises:
+        requests.HTTPError: If the feed cannot be downloaded.
+    """
+    resp = _request("GET", f"{BASE_URL}/prices/singles", headers={"User-Agent": "mtg_scanner/1.0"}, timeout=120)
+    resp.raise_for_status()
+    body = resp.json()
+    return body.get("meta", {}).get("as_of"), body.get("data", [])
+
+
+def fetch_seller_inventory(page_size: int = 10000) -> List[Dict[str, Any]]:
+    """Reads every live listing in the seller's ManaPool inventory (cursor-paged, authenticated).
+
+    Returns:
+        List[Dict[str, Any]]: Items with product_type, product_id, price_cents and quantity.
+
+    Raises:
+        RuntimeError: If the API is not configured or a page cannot be read.
+    """
+    if not is_configured():
+        raise RuntimeError("ManaPool API is not configured.")
+    items: List[Dict[str, Any]] = []
+    cursor: Optional[str] = None
+    while True:
+        params: Dict[str, Any] = {"limit": page_size}
+        if cursor:
+            params["cursor"] = cursor
+        resp = _request("GET", f"{BASE_URL}/seller/inventory", headers=get_headers(), params=params, timeout=60)
+        if resp.status_code != 200:
+            raise RuntimeError(f"Reading seller inventory failed: HTTP {resp.status_code} {resp.text[:200]}")
+        body = resp.json()
+        items.extend(body.get("inventory", []))
+        cursor = body.get("pagination", {}).get("next_cursor")
+        if not cursor:
+            return items
+
+
+def push_prices(prices: Dict[str, int], product_type: str = "mtg_single") -> Tuple[int, List[str]]:
+    """Sets prices only (quantity null, left unchanged) for products, in batches of 2,000.
+
+    Args:
+        prices (Dict[str, int]): product_id -> price in cents.
+        product_type (str): ManaPool product type.
+
+    Returns:
+        Tuple[int, List[str]]: (items updated, error messages).
+    """
+    if not is_configured():
+        return 0, ["ManaPool API is not configured. Cannot push prices."]
+    payload = [
+        {"product_type": product_type, "product_id": pid, "price_cents": cents, "quantity": None}
+        for pid, cents in prices.items()
+    ]
+    updated, errors = 0, []
+    for i in range(0, len(payload), 2000):
+        chunk = payload[i : i + 2000]
+        resp = _request("POST", f"{BASE_URL}/seller/inventory/product", headers=get_headers(), json=chunk, timeout=60)
+        if resp.status_code in (200, 204):
+            updated += len(chunk)
+        else:
+            errors.append(f"Batch {i // 2000 + 1} failed: HTTP {resp.status_code} - {resp.text[:300]}")
+    return updated, errors
+
+
 def get_inventory_item(product_id: str, product_type: str = "mtg_single") -> Tuple[Optional[Dict[str, Any]], str]:
     """Reads the live storefront listing for one product (GET, read only).
 
