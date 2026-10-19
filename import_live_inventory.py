@@ -253,24 +253,24 @@ def write_summary_file(
     return os.path.abspath(path)
 
 
-def import_live_inventory(
+def plan_import(
     inventory_csv: str,
     map_csv: str = "Manapool Print Format - Set_Box Map.csv",
     unmapped_box: str = "Unassigned",
-    rebuild: bool = False,
-    output_dir: str = "exports",
 ) -> Dict[str, Any]:
-    """Imports a ManaPool inventory backup, mapped to physical boxes and the Scryfall mirror.
+    """Resolves a ManaPool inventory backup and assigns every row its physical location.
+
+    Reads only; nothing is written.
 
     Args:
         inventory_csv (str): Path to exported ManaPool inventory CSV.
         map_csv (str): Path to Set_Box map CSV.
         unmapped_box (str): Default box for sets (or TOKENS) without a mapped location.
-        rebuild (bool): If True, drop and recreate the tables and insert. If False, preview only.
-        output_dir (str): Directory for the summary file.
 
     Returns:
-        Dict[str, Any]: Execution summary dictionary.
+        Dict[str, Any]: 'placements' (one dict per row: row, res, box_label, section_label,
+            index_num), 'inventory_rows', 'new_layout', 'section_sets', 'box_stats',
+            'refused', 'skipped_non_singles' and 'unmapped_sets'.
 
     Raises:
         RuntimeError: If the Scryfall mirror is empty.
@@ -286,7 +286,6 @@ def import_live_inventory(
 
     in_stock = [r for r in raw_rows if int(r.get("quantity", 0) or 0) > 0]
     singles = [r for r in in_stock if (r.get("product_type") or "").strip() == "mtg_single"]
-    skipped_non_singles = len(in_stock) - len(singles)
 
     resolved = scryfall_mirror.resolve_manapool_cards((r.get("set") or "", r.get("number") or "") for r in singles)
 
@@ -313,23 +312,25 @@ def import_live_inventory(
                 unmapped_sets.append(key)
         return box
 
-    placements: List[Tuple[Dict[str, Any], str, str, int]] = []
+    order: List[Tuple[Dict[str, Any], str, str, int]] = []
     for idx, it in enumerate(sorted(tokens_items, key=_token_sort_key), start=1):
-        placements.append((it, box_for(TOKENS_SET_KEY), TOKEN_SECTION, idx))
+        order.append((it, box_for(TOKENS_SET_KEY), TOKEN_SECTION, idx))
     promo_box = set_to_box.get("PROMOS", "M19")
     for idx, it in enumerate(sorted(promo_items, key=_promo_sort_key), start=1):
-        placements.append((it, promo_box, "PROMOS", idx))
+        order.append((it, promo_box, "PROMOS", idx))
     for set_code, items in sorted(regular_sets.items()):
         box = box_for(set_code)
         for idx, it in enumerate(sorted(items, key=_set_sort_key), start=1):
-            placements.append((it, box, "Sec-1", idx))
+            order.append((it, box, "Sec-1", idx))
 
+    placements: List[Dict[str, Any]] = []
     inventory_rows: List[Dict[str, Any]] = []
     new_layout: Dict[Tuple[str, str], List[ProductKey]] = {}
     section_sets: Dict[Tuple[str, str], List[str]] = {}
     box_stats: Dict[str, Dict[str, Any]] = {}
-    for it, box, section, idx in placements:
+    for it, box, section, idx in order:
         res = res_for(it)
+        placements.append({"row": it, "res": res, "box_label": box, "section_label": section, "index_num": idx})
         price_str = it.get("price") or it.get("market_price")
         try:
             price = float(price_str) if price_str else None
@@ -354,15 +355,50 @@ def import_live_inventory(
         stats["listings"] += 1
         stats["cards"] += int(it.get("quantity", 1))
 
-    resort = build_resort_list(fetch_current_layout(), new_layout, section_sets)
-    summary_path = write_summary_file(refused, resort, output_dir)
+    return {
+        "placements": placements,
+        "inventory_rows": inventory_rows,
+        "new_layout": new_layout,
+        "section_sets": section_sets,
+        "box_stats": box_stats,
+        "refused": refused,
+        "skipped_non_singles": len(in_stock) - len(singles),
+        "unmapped_sets": unmapped_sets,
+    }
+
+
+def import_live_inventory(
+    inventory_csv: str,
+    map_csv: str = "Manapool Print Format - Set_Box Map.csv",
+    unmapped_box: str = "Unassigned",
+    rebuild: bool = False,
+    output_dir: str = "exports",
+) -> Dict[str, Any]:
+    """Imports a ManaPool inventory backup, mapped to physical boxes and the Scryfall mirror.
+
+    Args:
+        inventory_csv (str): Path to exported ManaPool inventory CSV.
+        map_csv (str): Path to Set_Box map CSV.
+        unmapped_box (str): Default box for sets (or TOKENS) without a mapped location.
+        rebuild (bool): If True, drop and recreate the tables and insert. If False, preview only.
+        output_dir (str): Directory for the summary file.
+
+    Returns:
+        Dict[str, Any]: Execution summary dictionary.
+    """
+    plan = plan_import(inventory_csv, map_csv, unmapped_box)
+    inventory_rows = plan["inventory_rows"]
+    tokens = [p for p in plan["placements"] if p["res"]["is_token"]]
+
+    resort = build_resort_list(fetch_current_layout(), plan["new_layout"], plan["section_sets"])
+    summary_path = write_summary_file(plan["refused"], resort, output_dir)
 
     if rebuild:
         rebuild_database(inventory_rows)
 
     summary_rows = []
-    for b_label in sorted(box_stats.keys()):
-        b_info = box_stats[b_label]
+    for b_label in sorted(plan["box_stats"].keys()):
+        b_info = plan["box_stats"][b_label]
         sample_sets = ", ".join(sorted(b_info["sets"])[:4])
         if len(b_info["sets"]) > 4:
             sample_sets += f" (+{len(b_info['sets']) - 4} more)"
@@ -373,12 +409,12 @@ def import_live_inventory(
         "rebuilt": rebuild,
         "total_lines": len(inventory_rows),
         "total_cards": sum(r["quantity"] for r in inventory_rows),
-        "tokens": len(tokens_items),
-        "token_combos": sum(1 for r in tokens_items if res_for(r)["back"]),
-        "skipped_non_singles": skipped_non_singles,
-        "refused": refused,
+        "tokens": len(tokens),
+        "token_combos": sum(1 for p in tokens if p["res"]["back"]),
+        "skipped_non_singles": plan["skipped_non_singles"],
+        "refused": plan["refused"],
         "resort": resort,
-        "unmapped_sets": unmapped_sets,
+        "unmapped_sets": plan["unmapped_sets"],
         "summary_path": summary_path,
         "summary_table": tabulate(
             summary_rows,
@@ -386,7 +422,6 @@ def import_live_inventory(
             tablefmt="fancy_grid",
         ),
     }
-
 
 def main():
     """CLI entry point for import_live_inventory."""

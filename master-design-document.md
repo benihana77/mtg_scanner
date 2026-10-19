@@ -50,7 +50,10 @@ benihana77/mtg_scanner/
 ├── manapool_client.py       # ManaPool API v1 client (orders, batch inventory push)
 ├── pull_list_optimizer.py   # Order ingestion, location optimization & printable pick sheet generator
 ├── tui.py                   # Curses terminal UI over the interim workflow
-├── import_live_inventory.py # One-time seed of live ManaPool stock using the Set/Box map
+├── import_live_inventory.py # Fresh import of a ManaPool backup against scryfall_cards (preview, or --rebuild)
+├── scryfall_mirror.py       # Local Scryfall mirror: bulk refresh, set/number + token-combo resolution
+├── token_validation_report.py # Read-only report of tokens / non-tokens filed in the wrong place
+├── special_cases_report.py # Printable check sheet of unusual cards at their planned locations
 ├── audit_inventory.py       # One-time audit: unmapped set assignment + token extraction sheet (to be superseded by the token validation report)
 ├── migrate_inventory.py     # [SUPERSEDED] Older seeding script (replaced by import_live_inventory.py)
 ├── test_interim_pipeline.py # unittest suite for the interim pipeline
@@ -83,7 +86,7 @@ Tokens (approved design):
 Token clean-up (one-time):
 1. Wipe the provisional Oct 7 MOM `Sec-2` test rows (box M18) from the database.
 2. Validation report against the current database: a text walk sheet (box → set → section → index) plus CSV listing (a) tokens sitting in set boxes and (b) non-tokens sitting in `TOKENS`. Report only; it moves nothing.
-3. Operator verifies and moves cards by hand.
+3. Operator verifies and moves cards by hand. `special_cases_report.py` prints a check sheet of every unusual card (combos, emblems, helper cards, promos, meld names, symbol/accent names, same-name printings in text order, The List) at the box / section / index the fresh import will assign.
 4. Fresh import (`python import_live_inventory.py --rebuild`; preview without the flag) from `backups/inventory-manapool-audited-20260927.csv` with real Scryfall IDs and the `layout` rule, using the previous import's sort keys: one alphabetized `Sec-1` per set plus `TOKEN-1`, together with a list of sets that need physical re-sorting (sets that had several sections or gain/lose tokens).
 ---
 4. Computer Vision & Perceptual Hashing Pipeline

@@ -5,6 +5,7 @@ import unittest
 from unittest import mock
 
 import import_live_inventory as ili
+import special_cases_report as scr
 import scryfall_mirror
 import token_validation_report as tvr
 
@@ -117,6 +118,40 @@ class TestResortList(unittest.TestCase):
         self.assertNotIn(("M1", "AAA"), changes)
         self.assertEqual(changes[("M1", "BBB")]["cards_out"], 1)
         self.assertEqual(changes[("M19", "TOKENS")]["cards_in"], 1)
+
+
+def _placement(set_code, num, name, section="Sec-1", idx=1, layout="normal", set_type="expansion", back=None):
+    front = {"scryfall_id": f"{set_code}{num}", "name": name, "layout": layout, "set_type": set_type, "type_line": "Creature"}
+    return {
+        "row": {"set": set_code, "number": num, "name": name, "finish": "NF", "quantity": "1"},
+        "res": {"front": front, "back": back, "name": name, "is_token": scryfall_mirror.is_token_layout(layout)},
+        "box_label": "M1", "section_label": section, "index_num": idx,
+    }
+
+
+class TestSpecialCases(unittest.TestCase):
+    def test_variant_order_is_per_set(self):
+        ps = [
+            _placement("AFR", "302", "Cloister Gargoyle", idx=1),
+            _placement("AFR", "7", "Cloister Gargoyle", idx=2),
+            _placement("10E", "254", "Canopy Spider", idx=3),
+            _placement("8ED", "236", "Canopy Spider", idx=4),
+        ]
+        flagged = {p["row"]["set"]: p["checks"] for p in scr.classify(ps)}
+        self.assertEqual(flagged, {"AFR": ["VARIANT-ORDER"]})
+
+    def test_sort_and_token_checks(self):
+        ps = [
+            _placement("LTR", "121", "\u00c9omer of the Riddermark"),
+            _placement("AFR", "1", "+2 Mace"),
+            _placement("DDR", "76", "Ob Nixilis Reignited Emblem", section="TOKEN-1", layout="emblem", set_type="duel_deck"),
+            _placement("MOM", "5", "Plain Card"),
+        ]
+        checks = {p["row"]["number"]: p["checks"] for p in scr.classify(ps)}
+        self.assertEqual(checks["121"], ["SORT-ACCENT"])
+        self.assertEqual(checks["1"], ["SORT-SYMBOL"])
+        self.assertEqual(checks["76"], ["EMBLEM", "TOKEN-FROM-SET"])
+        self.assertNotIn("5", checks)
 
 
 if __name__ == "__main__":
