@@ -42,19 +42,50 @@ Input Controller	Mechanical USB Numpad	Operator control interface for fast quant
 benihana77/mtg_scanner/
 ├── .gitignore               # Git ignore configuration (Python, Docker, DB files)
 ├── docker-compose.yml       # PostgreSQL container deployment
-├── hashing_engine.py        # Camera capture, OpenCV edge detection & perceptual hashing
-├── db_pipeline.py           # PostgreSQL connection management & database operations
-├── csv_pipeline.py          # Two-way ManaPool CSV import/export pipeline (interim scanning replacement)
-├── migrate_inventory.py     # Legacy CSV data importer for PostgreSQL schema
-└── pull_list_optimizer.py   # Nightly order ingestion, location optimization & printable pull list generator
+├── schema.sql               # Canonical DDL for scryfall_cards / inventory / price_history (see Section 6)
+├── db.py                    # PostgreSQL connection management & parameterized queries (active)
+├── hashing_engine.py        # [STUB] pHash helper only; camera/OpenCV capture not yet implemented
+├── csv_pipeline.py          # ManaPool CSV intake, box/section allocation, relocation
+├── manapool_client.py       # ManaPool API v1 client (orders, batch inventory push)
+├── pull_list_optimizer.py   # Order ingestion, location optimization & printable pick sheet generator
+├── tui.py                   # Curses terminal UI over the interim workflow
+├── import_live_inventory.py # Fresh import of a ManaPool backup against scryfall_cards (preview, or --rebuild)
+├── scryfall_mirror.py       # Local Scryfall mirror: bulk refresh, set/number + token-combo resolution
+├── token_validation_report.py # Read-only report of tokens / non-tokens filed in the wrong place
+├── special_cases_report.py # Printable check sheet of unusual cards at their planned locations
+├── audit_inventory.py       # One-time audit: unmapped set assignment + token extraction sheet (to be superseded by the token validation report)
+├── test_interim_pipeline.py # unittest suite for the interim pipeline
+└── Manapool Print Format - Set_Box Map.csv  # Set -> physical box (M1..M19) mapping
 ```
 Module Responsibilities
 `hashing_engine.py`: Intercepts camera frames, crops card boundaries using contour detection, generates perceptual hashes, and computes Hamming distance against Scryfall hash caches.
-`db_pipeline.py`: Executes parameterized SQL operations (`INSERT`/`UPDATE`) against the `cards`, `inventory`, and `price_history` tables.
+`db.py`: Executes parameterized SQL operations (`INSERT`/`UPDATE`) against the `scryfall_cards`, `inventory`, and `price_history` tables, and initializes the schema from `schema.sql`.
+Scryfall mirror refresh (planned): downloads Scryfall's "Default Cards" bulk file and upserts it into `scryfall_cards`. Run manually from the TUI or CLI, e.g. before an intake that contains a new set.
+`manapool_client.py`: Fetches unfulfilled orders and pushes absolute inventory quantities to the ManaPool API.
+`tui.py`: Keyboard-driven terminal front end for intake, fulfillment, browsing and relocation.
 `csv_pipeline.py`: Manages temporary spreadsheet ingestion and ManaPool inventory sync prior to hardware CV integration.
-`migrate_inventory.py`: Reads offline JSON/CSV scanning payloads and migrates them into the relational database.
+`import_live_inventory.py`: Fresh import of a ManaPool inventory export against `scryfall_cards`, using the Set/Box map to assign boxes (preview by default, `--rebuild` to write).
+`audit_inventory.py`: One-time audit that assigned boxes to unmapped sets and produced the token extraction walk sheet.
 `pull_list_optimizer.py`: Ingests nightly order reports from ManaPool, joins with PostgreSQL inventory location metadata (`box_label`, `section_label`, `index_num`), calculates an optimal physical traversal path, and exports print-ready spreadsheets for fulfillment.
 `docker-compose.yml`: Provisions the persistent PostgreSQL instance.
+---
+3a. Physical Storage Model
+Boxes: Storage boxes are labelled `M1`–`M19`. Each set is assigned to one box via `Manapool Print Format - Set_Box Map.csv`; brand-new sets are assigned at intake by operator prompt.
+Sections: Within a box, each set is split into append-only sections (`Sec-1`, `Sec-2`, …). Every intake batch for a set becomes the next section, alphabetized by card name and indexed `1..N`. Shelf order: names are compared case- and accent-insensitively (Éomer files under E; leading symbols like `+2 Mace` file first), and same-name printings go in numeric collector-number order, so the regular printing comes before showcase/other variants. Existing sections are never re-sorted. No divider slips are printed.
+Special sections (box M19): `PROMOS` holds standalone promo sets (unchanged by the token design below).
+Tokens (approved design):
+- Detection: a card is a token if and only if its Scryfall `layout` (from `scryfall_cards`) is `token`, `double_faced_token` or `emblem`. No set-code or name heuristics. Art Series cards are not sold and get no special handling.
+- Set code: tokens keep their real set code (`TMOM`, `DDR`, `TCMR`, …), so orders still resolve on set + collector number.
+- `TOKENS` pseudo-set: all tokens behave as one set named `TOKENS`. Each intake batch's tokens, from any set, become one new append-only chunk with the next section label `TOKEN-1`, `TOKEN-2`, …, alphabetized by name → set code → collector number. A batch with no tokens creates no chunk.
+- Token box: resolved like any set's box: from existing `TOKEN-n` rows in the database, else the `TOKENS` row of the Set/Box map (currently `M19`), else an operator prompt. Relocating `TOKENS` moves every `TOKEN-n` chunk together, keeping section labels and indexes.
+- Double-sided token combos: ManaPool sells each double-sided token pairing as one product whose collector number joins the faces (`8-11` = front #8 / back #11 in the row's set; `17-TMOM-10` = front #17 in the row's set / back TMOM #10). Scryfall lists each face as a separate card, so a combo is stored as `inventory.scryfall_id` (front) + `inventory.back_scryfall_id` (back). Resolution order for a ManaPool set + number: (1) exact mirror match; (2) parse `front-back` / `front-SET-back` and resolve both faces; (3) if both faces are the same Scryfall card (e.g. `18-18`) and it is a `double_faced_token`, use that single card with no back; (4) otherwise refuse and list. A combo is a token if its front face is. Combos are sorted by ManaPool's product name, because ManaPool's name order does not always follow its number order (e.g. ZNR `5-10` is named "Construct // Drake" but #5 is the Drake).
+- Singles only: import and intake only take `product_type = mtg_single` rows; other product types are skipped and counted in the summary.
+- Unknown layout at intake: cannot occur. Every resolved card has a Scryfall layout; a row missing from the mirror stops the whole intake (nothing is written) and is listed, so the operator refreshes the mirror or fixes the CSV and re-runs.
+Token clean-up (one-time):
+1. Wipe the provisional Oct 7 MOM `Sec-2` test rows (box M18) from the database.
+2. Validation report against the current database: a text walk sheet (box → set → section → index) plus CSV listing (a) tokens sitting in set boxes and (b) non-tokens sitting in `TOKENS`. Report only; it moves nothing.
+3. Operator verifies and moves cards by hand. `special_cases_report.py` prints a check sheet of every unusual card (combos, emblems, helper cards, promos, meld names, symbol/accent names, same-name printings in text order, The List) at the box / section / index the fresh import will assign.
+4. Fresh import (`python import_live_inventory.py --rebuild`; preview without the flag) from `backups/inventory-manapool-audited-20260927.csv` with real Scryfall IDs and the `layout` rule, using the shelf sort order above: one alphabetized `Sec-1` per set plus `TOKEN-1`, together with a list of sets that need physical re-sorting (sets that had several sections or gain/lose tokens).
 ---
 4. Computer Vision & Perceptual Hashing Pipeline
 ```
@@ -69,7 +100,7 @@ Module Responsibilities
 │ UI Verification │     │ Match (< Threshold)│     │ Generation          │
 └─────────────────┘     └──────────────────┘     └─────────────────────┘
 ```
-Hash Pre-Fetching: Prior to scanning a batch, the script calls the Scryfall API to fetch card metadata and pre-generate image hashes only for the 2–3 active set codes.
+Hash Pre-Fetching: Prior to scanning a batch, the script reads card metadata for the 2–3 active set codes from the local `scryfall_cards` mirror and pre-generates their image hashes.
 Frame Capture: Captures 1080p video feed from the Raspberry Pi camera.
 Card Boundary Detection: OpenCV converts frame to grayscale, applies Gaussian blur, thresholding, and locates the primary 4-corner polygon contour on the dark background mat.
 Perspective Transformation: Performs a 4-point perspective transform to rectify and crop the card into a normalized rectangle.
@@ -98,39 +129,55 @@ Pressing `Enter` emits the following structured payload:
 ---
 6. Database Architecture & PostgreSQL Schema
 The storage pipeline uses PostgreSQL deployed via Docker. The relational model decouples static Scryfall catalog data, physical inventory, and temporal pricing logs.
+The canonical definition lives in `schema.sql`; this section mirrors it.
 ```sql
--- Static Scryfall Card Catalog Table
-CREATE TABLE cards (
+-- Local Scryfall Mirror (catalog source of truth)
+-- Loaded from Scryfall's "Default Cards" bulk file and refreshed manually.
+-- Intake and import resolve cards here; they never call the Scryfall API live.
+CREATE TABLE IF NOT EXISTS scryfall_cards (
     scryfall_id VARCHAR(50) PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    set_code VARCHAR(10) NOT NULL,
-    collector_number VARCHAR(10),
-    rarity VARCHAR(20)
+    name TEXT NOT NULL,
+    set_code VARCHAR(10) NOT NULL,          -- Upper-cased to match ManaPool exports
+    set_type VARCHAR(30),
+    collector_number VARCHAR(20) NOT NULL,
+    rarity VARCHAR(20),
+    layout VARCHAR(30) NOT NULL,            -- token / double_faced_token / emblem => token
+    type_line TEXT,
+    image_uri TEXT,
+    raw JSONB NOT NULL,                     -- Full Scryfall card object
+    refreshed_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Physical Storefront Inventory Table
-CREATE TABLE inventory (
+CREATE TABLE IF NOT EXISTS inventory (
     inventory_id SERIAL PRIMARY KEY,
-    scryfall_id VARCHAR(50) REFERENCES cards(scryfall_id),
+    scryfall_id VARCHAR(50) NOT NULL REFERENCES scryfall_cards(scryfall_id),
+    back_scryfall_id VARCHAR(50) REFERENCES scryfall_cards(scryfall_id),  -- Back face of a ManaPool double-sided token combo
+    manapool_product_id VARCHAR(50),
     condition VARCHAR(10) DEFAULT 'NM',
     is_foil BOOLEAN DEFAULT FALSE,
     quantity INTEGER NOT NULL DEFAULT 1,
     manapool_listed_price DECIMAL(10, 2),
-    box_label VARCHAR(50),
-    section_label VARCHAR(10),
-    index_num INTEGER,
+    box_label VARCHAR(50) NOT NULL,
+    section_label VARCHAR(10) NOT NULL,     -- Sec-N for sets, TOKEN-N for token chunks
+    index_num INTEGER NOT NULL,
     scanned_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Daily Market Price Ledger Table
-CREATE TABLE price_history (
+CREATE TABLE IF NOT EXISTS price_history (
     price_id SERIAL PRIMARY KEY,
-    scryfall_id VARCHAR(50) REFERENCES cards(scryfall_id),
+    scryfall_id VARCHAR(50) REFERENCES scryfall_cards(scryfall_id),
     recorded_date DATE NOT NULL DEFAULT CURRENT_DATE,
     market_price_normal DECIMAL(10, 2),
     market_price_foil DECIMAL(10, 2)
 );
 ```
+Catalog model: `scryfall_cards` replaces the former `cards` table and is the single source of card facts (name, set, number, rarity, layout, image). `inventory` and `price_history` reference it directly; card facts are obtained by joining, never copied.
+Double-sided token combos: `back_scryfall_id` holds the back face of a ManaPool combo product and is NULL for every other card (see Section 3a).
+No synthetic IDs: a card that cannot be resolved against `scryfall_cards` (after a refresh) is refused at intake/import and listed in the run summary. A `custom_cards` table will only be added if such rows turn out to be a real need.
+`image_hash`: the only non-Scryfall catalog field. It is unused until Phase 3 and will get its own table (`scryfall_id` → hash) at that point.
+Migration: existing databases still have the old `cards` table and the synthetic `mp-<set>-<num>` IDs. They are replaced during the token clean-up fresh import (Section 3a), which wipes `inventory`/`cards` and reloads against `scryfall_cards`.
 Automated Price Sync Workflow (3:00 AM Cron Job)
 Fetch Active Stock: Secondary Python cron script queries `inventory` for all distinct `scryfall_id` values currently in stock.
 Retrieve API Rates: Queries Scryfall/TCGPlayer APIs for latest normal and foil market prices.
@@ -148,7 +195,7 @@ To optimize physical order fulfillment, a nightly batch job processes incoming M
              ▼
 ┌─────────────────────────┐     ┌───────────────────────────────────┐
 │ Query PostgreSQL DB     │ ──> │ Location-Aware Traversal Optimizer│
-│ (inventory & cards JOIN)│     │ Sort: Box -> Section -> Index     │
+│ (inventory ⋈ scryfall)  │     │ Sort: Box -> Section -> Index     │
 └─────────────────────────┘     └─────────────────┬─────────────────┘
                                                   │
                                                   ▼
@@ -159,29 +206,30 @@ To optimize physical order fulfillment, a nightly batch job processes incoming M
 ```
 Workflow Mechanics
 Order Ingestion: Triggers nightly to fetch sold order line items from ManaPool (via API or CSV order export).
-Database Resolution: Performs SQL `JOIN` between order items, `inventory`, and `cards` to resolve physical storage coordinates (`box_label`, `section_label`, `index_num`).
+Database Resolution: Performs SQL `JOIN` between order items, `inventory`, and `scryfall_cards` to resolve physical storage coordinates (`box_label`, `section_label`, `index_num`).
 Location Sorting & Traversal Optimization:
-Primary Sort: `box_label` (alphabetical / numerical box sequence).
-Secondary Sort: `section_label` (alphabetical section within box).
-Tertiary Sort: `index_num` (positional card sequence within section).
+Regular sections: `box_label` (natural numeric order, M1 → M19) → `set_code` (alphabetical within box) → `section_label` (natural order, Sec-1 → Sec-2) → `index_num`.
+Token chunks (`TOKEN-n`): `box_label` → `section_label` (TOKEN-1 → TOKEN-2) → `index_num`, ignoring set code, since each chunk mixes many sets.
+Allocation is FIFO: when a card exists in several sections or token chunks, the oldest is drawn from first.
 Minimizes human physical movement across storage racks by sorting items sequentially along the physical layout path.
 Stock Reservation & Deduction: Updates or decrements `inventory.quantity` to reflect pulled cards, flagging out-of-stock items if discrepancies occur.
-Printable Output Spreadsheet Generation: Formats and exports a clean, print-ready spreadsheet (`.xlsx`) structured for rapid manual physical picking:
+Printable Output Generation: Exports a print-ready pick sheet for rapid manual picking. (Current implementation: plain-text table at `exports/pick_sheet_<date>.txt` with an out-of-stock section; `.xlsx`/PDF export is not built.)
 Pick Seq	Box	Section	Index	Card Name	Set	Collector #	Foil	Qty to Pull	Order ID	Collected [ ]
 1	Box-01	Sec-A	004	Fling	DKA	087	Yes	2	#MP-10492	[  ]
 2	Box-01	Sec-A	012	Lightning Bolt	CLB	187	No	4	#MP-10492	[  ]
 3	Box-02	Sec-C	001	Sol Ring	C21	263	No	1	#MP-10495	[  ]
 ---
 8. Implementation Roadmap
-[x] Phase 1: Physical Jig Assembly  
+[ ] Phase 1: Physical Jig Assembly — not started  
 Mount copy stand, Pi Camera Module 3, microscope ring light, Selens cross-polarizing film, and USB numpad.
-[ ] Phase 2: OpenCV & Frame Grabber Foundation  
+[ ] Phase 2: OpenCV & Frame Grabber Foundation — not started  
 Initialize Raspberry Pi OS 64-bit environment. Write frame capture script in OpenCV.
-[ ] Phase 3: Image Hashing Engine (`hashing_engine.py`)  
+[ ] Phase 3: Image Hashing Engine (`hashing_engine.py`) — stub only  
 Build Scryfall API hash pre-fetcher, card contour detector, perspective transform, and dHash matcher.
-[ ] Phase 4: Web Dashboard & Numpad Controller  
+[ ] Phase 4: Web Dashboard & Numpad Controller — not started (interim curses TUI exists)  
 Implement FastAPI WebSockets server to stream real-time camera frames and candidate cards to companion UI. Map mechanical numpad keybindings.
-[ ] Phase 5: Database Pipeline & Interim CSV Bridge (`db_pipeline.py`, `csv_pipeline.py`, `migrate_inventory.py`)  
+[~] Phase 5: Database Pipeline & Interim CSV Bridge (`db.py`, `csv_pipeline.py`, `import_live_inventory.py`) — built, not yet verified; 3:00 AM auto-pricer not built  
 Deploy Dockerized PostgreSQL server, connect FastAPI pipeline via `psycopg2`/`SQLAlchemy`, build interim two-way ManaPool CSV sync engine, and implement daily 3:00 AM auto-pricer job.
-[ ] Phase 6: Nightly Pull List Optimizer & Fulfillment Engine (`pull_list_optimizer.py`)  
+Token & catalog rework — done (2026-10-19): `scryfall_cards` mirror + refresh, combo-token resolution, validation and special-case reports, fresh import (`--rebuild`) run against the audited backup, token-aware intake (`TOKEN-n` chunks), pick-sheet token walk order and combo matching, `TOKENS` relocation, divider slips removed, integration tests isolated in `mtg_inventory_test`.
+[~] Phase 6: Nightly Pull List Optimizer & Fulfillment Engine (`pull_list_optimizer.py`) — built, not yet verified (text pick sheet; not scheduled nightly)  
 Build ManaPool order ingestion module, write location-sorting query engine (`box_label` $\rightarrow$ `section_label` $\rightarrow$ `index_num`), automate inventory quantity deductions, and implement print-ready spreadsheet exporter.

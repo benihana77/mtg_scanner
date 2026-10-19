@@ -1,0 +1,1219 @@
+product_type,product_id,name,set,number,language,finish,condition,market_low,market_price,market_price_foil,price,quantity
+mtg_single,3618070d-3399-4f15-a5c0-bc27dda959f6,Abzan Battle Priest,MOC,164,EN,NF,NM,0.29,0.41,,0.41,0
+mtg_single,de6031a1-04c0-4a06-82b0-32b28bd976f7,Abzan Falconer,MOC,165,EN,NF,NM,0.38,0.57,,0.57,0
+mtg_single,ea81d53f-ff99-4774-8372-dd0a8b83b284,Academy Manufactor,MOC,346,EN,NF,NM,8.59,8.58,,8.58,0
+mtg_single,46450722-af9e-4635-94f0-e3fd69c1ea38,Acclaimed Contender,MOC,166,EN,NF,NM,0.32,0.42,,0.42,0
+mtg_single,63125ac9-3f95-4233-addd-bf6504870d54,"Adeline, Resplendent Cathar",MOC,167,EN,NF,NM,2.47,2.95,,2.95,0
+mtg_single,9bb2394d-bda4-4f32-918e-af86a20cb6d2,"Aegar, the Freezing Flame",MUL,31,EN,NF,NM,0.15,0.20,0.17,0.20,0
+mtg_single,1cf6d0c7-4ac7-4487-b5f7-3227cf067e2c,Aerial Boost,MOM,2,EN,NF,NM,0.15,0.17,0.22,0.17,0
+mtg_single,021e0b1c-0e68-4671-8ff9-6f38f0376ae9,Aetherblade Agent // Gitaxian Mindstinger,MOM,88,EN,NF,NM,0.15,0.19,0.16,0.16,2
+mtg_single,261d720c-f828-4611-8754-596e7b3b204b,Aid from the Cowl,MOC,290,EN,NF,NM,0.15,0.35,,0.35,0
+mtg_single,7565eae6-68ba-41cb-ba55-170382094313,Akki Scrapchomper,MOM,130,EN,NF,NM,0.15,0.16,0.27,0.15,1
+mtg_single,6b678756-f0fd-48cb-b056-1ef659f88730,Alabaster Host Intercessor,MOM,3,EN,NF,NM,0.15,0.16,0.26,0.17,0
+mtg_single,9d42e1a5-b5dc-477c-aa2a-0509abba4c20,Alabaster Host Sanctifier,MOM,4,EN,NF,NM,0.15,0.15,0.15,0.15,0
+mtg_single,941400eb-b99e-4c45-b6d8-03d93bd218ae,"Alharu, Solemn Ritualist",MOC,168,EN,NF,NM,0.15,0.19,,0.19,0
+mtg_single,9928b6f5-32d2-4cff-9ae6-2146b1153b16,Ambition's Cost,MOC,246,EN,NF,NM,0.15,0.27,,0.27,0
+mtg_single,2720b065-94a6-4a0f-9152-9d3e55cda374,"Anafenza, Kin-Tree Spirit",MUL,1,EN,NF,NM,0.15,0.29,0.43,0.29,0
+mtg_single,4fecceab-6d8f-42c5-8da5-71d02914cdca,Ancient Imperiosaur,MOM,174,EN,NF,NM,0.15,0.27,0.39,0.27,0
+mtg_single,be24c67f-4626-443b-a56a-40bcb8392c6b,Ancient Imperiosaur,PMOM,174p,EN,NF,NM,0.32,0.35,0.38,0.35,0
+mtg_single,365ad91b-da03-4aee-8ce6-c67b5e2f0eba,Ancient Imperiosaur,MOM,368,EN,NF,NM,0.35,0.54,0.67,0.54,0
+mtg_single,acb41841-7bcd-4137-a413-5a70b83aff44,Ancient Stone Idol,MOC,347,EN,NF,NM,0.91,0.98,,0.98,0
+mtg_single,0f78383b-fcbc-4587-a6f6-ce9784115079,Angel,TMOC,3,EN,NF,NM,,0.37,,0.37,0
+mtg_single,0999eba4-35eb-43dc-a0db-89ab89f18351,Angel,TMOC,4,EN,NF,NM,,0.26,,0.26,0
+mtg_single,ce2a17bc-b276-42c3-bb96-36261c8bd338,Angel // Demon,TMOC,3-18,EN,NF,NM,0.15,0.18,,0.18,0
+mtg_single,440a2243-99e7-4104-82a8-767ef97e6b82,Angel of Finality,MOC,169,EN,NF,NM,0.15,0.18,,0.18,0
+mtg_single,255f41aa-55a8-4a87-acaa-0c65caf53bd1,Angel of Salvation,MOC,170,EN,NF,NM,0.15,0.15,,0.15,0
+mtg_single,b351c042-1471-4c5d-b924-e001c41865b8,Angel of the Ruins,MOC,171,EN,NF,NM,0.15,0.17,,0.17,0
+mtg_single,cc468b7d-4794-406c-b256-29ea1c5c9bce,Angelic Intervention,MOM,5,EN,NF,NM,0.15,0.18,0.21,0.15,0
+mtg_single,16c19c9c-4ffc-4739-9cfe-39f97d35bbaa,Arachnoid Adaptation,MOM,175,EN,NF,NM,0.15,0.16,0.27,0.19,0
+mtg_single,d04ed10b-fb74-4e71-8540-dacb9f6a61c7,Arcane Sanctum,MOC,390,EN,NF,NM,0.45,0.50,,0.50,0
+mtg_single,4e1c6066-4811-4588-a028-78ac121c1058,Arcane Signet,MOC,348,EN,NF,NM,0.49,0.55,,0.55,0
+mtg_single,26d033f4-88a8-4c9d-922f-481ffadfcb22,Archangel Elspeth,AMOM,1,EN,NF,NM,0.50,,,,0
+mtg_single,151364d8-8401-4164-b825-840939b93ee0,Archangel Elspeth,MOM,320,EN,NF,NM,3.00,4.10,6.48,4.10,0
+mtg_single,bbfb43ba-f050-43a9-99c9-60c6618b0d85,Archangel Elspeth,MOM,6,EN,NF,NM,2.65,2.69,3.77,2.69,0
+mtg_single,b7d5143b-fe8a-4600-a616-ec40ba999698,Archangel Elspeth,PMOM,6p,EN,NF,NM,4.67,,,,0
+mtg_single,5596b3b2-32d9-4820-a992-e8fede9189cf,Archpriest of Shadows,MOM,356,EN,NF,NM,1.61,1.78,2.16,1.78,0
+mtg_single,fe6629fc-4725-46f2-9d81-65f78b35185e,Archpriest of Shadows,MOM,89,EN,NF,NM,0.78,1.79,1.36,1.79,0
+mtg_single,20b16f8d-dadd-4be2-a899-155df4344f7b,Archpriest of Shadows,PMOM,89p,EN,NF,NM,,1.37,1.57,1.37,0
+mtg_single,da6f4e2d-7f90-4457-80a9-1fb466dc0dda,"Arixmethes, Slumbering Isle",MUL,32,EN,NF,NM,0.83,1.01,1.63,1.01,0
+mtg_single,8a990e21-178a-4a73-b812-a54dc8d41a77,Armorcraft Judge,MOC,291,EN,NF,NM,0.15,0.21,,0.21,0
+mtg_single,90a3bd63-446e-489c-98b0-5b5ab6c48b21,Artistic Refusal,MOM,46,EN,NF,NM,0.15,0.18,0.34,0.15,1
+mtg_single,7fb5e99c-63a4-44b9-9ad9-d6e52ea6e3fb,Arvad the Cursed,MOC,317,EN,NF,NM,0.24,0.25,,0.25,0
+mtg_single,e8464a29-d562-4ca1-9337-bc2ad0db3546,"Aryel, Knight of Windgrace",MOC,318,EN,NF,NM,0.15,0.38,,0.38,0
+mtg_single,3c7c84d6-748c-4a99-9dce-3aa716ed1d95,Ashen Reaper,AMOM,46,EN,NF,NM,,,,,0
+mtg_single,1803b5be-91c6-4956-b0fd-7aa8c29accb4,Assassin,TMOC,17,EN,NF,NM,,0.33,,0.33,0
+mtg_single,8f7563a5-bd05-42fa-8b97-066a325f1d6b,Assassin // Knight,TMOC,17-TMOM-10,EN,NF,NM,0.25,0.48,,0.48,0
+mtg_single,53a90374-3bed-4047-b011-1ff931470ee4,Assimilate Essence,MOM,47,EN,NF,NM,0.15,0.19,0.20,0.17,1
+mtg_single,ad201e0a-dcea-45c3-9844-5ebdfb24e261,Astral Wingspan,MOM,48,EN,NF,NM,0.15,0.16,0.20,0.15,1
+mtg_single,cba6816c-d5ba-4b5c-a316-671269b9311e,Atraxa's Fall,MOM,176,EN,NF,NM,0.15,0.17,0.33,0.20,0
+mtg_single,2fa43822-5b19-4f85-b6ba-b44c83f0f971,"Atraxa, Praetors' Voice",MUL,33,EN,NF,NM,20.85,22.41,25.05,22.41,0
+mtg_single,35c28160-dab5-418e-bf5a-4abc000f3338,"Atraxa, Praetors' Voice",AMOM,77,EN,NF,NM,,,,,0
+mtg_single,856d3cbf-0778-4cc6-b903-c437e808c51c,"Atris, Oracle of Half-Truths",MUL,34,EN,NF,NM,0.15,0.24,0.15,0.24,0
+mtg_single,c57c59ed-ba26-4440-85f4-4c105b5199ad,"Atris, Oracle of Half-Truths",AMOM,78,EN,NF,NM,0.25,,,,0
+mtg_single,288a1485-1a5b-426e-83e5-c024949306cf,Attentive Skywarden,MOM,7,EN,NF,NM,0.15,0.18,0.27,0.18,0
+mtg_single,091e0fe6-962a-43a8-be5b-dfacaaf6fc77,"Aurelia, the Warleader",MUL,35,EN,NF,NM,8.34,8.84,13.90,8.84,0
+mtg_single,ba757f0d-3312-4959-a06d-33d53a893be0,Austere Command,MOC,172,EN,NF,NM,0.47,0.50,,0.50,0
+mtg_single,df79a809-299d-444d-ba53-c9540d0a88e3,Axgard Artisan,MOM,332,EN,NF,NM,0.37,0.47,0.79,0.47,0
+mtg_single,7b0472ff-8489-466a-8af9-987f72747d6d,"Ayara, First of Locthwain",MUL,13,EN,NF,NM,6.21,7.12,8.48,7.12,0
+mtg_single,99a900b8-cca0-423c-bc6e-bfd41e8c2036,"Ayara, Furnace Queen",AMOM,21,EN,NF,NM,,,,,0
+mtg_single,ab104250-aea0-4b68-b6a5-f3883b513c56,"Ayara, Widow of the Realm // Ayara, Furnace Queen",MOM,296,EN,NF,NM,0.29,0.47,0.55,0.47,0
+mtg_single,c3ce2bf0-b583-458f-a233-df97df8f53dc,"Ayara, Widow of the Realm // Ayara, Furnace Queen",MOM,90,EN,NF,NM,0.15,0.41,0.47,0.41,0
+mtg_single,0f971f4a-7011-4745-b46c-25f1a4c2c225,Banisher Priest,MOC,173,EN,NF,NM,0.15,0.17,,0.17,0
+mtg_single,ee207a5a-ab60-4632-bed3-02adcdabde3b,Baral and Kari Zev,MOM,218,EN,NF,NM,0.15,0.20,0.35,0.20,0
+mtg_single,3f333bd8-4caa-494b-8699-24f545a68e34,Baral and Kari Zev,PMOM,218p,EN,NF,NM,0.22,,,,0
+mtg_single,0334385a-3bda-4d8a-9295-0228fd7fdbe1,Baral and Kari Zev,MOM,302,EN,NF,NM,0.15,0.27,0.47,0.27,0
+mtg_single,b1e2be8b-8b69-42fb-96d7-d81b13daccd5,"Baral, Chief of Compliance",AMOM,68,EN,NF,NM,,,,,0
+mtg_single,99254131-3474-4505-83c7-85e867c30add,"Baral, Chief of Compliance",MUL,8,EN,NF,NM,2.97,3.23,3.67,3.23,0
+mtg_single,b3d6b763-d843-45c7-8217-3b8bdc2a9075,Battle Screech,MOC,174,EN,NF,NM,0.15,0.19,,0.19,0
+mtg_single,2a8a97e1-0818-4bec-ae75-1e5efbf837d0,Beamtown Beatstick,MOM,131,EN,NF,NM,0.48,0.64,0.89,0.40,0
+mtg_single,5a2d954b-37f9-439c-b728-94269e2549e1,Beast,TMOC,28,EN,NF,NM,0.30,0.50,,0.50,0
+mtg_single,b217607f-fb78-4dd5-986f-adb6f8254f39,Begin the Invasion,MOC,79,EN,NF,NM,0.15,0.29,0.38,0.29,0
+mtg_single,945997dd-8af9-478b-9e7f-a93ff41f7104,Begin the Invasion,MOC,87,EN,NF,NM,0.37,0.45,0.51,0.45,0
+mtg_single,6e734852-3b9d-4fca-a22a-c4c25c0901b5,Bird,TMOC,5,EN,NF,NM,,0.25,,0.25,0
+mtg_single,1a730b27-d5be-448d-8528-3512b79fbe6c,Bird // Kobolds of Kher Keep,TMOC,5-27,EN,NF,NM,0.20,,,,0
+mtg_single,235cf000-8f45-4462-86dd-1c79793d6bcf,"Bitterthorn, Nissa's Animus",MOC,132,EN,NF,NM,6.74,8.25,,8.25,0
+mtg_single,5a421775-5e48-4fa2-875f-ebb5710f8319,"Bitterthorn, Nissa's Animus",MOC,45,EN,NF,NM,4.95,5.71,,5.71,0
+mtg_single,2805479c-d689-4a33-b334-e7863e1ed8c5,Blade Splicer,MOC,175,EN,NF,NM,0.19,0.35,,0.35,0
+mtg_single,44f79722-a3f0-4280-8410-cdbf6e9d572e,Bladed Battle-Fan,MOM,91,EN,NF,NM,0.15,0.27,0.22,0.18,1
+mtg_single,c444fb8d-46a0-4612-8df7-2e84e0772515,Blight Titan,MOC,112,EN,NF,NM,0.30,0.43,,0.43,0
+mtg_single,e01e9f27-4828-4da9-b832-371402410ecc,Blight Titan,MOC,25,EN,NF,NM,0.20,0.33,,0.33,0
+mtg_single,72cd27e1-6b82-458d-81f6-d0d6d666c8f1,Blighted Burgeoning,MOM,177,EN,NF,NM,0.15,0.23,0.29,0.17,1
+mtg_single,8a5a59d6-2e96-4365-95a0-bd99faf92d77,Blightreaper Thallid // Blightsower Thallid,MOM,92,EN,NF,NM,0.15,0.23,0.49,0.15,0
+mtg_single,d9113809-73f9-49b3-a6d2-e62d0993e163,Bloated Processor,MOM,357,EN,NF,NM,0.18,0.33,0.40,0.33,0
+mtg_single,3adf8a34-c2e3-4000-9449-f7a06dbd8000,Bloated Processor,MOM,93,EN,NF,NM,0.15,0.21,0.27,0.21,0
+mtg_single,ac9558b3-af60-4749-a45e-54f14cd0a78e,Bloated Processor,PMOM,93p,EN,NF,NM,0.18,0.36,,0.36,0
+mtg_single,5ee8949d-38d4-4005-a1e5-d6d35c05ca00,Blood,TMOC,32,EN,NF,NM,0.85,0.87,,0.87,0
+mtg_single,4375ef4d-3bf6-4dbd-bd56-2a3150e33d0c,Blood // Shapeshifter,TMOC,12-32,EN,NF,NM,0.21,0.49,,0.49,0
+mtg_single,8f686719-4b4c-46b4-99f8-1911412298a2,Bloodfeather Phoenix,MOM,132,EN,NF,NM,0.15,0.26,0.20,0.26,0
+mtg_single,cab0c410-6e50-4722-ad43-61575eed16af,Bloodfeather Phoenix,PMOM,132p,EN,NF,NM,0.25,0.30,,0.30,0
+mtg_single,9d7d82e3-3464-4b01-8119-fe6da93364cd,Bloodfeather Phoenix,MOM,362,EN,NF,NM,0.15,0.20,0.24,0.20,0
+mtg_single,37026c0e-18b6-4e00-8ef1-0cb94ae78b8d,Bloodfell Caves,MOM,267,EN,NF,NM,0.15,0.15,0.26,0.15,2
+mtg_single,d20697dd-2a5e-4dbf-bd6e-58a3ee785303,Bloodfell Caves,AMOM,55,EN,NF,NM,0.15,,,,0
+mtg_single,1cc7dd3b-eb21-4338-831c-cc37fe37b394,Bloodforged Battle-Axe,MOC,349,EN,NF,NM,3.48,3.41,,3.41,0
+mtg_single,6bdbccdf-bda5-40b7-9cf5-38cee9591372,Bloodhill Bastion,MOC,140,EN,NF,NM,0.45,0.35,,0.35,0
+mtg_single,ece76181-bc8a-447c-81a3-ea6ce3eb3693,Bloodline Pretender,MOC,350,EN,NF,NM,1.30,1.85,,1.85,0
+mtg_single,cbf35732-966e-46fe-9eb2-ec384b5da021,Blossoming Sands,MOM,268,EN,NF,NM,0.15,0.15,0.24,0.18,0
+mtg_single,a4582c98-0ab2-4beb-b5a5-bcb622c3ce89,Bojuka Bog,MOC,391,EN,NF,NM,1.30,1.31,,1.31,0
+mtg_single,09b29203-7b0b-4719-a9c9-6e92625b5e78,Bola Slinger,MOM,8,EN,NF,NM,0.15,0.21,0.15,0.17,0
+mtg_single,b46fc6cd-91ac-4b36-8138-369d5beb2fe0,Bonded Herdbeast // Plated Kilnbeast,MOM,178,EN,NF,NM,0.15,0.17,0.15,0.16,2
+mtg_single,cd444641-5a55-4b9e-8b48-3519c541ab1b,Bone Shredder,MOC,247,EN,NF,NM,0.15,0.22,,0.22,0
+mtg_single,7175e1df-7768-40a2-afce-6d39600e0ecb,Boon-Bringer Valkyrie,AMOM,2,EN,NF,NM,,,,,0
+mtg_single,836fba04-faf2-48d1-b2e2-b73f5787d63d,Boon-Bringer Valkyrie,MOM,343,EN,NF,NM,0.50,0.59,0.63,0.59,0
+mtg_single,bf5d4a36-ee99-4ecc-b5d3-bf744a5a7cbb,Boon-Bringer Valkyrie,MOM,9,EN,NF,NM,0.26,0.69,0.54,0.69,0
+mtg_single,eb68dd58-3a47-4872-910e-df99dbaaeb92,Boon-Bringer Valkyrie,PMOM,9p,EN,NF,NM,0.48,0.73,0.59,0.73,0
+mtg_single,e63e39a6-16d9-41d3-8165-942edb5f6fc1,Borborygmos and Fblthp,MOM,219,EN,NF,NM,0.15,0.37,0.49,0.37,0
+mtg_single,66ceb713-80e6-4e27-bee5-322ce871fb16,Borborygmos and Fblthp,PMOM,219p,EN,NF,NM,0.59,0.34,,0.34,0
+mtg_single,b0645c99-dac4-4f24-b061-1043d10dd888,Borborygmos and Fblthp,MOM,303,EN,NF,NM,0.18,0.49,0.56,0.49,0
+mtg_single,9e25c1a6-81b2-4941-93e0-5f41f3d505fc,Borborygmos and Fblthp,AMOM,42,EN,NF,NM,1.00,,,,0
+mtg_single,a0b25965-d57d-4bd1-a83f-0634afd726cb,Borborygmos and Fblthp,AMOM,57,EN,NF,NM,,,,,0
+mtg_single,1d99aebf-9bed-45cc-bb7f-918f53a4cfce,Botanical Brawler,MOM,220,EN,NF,NM,0.15,0.26,0.32,0.26,1
+mtg_single,41584d87-2a93-4c86-937e-007d169608df,Botanical Brawler,MOM,384,EN,NF,NM,0.22,0.30,0.44,0.30,0
+mtg_single,20717182-9245-4dee-bfdd-09b683e927d7,Botanical Brawler,AMOM,43,EN,NF,NM,,,,,0
+mtg_single,7a5c91e7-1532-4a05-895f-c431d98c6818,Brass's Bounty,MOC,272,EN,NF,NM,0.37,0.54,,0.54,0
+mtg_single,b707c153-ae38-44fa-877e-df53335f47c2,Brawn,MOC,292,EN,NF,NM,0.29,0.40,,0.40,0
+mtg_single,f1545745-e2f1-4cba-8b84-bffd3bef3622,Breach the Multiverse,MOM,358,EN,NF,NM,10.45,11.89,10.98,11.89,0
+mtg_single,24f0e31d-fdde-47c4-83bc-8598db5037ab,Breach the Multiverse,MOM,94,EN,NF,NM,7.98,10.15,10.82,10.15,0
+mtg_single,d16581b8-e495-4e20-a517-56c6cf89f56a,Breach the Multiverse,PMOM,94p,EN,NF,NM,10.99,11.38,10.68,11.38,0
+mtg_single,5def4f0e-0246-40b3-b9a1-8f56929c3869,Bretagard Stronghold,MOC,392,EN,NF,NM,0.15,0.33,,0.33,0
+mtg_single,e4fcf2c8-9327-4174-8f78-9ba7fee8341c,"Bright-Palm, Soul Awakener",MOC,1,EN,NF,NM,0.15,0.32,0.38,0.32,0
+mtg_single,080a70a8-80ee-4329-9276-acaebea720ed,"Bright-Palm, Soul Awakener",MOC,88,EN,NF,NM,0.35,0.58,0.78,0.58,0
+mtg_single,5daaed2d-9922-48de-a99c-0b6dad35ea82,"Brimaz, Blight of Oreskos",MOC,2,EN,NF,NM,0.39,0.55,0.36,0.55,0
+mtg_single,e5c88fdf-7fa2-4db2-bf8a-025a396f9596,"Brimaz, Blight of Oreskos",MOC,89,EN,NF,NM,0.97,1.70,2.04,1.70,0
+mtg_single,99585e3c-2f0d-404a-92d7-b13ce35e22d7,Brood,FMOM,1,EN,NF,NM,0.25,,,,0
+mtg_single,aca547b9-93ee-4daa-a031-9a3894fd8110,"Brudiclad, Telchor Engineer",MUL,36,EN,NF,NM,0.15,0.30,0.65,0.30,0
+mtg_single,505e3604-95af-4870-a187-c1fbb67bd36e,Buff,FMOM,5,EN,NF,NM,0.25,,,,0
+mtg_single,08de9b6a-728d-4cc8-bfe9-1edf9bcfddfb,Burning Sun's Fury,MOM,133,EN,NF,NM,0.15,0.20,0.32,0.18,1
+mtg_single,73f0aaad-c134-48ac-bd68-2c21035248ed,Burning Sun's Fury,AMOM,29,EN,NF,NM,,,,,0
+mtg_single,7ecaa2b3-c5e3-41e6-8aa9-141ba1d8586c,Burnished Hart,MOC,351,EN,NF,NM,0.15,0.16,,0.16,0
+mtg_single,cc7524a8-920d-47e0-9d00-0fbbf5a2fb2e,Butterfly,TMOC,29,EN,NF,NM,0.15,0.15,,0.15,0
+mtg_single,45bb187f-a425-4ea0-a46f-ec144ad65b07,Butterfly // City's Blessing,TMOC,29-45,EN,NF,NM,0.15,0.15,,0.15,0
+mtg_single,6374f380-e604-4651-bfa6-a153736f8cce,Canopy Vista,MOC,393,EN,NF,NM,0.20,0.26,,0.26,0
+mtg_single,e9b8221e-1f43-43ba-9014-5bc3bbe92e7d,Captain Lannery Storm,MUL,20,EN,NF,NM,0.15,0.19,0.38,0.19,0
+mtg_single,ae73f5dd-5269-4c2a-82ef-7d509acab46e,Captain Lannery Storm,AMOM,73,EN,NF,NM,0.25,,,,0
+mtg_single,1c065b48-ebee-464f-ba82-73a7c500fa67,Captive Weird // Compleated Conjurer,MOM,49,EN,NF,NM,0.15,0.15,,0.15,0
+mtg_single,8b9bdfa2-8ea3-430e-bb33-09a464b2ab92,Cataclysmic Gearhulk,MOC,176,EN,NF,NM,0.15,0.18,,0.18,0
+mtg_single,0150bcfe-5525-4b17-9d35-d087b7ac6de9,Champion of Lambholt,MOC,293,EN,NF,NM,3.50,3.62,,3.62,0
+mtg_single,0f5523d9-627b-4bcb-a4c4-b80fae0eb488,"Chandra, Hope's Beacon",MOM,134,EN,NF,NM,2.45,2.47,2.59,2.47,0
+mtg_single,11bf229c-bfe8-4a2f-a39c-cc8119973338,"Chandra, Hope's Beacon",PMOM,134p,EN,NF,NM,3.78,2.48,2.75,2.48,0
+mtg_single,55327eca-b7ae-469d-a97a-36b61e5a5664,"Chandra, Hope's Beacon",AMOM,30,EN,NF,NM,,,,,0
+mtg_single,853362f1-d92e-439e-bf1b-31b8aab042b3,"Chandra, Hope's Beacon",MOM,321,EN,NF,NM,2.72,3.34,3.31,3.34,0
+mtg_single,eadcb720-3eea-497b-818a-8808ebc1fb4b,Change the Equation,MOM,50,EN,NF,NM,0.15,0.24,0.26,0.15,0
+mtg_single,09f3b4c1-901f-4b96-84f3-944d6cd0c1fa,Chant of Vitu-Ghazi,MOC,177,EN,NF,NM,0.20,0.35,,0.35,0
+mtg_single,1f3fb904-af71-4246-9995-0db8cffb9f36,Chaos Warp,MOC,273,EN,NF,NM,0.35,0.38,,0.38,0
+mtg_single,5aa81b26-cff3-4889-9ad1-86bcf5602498,Chaotic Aether,MOC,141,EN,NF,NM,0.15,0.33,,0.33,0
+mtg_single,d583dd4d-3030-4288-ad62-61b72d461911,Chasm Skulker,MOC,218,EN,NF,NM,0.43,0.63,,0.63,0
+mtg_single,c571b42e-b0b0-4312-a0fa-b02690a5d743,Chivalric Alliance,MOC,11,EN,NF,NM,12.48,13.53,,13.53,0
+mtg_single,f469e97e-e236-4b96-b13c-b45bd695dab5,Chivalric Alliance,MOC,98,EN,NF,NM,13.66,13.51,,13.51,0
+mtg_single,86b75107-4c62-4e35-9c6b-959021f5b3dc,Choked Estuary,MOC,394,EN,NF,NM,0.28,0.38,,0.38,0
+mtg_single,2e2d141b-d746-4b09-9df6-ba6b4cf80f64,Chomping Kavu,MOM,179,EN,NF,NM,0.15,0.21,,0.15,0
+mtg_single,e8bd921c-cea3-462d-8b03-9e53e4a944ce,Chrome Host Seedshark,MOM,350,EN,NF,NM,0.35,0.58,0.61,0.58,0
+mtg_single,a0f9240a-20f2-4a74-a4be-7bbdfc22abe7,Chrome Host Seedshark,MOM,51,EN,NF,NM,0.15,0.21,0.58,0.21,0
+mtg_single,aa06e385-7987-45f8-8700-c3d11a5d2ba2,Chrome Host Seedshark,PMOM,51p,EN,NF,NM,0.53,0.52,,0.52,0
+mtg_single,f37c2fd8-929a-43c4-b5c2-6d1b2e19e86c,Cinder Glade,MOC,395,EN,NF,NM,0.22,0.36,,0.36,0
+mtg_single,5be1daa9-9b2a-4360-8e40-95ef90605bb0,City on Fire,MOM,135,EN,NF,NM,9.90,11.37,11.01,11.37,0
+mtg_single,32be7199-9e90-42d7-9bf4-e26868ef8764,City on Fire,PMOM,135p,EN,NF,NM,11.70,10.80,11.51,10.80,0
+mtg_single,f42e0728-79ed-4485-9be5-4b6b4663aaf7,City on Fire,MOM,363,EN,NF,NM,10.80,10.80,11.26,10.80,0
+mtg_single,12ae7b40-8ca1-438d-9a79-72ab3a656c20,City's Blessing,TMOC,45,EN,NF,NM,,0.76,,0.76,0
+mtg_single,fcd3c8fd-b7fa-4234-9279-0f580cc81a1e,Cloud of Faeries,MOC,219,EN,NF,NM,0.30,0.47,,0.47,0
+mtg_single,90432657-2667-4099-8909-4a83568a0dfb,Clue,TMOC,33,EN,NF,NM,0.75,,,,0
+mtg_single,8b8aa58a-2410-40e2-b5f0-e51df015f120,Collective Nightmare,AMOM,22,EN,NF,NM,,,,,0
+mtg_single,7f22e69d-6628-4153-920a-2a8297b7f836,Collective Nightmare,MOM,95,EN,NF,NM,0.15,0.16,0.20,0.15,0
+mtg_single,53e76c17-52c1-46e6-8135-d1df32998f7e,Combine Chrysalis,MOC,319,EN,NF,NM,0.15,0.27,,0.27,0
+mtg_single,5006d102-e9a0-41df-9da8-7fee275e6f3a,Coming In Hot,MOM,136,EN,NF,NM,0.15,0.15,0.19,0.15,0
+mtg_single,4159cb30-1cad-4adb-8dfc-cd6b9de25434,Command Tower,MOC,396,EN,NF,NM,0.21,0.28,,0.28,0
+mtg_single,cdf322ad-f5c8-4c4e-b71c-a5cccde56d99,Commander's Sphere,MOC,352,EN,NF,NM,0.15,0.19,,0.19,0
+mtg_single,ba025432-9159-46a9-a841-7e253a56ca64,Compleated Huntmaster,MOM,96,EN,NF,NM,0.15,0.15,0.24,0.18,0
+mtg_single,e8b3d7a5-e078-4d68-9b1b-44ac66c4b58d,Complete the Circuit,MOM,351,EN,NF,NM,0.33,0.41,0.41,0.41,0
+mtg_single,e24468ef-c270-4ad2-992c-f5aa4bd47e31,Complete the Circuit,MOM,52,EN,NF,NM,0.15,0.32,0.31,0.32,0
+mtg_single,871f15a0-93ef-47f0-9586-10cec51fcd17,Complete the Circuit,PMOM,52p,EN,NF,NM,0.30,0.34,0.39,0.34,0
+mtg_single,bec28dc4-2b4c-4087-ba06-b78ac285e4e0,Conclave Mentor,MOC,320,EN,NF,NM,0.49,0.54,,0.54,0
+mtg_single,738da282-b26a-40ea-a1a8-8c97ceb213f8,Conclave Sledge-Captain,MOC,123,EN,NF,NM,1.49,1.49,,1.49,0
+mtg_single,3993df9f-167d-474d-be42-c177ef27fd10,Conclave Sledge-Captain,MOC,36,EN,NF,NM,1.34,1.65,,1.65,0
+mtg_single,a21263c2-95b7-48d5-9a28-bd20af3433dd,Conclave Tribunal,MOC,178,EN,NF,NM,0.15,0.25,,0.25,0
+mtg_single,ed3c7b15-379f-4b1c-b8bd-5b131a818f6e,Conjurer's Mantle,MOC,12,EN,NF,NM,1.86,1.90,,1.90,0
+mtg_single,14ef43b0-d707-4b37-aa0e-b65944e45336,Conjurer's Mantle,MOC,99,EN,NF,NM,2.04,2.37,,2.37,0
+mtg_single,d66027cc-de56-4012-b6f0-688f154a69e3,Constable of the Realm,MOC,179,EN,NF,NM,0.15,0.23,,0.23,0
+mtg_single,3b48bd47-21fc-4145-935b-c71cae4094e8,Construct,TMOC,34,EN,NF,NM,,0.51,,0.51,0
+mtg_single,65b094d7-e994-4684-b59a-1dfb36b1b5b3,Consuming Aetherborn,MOM,97,EN,NF,NM,0.15,0.16,0.19,0.15,0
+mtg_single,f2c613d8-4ac7-4e5d-b3fa-bc78cb22911e,Converter Beast,MOM,180,EN,NF,NM,0.15,0.15,,0.15,1
+mtg_single,8f50ee2a-ffd0-490b-8ca0-3e2a1ef9419b,Copper Host Crusher,MOM,181,EN,NF,NM,0.15,0.20,0.42,0.25,1
+mtg_single,367a43bc-9bc5-4370-9e70-ba7ad03440a0,Corpse Knight,MOC,321,EN,NF,NM,0.45,0.53,,0.53,0
+mtg_single,edff1e26-589f-448c-a903-200bb24c472e,Corrupted Conviction,MOM,98,EN,NF,NM,0.15,0.56,0.52,0.36,0
+mtg_single,b563eef3-d933-4396-9f5a-5e902a0ec0a2,Corruption of Towashi,MOM,53,EN,NF,NM,0.15,0.16,0.16,0.17,2
+mtg_single,c807d4c1-f1e3-449f-9dbd-2a223fa2d7af,Cosmic Hunger,MOM,182,EN,NF,NM,0.15,0.25,0.26,0.15,0
+mtg_single,f4812f56-4b93-42e0-ae80-90f12d35d450,Coveted Jewel,MOC,353,EN,NF,NM,0.15,0.22,,0.22,0
+mtg_single,f46013ce-1ab0-4ea8-b4ec-003a71117ed1,Crack Open,MOC,294,EN,NF,NM,0.15,0.19,,0.19,0
+mtg_single,0cbcc89e-4bcd-464e-a2c2-d4517fb556df,Cragsmasher Yeti,MOM,333,EN,NF,NM,0.15,0.19,0.23,0.22,0
+mtg_single,6f5619f1-69f9-43cd-9cd7-37fcd3ab0a78,Crystal Carapace,MOM,183,EN,NF,NM,0.15,0.19,0.24,0.15,1
+mtg_single,ed9d132f-695f-479d-a0af-a81d54f490e6,Cultivate,MOC,295,EN,NF,NM,0.40,0.46,,0.46,0
+mtg_single,333872f7-1378-4057-a264-27820abd4ca2,Cultivator's Caravan,MOC,354,EN,NF,NM,0.16,0.25,,0.25,0
+mtg_single,567b7d91-9390-40a2-b0ba-c4b5a9f6c60b,Curse of Opulence,MOC,274,EN,NF,NM,3.98,4.67,,4.67,0
+mtg_single,8c454fe6-48a4-43cd-838b-b0aa6eb7ec11,Cut Short,MOM,10,EN,NF,NM,0.15,0.17,0.15,0.15,1
+mtg_single,384fde99-9850-4098-b11d-47239e060b4f,Cut Short,AMOM,3,EN,NF,NM,0.25,,,,0
+mtg_single,7783c3c2-8040-4f45-8a87-7c0cb9e16d7e,Cutthroat Negotiator,MOC,127,EN,NF,NM,0.30,0.52,,0.52,0
+mtg_single,07e89353-a2a5-43d0-b485-7a34ad069c6b,Cutthroat Negotiator,MOC,40,EN,NF,NM,0.34,0.39,,0.39,0
+mtg_single,8e6bc502-a297-49fa-9df8-28978061f9b3,Dance with Calamity,MOC,116,EN,NF,NM,3.01,3.84,,3.84,0
+mtg_single,a1c73265-743a-4126-b882-8673ecc9c624,Dance with Calamity,MOC,29,EN,NF,NM,0.94,0.96,,0.96,0
+mtg_single,cd6b9da3-8729-47e5-8d95-ba07cf8c9992,Darksteel Splicer,MOC,100,EN,NF,NM,0.83,2.11,,2.11,0
+mtg_single,ef027f2f-253f-4f1f-84d8-5064d4f01176,Darksteel Splicer,MOC,13,EN,NF,NM,1.66,1.88,,1.88,0
+mtg_single,aa4c92eb-e4fe-47c3-9176-822181ecc194,"Daxos, Blessed by the Sun",MUL,2,EN,NF,NM,0.15,0.26,0.29,0.26,0
+mtg_single,6e4db2d4-f8b8-49ec-96e5-178fe0ed55b3,Deadly Derision,MOM,99,EN,NF,NM,0.15,0.18,0.25,0.18,1
+mtg_single,cd11debd-8db1-4034-9088-e786e8ce3c6f,Death-Greeter's Champion,MOC,117,EN,NF,NM,0.30,0.43,,0.43,0
+mtg_single,db892609-38f0-4ac9-97e7-e18e7450ded1,Death-Greeter's Champion,MOC,30,EN,NF,NM,0.19,0.36,,0.36,0
+mtg_single,e98b461b-1bbf-486c-8b82-7ac6c3559d61,Deeproot Wayfinder,MOM,184,EN,NF,NM,0.15,0.31,0.40,0.31,0
+mtg_single,1864c222-ad8b-45a7-b203-f6193349c574,Deeproot Wayfinder,PMOM,184p,EN,NF,NM,0.27,0.27,0.40,0.27,0
+mtg_single,2e8221d1-3ec0-4d7d-91ba-b2c8d071aacf,Deeproot Wayfinder,MOM,369,EN,NF,NM,0.20,0.29,0.51,0.29,0
+mtg_single,3e75605d-2bfc-45c5-93ad-3d71374fda0c,Defiant Thundermaw,AMOM,35,EN,NF,NM,,,,,0
+mtg_single,466067d4-27f8-44f2-87ef-383106f3a26b,Deluxe Dragster,MOC,108,EN,NF,NM,2.19,2.27,,2.27,0
+mtg_single,afbfef94-33fb-45d1-9beb-0240f135be80,Deluxe Dragster,MOC,21,EN,NF,NM,2.12,2.27,,2.27,0
+mtg_single,2763727c-2add-479f-a4c0-a4a4e0c002bb,Demon,TMOC,18,EN,NF,NM,1.38,0.36,,0.36,0
+mtg_single,535ef435-654a-4290-882c-e6926596e9f7,Despark,MOC,322,EN,NF,NM,0.34,0.38,,0.38,0
+mtg_single,4554369d-a1d2-44c6-84d6-682d19899b76,Devouring Light,MOC,180,EN,NF,NM,0.15,0.17,,0.17,0
+mtg_single,de0e8e37-d0c1-4ceb-892d-ebd954d91c8a,"Dina, Soul Steeper",MUL,37,EN,NF,NM,0.15,0.34,0.33,0.34,0
+mtg_single,80a1fdb5-a81e-446d-ba1d-31164f0d7705,Dinosaur,TMOM,7,EN,NF,NM,0.89,1.11,2.37,1.11,0
+mtg_single,fc45c0a2-510a-4787-963c-2c9227d03dd8,Dismal Backwater,MOM,269,EN,NF,NM,0.15,0.17,0.23,0.17,0
+mtg_single,29d6e340-d886-43d1-941c-44cfddbd9b94,Distant Melody,MOC,220,EN,NF,NM,0.40,0.58,,0.58,0
+mtg_single,27a74578-99f0-423f-9743-877ac1df5ac9,Disturbing Conversion,MOM,54,EN,NF,NM,0.15,0.17,0.28,0.18,1
+mtg_single,108bda99-7a8a-488f-a944-dddf01ab17f9,Djeru and Hazoret,MOM,221,EN,NF,NM,0.15,0.43,0.46,0.43,0
+mtg_single,3e155132-b702-45b8-bdcf-c1dec67d873a,Djeru and Hazoret,PMOM,221p,EN,NF,NM,0.49,0.50,0.54,0.50,0
+mtg_single,24ba06cd-f26c-400c-a0a3-2db4ac4cd75d,Djeru and Hazoret,MOM,304,EN,NF,NM,0.24,0.49,0.53,0.49,0
+mtg_single,a400777b-4ab4-4fae-8c8d-d09127e79eb4,Djeru and Hazoret,AMOM,44,EN,NF,NM,,,,,0
+mtg_single,e35cbfe2-91e4-4904-bf60-91226cbdaa89,Doomskar Warrior,MOM,185,EN,NF,NM,0.15,0.24,0.30,0.24,0
+mtg_single,b16361ae-48be-411f-8db8-0393ed20784a,Doomskar Warrior,PMOM,185p,EN,NF,NM,0.40,0.32,0.16,0.32,0
+mtg_single,e3b77ed0-fc8b-4ac4-a25b-a169a3f101e5,Doomskar Warrior,MOM,370,EN,NF,NM,0.19,0.27,0.28,0.27,0
+mtg_single,f8e8a63e-4bf5-4f62-9bc2-64a7aa422092,Double-Faced Substitute Card,SMOM,1,EN,NF,NM,0.20,0.23,,0.23,0
+mtg_single,c6851db5-6eb1-4fb9-ba30-dd24c83a9882,Drana and Linvala,MOM,222,EN,NF,NM,5.79,6.20,6.78,6.20,0
+mtg_single,b0f28748-3fb5-432a-abdb-6cca8a895c09,Drana and Linvala,PMOM,222p,EN,NF,NM,5.00,5.97,5.93,5.97,0
+mtg_single,1459e2b0-3a5d-4327-82ff-5c5404b3d404,Drana and Linvala,MOM,305,EN,NF,NM,5.47,6.34,9.45,6.34,0
+mtg_single,3677826d-0ef1-44d3-be64-5e70c07482e4,Drana and Linvala,AMOM,58,EN,NF,NM,,,,,0
+mtg_single,05d6bbc0-1c93-4a4a-abe6-04e1e94ce84a,Dreg Recycler,MOM,100,EN,NF,NM,0.15,0.15,0.20,0.16,0
+mtg_single,120e5092-8fdf-48cb-a316-67350c8555f1,Dromoka's Command,MOC,323,EN,NF,NM,0.18,0.22,,0.22,0
+mtg_single,8b7f81b4-7073-4ee1-8bc9-38ee39f5e447,Duergar Hedge-Mage,MOC,324,EN,NF,NM,0.16,0.41,,0.41,0
+mtg_single,68f10f36-aee7-47c3-a5dd-3f9c32717c1e,Duplicant,MOC,355,EN,NF,NM,0.19,0.36,,0.36,0
+mtg_single,277e5a1f-d735-4ac0-ae93-e87b9b54d0f8,Dusk Legion Duelist,MOM,11,EN,NF,NM,1.24,2.12,2.04,2.12,0
+mtg_single,62d3b5c5-fda0-416e-9026-7baafdfdf579,Dusk Legion Duelist,PMOM,11p,EN,NF,NM,1.99,2.04,2.13,2.04,0
+mtg_single,e638907d-6cbb-4690-a966-e2736a33352e,Dusk Legion Duelist,MOM,344,EN,NF,NM,1.97,2.61,1.91,2.61,0
+mtg_single,287edce2-e6c4-4c23-a8c2-2ecaca2b508f,Echo Storm,MOC,221,EN,NF,NM,0.15,0.32,,0.32,0
+mtg_single,7f2a1342-6112-4932-b7cc-ddb2931cbc72,Eldrazi,TMOC,1,EN,NF,NM,,0.62,,0.62,0
+mtg_single,56170647-2280-4161-9d0b-efd316ff3ccd,Eldrazi // Angel,TMOC,1-4,EN,NF,NM,0.35,0.58,,0.58,0
+mtg_single,cd3a46b8-71dd-445a-b114-d07843e27458,Elemental,TMUL,2,EN,NF,NM,0.15,0.21,,0.21,0
+mtg_single,8d3c0522-d19c-4c4d-97d1-6e08e695aea5,Elemental,TMOC,22,EN,NF,NM,,0.52,,0.52,0
+mtg_single,33b1e8f9-91e6-4292-baad-2dc866171e2a,Elemental,TMOC,22-TMOM-9,EN,NF,NM,0.48,0.85,,0.85,0
+mtg_single,7f8ec9fc-630d-433d-8ef7-28b0b662ae9d,Elemental,TMOM,9,EN,NF,NM,0.15,0.23,0.33,0.23,0
+mtg_single,342306e0-5fce-4296-afde-560f194de386,Elemental // Dinosaur,TMUL,2-TMOM-7,EN,NF,NM,,,,,0
+mtg_single,46162c44-8943-4fd6-a6dd-21ec7ea1e5e6,Elemental // Faerie,TMOC,11-22,EN,NF,NM,0.21,0.34,,0.34,0
+mtg_single,736628b6-5608-4cf6-b842-dfaa9b19a441,Elemental // Knight,TMUL,2-TMOM-10,EN,NF,NM,,,,,0
+mtg_single,13c5be45-7107-4414-b824-d04eb1171aab,Elemental // Knight,TMOM,9-10,EN,NF,NM,0.22,,,,0
+mtg_single,af82b351-ea1a-4f6f-aee8-348033a23213,Elemental // Phyrexian Hydra,TMUL,2-TMOM-11,EN,NF,NM,,,,,0
+mtg_single,bf98ce72-7388-4590-9cae-a270900a667e,Elemental // Phyrexian Hydra,TMUL,2-TMOM-12,EN,NF,NM,,,0.22,,0
+mtg_single,2d7f0eab-a9c5-4171-b75e-6848e7c40f36,Elemental // Phyrexian Hydra,TMOM,9-11,EN,NF,NM,,,,,0
+mtg_single,37dd3884-644b-421b-b791-343b6d178dec,Elemental // Phyrexian Hydra,TMOM,9-12,EN,NF,NM,,,,,0
+mtg_single,a4dec398-d60f-4e66-a844-0f15e33defc0,Elemental // Phyrexian Saproling,TMOM,8-9,EN,NF,NM,,,,,0
+mtg_single,4a737658-8c76-499e-99e3-1670e4fc4a5d,Elemental // Spirit,TMUL,2-TMOC-13,EN,NF,NM,,,,,0
+mtg_single,65d33f6e-1818-4e48-9ec9-63df49f680f8,Elemental // Spirit,TMUL,2-TMOM-13,EN,NF,NM,,,,,0
+mtg_single,1e603141-c1e6-4647-aca8-d106e455c8a2,Elemental // Spirit,TMUL,2-TMOM-14,EN,NF,NM,0.15,,,,0
+mtg_single,4d65aca5-c43e-4ee7-8665-44d3097a0d5b,Elemental // Spirit,TMOM,9-14,EN,NF,NM,,,,,0
+mtg_single,c869fd7c-8681-4d24-82ee-d1b4662fa1ee,Elemental // Teferi Akosa of Zhalfir Emblem,TMUL,2-TMOM-22,EN,NF,NM,,,,,0
+mtg_single,a46ec5af-c730-471b-bb9b-b771c9c1dea2,Elemental // Teferi's Talent Emblem,TMUL,2-TMOC-44,EN,NF,NM,,,0.50,,0
+mtg_single,7c6002a9-873d-40ac-9fd3-5b4f130286f9,Elemental // Teferi's Talent Emblem,TMOC,44-TMOM-9,EN,NF,NM,0.15,0.15,,0.15,0
+mtg_single,1c8fc567-783f-4ad6-bf4b-2f36c3452e3a,Elemental // Thopter,TMOM,9-19,EN,NF,NM,,,,,0
+mtg_single,5ac7dee8-c376-44fb-ad9b-90277b47ea5a,Elemental // Vampire,TMOM,3-9,EN,NF,NM,,,,,0
+mtg_single,2602e04c-c020-4dee-8dac-d730a9886ee3,Elemental // Wrenn and Realmbreaker Emblem,TMOM,9-23,EN,NF,NM,,,,,0
+mtg_single,dd71638d-43c7-45f8-9b75-fcb2e7519301,Elemental // Zombie,TMUL,2-TMOM-5,EN,NF,NM,,,,,0
+mtg_single,7ef61c53-3646-4912-9487-66520324cec3,Elemental // Zombie,TMOM,5-9,EN,NF,NM,,,,,0
+mtg_single,47aec2d4-6d30-4d3e-82c8-2695ebc27502,Elenda and Azor,MOC,6,EN,NF,NM,0.48,0.63,0.64,0.63,0
+mtg_single,2ffb46be-22e6-49ed-9023-fc7112f77b93,Elenda and Azor,MOC,90,EN,NF,NM,1.50,1.48,1.39,1.48,0
+mtg_single,dd1d9ce4-5562-4406-8f0c-49cd33f34daa,Elephant,TMOC,30,EN,NF,NM,,0.40,,0.40,0
+mtg_single,daccf447-5e30-477b-ad2d-16e158b146f5,Elephant // City's Blessing,TMOC,30-45,EN,NF,NM,0.19,0.15,,0.15,0
+mtg_single,05d2b999-24d8-4c23-b4b1-20d0cc964bb1,Elesh Norn,AMOM,4,EN,NF,NM,,,,,0
+mtg_single,bcf2f48d-c3d6-4bd1-be63-750710715ddc,Elesh Norn // The Argent Etchings,MOM,12,EN,NF,NM,7.00,7.14,7.74,7.14,0
+mtg_single,ae85fb87-923f-4af9-9512-a64104e9da19,Elesh Norn // The Argent Etchings,MOM,292,EN,NF,NM,8.74,8.83,11.82,8.83,0
+mtg_single,e81ec5c1-4444-4b6b-b995-3c8b1c19930e,"Elesh Norn, Grand Cenobite",MUL,3,EN,NF,NM,20.99,20.69,23.93,20.69,0
+mtg_single,9aac4c00-e537-4166-a6bc-8e9206bc23ae,Elite Scaleguard,MOC,181,EN,NF,NM,0.15,0.16,,0.16,0
+mtg_single,eea1971c-4641-440b-bbce-95e45fa9f053,Elspeth's Smite,MOM,13,EN,NF,NM,0.15,0.16,0.17,0.22,0
+mtg_single,c82766de-ba86-4381-8df7-8954daeadf12,Elspeth's Smite,AMOM,5,EN,NF,NM,0.15,,,,0
+mtg_single,0a25680d-8bd6-4419-b9bf-73c2e91c11e3,Elspeth's Talent,MOC,72,EN,NF,NM,0.15,0.33,0.50,0.33,0
+mtg_single,ab9fe6cf-85a2-4e8d-9372-44babd535cfa,Elspeth's Talent,MOC,80,EN,NF,NM,0.32,0.40,0.41,0.40,0
+mtg_single,175d6d73-e884-4e83-9717-98d048a1a18f,"Elspeth, Sun's Champion",MOC,182,EN,NF,NM,1.25,1.63,,1.63,0
+mtg_single,82d64cc2-151f-4e7b-8788-a909d2e71333,"Elspeth, Sun's Champion Emblem",TMOC,43,EN,NF,NM,,0.94,,0.94,0
+mtg_single,eb22d3dd-9820-4c43-a186-50a5a5f43e17,Elvish Vatkeeper,MOM,223,EN,NF,NM,0.15,0.15,0.15,0.15,2
+mtg_single,cff044f8-a5e0-475b-af8e-4591c724136d,Emergent Woodwurm,MOC,124,EN,NF,NM,2.53,2.97,,2.97,0
+mtg_single,b0f37960-9378-466f-83cd-a5c1d0f6639a,Emergent Woodwurm,MOC,37,EN,NF,NM,2.55,2.60,,2.60,0
+mtg_single,0c652463-00ff-40d4-b3c9-1c285271fc02,Emeria Angel,MOC,183,EN,NF,NM,0.23,0.39,,0.39,0
+mtg_single,ea1c2799-0b0c-4371-aa9b-5033dffb88e5,"Emry, Lurker of the Loch",AMOM,69,EN,NF,NM,,,,,0
+mtg_single,7ee61aa2-a84f-4659-97ca-05f68a35fb81,"Emry, Lurker of the Loch",MUL,9,EN,NF,NM,1.36,1.72,2.29,1.72,0
+mtg_single,6d310cba-0668-4359-8cb3-7e0679349e8e,Enduring Bondwarden,MOM,14,EN,NF,NM,0.15,0.20,0.22,0.17,0
+mtg_single,feaf446b-f479-452a-b6b9-2b75693443b7,Enduring Scalelord,MOC,325,EN,NF,NM,0.15,0.20,,0.20,0
+mtg_single,1e269c75-19cd-4982-9523-0c1733746d33,Enigma Ridges,MOC,48,EN,NF,NM,0.63,0.92,,0.92,0
+mtg_single,026599de-09ea-4e05-81d0-5d203f51d105,Ephara's Dispersal,MOM,55,EN,NF,NM,0.15,0.18,0.23,0.17,0
+mtg_single,b7d98171-74b6-4b84-babf-ab821b7d64da,"Ephara, Ever-Sheltering",AMOM,8,EN,NF,NM,0.25,,,,0
+mtg_single,e12111e6-0daa-48e5-83e5-6463724e1c67,Ephemeral Shields,MOC,184,EN,NF,NM,0.15,0.25,,0.25,0
+mtg_single,e838c08b-2c4e-41bc-b46d-7d8c9a0c1cd3,Errant and Giada,MOM,224,EN,NF,NM,0.23,0.47,0.49,0.47,0
+mtg_single,fc42e287-1273-4ea5-a345-f7bf9f87ae6b,Errant and Giada,PMOM,224p,EN,NF,NM,0.44,0.45,0.61,0.45,0
+mtg_single,84759324-e44b-492e-acc7-3461452cd1ae,Errant and Giada,MOM,306,EN,NF,NM,0.23,0.53,0.55,0.53,0
+mtg_single,013dbadf-a2bc-4b7f-8a39-d365a130947b,Errant and Giada,AMOM,59,EN,NF,NM,,,,,0
+mtg_single,a3f1eb2c-a391-4fc4-9e34-b73d395e70c1,Esper,MOC,49,EN,NF,NM,3.80,1.58,,1.58,0
+mtg_single,0a393872-6b9f-4f20-8402-82f6b28d42bc,Essence of Orthodoxy,MOM,323,EN,NF,NM,0.15,0.51,1.14,0.51,0
+mtg_single,d473e1f0-71f4-4efb-9198-916dc759d813,Essence of Orthodoxy,MOM,376,EN,NF,NM,0.48,0.76,,0.76,0
+mtg_single,4004498e-6557-48c2-a643-05e82e8b997e,"Etali, Primal Conqueror",AMOM,31,EN,NF,NM,,,,,0
+mtg_single,85df1406-bce5-4aa3-ae19-6e1a00190767,"Etali, Primal Conqueror // Etali, Primal Sickness",MOM,137,EN,NF,NM,28.15,28.86,34.48,28.86,0
+mtg_single,25b160ec-ea87-4a08-92c3-fe4f93a18bb3,"Etali, Primal Conqueror // Etali, Primal Sickness",MOM,298,EN,NF,NM,24.20,25.07,31.86,25.07,0
+mtg_single,c57e5fea-abeb-4bd7-8e33-c9cb0b9fcbf9,"Etali, Primal Sickness",AMOM,32,EN,NF,NM,0.50,,,,0
+mtg_single,71d6313d-0d80-4a0d-8dda-03686df4d39f,Etched Familiar,MOM,101,EN,NF,NM,0.15,0.17,0.27,0.16,0
+mtg_single,63a11a78-d035-4430-8545-2aa703efe66b,Etched Host Doombringer,MOM,102,EN,NF,NM,0.15,0.17,0.32,0.15,0
+mtg_single,aa772ece-281f-4f27-8530-499a7e7ad9bc,Ethersworn Adjudicator,MOC,222,EN,NF,NM,0.38,0.40,,0.40,0
+mtg_single,cae4d0b9-a084-4934-90ad-7ee3c4b64ca8,Everquill Phoenix,MOC,275,EN,NF,NM,0.15,0.20,,0.20,0
+mtg_single,9da57884-4495-4753-b122-c49f2969c295,Evolving Wilds,MOC,397,EN,NF,NM,0.15,0.27,,0.27,0
+mtg_single,d4709fcd-2f97-4ee3-a4bb-0062ef298ef8,Excise the Imperfect,MOC,101,EN,NF,NM,0.50,0.82,,0.82,0
+mtg_single,027e99dc-a9ad-40f4-96c8-10b7d7d505b4,Excise the Imperfect,MOC,14,EN,NF,NM,0.39,0.46,,0.46,0
+mtg_single,e56a0218-a0f8-451c-82c2-5b271ec655d4,Exotic Orchard,MOC,398,EN,NF,NM,0.18,0.19,,0.19,0
+mtg_single,d0680563-d3bf-4eb3-aa1e-b5b17eebd85b,Expedition Lookout,MOM,56,EN,NF,NM,0.15,0.17,0.47,0.15,0
+mtg_single,a140c6dd-801a-4a15-9c3d-fe83c83293db,Expendable,FMOM,3,EN,NF,NM,0.20,,,,0
+mtg_single,18c53785-c7d2-4537-980f-04cb31bf3120,Exsanguinator Cavalry,MOC,113,EN,NF,NM,2.98,3.71,,3.71,0
+mtg_single,da31123b-88b4-4693-869d-6b63a980a31c,Exsanguinator Cavalry,MOC,26,EN,NF,NM,2.17,2.69,,2.69,0
+mtg_single,f4f71cd5-d934-433a-86b1-2015b18f57e0,Eyes of Gitaxias,MOM,57,EN,NF,NM,0.15,0.18,,0.18,0
+mtg_single,b7fe14a1-f0fb-4482-922a-872dd46d51d9,"Ezuri, Claw of Progress",MUL,38,EN,NF,NM,1.50,1.87,2.72,1.87,0
+mtg_single,4ec47f0c-aab4-4a16-aa94-a6570fc8cc8c,Faerie,TMOC,11,EN,NF,NM,0.50,,,,0
+mtg_single,854530eb-f2a4-4756-b77a-297870355f39,Faerie Mastermind,MOM,352,EN,NF,NM,13.91,14.27,22.10,14.27,0
+mtg_single,63aaa0f1-ca5a-4b7b-81ac-69a3d37a43cf,Faerie Mastermind,MOM,58,EN,NF,NM,11.66,12.53,14.16,12.53,0
+mtg_single,e8b6e9cd-54b1-4839-9848-1cb156d21f5d,Faerie Mastermind,PMOM,58p,EN,NF,NM,11.82,12.19,12.89,12.19,0
+mtg_single,236f7435-0f1c-43a5-a7a9-ea487ba72335,Failed Conversion,MOM,103,EN,NF,NM,0.15,0.15,0.21,0.15,0
+mtg_single,19f81602-7a8a-41db-a6a4-19c645039710,Fairgrounds Trumpeter,MOM,335,EN,NF,NM,0.15,0.23,0.21,0.15,0
+mtg_single,0be9657e-6cc8-4fbe-a26a-682c0803ccbd,Falkenrath Exterminator,MOC,276,EN,NF,NM,0.15,0.23,,0.23,0
+mtg_single,a4102d9b-50dd-457c-a341-88915cae7e15,Fallowsage,MOC,223,EN,NF,NM,0.20,0.28,,0.28,0
+mtg_single,09ae210a-a614-4ebd-9171-939721f43651,Fearless Skald,MOM,138,EN,NF,NM,0.15,0.16,0.26,0.20,0
+mtg_single,49b71dd5-86e4-4c41-8483-703415279634,Feather,TMOC,23,EN,NF,NM,0.16,0.29,,0.29,0
+mtg_single,8dad1890-a2a9-448a-b885-7ec2e28110ba,Feather // Servo,TMOC,23-42,EN,NF,NM,0.18,,,,0
+mtg_single,2ddea6da-be31-4ac7-8d81-83e8797fd7b8,Feldon of the Third Path,MOC,277,EN,NF,NM,1.00,1.01,,1.01,0
+mtg_single,f3fa317e-dd35-441b-a7bd-cbd9077d6b7d,Fell the Mighty,MOC,185,EN,NF,NM,0.25,0.37,,0.37,0
+mtg_single,925b5187-7850-4276-8997-375ca40b2576,Fellwar Stone,MOC,356,EN,NF,NM,0.94,1.08,,1.08,0
+mtg_single,f9656bce-2730-4ba8-94d7-4e29d0d7f564,Fertilid,MOC,296,EN,NF,NM,0.15,0.19,,0.19,0
+mtg_single,7369a003-682c-43d1-907c-15c23124e7c2,Fertilid's Favor,MOM,186,EN,NF,NM,0.15,0.16,0.30,0.15,0
+mtg_single,c963d5cf-c3b1-4686-a462-09332daab6f1,Fetid Heath,MOC,399,EN,NF,NM,0.61,0.89,,0.89,0
+mtg_single,6ea50cdf-36e9-46e1-8c03-178613c3acbf,Field of Ruin,MOC,400,EN,NF,NM,0.17,0.25,,0.25,0
+mtg_single,7f16291c-cc9a-43c7-9f4f-92ba942577f3,Fiery Confluence,MOC,278,EN,NF,NM,0.52,0.57,,0.57,0
+mtg_single,084f846d-4539-497a-9a5a-da3ee5ca1a29,Filigree Vector,MOC,102,EN,NF,NM,9.89,11.13,,11.13,0
+mtg_single,8422698e-6260-4568-ade5-aead3bf5d4a6,Filigree Vector,MOC,15,EN,NF,NM,10.05,8.82,,8.82,0
+mtg_single,273c616c-5750-414b-9e4c-3f2ee18ce2ba,Final Flourish,MOM,104,EN,NF,NM,0.15,0.18,0.18,0.15,0
+mtg_single,e915d24e-ce00-4504-9ed5-028e4ccbe2a7,Firemane Commando,MOC,73,EN,NF,NM,0.87,1.56,3.21,1.56,0
+mtg_single,d908044c-6538-4e2a-829b-0c40aceb6213,Firemane Commando,MOC,81,EN,NF,NM,3.37,3.41,5.90,3.41,0
+mtg_single,2a508996-29b7-40ae-ba06-3cfcee42b365,Firesong and Sunspeaker,MUL,39,EN,NF,NM,0.15,0.36,0.44,0.36,0
+mtg_single,5a884e8f-f26f-4cce-80be-307b68c1df51,"Firja, Judge of Valor",MUL,40,EN,NF,NM,0.15,0.17,0.21,0.17,0
+mtg_single,5654b728-8ba1-4158-a390-d270fed43112,First Mate Ragavan,TMOM,6,EN,NF,NM,0.17,0.27,,0.27,0
+mtg_single,99b07640-1010-471a-935a-c0bb0b091a15,First Mate Ragavan // Knight,TMOM,6-10,EN,NF,NM,,,0.49,,0
+mtg_single,cb132cb6-d953-4cca-9613-7b2db8644122,First Mate Ragavan // Phyrexian Saproling,TMOM,6-8,EN,NF,NM,0.24,,0.49,,0
+mtg_single,4ea2e70d-4327-460f-8318-5c895f8116e1,First Mate Ragavan // Spirit,TMOC,13-TMOM-6,EN,NF,NM,,,,,0
+mtg_single,1fffe173-472a-4009-817d-7f0b3b5cb0f7,First Mate Ragavan // Spirit,TMOM,6-13,EN,NF,NM,,,0.24,,0
+mtg_single,b4e11f61-1ab0-469d-952c-49f118e7b7c4,First Mate Ragavan // Teferi's Talent Emblem,TMOC,44-TMOM-6,EN,NF,NM,0.25,,,,0
+mtg_single,1c74f7b0-a1db-4f79-bd69-dfb4cafeb791,First Mate Ragavan // Thopter,TMOM,6-19,EN,NF,NM,,,,,0
+mtg_single,f764e87f-88f3-4159-8c0f-9bf2555eb772,First-Sphere Gargantua,MOC,248,EN,NF,NM,0.15,0.21,,0.21,0
+mtg_single,21f2567a-2f7d-415a-8e4d-70a90ad8dab5,Flamerush Rider,MOC,279,EN,NF,NM,0.15,0.32,,0.32,0
+mtg_single,fab39c9e-3845-48d8-93dc-8df6f9ebbc9b,Flameshadow Conjuring,MOC,280,EN,NF,NM,3.15,3.41,,3.41,0
+mtg_single,7fdb3381-c68a-4aec-a137-ee98dcddc798,Flight of Equenauts,MOC,186,EN,NF,NM,0.15,0.17,,0.17,0
+mtg_single,aeb97771-d47d-4b32-b26c-43dac546dea4,Flitting Guerrilla,MOM,105,EN,NF,NM,0.15,0.22,0.28,0.21,0
+mtg_single,74075da4-f1a9-4c1f-935a-90166bc7ff8d,Flockchaser Phantom,MOC,128,EN,NF,NM,0.19,0.41,,0.41,0
+mtg_single,cfa7d1d5-15a3-4ce6-8c77-37a3702b6f4d,Flockchaser Phantom,MOC,41,EN,NF,NM,0.15,0.16,,0.16,0
+mtg_single,0f658908-bd30-44db-a71f-266b6f52d9da,Flywheel Racer,MOM,259,EN,NF,NM,0.15,0.17,0.27,0.17,0
+mtg_single,cc809c4f-c992-4f51-b3df-c3d6a9c1548a,Food,TMOC,35,EN,NF,NM,0.26,0.30,,0.30,0
+mtg_single,accc6089-4f36-4439-82bb-6feef6ce3a3a,Food // Replicated Ring,TMOC,35-41,EN,NF,NM,0.26,0.29,,0.29,0
+mtg_single,c7afe956-4d10-4b67-ae6a-39c85afba644,Forest,MOM,281,EN,NF,NM,0.15,0.15,0.23,0.18,0
+mtg_single,78526d75-81f8-406c-b62d-9c36e4ad12c0,Forest,MOM,290,EN,NF,NM,0.15,0.16,0.26,0.16,0
+mtg_single,a01ea76c-2ea1-45af-94b2-1c07bf1326bc,Forest,MOM,291,EN,NF,NM,0.15,0.34,0.28,0.34,0
+mtg_single,1045e59e-78cc-4b6e-93dc-e361c7e387d7,Forgotten Ancient,MOC,297,EN,NF,NM,0.34,0.44,,0.44,0
+mtg_single,72bb1559-5dd0-43ba-9fd8-60835907a78b,Fortified Village,MOC,401,EN,NF,NM,0.15,0.31,,0.31,0
+mtg_single,46bd210d-b9a9-4458-a405-30b965e43839,Foulmire Knight // Profane Insight,MOC,249,EN,NF,NM,0.19,0.31,,0.31,0
+mtg_single,eade9990-2ad7-43ac-8633-30d7c715531e,Fractured Powerstone,MOC,357,EN,NF,NM,0.15,0.22,,0.22,0
+mtg_single,1aa7dc04-5c9e-4072-b29b-3467f8832a8b,Frontier Bivouac,MOC,402,EN,NF,NM,0.16,0.22,,0.22,0
+mtg_single,23670c97-c74f-4a13-a882-229e7255573b,Frostboil Snarl,MOC,403,EN,NF,NM,0.18,0.25,,0.25,0
+mtg_single,9546cd51-c803-4c1f-8d0c-ca7da3055efd,Furnace Gremlin,MOM,139,EN,NF,NM,0.15,0.15,0.47,0.15,0
+mtg_single,86fa1114-bbf9-46bd-bdc0-ab4462808342,Furnace Host Charger,MOM,140,EN,NF,NM,0.15,0.15,0.20,0.16,1
+mtg_single,93835ff1-68f0-4105-af88-c0a468331330,Furnace Reins,MOM,141,EN,NF,NM,0.15,0.22,0.30,0.22,0
+mtg_single,c711dd92-1b6e-4fc8-8686-609680ca6e72,Furtive Analyst,MOM,59,EN,NF,NM,0.15,0.15,,0.15,0
+mtg_single,df62339f-707b-4c42-8058-b101579ccae2,Furycalm Snarl,MOC,404,EN,NF,NM,0.15,0.29,,0.29,0
+mtg_single,4f2736dc-78e6-42b7-b2cd-3069fcaa404d,"Fynn, the Fangbearer",MUL,26,EN,NF,NM,0.15,0.15,0.20,0.15,0
+mtg_single,2b45a6f9-ee83-42c3-bfeb-e6c48ccd9a4b,"Fynn, the Fangbearer",AMOM,76,EN,NF,NM,1.00,3.00,,3.00,0
+mtg_single,5e714a2b-f7fd-4c6a-8147-147f078cfcf9,Game Trail,MOC,405,EN,NF,NM,0.16,0.33,,0.33,0
+mtg_single,1880792b-4cfc-4beb-a39d-3a910e3a6ff7,Gavony,MOC,142,EN,NF,NM,0.22,0.57,,0.57,0
+mtg_single,30a2bb52-673d-4886-b6d7-c9ef969fb01f,Gavony Township,MOC,406,EN,NF,NM,4.89,5.21,,5.21,0
+mtg_single,ee55f390-66b5-4b6d-9149-d2a96daf685f,Generous Gift,MOC,187,EN,NF,NM,1.25,1.38,,1.38,0
+mtg_single,504af78f-d0e6-4f31-b4d9-8d1cb3055264,Genesis Hydra,MOC,298,EN,NF,NM,0.30,0.39,,0.39,0
+mtg_single,aa5852e9-bb41-4949-b4d9-1c0ccf496f1c,Ghalta and Mavren,MOM,225,EN,NF,NM,1.94,2.70,3.35,2.70,0
+mtg_single,97de7239-b741-403e-86fd-8ae835ba454d,Ghalta and Mavren,PMOM,225p,EN,NF,NM,2.97,3.64,2.80,3.64,0
+mtg_single,c2db2494-0abc-4255-a7b3-dd5d5c2d3de0,Ghalta and Mavren,MOM,307,EN,NF,NM,1.88,2.09,2.31,2.09,0
+mtg_single,2a2d4cc2-4868-4a60-8241-fae862a8c9fd,Ghirapur,MOC,51,EN,NF,NM,2.85,1.58,,1.58,0
+mtg_single,1a13f3c1-db84-44ff-b979-e220db361126,Ghirapur Aether Grid,MOC,281,EN,NF,NM,0.18,0.27,,0.27,0
+mtg_single,66d1822d-ddf4-4802-a2de-a125915568c1,Gift of Compleation,MOM,106,EN,NF,NM,0.15,0.20,0.15,0.20,0
+mtg_single,46d01557-b865-48e5-8185-d360d9460783,Gilded Goose,MOC,299,EN,NF,NM,0.34,0.51,,0.51,0
+mtg_single,1fc68be5-c42c-4a4d-a81c-e59243703177,"Gimbal, Gremlin Prodigy",MOC,3,EN,NF,NM,0.15,0.20,0.27,0.20,0
+mtg_single,e30d3c68-e4c4-4c74-bba5-0de32c8b159c,"Gimbal, Gremlin Prodigy",MOC,91,EN,NF,NM,0.36,0.35,0.55,0.35,0
+mtg_single,b622febe-64c2-4010-bd83-8aeed50b79d6,Glimmervoid Basin,MOC,143,EN,NF,NM,0.39,0.54,,0.54,0
+mtg_single,d901564b-8e4a-4f05-8f90-f6cd5ba97c85,"Glissa, Herald of Predation",MOM,226,EN,NF,NM,0.15,0.25,0.30,0.25,0
+mtg_single,27aa9000-06e5-4836-ae48-3a0608e40c9a,"Glissa, Herald of Predation",PMOM,226p,EN,NF,NM,0.25,0.28,0.39,0.28,0
+mtg_single,8cb17925-b1dd-4b87-ae7b-ef6fbc9acf75,"Glissa, Herald of Predation",MOM,308,EN,NF,NM,0.19,0.30,0.34,0.30,0
+mtg_single,4fe9e063-deb6-4e49-a118-7bc3d04cf97a,Glistening Dawn,MOM,187,EN,NF,NM,0.15,0.16,0.15,0.16,0
+mtg_single,1c79ce79-5cbc-4ad9-b6f6-64592011b185,Glistening Dawn,PMOM,187p,EN,NF,NM,0.17,0.18,0.47,0.18,0
+mtg_single,c4e14e95-a50e-492a-bb56-e2bb6818ea5f,Glistening Dawn,MOM,371,EN,NF,NM,0.15,0.17,0.30,0.17,0
+mtg_single,73c6ea2d-1fa2-4022-9234-1c8450942952,Glistening Deluge,MOM,107,EN,NF,NM,0.15,0.24,0.20,0.24,0
+mtg_single,04c4bb80-a181-4cc9-8fb0-236f2bd22a46,Gloomfang Mauler,MOM,108,EN,NF,NM,0.15,0.15,0.23,0.15,1
+mtg_single,85845349-de56-4d5d-8617-086ee126f7f4,Gnottvold Hermit // Chrome Host Hulk,MOM,188,EN,NF,NM,0.15,0.15,0.15,0.15,0
+mtg_single,d70d7c4c-c297-4864-927a-47997ea3b4de,Go for the Throat,MOC,250,EN,NF,NM,0.43,0.58,,0.58,0
+mtg_single,70b9895a-9391-4584-a328-675f994d7929,Goblin,TMOC,24,EN,NF,NM,3.85,,,,0
+mtg_single,ebdb4186-4f19-4158-8b65-447998eea523,Goblin // Eldrazi,TMOC,1-24,EN,NF,NM,0.25,0.25,,0.25,0
+mtg_single,bfbac7b1-1a03-488c-9be4-dc4d4c704882,Goblin // Sliver,TMOC,2-24,EN,NF,NM,0.25,,,,0
+mtg_single,9d8ff8fa-db57-4cb6-9857-32c7f8511ab1,Goblin Instigator,MOC,282,EN,NF,NM,0.23,0.17,,0.17,0
+mtg_single,3ac9f456-b018-44ab-8274-dc7db47618c2,Goblin Medics,MOC,283,EN,NF,NM,0.15,0.28,,0.28,0
+mtg_single,a52966a9-4f4b-4402-9218-787d7932f4b1,Gold,TMOC,36,EN,NF,NM,,0.21,,0.21,0
+mtg_single,da660507-9b5c-4408-9823-cb05d77d9512,Golden-Scale Aeronaut,MOM,15,EN,NF,NM,0.15,0.16,,0.16,0
+mtg_single,f39e9cb6-d9f0-4348-abc8-5c599c53cce4,Goldmire Bridge,MOC,407,EN,NF,NM,0.25,0.45,,0.45,0
+mtg_single,fcf34066-7c67-45b4-9957-41e7d1558fca,Golem,TMOC,37,EN,NF,NM,0.35,0.34,,0.34,0
+mtg_single,46f9547f-6f97-4fdc-be5f-5c6c10541c0a,Golem // Blood,TMOC,32-37,EN,NF,NM,0.16,0.28,,0.28,0
+mtg_single,46742c1b-7d18-4316-bea1-42b68f51b6df,Golem // Clue,TMOC,33-37,EN,NF,NM,0.17,0.21,,0.21,0
+mtg_single,10261bba-a96d-4080-859c-1359a6c8b5a7,Good-Fortune Unicorn,MOC,326,EN,NF,NM,0.15,0.27,,0.27,0
+mtg_single,3f40040f-688d-4ad1-bcf3-add754507e0b,"Goreclaw, Terror of Qal Sisma",MUL,27,EN,NF,NM,3.43,3.53,4.33,3.53,0
+mtg_single,b895993b-4866-48f4-98bd-403b51d145a6,Goro-Goro and Satoru,MOC,445,EN,NF,NM,1.07,1.36,2.70,1.36,0
+mtg_single,477a82a4-f879-4086-9576-02a74efb46b9,Goro-Goro and Satoru,MOC,448,EN,NF,NM,6.75,6.31,15.28,6.31,0
+mtg_single,5d7cb1ab-d6f0-4d18-90b9-3f2afe6f01ae,Grafted Butcher,MOM,109,EN,NF,NM,0.15,0.29,0.25,0.29,0
+mtg_single,c4a2a260-bba4-4b16-9686-5bda6bd6430a,Grafted Butcher,PMOM,109p,EN,NF,NM,0.24,0.30,0.66,0.30,0
+mtg_single,bde765e8-4748-48cc-810c-91ee15b97f07,Grafted Butcher,MOM,359,EN,NF,NM,0.36,0.41,0.47,0.41,0
+mtg_single,7ef4f7a1-c468-40c2-b69f-4564f9bac0ba,Graveshifter,MOC,251,EN,NF,NM,0.15,0.22,,0.22,0
+mtg_single,39cda988-adeb-4087-82b1-8dfa3245dda9,Gremlin,TMOC,25,EN,NF,NM,1.11,0.39,,0.39,0
+mtg_single,2b72e16f-5f4a-4fd0-9cff-953433dab60e,"Grimgrin, Corpse-Born",MUL,41,EN,NF,NM,1.72,1.96,1.93,1.96,0
+mtg_single,a27a7607-018f-4fd3-a294-d53245b6a9c9,Grove of the Dreampods,MOC,145,EN,NF,NM,0.15,0.29,,0.29,0
+mtg_single,80232286-1eb1-452b-91d9-b5169faac7ef,Gruul Signet,MOC,358,EN,NF,NM,0.30,0.41,,0.41,0
+mtg_single,6ce8fc7c-fb16-45bf-af3e-342f41a2f64b,Guardian Scalelord,MOC,103,EN,NF,NM,2.99,4.11,,4.11,0
+mtg_single,aa6b7dce-bc6c-4fc6-bf17-3e81b20f1e0c,Guardian Scalelord,MOC,16,EN,NF,NM,0.67,2.10,,2.10,0
+mtg_single,e7f3227e-a510-4c6c-8545-65022c13a34f,Guardian of Ghirapur,MOM,16,EN,NF,NM,0.29,0.40,0.41,0.40,0
+mtg_single,2cde9c9d-15ab-4f10-9c1c-4dc8186f5767,Guardian of Ghirapur,PMOM,16p,EN,NF,NM,0.38,0.39,0.62,0.39,0
+mtg_single,62982001-06e3-4fed-83f1-d675d43ab343,Guardian of Ghirapur,MOM,345,EN,NF,NM,0.45,0.53,0.42,0.53,0
+mtg_single,8f291aca-5edb-421a-8d3c-4eaa36826d28,Gyre Sage,MOC,300,EN,NF,NM,1.84,2.63,,2.63,0
+mtg_single,920d242c-a243-4fcb-9d05-24d83578ab90,"Gyruda, Doom of Depths",MUL,42,EN,NF,NM,0.63,0.87,0.84,0.87,0
+mtg_single,a9287420-f0ce-4c23-b2e1-22d163e59841,"Haakon, Stromgald Scourge",MOC,252,EN,NF,NM,0.49,0.55,,0.55,0
+mtg_single,a65496e4-172f-4659-8530-58d95c50ecbb,Halo Forager,MOM,227,EN,NF,NM,0.15,0.18,0.45,0.29,0
+mtg_single,eba14c7f-195b-463d-af90-f28b7e650a47,Halo Forager,MOM,385,EN,NF,NM,0.23,0.34,0.34,0.34,0
+mtg_single,6d16401a-61e4-478a-974a-9e9b55e86606,Halo Hopper,MOM,260,EN,NF,NM,0.15,0.32,0.26,0.15,0
+mtg_single,08349cc1-05ce-4b86-bb13-e5a1b6bc6cba,Halo-Charged Skaab,MOM,60,EN,NF,NM,0.15,0.16,0.36,0.19,0
+mtg_single,af4e74fc-984f-4f81-a7e1-ef1b6163fae5,"Hamza, Guardian of Arashin",MOC,327,EN,NF,NM,0.25,0.31,,0.31,0
+mtg_single,c2a95bac-2519-46f9-a441-16a9f916c855,Hangar Scrounger,MOM,142,EN,NF,NM,0.15,0.22,0.24,0.15,0
+mtg_single,0cd61912-3b32-4a7e-9ba6-905d4c5a06d4,Harried Artisan // Phyrexian Skyflayer,MOM,143,EN,NF,NM,0.15,0.15,0.43,0.15,1
+mtg_single,a6c8ab12-8d33-4ea6-8eb9-a288287e453b,Heaven // Earth,MOC,328,EN,NF,NM,0.15,0.26,,0.26,0
+mtg_single,5a613e92-59cd-4b01-86fd-8ac36313b0e4,Hedron Archive,MOC,359,EN,NF,NM,0.19,0.22,,0.22,0
+mtg_single,82810b0b-fa7c-459d-9816-71a2055b7e94,Hedron Detonator,MOC,118,EN,NF,NM,7.00,7.83,,7.83,0
+mtg_single,ccae7da6-5db9-48ef-9f46-c979155e43d3,Hedron Detonator,MOC,31,EN,NF,NM,6.82,8.34,,8.34,0
+mtg_single,0e2269da-0ae1-434e-b0b6-7551c44ec6dd,Hedron Fields of Agadeem,MOC,146,EN,NF,NM,0.32,0.51,,0.51,0
+mtg_single,5659b7f4-37d8-4a6f-8923-0377baedd253,"Heliod, the Radiant Dawn // Heliod, the Warped Eclipse",MOM,17,EN,NF,NM,1.07,1.28,2.63,1.28,0
+mtg_single,4b4c3779-9ca7-460b-9101-190c8830d580,"Heliod, the Radiant Dawn // Heliod, the Warped Eclipse",MOM,293,EN,NF,NM,1.24,1.70,3.41,1.70,0
+mtg_single,8dc70d56-42b9-4f42-94d0-be32975b208c,"Heliod, the Warped Eclipse",AMOM,60,EN,NF,NM,,,,,0
+mtg_single,bcd95558-88ad-4ce4-aaa8-d6c929131678,Hellkite Igniter,MOC,284,EN,NF,NM,0.15,0.27,,0.27,0
+mtg_single,5934a55f-2d0e-476b-8601-3e87a56c9e7c,Herald of Hoofbeats,MOC,109,EN,NF,NM,4.97,5.13,,5.13,0
+mtg_single,530d4bcb-a5d5-4d06-b4c1-50c78b993eae,Herald of Hoofbeats,MOC,22,EN,NF,NM,3.99,5.13,,5.13,0
+mtg_single,9ebaea31-5374-4646-92fb-f26377f00b72,Herald's Horn,MOC,360,EN,NF,NM,4.75,5.17,,5.17,0
+mtg_single,9c01609e-4bdd-4a0f-9af8-983e09ec247a,Herbology Instructor // Malady Invoker,MOM,189,EN,NF,NM,0.15,0.15,0.24,0.15,1
+mtg_single,a3b74b17-d824-4d7e-ac26-0a961d6a8216,Hero of Bladehold,MOC,188,EN,NF,NM,1.20,1.37,,1.37,0
+mtg_single,94ae3795-e89b-4e57-abe2-f4a0b7fb043c,Hidetsugu and Kairi,MOM,228,EN,NF,NM,0.15,0.38,0.37,0.38,0
+mtg_single,925084c3-fe7a-4ecf-81d5-99abf19e0cc0,Hidetsugu and Kairi,PMOM,228p,EN,NF,NM,0.38,0.40,0.34,0.40,0
+mtg_single,ff135654-405d-49a4-aeda-88421aaa161a,Hidetsugu and Kairi,MOM,309,EN,NF,NM,0.15,0.37,0.51,0.37,0
+mtg_single,1e9d1ac2-b7eb-4606-88e3-e8ea75106b98,Hidetsugu and Kairi,AMOM,45,EN,NF,NM,,,,,0
+mtg_single,4c970b09-49eb-4d51-b059-2af805b800f7,High Sentinels of Arashin,MOC,189,EN,NF,NM,0.15,0.17,,0.17,0
+mtg_single,22c0dffa-a05c-4b5b-a8c9-cbf3fe6db582,Hindervines,MOC,301,EN,NF,NM,0.15,0.23,,0.23,0
+mtg_single,17eb286c-615c-40d6-a912-b4ddc23b4b1f,Hoarding Broodlord,MOM,110,EN,NF,NM,2.98,4.86,5.45,4.86,0
+mtg_single,7e7966ad-17fe-4ae1-a18b-5d454bac664a,Hoarding Broodlord,PMOM,110p,EN,NF,NM,5.42,5.92,4.42,5.92,0
+mtg_single,5d787fee-20a5-41e1-8869-e34e1990e673,Hoarding Broodlord,AMOM,23,EN,NF,NM,0.50,0.49,,0.49,0
+mtg_single,e38a53be-55a9-488a-a02b-1c8909ea0e43,Hoarding Broodlord,MOM,360,EN,NF,NM,5.65,5.68,8.28,5.68,0
+mtg_single,de5c92cc-f022-4bf2-ac04-3db8bf89ba57,"Horobi, Death's Wail",MUL,14,EN,NF,NM,0.15,0.39,0.55,0.39,0
+mtg_single,132c9d1d-c2f2-4a01-948d-74db53259003,"Horobi, Death's Wail",AMOM,70,EN,NF,NM,,,,,0
+mtg_single,d696f821-7b8c-4c65-b744-07a517f12b57,Hour of Reckoning,MOC,190,EN,NF,NM,0.19,0.23,,0.23,0
+mtg_single,9eff7383-4cd7-4128-8219-aedb9ff67058,Human,TMOC,26,EN,NF,NM,,,,,0
+mtg_single,63a0b2c0-41bd-4209-aea6-e964be03b1ae,Human,TMOC,6,EN,NF,NM,,,,,0
+mtg_single,db11114a-cc58-4f3f-ac35-fdf751a76b71,Ichor Drinker,MOM,111,EN,NF,NM,0.15,0.21,0.20,0.29,0
+mtg_single,74ed2e68-a0c8-44f8-b232-e728a106d8d5,Ichor Elixir,MOC,133,EN,NF,NM,0.20,0.32,,0.32,0
+mtg_single,2cb4c99b-85ae-40c4-96b2-c0b0bb5fdceb,Ichor Elixir,MOC,46,EN,NF,NM,0.15,0.18,,0.18,0
+mtg_single,24cd5d1b-3751-4d72-a91d-4d0ead153fe6,Ichor Shade,MOM,112,EN,NF,NM,0.15,0.15,0.15,0.15,0
+mtg_single,f5c5d178-9143-4a76-b3a4-7cb42a2d4cb9,"Imoti, Celebrant of Bounty",MUL,43,EN,NF,NM,0.15,0.20,0.29,0.20,0
+mtg_single,c843e63d-9d46-4987-8745-41c3b9b1ed60,"Imoti, Celebrant of Bounty",AMOM,79,EN,NF,NM,,,,,0
+mtg_single,ac0890b3-faad-4360-8df3-c8db31962d42,Impact Tremors,MOC,285,EN,NF,NM,2.55,2.71,,2.71,0
+mtg_single,e44ca13f-eba8-421e-b442-4632b246676e,Imprisoned in the Moon,MOC,224,EN,NF,NM,0.20,0.27,,0.27,0
+mtg_single,0f2eedc2-c3ce-40f2-96b0-b6c7621e4471,Improbable Alliance,MOC,329,EN,NF,NM,0.15,0.21,,0.21,0
+mtg_single,72bc6617-b2f2-49e1-b05c-fc9d32fba3a1,Incubation Druid,MOC,302,EN,NF,NM,1.68,1.91,,1.91,0
+mtg_single,a32bea5c-2119-48a3-bb30-413ccdc5ba41,Incubator // Phyrexian,TMOM,16,EN,NF,NM,0.15,0.18,0.37,0.18,0
+mtg_single,d7960a1f-e0a4-4e25-b57f-d759afb87f63,Incubator // Phyrexian,TMOM,16-16,EN,NF,NM,0.17,0.27,0.33,0.27,0
+mtg_single,e77a880e-dd69-4e13-bf02-e277785d8c8c,Incubator // Phyrexian,TMOM,17,EN,NF,NM,0.28,0.29,0.99,0.29,0
+mtg_single,c77a4034-ad17-49b6-94b9-52b2d96ae4ef,Incubator // Phyrexian,TMOM,17-17,EN,NF,NM,0.16,0.18,0.36,0.18,0
+mtg_single,06b4442b-e0e2-4c59-9048-bf75c295ec5b,Incubator // Phyrexian,TMOM,18,EN,NF,NM,0.21,0.22,,0.22,0
+mtg_single,fdf1098a-8814-4496-bf43-8fe72ac21625,Incubator // Phyrexian,TMOM,18-18,EN,NF,NM,0.15,0.21,0.26,0.21,0
+mtg_single,bb7381a5-c969-4456-a5b4-94ed14c03da7,Infected Defector,MOM,18,EN,NF,NM,0.15,0.16,0.16,0.16,1
+mtg_single,a44ccc05-5440-4f74-91b6-a39631cf702f,Infernal Sovereign,MOC,75,EN,NF,NM,0.43,0.45,0.87,0.45,0
+mtg_single,ee5e1f4e-15db-44d3-9d3c-cea9e4e58dbe,Infernal Sovereign,MOC,83,EN,NF,NM,0.53,0.58,0.74,0.58,0
+mtg_single,1d369a22-8af1-4679-9356-200d43d4e5ec,Inga Rune-Eyes,MUL,10,EN,NF,NM,0.15,0.15,0.15,0.15,0
+mtg_single,a97a4fb4-4699-4f76-8dd8-0aec5ab493fa,Inga and Esika,MOM,229,EN,NF,NM,1.28,1.43,1.99,1.43,0
+mtg_single,119bab11-4bbf-479d-a631-c19247578361,Inga and Esika,PMOM,229p,EN,NF,NM,2.38,1.98,,1.98,0
+mtg_single,14ad4a56-74a6-472d-9e57-2802f5cdc0e5,Inga and Esika,MOM,310,EN,NF,NM,1.60,1.95,1.92,1.95,0
+mtg_single,d699be25-020a-4735-96ff-2acf9463f619,Injector Crocodile,MOM,329,EN,NF,NM,0.15,0.25,0.18,0.25,0
+mtg_single,36bfc57f-fac7-44a5-941d-ca64a6a75f6a,Inscription of Abundance,MOC,303,EN,NF,NM,0.30,0.48,,0.48,0
+mtg_single,36d91a9b-8471-40fa-9120-6834138cd194,Insect,TMOC,31,EN,NF,NM,,0.65,,0.65,0
+mtg_single,ac3ff177-4b09-466f-a1d8-7e05118fedcc,Inspired Charge,MOM,19,EN,NF,NM,0.15,0.15,,0.15,1
+mtg_single,87a88911-d3c7-4b51-acaf-cd2e0f2a13b8,Inspiring Call,MOC,304,EN,NF,NM,0.35,0.37,,0.37,0
+mtg_single,f6122a89-112f-45d5-879e-1819f252268e,Inspiring Statuary,MOC,361,EN,NF,NM,0.25,0.33,,0.33,0
+mtg_single,ff72943f-47d1-47cf-886b-390f9cc8f9e3,Interdisciplinary Mascot,MOM,326,EN,NF,NM,0.15,0.26,0.51,0.26,0
+mtg_single,b00db9b7-3fd1-4d54-98ed-04bdc50dbfa6,Interdisciplinary Mascot,MOM,377,EN,NF,NM,0.31,0.41,,0.41,0
+mtg_single,551b326f-e3db-4e4a-8afb-db3203f9e744,Into the Fire,MOM,144,EN,NF,NM,0.15,0.42,0.31,0.42,0
+mtg_single,597a4325-d190-4cfa-bdd5-9ce236ed5cab,Into the Fire,PMOM,144p,EN,NF,NM,0.32,0.33,0.32,0.33,0
+mtg_single,18ec13fa-0c3b-4c97-a4eb-aab7d69d84ca,Into the Fire,MOM,364,EN,NF,NM,0.20,0.40,0.41,0.40,0
+mtg_single,7f204509-a1d3-450f-b063-7d4ee5a636c6,Invasion of Alara // Awaken the Maelstrom,MOM,230,EN,NF,NM,0.15,0.26,0.41,0.26,0
+mtg_single,87c14942-f319-4fc6-8355-1bd762af6392,Invasion of Amonkhet // Lazotep Convert,MOM,231,EN,NF,NM,0.15,0.22,0.58,0.22,0
+mtg_single,b760ce2d-58e2-4bcb-943d-c80dac173897,Invasion of Arcavios,AMOM,11,EN,NF,NM,0.25,,,,0
+mtg_single,d6f98dd2-7b2b-4191-a35a-07a5d5147ecc,Invasion of Arcavios // Invocation of the Founders,MOM,61,EN,NF,NM,0.15,0.23,0.45,0.23,0
+mtg_single,3ec6e5b6-ba82-40e6-b368-f3d8a0604dbd,Invasion of Azgol // Ashen Reaper,MOM,232,EN,NF,NM,0.15,0.17,0.35,0.16,3
+mtg_single,60236b31-67a9-4a9f-add3-e9ff36933f59,Invasion of Belenon // Belenon War Anthem,MOM,20,EN,NF,NM,0.15,0.22,0.27,0.15,1
+mtg_single,aa27cfbe-6e53-411d-86b5-2633402b0ce1,Invasion of Dominaria,AMOM,6,EN,NF,NM,,,,,0
+mtg_single,053bf72f-1dc3-4cfd-9fe8-16b54ba2a659,Invasion of Dominaria // Serra Faithkeeper,MOM,21,EN,NF,NM,0.15,0.17,0.21,0.21,0
+mtg_single,512e07bf-a2ec-4393-9d65-c91625e8019c,Invasion of Eldraine,AMOM,24,EN,NF,NM,0.25,,,,0
+mtg_single,fb73112e-d38f-4d28-9fed-11ba8452489c,Invasion of Eldraine // Prickle Faeries,MOM,113,EN,NF,NM,0.15,0.19,0.26,0.27,0
+mtg_single,08e963f7-4c77-41e8-a650-743c1a95cb7b,Invasion of Ergamon // Truga Cliffcharger,MOM,233,EN,NF,NM,0.15,0.23,0.30,0.20,0
+mtg_single,bdfc1c1a-2432-41b6-8bbd-87b242016346,"Invasion of Fiora // Marchesa, Resolute Monarch",MOM,114,EN,NF,NM,0.19,0.48,0.80,0.48,0
+mtg_single,12907843-c1d0-4e1e-930e-2c7ddf3d6090,Invasion of Gobakhan // Lightshield Array,MOM,22,EN,NF,NM,0.20,0.51,0.60,0.51,0
+mtg_single,cb89694d-17f0-4def-8ef1-e0c7b371375c,"Invasion of Ikoria // Zilortha, Apex of Ikoria",MOM,190,EN,NF,NM,11.27,12.80,15.91,12.80,0
+mtg_single,2215846d-b07d-4122-a504-380fcbd07847,Invasion of Innistrad // Deluge of the Dead,MOM,115,EN,NF,NM,0.23,0.32,0.42,0.32,0
+mtg_single,388439a8-8367-4e49-87dc-688db875d266,Invasion of Ixalan // Belligerent Regisaur,MOM,191,EN,NF,NM,0.15,0.42,0.42,0.42,0
+mtg_single,e94313ac-c1a9-41f3-8bd8-7666340c934e,"Invasion of Kaladesh // Aetherwing, Golden-Scale Flagship",MOM,234,EN,NF,NM,0.15,0.22,0.31,0.27,3
+mtg_single,04fcb2df-c703-4c84-ab58-03c9da10711b,Invasion of Kaldheim,AMOM,33,EN,NF,NM,,,,,0
+mtg_single,696e359e-b1f7-4298-8123-6bc64305b218,Invasion of Kaldheim // Pyre of the World Tree,MOM,145,EN,NF,NM,0.20,0.37,0.65,0.37,0
+mtg_single,3e8988fd-7800-4537-947f-9c0926e6b0b1,Invasion of Kamigawa,AMOM,12,EN,NF,NM,,,,,0
+mtg_single,e8c22b42-43d3-43d7-84c8-94d16032a400,Invasion of Kamigawa // Rooftop Saboteurs,MOM,62,EN,NF,NM,0.15,0.20,0.19,0.18,1
+mtg_single,e99d6586-ddcb-430e-a630-f43e01b29f70,Invasion of Karsus // Refraction Elemental,MOM,146,EN,NF,NM,0.15,0.24,0.30,0.24,0
+mtg_single,a57ed5f4-aed8-44e7-b345-e5c5570a4a38,Invasion of Kylem // Valor's Reach Tag Team,MOM,235,EN,NF,NM,0.15,0.19,0.17,0.17,3
+mtg_single,f405adc4-7a2b-44c2-8c94-b1ac2c7d78c4,Invasion of Lorwyn // Winnowing Forces,MOM,236,EN,NF,NM,0.15,0.18,0.33,0.17,1
+mtg_single,1e278bf2-488c-4c13-b4f2-eaf6faf807a5,Invasion of Mercadia // Kyren Flamewright,MOM,147,EN,NF,NM,0.15,0.17,0.30,0.25,1
+mtg_single,210bb7f7-743c-4f90-90e8-34fd5284ab70,Invasion of Moag // Bloomwielder Dryads,MOM,237,EN,NF,NM,0.15,0.19,0.21,0.18,0
+mtg_single,8acaaf28-4733-4366-b19d-f6616ff065ae,Invasion of Muraganda // Primordial Plasm,MOM,192,EN,NF,NM,0.15,0.20,0.22,0.23,0
+mtg_single,6a48e60f-2d7c-45bb-a0e0-87658298472d,Invasion of New Capenna // Holy Frazzle-Cannon,MOM,238,EN,NF,NM,0.15,0.21,0.31,0.21,0
+mtg_single,98db13a3-61c9-4d67-a36c-db2abfbb6ff3,Invasion of New Phyrexia // Teferi Akosa of Zhalfir,MOM,239,EN,NF,NM,0.86,0.98,1.45,0.98,0
+mtg_single,5e534aea-08af-4831-88f5-390126e0a129,Invasion of Pyrulea,AMOM,47,EN,NF,NM,,,,,0
+mtg_single,f4f604da-e32c-48b7-a97e-93b6f007f80d,Invasion of Pyrulea // Gargantuan Slabhorn,MOM,240,EN,NF,NM,0.15,0.17,0.30,0.20,1
+mtg_single,9015006b-056c-42c0-acb3-142b9f80862e,Invasion of Ravnica // Guildpact Paragon,MOM,1,EN,NF,NM,0.23,0.74,0.51,0.74,0
+mtg_single,ec45edf8-f378-479d-b469-9fad4b77ed40,Invasion of Regatha // Disciples of the Inferno,MOM,148,EN,NF,NM,0.15,0.21,0.35,0.19,1
+mtg_single,87b9d9ff-efe7-4eff-b8b8-791ac0cd12d4,"Invasion of Segovia // Caetus, Sea Tyrant of Segovia",MOM,63,EN,NF,NM,0.70,1.28,1.49,1.28,0
+mtg_single,0a2e8b22-c912-4b63-ad85-21c91531534e,Invasion of Shandalar // Leyline Surge,MOM,193,EN,NF,NM,1.25,1.70,2.03,1.70,0
+mtg_single,7f1101a7-1553-4bee-9125-d81a049c0ee3,Invasion of Tarkir,AMOM,34,EN,NF,NM,,,,,0
+mtg_single,30a06b80-b2d3-452e-983b-7a3646176392,Invasion of Tarkir // Defiant Thundermaw,MOM,149,EN,NF,NM,1.87,2.86,2.70,2.86,0
+mtg_single,e21b317c-69c7-4289-86e0-9152b2c5f595,"Invasion of Theros // Ephara, Ever-Sheltering",MOM,23,EN,NF,NM,0.20,0.47,0.73,0.47,0
+mtg_single,217dc519-7f53-40f4-9836-9a60c848c20b,Invasion of Tolvada // The Broken Sky,MOM,241,EN,NF,NM,0.19,0.38,0.47,0.38,0
+mtg_single,f6af95a7-a84f-4821-8078-73366bddc388,Invasion of Ulgrotha // Grandmother Ravi Sengir,MOM,116,EN,NF,NM,0.15,0.17,0.31,0.16,0
+mtg_single,12073776-c2e2-42a6-8d39-a2228e477617,Invasion of Vryn // Overloaded Mage-Ring,MOM,64,EN,NF,NM,0.15,0.20,0.20,0.15,1
+mtg_single,51d89b58-2187-4938-bd12-5eec19989cef,Invasion of Xerex // Vertex Paladin,MOM,242,EN,NF,NM,0.15,0.23,0.21,0.16,1
+mtg_single,045a3152-73c4-46c1-aa34-dbadc081f576,Invasion of Zendikar // Awakened Skyclave,MOM,194,EN,NF,NM,0.15,0.31,0.39,0.25,2
+mtg_single,681ba11c-41fc-45b2-86d2-9e1e1e40645a,Inys Haen,MOC,54,EN,NF,NM,2.24,2.12,,2.12,0
+mtg_single,f89e2ef0-12f0-4407-a207-a1bba223ddbe,Ion Storm,MOC,286,EN,NF,NM,0.15,0.33,,0.33,0
+mtg_single,249068c0-15da-4344-af49-699f2f36baa3,Iridescent Blademaster,MOM,195,EN,NF,NM,0.15,0.18,0.17,0.16,0
+mtg_single,40fdbdf1-2f63-4100-a5ff-9208fa8beda5,Island,MOM,278,EN,NF,NM,0.15,0.15,0.25,0.15,0
+mtg_single,e9dccf55-0b90-4683-a01e-8f7a9690b389,Island,MOM,284,EN,NF,NM,0.15,0.15,0.39,0.15,0
+mtg_single,2c686a8a-3cba-4520-a999-7665092e651c,Island,MOM,285,EN,NF,NM,0.15,0.25,0.37,0.25,0
+mtg_single,3850cd54-6a5a-4536-9b66-5b48928e2a27,Isle of Vesuva,MOC,147,EN,NF,NM,0.42,0.28,,0.28,0
+mtg_single,d85866f7-2c9e-4113-9a80-a4d85d36e534,Izzet Signet,MOC,362,EN,NF,NM,0.48,0.52,,0.52,0
+mtg_single,6a6b0159-a920-438e-adab-d2a9b1c61c54,"Jegantha, the Wellspring",MUL,44,EN,NF,NM,0.18,0.28,0.71,0.28,0
+mtg_single,f75e4d4c-9123-4a7f-b669-5245d5436bec,Jin-Gitaxias,AMOM,13,EN,NF,NM,,,,,0
+mtg_single,75031b27-555d-43e1-8af1-179624a4e586,Jin-Gitaxias // The Great Synthesis,MOM,294,EN,NF,NM,14.26,13.92,16.40,13.92,0
+mtg_single,d787a232-2abc-426c-a852-ac29c01e1c3a,Jin-Gitaxias // The Great Synthesis,MOM,65,EN,NF,NM,11.09,11.18,11.88,11.18,0
+mtg_single,6c21ce31-9b68-4f27-869a-bbf586b868e0,"Jin-Gitaxias, Core Augur",MUL,11,EN,NF,NM,11.78,12.91,14.04,12.91,0
+mtg_single,522bc63d-e913-491f-88ce-fd9348f75df7,"Josu Vess, Lich Knight",MOC,253,EN,NF,NM,0.15,0.35,,0.35,0
+mtg_single,ff8561e8-dbb9-4aff-aeb6-319abd6835ae,Joyful Stormsculptor,MOM,243,EN,NF,NM,0.15,0.15,0.15,0.15,3
+mtg_single,21fb6a72-ba6b-4392-afe5-9933bc4d69a6,Joyful Stormsculptor,AMOM,49,EN,NF,NM,,,,,0
+mtg_single,819d3136-55b8-4c02-85d9-5bcaefb139f4,"Judith, the Scourge Diva",MUL,45,EN,NF,NM,0.15,0.28,0.43,0.28,0
+mtg_single,45d951b0-fcf0-4bee-a825-f6443fc0053a,"Judith, the Scourge Diva",AMOM,80,EN,NF,NM,,,,,0
+mtg_single,f93c156e-c7c6-4dc4-b968-ffd1ef7d49ed,Jund,MOC,148,EN,NF,NM,0.24,0.30,,0.30,0
+mtg_single,08e592e0-79a6-465e-b265-8f73db429e61,Jungle Hollow,MOM,270,EN,NF,NM,0.15,0.20,0.27,0.16,1
+mtg_single,3425479a-74bc-4130-81bb-717c6158a4b2,Jungle Shrine,MOC,408,EN,NF,NM,0.22,0.25,,0.25,0
+mtg_single,07ce9f6c-26c5-40d6-a705-8ce86f0d6992,Juniper Order Ranger,MOC,330,EN,NF,NM,0.15,0.24,,0.24,0
+mtg_single,799bf5af-544a-4393-97c3-a52b662e1045,Junk Winder,MOC,225,EN,NF,NM,0.20,0.29,,0.29,0
+mtg_single,993adb69-4fa1-4ebe-afb2-9a0eab50f1a5,"Juri, Master of the Revue",MUL,46,EN,NF,NM,0.15,0.20,0.37,0.20,0
+mtg_single,35c0a022-1075-4c14-b74a-4ee8b0f5fdb1,"Kaheera, the Orphanguard",MUL,47,EN,NF,NM,0.75,0.83,1.97,0.83,0
+mtg_single,fc72ef58-ef31-4211-9fd9-b3a97a7438b9,Kalonian Hydra,MOC,305,EN,NF,NM,6.25,6.35,,6.35,0
+mtg_single,513b4f6c-59e9-47ab-90d4-6009a9a3ec3c,Kami of Whispered Hopes,MOM,196,EN,NF,NM,4.00,4.20,5.22,4.20,0
+mtg_single,b528cdfe-a872-4763-bae3-d2bf77db42aa,Kami of Whispered Hopes,MOM,383,EN,NF,NM,4.70,5.36,9.13,5.36,0
+mtg_single,66c6d03e-61e4-453d-8ffc-290420675d8d,Karn's Bastion,MOC,409,EN,NF,NM,2.90,3.12,,3.12,0
+mtg_single,81e37ee2-afda-46ec-b32a-317728355df5,Karsus Depthguard,MOM,150,EN,NF,NM,0.15,0.17,0.15,0.15,1
+mtg_single,fcc2c763-5d73-47ce-9f21-928e2d3af534,"Kasla, the Broken Halo",MOC,4,EN,NF,NM,0.15,0.19,0.33,0.19,0
+mtg_single,8ff353b5-701c-4552-8e01-9ba08aa35e8b,"Kasla, the Broken Halo",MOC,92,EN,NF,NM,0.61,0.59,0.98,0.59,0
+mtg_single,acd0b55d-8956-4894-90e5-53a5d5e0fb53,Katilda and Lier,MOC,446,EN,NF,NM,0.24,0.40,0.45,0.40,0
+mtg_single,1a7e720d-48b8-4820-a619-9fe00c30aaaa,Katilda and Lier,MOC,449,EN,NF,NM,0.67,0.68,1.37,0.68,0
+mtg_single,7bda9720-b00c-4551-9755-52193105f547,Keeper of the Accord,MOC,191,EN,NF,NM,0.52,0.63,,0.63,0
+mtg_single,09603eb7-a3fb-4123-b9ef-477bfcb75eea,"Kenrith, the Returned King",MUL,4,EN,NF,NM,1.23,1.54,4.43,1.54,0
+mtg_single,634a36fc-0397-47d7-9d8f-c7c8218cc487,"Keruga, the Macrosage",MUL,48,EN,NF,NM,0.20,0.38,0.49,0.38,0
+mtg_single,b396fba8-13bd-45d0-b2fe-7648d9d370f7,"Keskit, the Flesh Sculptor",MOC,254,EN,NF,NM,0.15,0.18,,0.18,0
+mtg_single,f42397a4-0089-4b30-9ab6-2733900dbc03,Kessig Wolf Run,MOC,410,EN,NF,NM,0.36,0.47,,0.47,0
+mtg_single,5d850487-7c00-439e-b44b-189af2b32d27,Ketria,MOC,55,EN,NF,NM,0.75,0.77,,0.77,0
+mtg_single,ef7145e2-d204-413d-9b25-f71ed35bf71f,Kharasha Foothills,MOC,149,EN,NF,NM,0.40,0.48,,0.48,0
+mtg_single,304cede4-9fc5-49e2-86ab-eab862cebf58,Khenra Spellspear // Gitaxian Spellstalker,MOM,151,EN,NF,NM,0.15,0.17,0.27,0.15,1
+mtg_single,471f274d-0f95-42aa-86be-746d7b991d50,Kher Keep,MOC,411,EN,NF,NM,0.24,0.37,,0.37,0
+mtg_single,f5e41545-2b28-4edf-962a-6e5b2e84e1ca,Kitesail,MOM,261,EN,NF,NM,0.15,0.20,,0.15,1
+mtg_single,3958a1fb-3f82-47d0-86fd-6388e6a93d8f,Kithkin Billyrider,MOM,24,EN,NF,NM,0.15,0.19,0.15,0.19,0
+mtg_single,b5a6cb3c-c94b-433a-83f8-ace75ea91782,Knight,TMOM,10,EN,NF,NM,0.15,0.19,,0.19,0
+mtg_single,40bd9d80-45d9-4365-8822-d82794efc718,Knight,TMOC,7,EN,NF,NM,,0.50,,0.50,0
+mtg_single,90ce249e-85df-4e32-b6bc-881e9c4da04f,Knight // Spirit,TMOC,7-TMOM-14,EN,NF,NM,0.15,0.26,,0.26,0
+mtg_single,b5a4aa8f-4a16-4e8e-aa90-03bf570e2587,Knight Exemplar,MOC,192,EN,NF,NM,3.25,4.31,,4.31,0
+mtg_single,43f24fdf-04bc-4e4e-9763-7c954318c001,Knight of the Last Breath,MOC,331,EN,NF,NM,0.15,0.20,,0.20,0
+mtg_single,82e83ef9-05b3-4b98-9e7d-f0c5c1249ec4,Knight of the New Coalition,MOM,25,EN,NF,NM,0.15,0.18,0.33,0.15,0
+mtg_single,38811521-db49-4ad9-b266-19a8f84c1cc7,Knight of the White Orchid,MOC,193,EN,NF,NM,2.43,2.54,,2.54,0
+mtg_single,f6da9f43-5345-4500-82eb-241b404328c3,Knight-Errant of Eos,MOM,26,EN,NF,NM,0.15,0.35,0.35,0.35,0
+mtg_single,7b20148a-414e-4072-81a2-9e69f301fd65,Knight-Errant of Eos,PMOM,26p,EN,NF,NM,0.27,0.38,,0.38,0
+mtg_single,11708d06-c03e-4a30-8a40-0671bbf65d6a,Knight-Errant of Eos,MOM,346,EN,NF,NM,0.31,0.31,0.53,0.31,0
+mtg_single,55379bc2-5137-4a06-8072-aa0e901a78dd,Knights of the Black Rose,MOC,332,EN,NF,NM,0.25,0.38,,0.38,0
+mtg_single,5b00c8f7-1a95-4b24-b2ee-bc6dcfb390f3,Knights' Charge,MOC,333,EN,NF,NM,0.66,0.70,,0.70,0
+mtg_single,a7f46018-d5ca-480e-ab60-b1c526b6ceea,Kobolds of Kher Keep,TMOC,27,EN,NF,NM,,0.49,,0.49,0
+mtg_single,80e1bf19-84e5-456f-9b38-8d7ff67bd208,Kodama's Reach,MOC,306,EN,NF,NM,1.66,1.88,,1.88,0
+mtg_single,0e2617f1-b6b0-4edd-9555-02604f115942,Kogla and Yidaro,MOM,244,EN,NF,NM,1.55,2.29,2.67,2.29,0
+mtg_single,6b0fe5cf-aa0a-4605-8ec3-176f2d258dbd,Kogla and Yidaro,PMOM,244p,EN,NF,NM,2.99,2.75,2.45,2.75,0
+mtg_single,f7fa2a5d-31a2-44a3-b77d-3de731ce76f5,Kogla and Yidaro,MOM,311,EN,NF,NM,2.49,2.72,3.57,2.72,0
+mtg_single,efcee300-2c95-4970-b220-18d61c610495,Kogla and Yidaro,AMOM,61,EN,NF,NM,2.00,,,,0
+mtg_single,4aba04a2-9d68-463a-b799-3960ef221667,Kor Halberd,MOM,27,EN,NF,NM,0.15,0.19,0.19,0.17,0
+mtg_single,903487f9-6720-43e1-9833-c8e79e55434a,Kraken,TMOM,4,EN,NF,NM,0.63,0.79,1.73,0.79,0
+mtg_single,d1bca457-7c24-453a-8004-112182e06a69,"Krenko, Tin Street Kingpin",MOC,287,EN,NF,NM,3.00,3.24,,3.24,0
+mtg_single,f59f1eeb-c5f1-41eb-998e-6ab05d5f1cd4,Krosa,MOC,150,EN,NF,NM,0.47,0.48,,0.48,0
+mtg_single,fcca0cdb-3e66-47fd-a7c0-5d32beb5456f,Krosan Verge,MOC,412,EN,NF,NM,0.15,0.23,,0.23,0
+mtg_single,b6b1d34f-3a15-4385-ab43-159b5a38d777,Kroxa and Kunoros,MOM,245,EN,NF,NM,0.15,0.35,0.48,0.35,0
+mtg_single,27cb58a6-63bc-410f-a78b-c54e4387a635,Kroxa and Kunoros,PMOM,245p,EN,NF,NM,0.40,0.41,,0.41,0
+mtg_single,3a07e93e-02ac-41fa-9bc9-0eebf82668ed,Kroxa and Kunoros,MOM,312,EN,NF,NM,0.39,0.46,0.86,0.46,0
+mtg_single,83bc4501-680c-4b78-abab-09e780c8e5ff,"Kroxa, Titan of Death's Hunger",MUL,49,EN,NF,NM,2.22,2.41,3.89,2.41,0
+mtg_single,5eecb1bf-3874-4f03-b943-092e6bd947aa,"Kwende, Pride of Femeref",MUL,5,EN,NF,NM,0.15,0.20,0.25,0.20,0
+mtg_single,7bc395bf-8011-4741-95e8-4012eb28c500,"Kykar, Wind's Fury",MOC,334,EN,NF,NM,0.49,0.59,,0.59,0
+mtg_single,32fb2934-ef16-4a6b-ae95-634ec62ec161,"Lathiel, the Bounteous Dawn",MUL,50,EN,NF,NM,0.90,1.33,1.83,1.33,0
+mtg_single,545b7562-ecb9-4b8b-b0fb-7812c41d6e4b,Liliana's Standard Bearer,MOC,255,EN,NF,NM,0.15,0.39,,0.39,0
+mtg_single,ad870929-5139-4162-bd94-12c177ea220c,Liliana's Talent,MOC,76,EN,NF,NM,0.26,0.58,0.75,0.58,0
+mtg_single,0a5a6cbd-f444-4a25-8f59-18c7ad075639,Liliana's Talent,MOC,84,EN,NF,NM,0.45,0.80,0.72,0.80,0
+mtg_single,e0ff268c-d9d4-4734-9cbf-6d0baef62eec,Lithomantic Barrage,MOM,152,EN,NF,NM,0.15,0.24,0.30,0.24,0
+mtg_single,51ff1bb0-175d-4b10-b5b7-fc88aa6dbc59,Littjara,MOC,56,EN,NF,NM,,3.55,,3.55,0
+mtg_single,e497f03e-f0af-49ad-90cc-b9507112c585,Llanowar Reborn,MOC,413,EN,NF,NM,0.21,0.25,,0.25,0
+mtg_single,40e0c152-6bfc-4a09-a9a8-61bed9f0d729,Locthwain Lancer,MOC,114,EN,NF,NM,0.19,0.35,,0.35,0
+mtg_single,c574d82f-041c-4788-bf2a-4610c1ec8631,Locthwain Lancer,MOC,27,EN,NF,NM,0.29,0.41,,0.41,0
+mtg_single,17a231d0-3e17-4345-a53d-73042f7085f0,Lurrus of the Dream-Den,MUL,51,EN,NF,NM,2.25,2.44,3.96,2.44,0
+mtg_single,3a51b727-3e0e-4eed-aca7-62f2a4d949fb,Lurrus of the Dream-Den,AMOM,81,EN,NF,NM,,0.99,,0.99,0
+mtg_single,53a2f922-b55e-4746-bfba-2703159834cd,"Lutri, the Spellchaser",MUL,52,EN,NF,NM,0.18,0.42,0.97,0.42,0
+mtg_single,af446944-19be-4f1b-a3ab-20a7ac499b8a,Managorger Hydra,MOC,307,EN,NF,NM,1.05,1.43,,1.43,0
+mtg_single,b68849ac-d9b6-4dda-ae95-6c534f9225a1,Marauding Dreadship,MOM,153,EN,NF,NM,0.15,0.17,0.15,0.15,1
+mtg_single,a67fb245-d1d2-46bb-bff3-c2369a9a7074,Marauding Dreadship,AMOM,36,EN,NF,NM,,,,,0
+mtg_single,b12f26c7-5363-4d21-a3f9-d0cbdecfdc9c,"Marchesa, Resolute Monarch",AMOM,25,EN,NF,NM,,,,,0
+mtg_single,194d480d-1df5-45a9-b6f0-072d863a18da,Marshal of Zhalfir,MOM,246,EN,NF,NM,0.15,0.31,0.30,0.31,1
+mtg_single,e17a5117-8286-4324-aa43-666ebe337f5b,Marshal of Zhalfir,AMOM,50,EN,NF,NM,0.25,,,,0
+mtg_single,03061d7b-09cd-4ba4-b209-8bf5cbee36fa,Massacre Wurm,MOC,256,EN,NF,NM,3.35,3.92,,3.92,0
+mtg_single,46322085-6235-48f8-946d-6dc0b0377574,Master Splicer,MOC,194,EN,NF,NM,0.15,0.27,,0.27,0
+mtg_single,2eb164e9-7369-43f8-b366-d42e8e957a54,Master of Etherium,MOC,226,EN,NF,NM,0.64,0.74,,0.74,0
+mtg_single,ae8a6652-186e-4d51-9477-47e3ce30d1bb,Masterful Replication,MOC,227,EN,NF,NM,0.15,0.32,,0.32,0
+mtg_single,19d8e442-70ed-46fa-9d4e-1c9620ffc1e8,Maul of the Skyclaves,MOC,195,EN,NF,NM,0.25,0.28,,0.28,0
+mtg_single,71f4a988-c535-4dfe-9e6d-d96f213194fd,Meeting of Minds,MOM,66,EN,NF,NM,0.15,0.20,0.41,0.19,3
+mtg_single,48f723c8-f379-4a4b-8c23-952084dabb2b,Megaflora Jungle,MOC,57,EN,NF,NM,0.75,0.76,,0.76,0
+mtg_single,585ed1d8-432b-406b-82ac-4f8ed09c40fd,Mentor of the Meek,MOC,196,EN,NF,NM,0.15,0.24,,0.24,0
+mtg_single,93a4ad45-d39f-497e-a7ee-22ecb06e5615,Merciless Repurposing,MOM,117,EN,NF,NM,0.15,0.16,,0.15,1
+mtg_single,574ef376-af3b-44e8-9486-2fff5b5a244d,Meteor Golem,MOC,363,EN,NF,NM,0.15,0.25,,0.25,0
+mtg_single,0e7eba35-fe6b-4881-b306-022fb7c79899,Midnight Reaper,MOC,257,EN,NF,NM,0.20,0.30,,0.30,0
+mtg_single,09af1c60-e583-47ed-bb7f-b6b0e81dff16,Migratory Route,MOC,336,EN,NF,NM,0.15,0.22,,0.22,0
+mtg_single,d6f94813-520e-49b1-9a4d-e9cb80674c97,"Mikaeus, the Lunarch",MOC,197,EN,NF,NM,0.59,0.77,,0.77,0
+mtg_single,8757c761-5181-4484-bf3b-3f49c90d5ea9,Mind Stone,MOC,364,EN,NF,NM,0.25,0.34,,0.34,0
+mtg_single,3bb66130-608d-4fe6-a586-69208b1d5e9f,Mindless Automaton,MOC,365,EN,NF,NM,0.15,0.23,,0.23,0
+mtg_single,c9de7617-d8ba-4076-8057-ac315ca68501,Mirran Banesplitter,MOM,154,EN,NF,NM,0.15,0.15,0.27,0.15,0
+mtg_single,a1216722-752d-4d22-b097-3c18cb7ba956,Mirrodin Avenged,MOM,118,EN,NF,NM,0.15,0.16,0.22,0.16,0
+mtg_single,06c7ade6-e6e4-4981-992e-1136a8e83db0,Mirrodin Avenged,AMOM,26,EN,NF,NM,,,,,0
+mtg_single,8be17556-a978-4860-9630-7d8826d6342d,Mirror-Shield Hoplite,MOM,247,EN,NF,NM,0.15,0.17,,0.22,1
+mtg_single,c3862b83-2bc6-4cc6-97cf-70cb1c2ad773,Mirror-Style Master,MOC,119,EN,NF,NM,0.27,0.45,,0.45,0
+mtg_single,56acebfe-41a6-40e4-85fb-1348a542cab9,Mirror-Style Master,MOC,32,EN,NF,NM,0.15,0.28,,0.28,0
+mtg_single,96626fe4-3d33-440c-82fa-0916ca5b1928,Mistmeadow Vanisher,MOC,129,EN,NF,NM,0.25,0.32,,0.32,0
+mtg_single,6b59314e-1cc2-4eee-98d0-d188698b54ea,Mistmeadow Vanisher,MOC,42,EN,NF,NM,0.15,0.25,,0.25,0
+mtg_single,092a8564-b835-4abe-8ded-526e9d5c6b7f,Moira and Teshar,MOC,7,EN,NF,NM,0.20,0.26,0.23,0.26,0
+mtg_single,92fcd16e-557b-4aae-b006-f0c2263ced25,Moira and Teshar,MOC,93,EN,NF,NM,0.29,0.48,0.40,0.48,0
+mtg_single,bdbd2fd5-de05-493b-80fb-26899ecfbbc8,Moment of Truth,AMOM,14,EN,NF,NM,,,,,0
+mtg_single,ca0ad5e1-56f7-4679-8456-54b2c0e75216,Moment of Truth,MOM,67,EN,NF,NM,0.15,0.21,0.27,0.19,0
+mtg_single,ba224ebf-bd74-4ada-8ba1-b17ae3353f29,Monastery Mentor,MOM,28,EN,NF,NM,1.10,2.04,1.67,2.04,0
+mtg_single,0d171074-552a-428f-8bb4-98aceefd5086,Monastery Mentor,PMOM,28p,EN,NF,NM,1.44,1.15,1.80,1.15,0
+mtg_single,3e245a9b-d3b2-4788-90f0-f995f137c16b,Monastery Mentor,MOM,347,EN,NF,NM,1.94,2.23,3.12,2.23,0
+mtg_single,3af73c84-bc77-4830-9b2e-0c4e6e7b5203,Monk,TMOM,1,EN,NF,NM,0.50,0.82,,0.82,0
+mtg_single,a014b5fb-e5f2-4013-a50d-b4768e1bd6e0,Monk // Knight,TMOM,1-10,EN,NF,NM,,,2.05,,0
+mtg_single,6586b61e-2086-425d-b889-cb6a4db68045,Monk // Kraken,TMOM,1-4,EN,NF,NM,,,,,0
+mtg_single,8f374ce7-fb95-4b05-bf75-53ad53a4c906,Monk // Phyrexian Hydra,TMOM,1-11,EN,NF,NM,,,,,0
+mtg_single,f267f8a5-b9bc-4591-8fd0-d423f9a71326,Monk // Phyrexian Saproling,TMOM,1-8,EN,NF,NM,,,,,0
+mtg_single,1460c68f-a802-4c13-8d08-f8718e705fc4,Monk // Spirit,TMOM,1-13,EN,NF,NM,0.59,0.76,,0.76,0
+mtg_single,87298454-6960-4188-8641-e8c94504a57e,Monk // Spirit,TMOM,1-14,EN,NF,NM,,,,,0
+mtg_single,6c9466e4-ee98-46d8-9456-2eac8f4e60a0,Monk // Spirit,TMOC,13-TMOM-1,EN,NF,NM,,,,,0
+mtg_single,ac43efad-f53d-47fd-900e-6aa2ecb2ebbe,Monk // Zombie,TMOM,1-5,EN,NF,NM,,,,,0
+mtg_single,ba6cdbf3-c8f0-4d8a-83ea-aaeb1353d66f,Mortify,MOC,337,EN,NF,NM,0.18,0.20,,0.20,0
+mtg_single,da5b21bc-6a64-47d2-9373-2b35f047c609,Mossfire Valley,MOC,414,EN,NF,NM,0.18,0.26,,0.26,0
+mtg_single,4903cb68-57ba-4ce6-9457-47c62e776df0,Mosswort Bridge,MOC,415,EN,NF,NM,0.30,0.38,,0.38,0
+mtg_single,e1c8d006-4ca7-40f1-a87c-eb3adb34f86e,Mountain,MOM,280,EN,NF,NM,0.15,0.15,0.23,0.15,0
+mtg_single,0b528012-ced8-471a-817e-549214749111,Mountain,MOM,288,EN,NF,NM,0.15,0.37,0.31,0.37,0
+mtg_single,9fa1ceef-6233-4307-86d0-7279196426f6,Mountain,MOM,289,EN,NF,NM,0.15,0.20,0.38,0.20,0
+mtg_single,d0195b5e-9514-4187-a9f8-bb3349d1c476,Murderous Rider // Swift End,MOC,258,EN,NF,NM,0.25,0.45,,0.45,0
+mtg_single,d505b9c6-7343-4b52-ad3f-08f248f18998,Mutagen Connoisseur,MOM,248,EN,NF,NM,0.15,0.15,0.25,0.15,0
+mtg_single,f08c433a-b00a-4860-bcf8-49963e3173e9,Mutual Epiphany,MOC,151,EN,NF,NM,0.15,0.32,,0.32,0
+mtg_single,e081c003-9795-4ad7-bad8-8aa32ac43786,Myr,TMOC,38,EN,NF,NM,,,,,0
+mtg_single,a8ba663f-1f81-4372-a6d7-a6000da04557,Myr Battlesphere,MOC,366,EN,NF,NM,0.24,0.29,,0.29,0
+mtg_single,e5a304bb-9af1-4a6d-b055-111419cdcf94,Myriad Landscape,MOC,416,EN,NF,NM,0.25,0.33,,0.33,0
+mtg_single,25c39f54-2530-4e54-bb95-e8916b815365,Mystic Monastery,MOC,417,EN,NF,NM,0.15,0.24,,0.24,0
+mtg_single,fcc5f880-c3dd-4485-a687-e0ac16b0f0b6,Nadir Kraken,MOC,228,EN,NF,NM,0.25,0.47,,0.47,0
+mtg_single,517977c6-3c63-4b6a-8409-9b4f3dad0250,Nahiri's Warcrafting,MOM,155,EN,NF,NM,0.15,0.17,0.15,0.17,0
+mtg_single,10715e06-9e05-4419-8f89-6a05f7b6f697,Nahiri's Warcrafting,PMOM,155p,EN,NF,NM,0.30,0.35,,0.35,0
+mtg_single,2c92937f-0085-4e95-a668-dd193ff8d258,Nahiri's Warcrafting,MOM,365,EN,NF,NM,0.15,0.17,0.21,0.17,0
+mtg_single,8f415396-709a-4254-bdd2-37287c11dd2f,Naktamun,MOC,58,EN,NF,NM,0.75,0.84,,0.84,0
+mtg_single,f616d90a-da2d-4cd9-a7f0-07dcb79be156,Negate,MOM,68,EN,NF,NM,0.15,0.16,0.33,0.20,0
+mtg_single,82446332-a429-413c-abce-e72da6910f13,Nesting Dovehawk,MOC,104,EN,NF,NM,23.49,23.64,,23.64,0
+mtg_single,e407efa0-3c1b-48b3-928d-36ff499eed28,Nesting Dovehawk,MOC,17,EN,NF,NM,21.83,21.55,,21.55,0
+mtg_single,28a1efc0-c023-4618-8707-0b50f7b40d9b,Nettlecyst,MOC,367,EN,NF,NM,2.86,3.53,,3.53,0
+mtg_single,fe0d2624-f23e-406c-a680-3d4a2dc8326a,New Argive,MOC,59,EN,NF,NM,2.54,1.94,,1.94,0
+mtg_single,aa87da22-0c73-4b14-b050-99e0ff289f30,Nezumi Freewheeler // Hideous Fleshwheeler,MOM,119,EN,NF,NM,0.15,0.19,0.17,0.15,1
+mtg_single,eca143bf-fa71-44a0-9269-471cb365760d,Nezumi Informant,MOM,120,EN,NF,NM,0.15,0.44,0.46,0.25,0
+mtg_single,8ee871f8-c237-4d72-98dd-bc77c9e2ab63,Nezumi Informant,AMOM,27,EN,NF,NM,,,,,0
+mtg_single,67438f1c-4707-422e-a515-01ffee040618,Night's Whisper,MOC,259,EN,NF,NM,0.28,0.48,,0.48,0
+mtg_single,6a32e1c3-d568-447c-85e6-66cef62e7b66,Niv-Mizzet Reborn,MUL,53,EN,NF,NM,0.58,0.83,0.67,0.83,0
+mtg_single,cb02146f-27d0-4505-aeb8-ef133e6a10b0,Norn's Inquisitor,MOM,29,EN,NF,NM,0.15,0.18,0.33,0.18,0
+mtg_single,a04e03a0-2f22-4189-97ad-b186d2d82460,Norn's Inquisitor,MOM,381,EN,NF,NM,0.15,0.58,0.40,0.58,0
+mtg_single,f8a285a8-7d68-4859-af1f-8a8cb079f776,Norn's Seedcore,MOC,60,EN,NF,NM,0.75,1.01,,1.01,0
+mtg_single,f3d64f7f-fe8e-4e16-b810-48976db5e52b,Noxious Gearhulk,MOC,260,EN,NF,NM,0.48,0.60,,0.60,0
+mtg_single,4f5a3143-c7ca-4f23-b181-730fad46e8db,Nyx,MOC,61,EN,NF,NM,2.29,1.34,,1.34,0
+mtg_single,36260f85-ff9c-4a4b-a755-c947fbaf756b,"Obosh, the Preypiercer",MUL,54,EN,NF,NM,0.15,0.32,0.43,0.32,0
+mtg_single,6e8d46dd-6adf-4c49-8c60-2f10b8259a9f,Oculus Whelp,AMOM,15,EN,NF,NM,,,,,0
+mtg_single,795b4258-a2d4-4fd9-be2f-999d42910c3a,Oculus Whelp,MOM,69,EN,NF,NM,0.15,0.15,0.16,0.18,0
+mtg_single,60f57e4b-9e26-454f-b4d8-3ccb5b8f43fc,Omen Hawker,MOM,70,EN,NF,NM,0.15,0.31,0.40,0.15,0
+mtg_single,4e33153d-fc3e-423d-b11f-b691907514fe,"Omnath, Locus of All",MOM,249,EN,NF,NM,0.15,0.43,0.33,0.43,0
+mtg_single,62c98b10-39c9-4a80-80c9-edba1e5cdec8,"Omnath, Locus of All",PMOM,249p,EN,NF,NM,0.47,0.48,0.55,0.48,0
+mtg_single,f0443f8a-ae16-401c-929e-4324baf77346,"Omnath, Locus of All",MOM,313,EN,NF,NM,0.15,0.28,0.53,0.28,0
+mtg_single,e94387c1-f51e-4a07-9c94-1332235ad768,"Omnath, Locus of All",AMOM,51,EN,NF,NM,,,,,0
+mtg_single,40923bc4-e3e1-403b-bcc7-b6f73c717661,"Omnath, Locus of All",AMOM,62,EN,NF,NM,,,0.39,,0
+mtg_single,0c4a768d-3804-4c87-a7f1-3c71022a9285,Onakke Javelineer,MOM,156,EN,NF,NM,0.15,0.15,,0.15,1
+mtg_single,294d2283-0023-4459-9dc6-3c92ed73bdb9,Oracle of Tragedy,MOM,71,EN,NF,NM,0.15,0.16,0.28,0.15,1
+mtg_single,3a68e1d9-83fd-46d1-a11a-b13dae802112,Order of Midnight // Alter Fate,MOC,261,EN,NF,NM,0.15,0.28,,0.28,0
+mtg_single,aa25fe65-28ba-4a5d-a885-afd802a4aaea,Order of the Mirror // Order of the Alabaster Host,MOM,72,EN,NF,NM,0.15,0.17,0.15,0.15,0
+mtg_single,35644316-f916-485b-9b4d-4fbde94d48f8,Orochi Colony,MOC,152,EN,NF,NM,0.39,0.34,,0.34,0
+mtg_single,fc4c7e63-ad33-4774-945b-cdea4aa61b8b,"Orthion, Hero of Lavabrink",MOM,334,EN,NF,NM,5.70,5.53,11.50,5.53,0
+mtg_single,be38bc86-0e22-4fe5-90a0-3655e9a6266a,"Orthion, Hero of Lavabrink",MOM,379,EN,NF,NM,5.99,6.25,,6.25,0
+mtg_single,96a75a7c-c795-44cc-af4f-814c91c7c99a,Orzhov Locket,MOC,368,EN,NF,NM,0.18,0.27,,0.27,0
+mtg_single,54833292-1645-4547-9ab8-c7ba6445e89e,Orzhov Signet,MOC,369,EN,NF,NM,0.34,0.39,,0.39,0
+mtg_single,e24164aa-7c85-4de4-b679-9ac81d5d2aeb,Overachiever,FMOM,2,EN,NF,NM,0.25,,,,0
+mtg_single,81ac1827-e8fd-4af4-a312-f868dc4bfd98,Overgrown Pest,MOM,197,EN,NF,NM,0.15,0.25,0.29,0.20,1
+mtg_single,2ffb998a-2181-49c9-958f-33e04c65a419,"Ozolith, the Shattered Spire",MOM,198,EN,NF,NM,5.22,6.27,6.89,6.27,0
+mtg_single,c8a3c152-9c6d-4d51-8c84-69b76a64856b,"Ozolith, the Shattered Spire",PMOM,198p,EN,NF,NM,6.61,6.00,9.28,6.00,0
+mtg_single,9e1dbe7a-48bc-4848-bad8-a441afc08e60,"Ozolith, the Shattered Spire",MOM,372,EN,NF,NM,8.28,8.72,10.52,8.72,0
+mtg_single,ce9d0708-7447-4772-8ccd-172ca26ed88d,Pain Distributor,MOC,120,EN,NF,NM,5.19,5.68,,5.68,0
+mtg_single,25eb0fd2-98aa-44c8-9727-b16bf82a07a8,Pain Distributor,MOC,33,EN,NF,NM,4.49,5.52,,5.52,0
+mtg_single,38dc4b28-db03-4145-aab8-7dd7fe8f1625,Painful Truths,MOC,262,EN,NF,NM,0.25,0.37,,0.37,0
+mtg_single,b819b76c-cda0-43ac-bff7-a12c2103f6b1,Paliano,MOC,62,EN,NF,NM,,4.10,,4.10,0
+mtg_single,fbc8d0ee-5cf1-44b6-a4cd-253bc86fd651,Panopticon,MOC,153,EN,NF,NM,0.29,0.31,,0.31,0
+mtg_single,746409cd-476a-4d13-afd5-8e3bbd82ec90,Path of Ancestry,MOC,418,EN,NF,NM,0.15,0.23,,0.23,0
+mtg_single,b385e464-1a81-4e9e-af12-58856f22c8ec,Path of the Animist,MOC,125,EN,NF,NM,0.23,0.39,,0.39,0
+mtg_single,dd1c5edf-60d5-4f9d-9cbc-eceec6f8e303,Path of the Animist,MOC,38,EN,NF,NM,0.20,0.36,,0.36,0
+mtg_single,37119fc9-d302-4ff3-8295-1fa04d65405d,Path of the Enigma,MOC,110,EN,NF,NM,0.15,0.23,,0.23,0
+mtg_single,bf22461b-556e-45cf-98d1-54942f2bdd4e,Path of the Enigma,MOC,23,EN,NF,NM,0.15,0.27,,0.27,0
+mtg_single,f1601c2f-2ea4-4124-ac30-f1cbcc29d321,Path of the Ghosthunter,MOC,105,EN,NF,NM,0.21,0.39,,0.39,0
+mtg_single,418ade47-2cee-471b-8b42-28dbea928b33,Path of the Ghosthunter,MOC,18,EN,NF,NM,0.15,0.19,,0.19,0
+mtg_single,c5081e50-5875-4440-b63e-fd30c9fe0e8b,Path of the Pyromancer,MOC,121,EN,NF,NM,3.75,3.92,,3.92,0
+mtg_single,f95396a2-5de4-4de6-885d-1d58a23fd37d,Path of the Pyromancer,MOC,34,EN,NF,NM,3.64,4.04,,4.04,0
+mtg_single,3481001f-d742-450a-af6a-6af5cc41c140,Path of the Schemer,MOC,115,EN,NF,NM,0.15,0.26,,0.26,0
+mtg_single,6ecf9c0d-a686-47d1-8075-d66169604696,Path of the Schemer,MOC,28,EN,NF,NM,0.17,0.26,,0.26,0
+mtg_single,a955f290-a65c-42ca-937e-00777aff2553,Path to Exile,MOC,198,EN,NF,NM,1.37,1.69,,1.69,0
+mtg_single,3de238af-e2b8-45a0-a21b-b457685ba0d0,Perplexing Test,MOC,229,EN,NF,NM,0.25,0.32,,0.32,0
+mtg_single,593e3fb0-26c5-49bb-9eaf-16542d6ec5a9,Phyrexian Archivist,MOM,262,EN,NF,NM,0.15,0.17,0.15,0.18,1
+mtg_single,7bd142f9-ed85-4e62-9121-623ec872071f,Phyrexian Awakening,MOM,30,EN,NF,NM,0.15,0.24,0.31,0.22,0
+mtg_single,462acb35-5d5d-4903-ac75-ffd19df21f31,Phyrexian Censor,MOM,31,EN,NF,NM,0.15,0.24,0.45,0.16,0
+mtg_single,7baac82d-7077-4a19-9a87-7aa695b775d9,Phyrexian Delver,MOC,263,EN,NF,NM,0.43,1.05,,1.05,0
+mtg_single,fb124e9b-1b05-4c0f-a738-e48d6fb58dbd,Phyrexian Gargantua,MOM,121,EN,NF,NM,0.15,0.15,0.15,0.15,0
+mtg_single,17d32a3b-4d6e-41da-a44b-5880e39e2762,Phyrexian Germ,TMOC,19,EN,NF,NM,,0.35,,0.35,0
+mtg_single,c4dd9c50-d498-4390-a058-8c1fcf39c2a3,Phyrexian Germ // Myr,TMOC,19-38,EN,NF,NM,0.21,0.30,,0.30,0
+mtg_single,5142d1cf-7fb6-48d0-976a-96a931df0be0,Phyrexian Ghoul,MOC,264,EN,NF,NM,0.15,0.19,,0.19,0
+mtg_single,c60043e9-d47f-48f5-a45a-ee5a22563f65,Phyrexian Golem,TMOC,39,EN,NF,NM,0.48,,,,0
+mtg_single,b06e76f0-7a6c-43de-9457-dce8711a460c,Phyrexian Golem // Construct,TMOC,34-39,EN,NF,NM,0.19,0.21,,0.21,0
+mtg_single,dcdcc786-2694-49e6-a4eb-b2e3693b378f,Phyrexian Golem // Phyrexian Horror,TMOC,39-40,EN,NF,NM,0.37,0.38,,0.38,0
+mtg_single,b640198f-e8ef-4086-a935-6ea4a4463930,Phyrexian Horror,TMOC,40,EN,NF,NM,,,,,0
+mtg_single,f4fba066-0e6e-4106-8730-225a2b669d37,Phyrexian Hydra,TMOM,11,EN,NF,NM,0.29,0.32,2.11,0.32,0
+mtg_single,eb0a1377-0faa-48c5-b25b-92a2b92a3685,Phyrexian Hydra,TMOM,12,EN,NF,NM,0.40,0.52,1.37,0.52,0
+mtg_single,82aae6ea-e1cb-484b-ac76-096367a9f3d6,Phyrexian Myr,TMUL,1,EN,NF,NM,0.33,0.39,1.27,0.39,0
+mtg_single,f0cb4515-654e-4130-a8da-de0349e20d6b,Phyrexian Myr // Dinosaur,TMUL,1-TMOM-7,EN,NF,NM,,,,,0
+mtg_single,31a4ae62-17a3-48e1-977c-7650567ac86e,Phyrexian Myr // Knight,TMUL,1-TMOM-10,EN,NF,NM,,,0.40,,0
+mtg_single,b19a7a45-8032-4630-b2f1-eb19d99f42f6,Phyrexian Myr // Phyrexian Hydra,TMUL,1-TMOM-11,EN,NF,NM,,,0.51,,0
+mtg_single,0ad76239-849c-4c07-98c5-de5164435f25,Phyrexian Myr // Spirit,TMUL,1-TMOM-14,EN,NF,NM,0.15,,,,0
+mtg_single,a32d9c91-6234-4368-b77b-cdc289174702,Phyrexian Myr // Wrenn and Realmbreaker Emblem,TMUL,1-TMOM-23,EN,NF,NM,,,,,0
+mtg_single,c27b8b09-32f9-4290-8a74-2553eeb52e35,Phyrexian Pegasus,MOM,324,EN,NF,NM,0.15,0.31,0.30,0.15,0
+mtg_single,7cc76ef0-3145-4493-a9e0-4b679d0c3979,Phyrexian Rager,MOC,265,EN,NF,NM,0.15,0.19,,0.19,0
+mtg_single,322f9d2e-4bb2-4d11-ac32-ccf225802080,Phyrexian Rebirth,MOC,199,EN,NF,NM,0.25,0.31,,0.31,0
+mtg_single,7cdb1542-c22c-4262-9a2a-a83cd353eeb8,Phyrexian Saproling,TMOM,8,EN,NF,NM,0.15,0.17,0.69,0.17,0
+mtg_single,bcd3bdae-1563-4be0-9d4b-e5f833ec8ef5,Phyrexian Scriptures,MOC,266,EN,NF,NM,0.32,0.56,,0.56,0
+mtg_single,715d1001-839f-4dc1-887c-9bf1d9d99d6a,Phyrexian Triniform,MOC,370,EN,NF,NM,0.95,1.16,,1.16,0
+mtg_single,a97a9e03-2048-4658-827a-2aad739389be,Pia and Kiran Nalaar,MOC,288,EN,NF,NM,0.15,0.19,,0.19,0
+mtg_single,40bb7f6b-dd18-4639-8185-1a9b2dcd690a,Pile On,MOM,122,EN,NF,NM,0.15,0.33,0.37,0.33,0
+mtg_single,13a8f5b9-7460-4fd7-a6e7-509fd253c204,Pile On,PMOM,122p,EN,NF,NM,0.40,0.42,0.35,0.42,0
+mtg_single,18a3741b-7d23-474c-89d1-fa42ce58a250,Pile On,MOM,361,EN,NF,NM,0.19,0.57,0.44,0.57,0
+mtg_single,cc29d326-da37-4659-bc04-e930348db399,Placid Rottentail,MOM,199,EN,NF,NM,0.15,0.21,0.31,0.19,0
+mtg_single,07ac5bf0-52a9-4cd2-8340-43bf66707b81,Placid Rottentail,AMOM,39,EN,NF,NM,0.25,,,,0
+mtg_single,c829a406-703e-4e0a-893d-020c24620655,Plains,MOM,277,EN,NF,NM,0.15,0.15,0.16,0.15,1
+mtg_single,d2a733e8-c1ab-40cd-aab0-dc12f32ab23f,Plains,MOM,282,EN,NF,NM,0.17,0.60,0.71,0.60,0
+mtg_single,18c49853-85e8-4369-bb44-5820de45ea03,Plains,MOM,283,EN,NF,NM,0.15,0.23,0.26,0.26,0
+mtg_single,7a55b3ad-3cef-4b4b-b5ae-72d43053c8dd,Planewide Disaster,MOC,154,EN,NF,NM,0.29,0.33,,0.33,0
+mtg_single,a2963263-930a-45c2-93c7-9aeb64aa1995,"Polukranos Reborn // Polukranos, Engine of Ruin",MOM,200,EN,NF,NM,0.15,0.44,0.29,0.44,0
+mtg_single,db829ede-d1e8-4247-8bc9-862e653782fa,"Polukranos Reborn // Polukranos, Engine of Ruin",MOM,300,EN,NF,NM,0.15,0.34,0.66,0.34,0
+mtg_single,4e0c1fe4-e020-4fcf-a980-9104904c1b27,Port Town,MOC,419,EN,NF,NM,0.15,0.20,,0.20,0
+mtg_single,f9d50315-1ce4-46c9-89bd-484057267526,Portent Tracker,MOM,201,EN,NF,NM,0.15,0.18,0.27,0.20,0
+mtg_single,46d6c2f7-021b-4464-aff4-478b88242d82,Prairie Stream,MOC,420,EN,NF,NM,0.23,0.35,,0.35,0
+mtg_single,e90eeacc-ab41-4f81-a300-8bed60b24a42,Preening Champion,MOM,73,EN,NF,NM,0.15,0.16,0.17,0.15,0
+mtg_single,766e34fb-7b89-4155-a0f4-96590291ee43,Pridemalkin,MOC,308,EN,NF,NM,0.15,0.41,,0.41,0
+mtg_single,e574812e-24c5-4fda-bc15-457f28fa5501,Progenitor Exarch,MOM,32,EN,NF,NM,0.15,0.28,0.33,0.28,0
+mtg_single,7b192bc8-8891-4254-b4e1-e37718af3163,Progenitor Exarch,PMOM,32p,EN,NF,NM,0.29,0.30,,0.30,0
+mtg_single,d850700e-ea36-4ee3-84a2-16b196acea3e,Progenitor Exarch,MOM,348,EN,NF,NM,0.20,0.65,0.34,0.65,0
+mtg_single,132406de-4afe-435a-b049-3dfebb54aad2,Promise of Loyalty,MOC,200,EN,NF,NM,0.25,0.36,,0.36,0
+mtg_single,ab74569c-9ed1-4a55-ad01-e12fc6a60fc1,Protocol Knight,MOM,74,EN,NF,NM,0.15,0.19,0.15,0.19,1
+mtg_single,4e30e0f4-c151-4ae9-b0ee-0e8fc9b5b4ae,Psychosis Crawler,MOC,371,EN,NF,NM,1.15,1.93,,1.93,0
+mtg_single,15812b76-7a58-4e06-8748-1a96615c52b4,Pull from Tomorrow,MOC,230,EN,NF,NM,0.15,0.24,,0.24,0
+mtg_single,005c5348-9168-4ba0-9712-f9c56e5e63c0,Pyretic Prankster // Glistening Goremonger,MOM,157,EN,NF,NM,0.15,0.15,0.38,0.15,2
+mtg_single,1f0d2361-e759-4e61-88de-58a82eae1d93,"Quintorius, Loremaster",MOM,250,EN,NF,NM,0.15,0.16,0.32,0.16,0
+mtg_single,f496c607-4a5c-4205-aa1c-231a6a2eeaa7,"Quintorius, Loremaster",PMOM,250p,EN,NF,NM,0.32,0.37,,0.37,0
+mtg_single,cd2ecad0-9a6e-4247-95cd-02bccd1ff8d2,"Quintorius, Loremaster",MOM,314,EN,NF,NM,0.15,0.23,0.28,0.23,0
+mtg_single,58a027a5-f385-4c30-b39d-ec878a5bdfa8,"Quintorius, Loremaster",AMOM,52,EN,NF,NM,0.25,,,,0
+mtg_single,210f6483-20d3-46d4-bf11-fddcd9696107,"Quintorius, Loremaster",AMOM,63,EN,NF,NM,,1.00,,1.00,0
+mtg_single,d4f1ee57-e3de-40d4-ae22-249889e6ef55,"Radha, Coalition Warlord",MUL,55,EN,NF,NM,0.15,0.15,0.15,0.15,0
+mtg_single,81244bbb-8c64-4b46-b9a3-9695d455ea50,"Raff, Weatherlight Stalwart",MUL,56,EN,NF,NM,0.15,0.17,0.17,0.17,0
+mtg_single,4e908c44-d060-41d8-9f82-a8d68a2aff5f,"Ragavan, Nimble Pilferer",MUL,21,EN,NF,NM,41.08,43.04,61.25,43.04,0
+mtg_single,1851e96a-0ebf-4e5e-ab9e-d02a829a8d99,"Ragavan, Nimble Pilferer",AMOM,74,EN,NF,NM,,,,,0
+mtg_single,be56abde-46b4-4a1b-ac61-768cdc83ff1e,Ral's Reinforcements,MOM,158,EN,NF,NM,0.15,0.20,0.23,0.15,0
+mtg_single,67ed8eb3-7e01-4ace-a286-b178a662af3d,Ramosian Greatsword,MOM,159,EN,NF,NM,0.15,0.15,0.26,0.15,2
+mtg_single,a4201672-b46a-4b1d-a892-b3d673b263c2,Ramosian Greatsword,AMOM,37,EN,NF,NM,,,,,0
+mtg_single,d6554f8e-db80-4052-8bc7-80583f7547f9,Rampaging Geoderm,MOM,251,EN,NF,NM,0.15,0.16,,0.17,1
+mtg_single,d0d996c8-5512-44e5-a235-25255007a03a,Rampaging Raptor,MOM,160,EN,NF,NM,0.15,0.29,0.19,0.29,0
+mtg_single,c9b5defb-c2ab-4fee-a22b-66e334b7688b,Rampaging Raptor,PMOM,160p,EN,NF,NM,0.26,0.45,,0.45,0
+mtg_single,92403746-632b-4515-ae2a-9e3b8925abd8,Rampaging Raptor,MOM,366,EN,NF,NM,0.19,0.23,0.28,0.23,0
+mtg_single,590961fd-4e91-4600-aa07-69e0e031d4e8,Rankle and Torbran,MOM,252,EN,NF,NM,0.15,0.29,0.40,0.29,0
+mtg_single,7bccc974-ebfa-4e53-864c-0bfd5f213a74,Rankle and Torbran,PMOM,252p,EN,NF,NM,0.31,0.24,,0.24,0
+mtg_single,6dc2ab9f-2dac-40a1-bb54-9636953df155,Rankle and Torbran,MOM,315,EN,NF,NM,0.22,0.30,0.28,0.30,0
+mtg_single,53e866d4-f596-4b95-ac3d-aa736fdda63d,Rankle and Torbran,AMOM,64,EN,NF,NM,,,,,0
+mtg_single,203b0214-7ddb-47f6-a54f-dc8fc8ccdda3,Rashmi and Ragavan,MOC,8,EN,NF,NM,0.15,0.24,0.32,0.24,0
+mtg_single,ce6e7795-da1f-4fcd-9e2d-e0066bf63ab7,Rashmi and Ragavan,MOC,94,EN,NF,NM,0.75,0.77,0.87,0.77,0
+mtg_single,fe925568-7e37-4c34-a004-53dbd8cb7db9,Ravenous Sailback,MOM,202,EN,NF,NM,0.15,0.20,0.23,0.18,1
+mtg_single,56992515-cb63-41be-8928-a2b29237f74b,Read the Bones,MOC,267,EN,NF,NM,0.24,0.32,,0.32,0
+mtg_single,897a99dc-72d1-4ec1-8f3a-f0c890f2c7a0,Reality Shaping,MOC,155,EN,NF,NM,0.21,0.53,,0.53,0
+mtg_single,9209c03b-dbcc-44cf-b975-735403761063,Reality Shift,MOC,231,EN,NF,NM,0.20,0.24,,0.24,0
+mtg_single,fefa4b09-134e-4974-b5b3-7cf8c0a0d29f,Realmbreaker's Grasp,MOM,33,EN,NF,NM,0.15,0.16,0.21,0.19,1
+mtg_single,e9cdbba0-2a15-4d20-85b7-341dfbd517f6,"Realmbreaker, the Invasion Tree",MOM,263,EN,NF,NM,0.24,0.73,0.67,0.73,0
+mtg_single,1500ad95-3238-46bd-9f8c-7c77acbcb974,"Realmbreaker, the Invasion Tree",PMOM,263p,EN,NF,NM,0.53,0.74,,0.74,0
+mtg_single,15da249f-0f20-4a4d-97be-f34cf726be4d,"Realmbreaker, the Invasion Tree",MOM,374,EN,NF,NM,0.40,0.98,0.89,0.98,0
+mtg_single,445f8cfb-9bf4-4b63-905f-af666b7929f3,"Realmbreaker, the Invasion Tree",AMOM,54,EN,NF,NM,,,,,0
+mtg_single,d9fa950f-79e7-4d46-bf9c-41b489b20ec7,Redcap Heelslasher,MOM,161,EN,NF,NM,0.15,0.16,,0.17,0
+mtg_single,886b2a4e-1a42-46e6-9507-0b28574616f0,Referee Squad,MOM,327,EN,NF,NM,0.15,0.27,0.47,0.27,0
+mtg_single,d192e7fd-d76f-4c44-9af1-288f35733b62,Reinforcement,FMOM,4,EN,NF,NM,0.20,,,,0
+mtg_single,2f3216b2-f591-4864-8acb-e7296907722b,"Renata, Called to the Hunt",MUL,28,EN,NF,NM,0.15,0.20,0.22,0.20,0
+mtg_single,42fad515-14da-4790-a75a-2c79f90c4e7a,Render Inert,MOM,123,EN,NF,NM,0.15,0.19,0.17,0.24,1
+mtg_single,b1020ba5-01c5-4fe0-9e04-34ec9e833e29,Replicated Ring,TMOC,41,EN,NF,NM,,0.70,,0.70,0
+mtg_single,9dc210f8-d5b9-4b3d-94be-b18ca2033a22,Replicating Ring,MOC,372,EN,NF,NM,0.50,0.53,,0.53,0
+mtg_single,e3733714-3a8c-435f-b30d-d47c4bad98d2,Restoration Angel,MOC,201,EN,NF,NM,0.21,0.31,,0.31,0
+mtg_single,cfbba343-6c28-4684-a16c-4c148249effd,Return to Dust,MOC,202,EN,NF,NM,0.15,0.17,,0.17,0
+mtg_single,8ae2438d-b01f-4041-a269-6232209b54d8,Return to Nature,MOC,309,EN,NF,NM,0.15,0.23,,0.23,0
+mtg_single,24aa9dfe-9d58-4570-9b30-414000632c2e,Reverse Engineer,MOC,232,EN,NF,NM,0.15,0.23,,0.23,0
+mtg_single,6ae8a290-8996-45b7-ac8f-11a63536dd07,"Reyav, Master Smith",MUL,57,EN,NF,NM,0.15,0.31,0.38,0.31,0
+mtg_single,e51206fd-6244-4fce-9cf1-02ec8851e3c7,Riptide Island,MOC,64,EN,NF,NM,2.85,2.50,,2.50,0
+mtg_single,05d557f3-a884-4a93-9374-ccb5dcb7c816,Rise and Shine,MOC,233,EN,NF,NM,0.22,0.44,,0.44,0
+mtg_single,7116f79d-46d7-47c2-add9-3ef662d31a14,"Rishkar, Peema Renegade",MOC,310,EN,NF,NM,0.25,0.31,,0.31,0
+mtg_single,6674ad3d-68ad-4738-a09b-50d9c5a6ca58,Rogue's Passage,MOC,421,EN,NF,NM,0.49,0.67,,0.67,0
+mtg_single,d08a9645-91b1-470a-b449-dac26d019a70,"Rona, Herald of Invasion",AMOM,16,EN,NF,NM,0.15,,,,0
+mtg_single,d19e21ee-cf55-4a8d-8913-321cdfa2acc6,"Rona, Herald of Invasion // Rona, Tolarian Obliterator",MOM,295,EN,NF,NM,0.90,1.50,1.60,1.50,0
+mtg_single,a458b73f-83a3-45c6-9340-945075c017df,"Rona, Herald of Invasion // Rona, Tolarian Obliterator",MOM,75,EN,NF,NM,0.89,1.52,1.57,1.52,0
+mtg_single,a11be25a-1b09-43a0-9742-0e5ea3a6f1d2,"Rona, Sheoldred's Faithful",MUL,58,EN,NF,NM,0.15,0.16,0.21,0.16,0
+mtg_single,cc840502-5f28-4a14-9f7f-b2837e0de68f,"Rona, Tolarian Obliterator",AMOM,17,EN,NF,NM,5.00,,,,0
+mtg_single,09fc8dad-d0fb-4342-b26f-5b4ee32fabfe,Root Out,MOC,311,EN,NF,NM,0.15,0.21,,0.21,0
+mtg_single,3b4cf0da-1fba-4c93-9a21-904c6ebdcf81,Rowan's Talent,MOC,77,EN,NF,NM,0.15,0.43,0.48,0.43,0
+mtg_single,14dcf279-72f0-45bf-945c-dfa4817d7c46,Rowan's Talent,MOC,85,EN,NF,NM,0.32,0.38,0.50,0.38,0
+mtg_single,e5d1681d-67ff-4386-88f2-851931fbbb28,Rugged Highlands,MOM,271,EN,NF,NM,0.15,0.17,0.18,0.18,1
+mtg_single,009ae217-2cf3-4b23-b452-11eae0d968e4,Ruins Recluse,MOM,336,EN,NF,NM,1.90,2.36,2.92,1.37,0
+mtg_single,ca6acaf0-ebef-402c-830c-f092c62870e0,Saheeli's Artistry,MOC,234,EN,NF,NM,0.15,0.29,,0.29,0
+mtg_single,bbed1095-cf19-4332-a79c-0d040567cbc5,"Saheeli, Sublime Artificer",MOC,338,EN,NF,NM,0.15,0.26,,0.26,0
+mtg_single,a3d3f7f2-a3d6-4aa6-9aee-57b61f1943f3,Saiba Cryptomancer,MOM,76,EN,NF,NM,0.15,0.26,0.30,0.11,0
+mtg_single,a67caac1-2543-45f5-beb1-53e656b2a804,Saint Traft and Rem Karolus,MOC,9,EN,NF,NM,0.15,0.27,0.23,0.27,0
+mtg_single,054fc253-bd3c-440c-b8d3-fe4443a88a82,Saint Traft and Rem Karolus,MOC,95,EN,NF,NM,0.19,0.54,0.37,0.54,0
+mtg_single,9e90f1ad-6380-430a-abb9-1b68beafe172,Sandstalker Moloch,MOM,203,EN,NF,NM,0.15,0.24,,0.22,0
+mtg_single,038140ad-4fd6-41eb-85e3-a0bfdeba6747,Sandsteppe War Riders,MOC,126,EN,NF,NM,0.15,0.15,,0.15,0
+mtg_single,787985c5-274c-489c-a661-9e529480b6e6,Sandsteppe War Riders,MOC,39,EN,NF,NM,0.15,0.20,,0.20,0
+mtg_single,dcab5dc8-c83f-48ac-b0a4-ac72b06880c7,Schema Thief,MOC,111,EN,NF,NM,0.33,0.46,,0.46,0
+mtg_single,221138cd-5852-4277-ae43-4a46c9c60334,Schema Thief,MOC,24,EN,NF,NM,0.19,0.30,,0.30,0
+mtg_single,af88b0d5-35d2-40a7-96ac-f92e50a9241d,Scorn-Blade Berserker,MOM,124,EN,NF,NM,0.15,0.16,0.27,0.19,0
+mtg_single,2e755c49-afc2-458f-80e2-39fd761db17a,Scoured Barrens,MOM,272,EN,NF,NM,0.15,0.19,0.28,0.21,1
+mtg_single,dad46033-9b24-47ef-9265-d207d1362b3b,Scrap Trawler,MOC,373,EN,NF,NM,1.44,1.62,,1.62,0
+mtg_single,4e494450-1904-42c9-b67b-5e0eeea46477,Scrappy Bruiser,MOM,162,EN,NF,NM,0.15,0.16,0.21,0.16,0
+mtg_single,4b961b58-0479-4874-94c6-6c28a57fbdfc,Scrappy Bruiser,MOM,382,EN,NF,NM,0.15,0.20,0.51,0.20,0
+mtg_single,44510c19-f629-4d5c-b3c6-03a2d1f809ff,Scrollshift,MOM,34,EN,NF,NM,0.15,0.27,0.38,0.16,0
+mtg_single,82f2f751-85bf-4a1d-9fc9-fcd41d26bc71,Sculpted Perfection,MOM,253,EN,NF,NM,0.15,0.20,0.16,0.17,0
+mtg_single,74a44086-5e39-4702-b818-13286ea8baea,Sculpting Steel,MOC,374,EN,NF,NM,2.39,2.71,,2.71,0
+mtg_single,3f79fdd1-0e2e-4617-a28a-81c4fa9cf6d9,Scytheclaw,MOC,375,EN,NF,NM,0.20,0.25,,0.25,0
+mtg_single,bd165251-2928-45d5-b577-3357601afff9,Seal from Existence,MOM,35,EN,NF,NM,0.15,0.26,0.48,0.26,0
+mtg_single,7b4c5931-ff64-4bee-b3bb-781d52f9edf1,Searing Barb,MOM,163,EN,NF,NM,0.15,0.17,,0.33,0
+mtg_single,f6b6acd7-1cb5-4df6-a640-bf3b18ca4f7c,Secure the Wastes,MOC,203,EN,NF,NM,2.34,2.61,,2.61,0
+mtg_single,6748d844-cf56-439d-8013-1101e8fb6d85,See Double,MOM,353,EN,NF,NM,0.96,1.56,1.04,1.56,0
+mtg_single,b8b80957-e8fb-47e8-8728-3f2fa6f4d86c,See Double,MOM,77,EN,NF,NM,0.80,1.13,1.34,1.13,0
+mtg_single,6d8fc009-acb7-4907-a0a7-2a56614aad2c,See Double,PMOM,77p,EN,NF,NM,1.25,1.15,1.38,1.15,0
+mtg_single,5e231788-fcc8-479f-8825-27ff2b84674b,Seed of Hope,MOM,204,EN,NF,NM,0.15,0.17,0.18,0.15,1
+mtg_single,20ba62e9-f2ee-4028-9c0d-565f1ac5f20c,Seedpod Caretaker,MOM,325,EN,NF,NM,0.17,0.33,0.45,0.33,0
+mtg_single,0ce87d71-32d1-411c-9886-7acd9b201912,Seer of Stolen Sight,MOM,330,EN,NF,NM,0.15,0.30,0.44,0.30,0
+mtg_single,fa6475ac-bbac-44cc-9147-87f94413bee2,"Seizan, Perverter of Truth",MUL,15,EN,NF,NM,1.20,1.84,2.04,1.84,0
+mtg_single,77583aa9-b4c3-4e38-87c4-cdc98f4c5e6a,Selesnya Loft Gardens,MOC,156,EN,NF,NM,0.30,0.40,,0.40,0
+mtg_single,6889b6f2-67f7-42a7-b8d5-75a983d68383,Semester's End,MOC,204,EN,NF,NM,0.83,1.09,,1.09,0
+mtg_single,201215fe-300f-47af-ab06-caded9dbfbde,Seraph of New Capenna // Seraph of New Phyrexia,MOM,36,EN,NF,NM,0.15,0.16,0.15,0.15,0
+mtg_single,36a586c8-5c7a-4be1-8d6f-96d3a7b57579,Seraph of the Masses,MOC,205,EN,NF,NM,0.15,0.16,,0.16,0
+mtg_single,addeb3bf-5e63-427f-8a39-74c99071f685,Serpent-Blade Assailant,MOM,205,EN,NF,NM,0.15,0.16,0.20,0.15,0
+mtg_single,c7e3522c-151e-45fd-b3b8-ccacf8d15937,Serpent-Blade Assailant,AMOM,40,EN,NF,NM,0.25,,,,0
+mtg_single,1fe08f00-ef53-4950-a77a-133f0e031686,Serra Faithkeeper,AMOM,7,EN,NF,NM,0.25,,,,0
+mtg_single,4288ac32-f070-4dfa-bedd-cd84d26bbf30,Servo,TMOC,42,EN,NF,NM,,,,,0
+mtg_single,8eff6ef2-c4ac-4c0a-a021-6e3c603d07a7,Shalai and Hallar,MOC,10,EN,NF,NM,4.00,5.21,5.32,5.21,0
+mtg_single,07039b88-6ebe-4e7d-9bbd-ac3656e4adc4,Shalai and Hallar,MOC,96,EN,NF,NM,7.23,8.91,9.91,8.91,0
+mtg_single,d3d9f667-1e0e-4772-92af-164b627ac039,"Shanna, Sisay's Legacy",MUL,59,EN,NF,NM,0.15,0.15,0.16,0.15,0
+mtg_single,48798813-3296-4c99-9a21-bcde0d4efbd1,Shapeshifter,TMOC,12,EN,NF,NM,,0.35,,0.35,0
+mtg_single,afd13724-966a-4b74-8d6e-9e0fca678dce,Sharding Sphinx,MOC,235,EN,NF,NM,0.22,0.38,,0.38,0
+mtg_single,201c97d6-5a30-4b2b-a48b-f6017dfa630f,Shatter the Source,MOM,164,EN,NF,NM,0.15,0.15,0.25,0.16,1
+mtg_single,31da8959-1194-4b2e-9fdf-01f4c83a0e3d,Shattered Angel,MOC,206,EN,NF,NM,0.54,0.66,,0.66,0
+mtg_single,8965bed3-9fde-4d31-88b4-f98609bcd8d1,Sheoldred,AMOM,28,EN,NF,NM,,,,,0
+mtg_single,73c05a40-bd23-4cd2-a3fd-388a6dc3a4a1,Sheoldred // The True Scriptures,MOM,125,EN,NF,NM,16.72,16.89,16.79,16.89,0
+mtg_single,a4a1baa1-7722-4096-b442-05d71ac3cea7,Sheoldred // The True Scriptures,MOM,297,EN,NF,NM,20.94,21.08,31.22,21.08,0
+mtg_single,ab4357b0-fa3f-4e84-b540-ecc7e55f5721,"Sheoldred, Whispering One",MUL,16,EN,NF,NM,21.40,21.29,28.65,21.29,0
+mtg_single,c1ff53ea-2e90-47a5-a066-e5971f23b090,Shimmer Dragon,MOC,236,EN,NF,NM,0.18,0.22,,0.22,0
+mtg_single,1bfaf36f-e38f-4614-80bc-45221dd20ad5,Shimmer Myr,MOC,376,EN,NF,NM,0.26,0.32,,0.32,0
+mtg_single,a938a30f-3f0d-404e-af43-4cddc302a55c,Shineshadow Snarl,MOC,422,EN,NF,NM,0.23,0.37,,0.37,0
+mtg_single,ec1d0501-1259-4d81-a762-9c76db34873e,Shivan Branch-Burner,MOM,165,EN,NF,NM,0.15,0.15,0.26,0.16,0
+mtg_single,fa6cc705-ebce-43a5-8955-b3104b8a3d67,Sidar Jabari of Zhalfir,MOC,5,EN,NF,NM,0.42,0.55,0.57,0.55,0
+mtg_single,e0c25953-d432-478d-b7fe-c44c2447c9d1,Sidar Jabari of Zhalfir,MOC,97,EN,NF,NM,1.77,2.44,5.15,2.44,0
+mtg_single,58896806-64fe-47cc-8f82-4e3271deb05b,Sigiled Sentinel,MOM,37,EN,NF,NM,0.15,0.19,,0.15,0
+mtg_single,72610b25-ee29-4506-8d38-7113fa881d22,Sigiled Sentinel,AMOM,9,EN,NF,NM,0.25,,,,0
+mtg_single,1395fb96-6279-460f-b8e8-80f7f26e4393,Sigiled Sword of Valeron,MOC,377,EN,NF,NM,0.35,0.41,,0.41,0
+mtg_single,a8f6ce6e-fca7-442f-ab61-b18d532d5ac2,Silverquill Campus,MOC,423,EN,NF,NM,0.15,0.20,,0.20,0
+mtg_single,0bf32fab-faeb-445a-8623-2a4bef6a54be,Silverwing Squadron,MOC,207,EN,NF,NM,0.30,0.44,,0.44,0
+mtg_single,ee000a8c-0eb0-487e-b2d7-ddfeb77cdf6b,Simic Growth Chamber,MOC,424,EN,NF,NM,0.21,0.23,,0.23,0
+mtg_single,3a06b01b-54af-49b0-8701-3d6edee2894c,Simic Signet,MOC,378,EN,NF,NM,0.22,0.28,,0.28,0
+mtg_single,afa604c8-678b-4ba3-b9fb-6d0841691c85,"Skithiryx, the Blight Dragon",MUL,17,EN,NF,NM,11.99,12.00,15.44,12.00,0
+mtg_single,5c34d2b9-634b-4fc2-a9f2-9fc4e5d07cbb,"Skithiryx, the Blight Dragon",AMOM,71,EN,NF,NM,1.00,,,,0
+mtg_single,81fe9f51-c18f-4f6d-8f6c-1889fca672c2,Skittering Surveyor,MOM,264,EN,NF,NM,0.15,0.15,0.38,0.15,1
+mtg_single,15133407-5800-40e3-8327-3ecc23cb6901,Skullclamp,MOC,379,EN,NF,NM,5.46,5.82,,5.82,0
+mtg_single,75a2418d-4ec1-4b15-af5b-386cc1503a8a,Skyclave Aerialist // Skyclave Invader,MOM,78,EN,NF,NM,0.15,0.15,0.19,0.15,0
+mtg_single,e4db816b-a95b-4d83-aa8a-b2173d5d0ddd,Skyclave Invader,AMOM,18,EN,NF,NM,0.25,,,,0
+mtg_single,d656d8d2-9071-4ada-9ff8-8495942ad5fd,Skyclave Relic,MOC,380,EN,NF,NM,0.70,1.14,,1.14,0
+mtg_single,257a0b3f-cae8-4d9b-89e1-5b543e192048,Skycloud Expanse,MOC,425,EN,NF,NM,0.15,0.15,,0.15,0
+mtg_single,5ceaefae-2ca1-458e-a57e-04b16963c8d5,Slimefoot and Squee,MOC,447,EN,NF,NM,3.00,3.94,4.75,3.94,0
+mtg_single,f98ff5b1-808e-44e3-9ce4-0c513bd37abf,Slimefoot and Squee,MOC,450,EN,NF,NM,8.18,8.69,16.03,8.69,0
+mtg_single,141051bd-bc1f-4f70-9105-eecb2f3b6d12,Sliver,TMOC,2,EN,NF,NM,0.75,0.61,,0.61,0
+mtg_single,8add8bfa-b320-424d-9c25-55cf66701086,"Slurrk, All-Ingesting",MOC,312,EN,NF,NM,0.15,0.16,,0.16,0
+mtg_single,f6cdcb54-3792-418c-83e4-63c1e7ba7b88,Smitten Swordmaster // Curry Favor,MOC,268,EN,NF,NM,0.15,0.25,,0.25,0
+mtg_single,2d31baf5-1899-45be-b007-2863918d8912,Sokenzan,MOC,157,EN,NF,NM,0.36,0.27,,0.27,0
+mtg_single,2bac4349-b059-43dc-b224-6606b94c8b6c,Sol Ring,MOC,381,EN,NF,NM,1.48,1.79,,1.79,0
+mtg_single,feb6397d-b983-4021-8546-8ae556b65288,Soldier,TMOM,2,EN,NF,NM,0.30,0.34,2.45,0.34,0
+mtg_single,b448fc6e-cfae-4ce1-90d2-2623222dc6e2,Soldier,TMOC,8,EN,NF,NM,,0.15,,0.15,0
+mtg_single,5d24070a-1122-4a4b-9f3e-12a939411ba0,Soldier // Dinosaur,TMOM,2-7,EN,NF,NM,,,0.40,,0
+mtg_single,01cc5d80-f653-455e-9eb9-2c3365369883,Soldier // Insect,TMOC,8-31,EN,NF,NM,0.15,0.15,,0.15,0
+mtg_single,430cbe7c-2768-47b1-a88e-40c52de72993,Soldier // Knight,TMOM,2-10,EN,NF,NM,,,,,0
+mtg_single,f0379c07-f350-4943-bf60-6a1e2533000e,Soldier // Kraken,TMOM,2-4,EN,NF,NM,,,,,0
+mtg_single,033b62b1-7c24-4fab-9e43-982fe5dfa465,Soldier // Teferi Akosa of Zhalfir Emblem,TMOM,2-22,EN,NF,NM,,0.35,0.81,0.35,0
+mtg_single,d5dd4d88-4084-490d-b1a8-8041c6dd73ce,Soldier // Thopter,TMOM,2-19,EN,NF,NM,,,3.22,,0
+mtg_single,287eaf99-5588-4139-a090-3f5bd21a6e01,Soul of New Phyrexia,MOC,382,EN,NF,NM,0.66,0.76,,0.76,0
+mtg_single,42a18f5d-8a81-4b28-9f7b-de8b757c53fd,Spatial Merging,MOC,158,EN,NF,NM,0.15,0.31,,0.31,0
+mtg_single,609538ea-f478-4adf-b249-5d14e6dd1864,Spell Swindle,MOC,237,EN,NF,NM,1.39,1.43,,1.43,0
+mtg_single,8bae5286-8298-48f7-a4fd-614fce1d5824,Spine of Ish Sah,MOC,383,EN,NF,NM,0.18,0.19,,0.19,0
+mtg_single,fcc62b9a-c495-4389-a191-5ca62f8a4796,Spire of Industry,MOC,426,EN,NF,NM,0.15,0.22,,0.22,0
+mtg_single,866984c7-8b24-418f-a4f7-a87f0a6ad17c,Spirit,TMOM,13,EN,NF,NM,0.20,0.22,,0.22,0
+mtg_single,3077a638-00c2-41af-96ba-1c109bb7dac6,Spirit,TMOC,13,EN,NF,NM,,0.15,,0.15,0
+mtg_single,dfd177b1-b6fb-4ed4-a48c-557a67353c33,Spirit,TMOM,14,EN,NF,NM,0.20,0.21,,0.21,0
+mtg_single,db85e867-ea52-4a5f-a935-762723bdcbc9,Spirit,TMOC,9,EN,NF,NM,0.35,0.15,,0.15,0
+mtg_single,2bbbffff-3681-4a59-bf75-8e50f0c23353,Spirit,TMOC,9-13,EN,NF,NM,0.35,,,,0
+mtg_single,c2ca058a-183a-4e9c-b130-c325956548ce,Spirit,TMOC,9-TMOM-13,EN,NF,NM,0.41,0.79,,0.79,0
+mtg_single,e0c6bb4e-2052-4b5b-ae17-c2ebeec28486,Spirit // Treasure,TMOC,9-TMOM-20,EN,NF,NM,0.18,,,,0
+mtg_single,eeae978e-caa8-482e-8f61-3904feee55fa,Spirited Companion,MOC,208,EN,NF,NM,0.15,0.29,,0.29,0
+mtg_single,7454162b-1a27-4c25-bde3-892c7723330b,"Squee, the Immortal",MUL,22,EN,NF,NM,0.50,0.80,1.53,0.80,0
+mtg_single,27c7145f-a8fa-4379-a309-e79412cec321,Squid,TMOC,14,EN,NF,NM,,0.37,,0.37,0
+mtg_single,cb16b5d5-86a8-4b29-bc10-bf42b5a33383,Squid // Human,TMOC,14-26,EN,NF,NM,0.18,0.34,,0.34,0
+mtg_single,b312d4d0-2c1f-4f06-89d7-168733a2ea55,"Sram, Senior Edificer",MUL,6,EN,NF,NM,1.60,1.68,2.59,1.68,0
+mtg_single,98c428f7-1804-4ef9-bf77-013e98acd9d5,Stasis Field,MOM,79,EN,NF,NM,0.15,0.20,0.23,0.18,0
+mtg_single,64355bc4-046c-4478-94bc-0f1091b13c05,Stensia,MOC,159,EN,NF,NM,0.23,0.61,,0.61,0
+mtg_single,1031e808-be8e-4b28-afb7-1e54f1602deb,Stoke the Flames,MOM,166,EN,NF,NM,0.15,0.19,0.24,0.15,1
+mtg_single,5581d549-0e5c-48d8-b8bb-c48e45ac8e21,Stoke the Flames,AMOM,38,EN,NF,NM,,,,,0
+mtg_single,ec6d6feb-abac-44e3-b7f2-3e7249a9faf8,Storm the Seedcore,MOM,206,EN,NF,NM,0.15,0.26,0.34,0.23,1
+mtg_single,ce8b4ea5-1d12-439e-b4af-f0a55e7f93eb,Storm the Seedcore,AMOM,41,EN,NF,NM,,0.99,,0.99,0
+mtg_single,4a6ca51f-2b8e-41ed-989f-9e7aa4f7aa3c,Stormclaw Rager,MOM,254,EN,NF,NM,0.15,0.29,0.29,0.29,0
+mtg_single,bd7eecff-cc2a-4716-b682-9a875b872c53,Streetwise Negotiator,MOM,207,EN,NF,NM,0.15,0.15,0.15,0.15,0
+mtg_single,cb139475-2817-47da-baf7-0bb376b10cee,Strionic Resonator,MOC,384,EN,NF,NM,5.85,5.54,,5.54,0
+mtg_single,9639d8ae-eb59-4182-82e9-7dbcce1e9ce7,Strixhaven,MOC,65,EN,NF,NM,0.75,0.81,,0.81,0
+mtg_single,34757ff9-854a-408c-846d-bd4275182ab3,Stroke of Genius,MOC,238,EN,NF,NM,0.25,0.48,,0.48,0
+mtg_single,41a336b6-273b-4424-a2d5-6805d03b169d,Stronghold Furnace,MOC,160,EN,NF,NM,0.30,0.37,,0.37,0
+mtg_single,5e4d26d9-3671-4cbe-9930-900c3d86fcba,Struggle // Survive,MOC,339,EN,NF,NM,0.15,0.22,,0.22,0
+mtg_single,b8492a18-3bc6-43c1-8864-c655b6cd7e7d,Sun-Blessed Guardian // Furnace-Blessed Conqueror,MOM,38,EN,NF,NM,0.15,0.16,0.15,0.19,1
+mtg_single,db7d19db-6831-4bd9-b0c8-9972cdeafa3b,Sunder the Gateway,MOM,39,EN,NF,NM,0.15,0.19,0.17,0.15,2
+mtg_single,4adfda46-2e6f-4f09-ad0c-fbf728749f1a,Sunfall,MOM,349,EN,NF,NM,0.90,1.30,1.30,1.30,0
+mtg_single,8b8ce7c4-248d-4d04-a575-29dca37f7e0e,Sunfall,MOM,40,EN,NF,NM,0.15,0.49,1.04,0.49,0
+mtg_single,9656f422-1b49-4099-9537-d8e82fd57996,Sunfall,PMOM,40p,EN,NF,NM,0.33,0.70,0.70,0.70,0
+mtg_single,a3100788-9679-492d-b779-9dc5a3b73fdd,Sungrass Prairie,MOC,427,EN,NF,NM,0.15,0.19,,0.19,0
+mtg_single,c919d444-50d1-4a49-a416-5457de326d4b,Sunken Hollow,MOC,428,EN,NF,NM,0.30,0.47,,0.47,0
+mtg_single,4d8b2aff-cd4c-439c-aa5c-d6993f4db1a6,Sunscorch Regent,MOC,209,EN,NF,NM,0.22,0.42,,0.42,0
+mtg_single,4cb5d276-7f75-4fe8-aee8-41d6255aedee,Surge of Salvation,AMOM,10,EN,NF,NM,,,,,0
+mtg_single,9cea1431-afdf-42e2-804f-a51f03df516a,Surge of Salvation,MOM,41,EN,NF,NM,0.23,0.40,0.93,0.40,1
+mtg_single,96be5ef1-e121-42a1-96c7-682629940532,Surrak and Goreclaw,MOM,337,EN,NF,NM,16.75,19.96,30.80,19.96,0
+mtg_single,4249bebc-ef7e-40a3-a468-4dca513cbe6d,Surrak and Goreclaw,MOM,380,EN,NF,NM,23.01,21.73,,21.73,0
+mtg_single,185fc0ec-28b5-4dc0-9d0c-ef8e1b701d5a,Suture Priest,MOC,210,EN,NF,NM,1.15,2.62,,2.62,0
+mtg_single,e6e19ce3-a93c-4e94-8bd6-2cb147168e53,Swamp,MOM,279,EN,NF,NM,0.15,0.15,0.20,0.15,0
+mtg_single,54d4ed83-27e4-473b-b580-b1ab46b04c76,Swamp,MOM,286,EN,NF,NM,0.17,0.34,0.69,0.33,0
+mtg_single,d84c0e13-6e57-4cdd-80dc-df3852f4fc82,Swamp,MOM,287,EN,NF,NM,0.18,0.44,1.33,0.44,0
+mtg_single,5155006c-6aab-4880-93f4-616f7aa74d5f,Swiftwater Cliffs,MOM,273,EN,NF,NM,0.15,0.15,0.21,0.15,0
+mtg_single,58f3465b-d2be-4fb7-94db-086df15cba53,Sword of Once and Future,MOM,265,EN,NF,NM,3.87,4.29,4.73,4.29,0
+mtg_single,9e15450e-ce72-4791-9158-2e15db79dcf2,Sword of Once and Future,PMOM,265p,EN,NF,NM,4.50,5.05,5.38,5.05,0
+mtg_single,c97ca23d-fefc-4075-9794-e88f7191f516,Sword of Once and Future,MOM,375,EN,NF,NM,5.17,5.17,6.58,5.17,0
+mtg_single,f379cfa0-f527-491b-b3e3-807384d880a4,Swords to Plowshares,MOC,211,EN,NF,NM,1.59,1.71,,1.71,0
+mtg_single,2ce2de9b-061c-4746-a5fd-aee4262ba637,Swordsworn Cavalier,MOM,42,EN,NF,NM,0.15,0.15,,0.15,0
+mtg_single,4c770b8f-7736-4ed2-be6e-cd398721f665,"Syr Elenora, the Discerning",MOC,239,EN,NF,NM,0.15,0.15,,0.15,0
+mtg_single,e81c0075-68f0-4b99-90e3-383078aefc72,"Syr Konrad, the Grim",MOC,269,EN,NF,NM,0.98,1.12,,1.12,0
+mtg_single,85b13e7e-311c-480d-aa26-872e78b1c921,"Taigam, Ojutai Master",MUL,60,EN,NF,NM,0.15,0.36,0.44,0.36,0
+mtg_single,28729a87-e0fd-4d5a-9b1c-0b25d429b6ad,Tainted Field,MOC,429,EN,NF,NM,0.38,0.51,,0.51,0
+mtg_single,6bc01c8a-a61c-4378-a569-d71a50314b4c,Talisman of Hierarchy,MOC,385,EN,NF,NM,0.49,0.64,,0.64,0
+mtg_single,f17d6c61-8d7e-4e0c-9a85-aec9eeb6d43f,Tandem Takedown,MOM,208,EN,NF,NM,0.15,0.15,0.19,0.15,0
+mtg_single,9ab61823-f87c-4ace-83bf-adc56b603702,Tangled Skyline,MOM,209,EN,NF,NM,0.15,0.18,0.16,0.17,1
+mtg_single,347698c3-6e27-4da3-b0d9-f2fb9cb23e91,Tarkir Duneshaper // Burnished Dunestomper,MOM,43,EN,NF,NM,0.15,0.18,0.22,0.20,3
+mtg_single,1fd94801-eec3-44c1-94f2-194578fd927c,Teferi Akosa of Zhalfir Emblem,TMOM,22,EN,NF,NM,0.16,0.24,,0.24,1
+mtg_single,9282f7d3-a446-4a96-ac13-31daa81c542b,Teferi's Talent,MOC,74,EN,NF,NM,0.15,0.42,0.54,0.42,0
+mtg_single,3a9ae05b-528b-4585-88fe-45362878cc69,Teferi's Talent,MOC,82,EN,NF,NM,0.20,0.41,0.58,0.41,0
+mtg_single,c81c5c3d-dc7d-4976-b125-827f76739948,Teferi's Talent Emblem,TMOC,44,EN,NF,NM,0.33,0.41,3.94,0.41,0
+mtg_single,92830b3f-6773-4e9c-a81a-150ecf4b3eaf,Teferi's Talent Emblem // Phyrexian Myr,TMOC,44-TMUL-1,EN,NF,NM,,0.26,0.46,0.26,0
+mtg_single,01dacf78-170f-484b-8487-10be84937910,Temple of Abandon,MOC,430,EN,NF,NM,0.15,0.17,,0.17,0
+mtg_single,1f20fd44-a51f-4175-9017-6bb10ffd8bd6,Temple of Deceit,MOC,431,EN,NF,NM,0.24,0.32,,0.32,0
+mtg_single,69de09e9-26bc-4aba-90fe-7392c96883a3,Temple of Enlightenment,MOC,432,EN,NF,NM,0.15,0.18,,0.18,0
+mtg_single,8a7567cf-4894-4a9b-8e05-1a5436d2fb5a,Temple of Epiphany,MOC,433,EN,NF,NM,0.15,0.16,,0.16,0
+mtg_single,fcd64576-da06-4dba-976b-0941092dcb5b,Temple of Mystery,MOC,434,EN,NF,NM,0.15,0.15,,0.15,0
+mtg_single,b7adf57f-8be3-4471-b864-7b1dd9a1ad3a,Temple of Plenty,MOC,435,EN,NF,NM,0.15,0.33,,0.33,0
+mtg_single,92996a82-a37b-48e5-ba9d-e6f38cc1abc6,Temple of Silence,MOC,436,EN,NF,NM,0.15,0.23,,0.23,0
+mtg_single,0c066c86-78e5-44a5-a683-60b782a53846,Temple of Triumph,MOC,438,EN,NF,NM,0.15,0.15,,0.15,0
+mtg_single,0732d266-0852-4f7c-9c93-64e26b96e0ec,Temple of the False God,MOC,437,EN,NF,NM,0.15,0.27,,0.27,0
+mtg_single,db50fe28-e010-4851-9150-449cb6093d7d,Temporal Cleansing,MOM,80,EN,NF,NM,0.15,0.16,0.26,0.15,1
+mtg_single,6248ee1a-9ca8-4ddf-86bb-d79938ba114f,Ten Wizards Mountain,MOC,66,EN,NF,NM,1.86,1.85,,1.85,0
+mtg_single,74c420a1-e485-4479-92f3-4c9c98f3afd3,Tentacle,TMOC,15,EN,NF,NM,,0.37,,0.37,0
+mtg_single,98f1559e-84d4-4295-bfb5-a84e10f5fbc4,Tentacle // Human,TMOC,15-26,EN,NF,NM,0.18,0.36,,0.36,0
+mtg_single,6045cb52-f621-4828-ae3f-359075368efd,Tenured Oilcaster,MOM,126,EN,NF,NM,0.15,0.20,0.32,0.24,0
+mtg_single,f4b6ebf5-1825-4893-a094-27e62d5f4c1d,Terramorphic Expanse,MOC,439,EN,NF,NM,0.15,0.19,,0.19,0
+mtg_single,5b9e9e13-6bd0-438c-876e-7b6109a85baa,Terror of Towashi,MOM,331,EN,NF,NM,0.15,0.23,1.31,0.23,0
+mtg_single,fccec445-f4c7-479e-a449-51e72c5467fe,Terror of Towashi,MOM,378,EN,NF,NM,0.20,0.50,,0.50,0
+mtg_single,a6746c97-98e6-45db-89b1-e02d391d9391,"Tetsuko Umezawa, Fugitive",MUL,12,EN,NF,NM,0.15,0.21,0.33,0.21,0
+mtg_single,486c8444-78e6-461e-8525-e65dfc767a80,"Tetsuko Umezawa, Fugitive",MOC,240,EN,NF,NM,0.15,0.18,,0.18,0
+mtg_single,f0c9c920-a135-4637-b443-71e62e3965d1,Teysa Karlov,MUL,61,EN,NF,NM,1.91,2.76,2.89,2.76,0
+mtg_single,ccd199ac-82e4-42e0-9743-e356ecde3111,Thalia and The Gitrog Monster,MOM,255,EN,NF,NM,4.99,5.11,5.50,5.11,0
+mtg_single,9af0c5f5-c56a-4ed0-bbab-c4d480dc79bb,Thalia and The Gitrog Monster,PMOM,255p,EN,NF,NM,6.80,5.00,5.96,5.00,0
+mtg_single,e95c36d9-8492-48bd-a6b1-a41e8cd7e0fa,Thalia and The Gitrog Monster,MOM,316,EN,NF,NM,5.27,4.95,8.03,4.95,0
+mtg_single,c0d14b77-26e4-4c16-b165-1e461ac5a91e,Thalia and The Gitrog Monster,AMOM,65,EN,NF,NM,,,,,0
+mtg_single,9fbe365a-8d83-4b1b-9983-934a72e79f25,"Thalia, Guardian of Thraben",AMOM,67,EN,NF,NM,,,,,0
+mtg_single,213a0f88-85b9-4ef9-af44-8260b1edb864,"Thalia, Guardian of Thraben",MUL,7,EN,NF,NM,0.20,0.56,0.58,0.56,0
+mtg_single,063ada1a-3a12-4165-a1e7-0b3e4399c4ae,The Aether Flues,MOC,139,EN,NF,NM,0.23,0.24,,0.24,0
+mtg_single,887551b9-5792-4ff0-a0f7-d004118e3abc,The Caldaia,MOC,47,EN,NF,NM,,2.70,,2.70,0
+mtg_single,a3232561-b235-4e7f-8130-43a53d673c0f,The Fertile Lands of Saulvinia,MOC,50,EN,NF,NM,0.63,0.91,,0.91,0
+mtg_single,6ecb300a-6a04-4627-9d93-e46ffdf1aef6,The Golden City of Orazca,MOC,52,EN,NF,NM,0.75,0.80,,0.80,0
+mtg_single,65701bd6-ccf6-46e8-9891-044ec0b22c48,The Great Aerie,MOC,53,EN,NF,NM,0.75,1.00,,1.00,0
+mtg_single,f514e3bb-05fd-4181-bf87-3c5f978fae69,The Great Forest,MOC,144,EN,NF,NM,0.21,0.22,,0.22,0
+mtg_single,750f5083-ba5d-4a6d-9c40-864e89dcbd45,The Locust God,MOC,335,EN,NF,NM,6.00,6.80,,6.80,0
+mtg_single,af642150-04b3-4c25-8413-78c12268053c,The Monarch,TMOC,46,EN,NF,NM,,0.35,,0.35,0
+mtg_single,3c9049d7-c03f-471d-8d33-e4ecff09fac0,The Monarch // Shapeshifter,TMOC,12-46,EN,NF,NM,0.25,0.33,,0.33,0
+mtg_single,a1fc6430-6df6-41fa-86f9-978327a2168d,The Pit,MOC,63,EN,NF,NM,0.75,0.83,,0.83,0
+mtg_single,9b77453e-700b-444d-9c0e-75c616424013,The Western Cloud,MOC,70,EN,NF,NM,2.74,1.99,,1.99,0
+mtg_single,ff4a33c0-a863-4e37-aebb-65934296ae0a,The Wilds,MOC,71,EN,NF,NM,0.99,1.24,,1.24,0
+mtg_single,bc23bb74-fa16-41eb-b678-ffa211774eaa,Thopter,TMOC,16,EN,NF,NM,0.35,0.35,,0.35,0
+mtg_single,433d4517-326c-4885-8f86-374c874ee591,Thopter,TMOM,19,EN,NF,NM,0.17,0.25,0.49,0.25,0
+mtg_single,20844721-fcf4-43a3-b975-f0d01c942b49,Thopter // Beast,TMOC,28-TMOM-19,EN,NF,NM,0.15,0.15,,0.15,0
+mtg_single,f940520a-050c-4fe2-8d27-4a1b0e18d107,Thopter // Gold,TMOC,16-36,EN,NF,NM,0.15,0.34,,0.34,0
+mtg_single,5a932256-2999-48f3-b1b5-809f565f8b26,Thopter // Knight,TMOM,10-19,EN,NF,NM,,,,,0
+mtg_single,53119378-adaa-4d2a-82b4-d14fff4efdd3,Thopter // Spirit,TMOM,14-19,EN,NF,NM,,,,,0
+mtg_single,2b169e60-5939-46e3-86c5-e0aa636bb0d9,Thopter Assembly,MOC,386,EN,NF,NM,0.24,0.34,,0.34,0
+mtg_single,bc2f8f34-a07b-43b3-a985-1ad0d989d980,Thopter Spy Network,MOC,241,EN,NF,NM,0.35,0.48,,0.48,0
+mtg_single,c49701b6-e0a4-42aa-94ed-c763b058dae9,Thornwood Falls,MOM,274,EN,NF,NM,0.15,0.24,0.19,0.15,2
+mtg_single,8e86ee04-51ca-4679-9909-835b8ed2527e,Thoughtcast,MOC,242,EN,NF,NM,1.91,2.62,,2.62,0
+mtg_single,bbe61ea9-ded8-46be-a10d-823a8bb65f43,Thrashing Frontliner,MOM,167,EN,NF,NM,0.15,0.15,,0.15,0
+mtg_single,91130740-7f1e-4231-b183-7f8f5910d5cb,Thriving Heath,MOC,440,EN,NF,NM,0.15,0.20,,0.20,0
+mtg_single,7d36a7ea-b0a3-4557-be90-536ec1008686,Thriving Isle,MOC,441,EN,NF,NM,0.15,0.28,,0.28,0
+mtg_single,802b8c20-27ab-4fde-bae7-6554de752af0,Thriving Moor,MOC,442,EN,NF,NM,0.15,0.23,,0.23,0
+mtg_single,b3ab3a11-a6e6-4952-ba69-55b67dec2b4c,Thunderhead Squadron,MOM,81,EN,NF,NM,0.15,0.17,0.26,0.17,1
+mtg_single,86151d40-d5e2-46d6-9fca-ac4794b33018,Tidal Terror,MOM,82,EN,NF,NM,0.15,0.21,0.17,0.15,1
+mtg_single,9e2c2c6d-1fe5-4855-80ef-0d530e4d628a,Tiller of Flesh,MOM,44,EN,NF,NM,0.15,0.16,0.38,0.20,0
+mtg_single,f7bd95c1-bb64-490f-877c-41eca9d11986,Timberland Ancient,MOM,210,EN,NF,NM,0.15,0.15,0.35,0.15,0
+mtg_single,55fbb609-1a77-48c4-bc69-f8591513818c,Time Wipe,MOC,340,EN,NF,NM,0.15,0.21,,0.21,0
+mtg_single,c0d8a0c5-156c-448a-8453-8b79be7a2c5c,Tireless Provisioner,MOC,313,EN,NF,NM,2.60,2.58,,2.58,0
+mtg_single,2b55c22f-ce7f-4512-b1f2-3f228100f6aa,Tireless Tracker,MOC,314,EN,NF,NM,0.17,0.37,,0.37,0
+mtg_single,bec079ae-e583-4b62-95fb-145b05ec2820,Together Forever,MOC,212,EN,NF,NM,0.15,0.23,,0.23,0
+mtg_single,9f8adf77-b3b5-4ef3-ae73-67c011569cf9,Towashi,MOC,67,EN,NF,NM,0.75,0.99,,0.99,0
+mtg_single,fca8462e-4e16-4776-a965-8ef5191780f2,Trailblazing Historian,MOM,168,EN,NF,NM,0.15,0.15,0.31,0.17,0
+mtg_single,27ae0d6f-f71a-4d56-9f49-5358d7dddc00,Tranquil Cove,MOM,275,EN,NF,NM,0.15,0.22,0.24,0.16,2
+mtg_single,2020e8b4-500b-4aaf-b825-89d448b6c8a4,Transcendent Message,AMOM,19,EN,NF,NM,,,,,0
+mtg_single,7baeb79e-d83c-4657-8ca4-8f829b58b278,Transcendent Message,MOM,354,EN,NF,NM,0.36,0.44,0.49,0.44,0
+mtg_single,710d63ad-0f32-422e-9df3-2e05662e3cd5,Transcendent Message,MOM,83,EN,NF,NM,0.19,0.26,0.50,0.26,0
+mtg_single,7100520d-1b28-4c49-9a4a-b3434cf6f6a4,Transcendent Message,PMOM,83p,EN,NF,NM,0.36,0.41,0.71,0.41,0
+mtg_single,71ac73f9-ea17-4373-9519-db8703ab8142,Traumatic Revelation,MOM,127,EN,NF,NM,0.15,0.20,,0.15,0
+mtg_single,bf9671a0-6b23-4386-b5bc-84319ad43391,Treasure,TMOM,20,EN,NF,NM,0.15,0.18,0.15,0.18,0
+mtg_single,eacacdfd-98a2-4a54-9620-36cf697e9754,Treasure,TMOM,21,EN,NF,NM,0.15,0.20,0.20,0.20,0
+mtg_single,80f9981e-a7d6-4adc-b8c2-4ec33b46a99a,Treasure // Dinosaur,TMOM,7-20,EN,NF,NM,,,,,0
+mtg_single,b2e68929-cc8e-4046-86c1-050a4126d308,Treasure // Dinosaur,TMOM,7-21,EN,NF,NM,,,,,0
+mtg_single,8d7273af-97c9-4992-b734-2828e57eff39,Treasure // Gremlin,TMOC,25-TMOM-20,EN,NF,NM,0.15,0.15,,0.15,0
+mtg_single,fc20502f-73dc-4dc9-96c5-a8d8b8fe3860,Treasure // Knight,TMOM,10-20,EN,NF,NM,,,0.29,,0
+mtg_single,54e04b73-af84-4290-aeba-e48cac02afa8,Treasure // Knight,TMOM,10-21,EN,NF,NM,,,,,0
+mtg_single,6d4adc59-84b9-45b7-acdc-8df5cb339392,Treasure // Kraken,TMOM,4-20,EN,NF,NM,,,,,0
+mtg_single,fd9ed8d0-2dab-406d-9ff4-a43fe854911f,Treasure // Kraken,TMOM,4-21,EN,NF,NM,,,0.44,,0
+mtg_single,c80014db-167a-47e9-92f3-79f9d52f5f89,Treasure // Phyrexian Hydra,TMOM,11-21,EN,NF,NM,,,,,0
+mtg_single,c2626332-f73b-4b18-bec0-f36fd15b3637,Treasure // Phyrexian Hydra,TMOM,12-20,EN,NF,NM,,,,,0
+mtg_single,3651b761-7ca8-4c24-8bbb-f819638a2a53,Treasure // Phyrexian Saproling,TMOM,8-20,EN,NF,NM,0.18,0.18,,0.18,0
+mtg_single,dbfc3d3c-aefa-4f36-b3bd-a8ccc9bbf0fc,Treasure // Phyrexian Saproling,TMOM,8-21,EN,NF,NM,,,,,0
+mtg_single,4ce999e4-4ffc-4775-b2a8-f3471eac724c,Treasure // Spirit,TMOM,13-20,EN,NF,NM,,,,,0
+mtg_single,36c28edb-66b3-410b-a3d4-f18e9741c5a8,Treasure // Spirit,TMOM,13-21,EN,NF,NM,,,,,0
+mtg_single,694a6304-f225-46f6-bcb0-abd35be3acca,Treasure // Spirit,TMOC,13-TMOM-20,EN,NF,NM,,,,,0
+mtg_single,335c729e-3b4b-4189-8327-ec7d988c1805,Treasure // Spirit,TMOC,13-TMOM-21,EN,NF,NM,,,,,0
+mtg_single,ea79def0-4f70-4e0b-9c5c-c07afbed6bfa,Treasure // Spirit,TMOM,14-20,EN,NF,NM,,,,,0
+mtg_single,33043d20-a3cb-4a58-854d-21d45542690e,Treasure // Spirit,TMOM,14-21,EN,NF,NM,0.45,,0.44,,0
+mtg_single,df7fb1ab-137e-4146-bbad-85fa77e47cee,Treasure // Teferi Akosa of Zhalfir Emblem,TMOM,20-22,EN,NF,NM,,,,,0
+mtg_single,a203fe6d-b547-4253-ac33-66f5a9831273,Treasure // Teferi Akosa of Zhalfir Emblem,TMOM,21-22,EN,NF,NM,,,,,0
+mtg_single,42b6af3e-843d-41d5-b355-dc1a7bc0656a,Treasure // Thopter,TMOM,19-20,EN,NF,NM,,,,,0
+mtg_single,502503f2-725a-41f0-987b-63bf8db3ab20,Treasure // Thopter,TMOM,19-21,EN,NF,NM,,,,,0
+mtg_single,5a5a8769-abb1-460d-aea1-498473abba52,Treasure // Vampire,TMOM,3-20,EN,NF,NM,,,,,0
+mtg_single,d1f5c772-043d-4c7e-922b-9524b95d12f6,Treasure // Wrenn and Realmbreaker Emblem,TMOM,21-23,EN,NF,NM,,,,,0
+mtg_single,7bc1a12e-da50-4cea-8470-bb359f1c1d86,Treasure // Zombie,TMOM,5-21,EN,NF,NM,,,,,0
+mtg_single,5b7f2afc-86d1-43bc-9a35-500911a52cdf,Tribute to the World Tree,MOM,211,EN,NF,NM,14.35,15.18,18.00,15.18,0
+mtg_single,24383ac8-a28c-4dd6-a6b6-ebd8ae45caca,Tribute to the World Tree,PMOM,211p,EN,NF,NM,15.50,16.55,14.35,16.55,0
+mtg_single,30ddb45c-fb12-41e5-8a2f-e9d4021f6808,Tribute to the World Tree,MOM,373,EN,NF,NM,14.99,16.01,17.11,16.01,0
+mtg_single,7ff2007c-e11a-4a97-bb6c-789ccbe27fdb,Triskelion,MOC,387,EN,NF,NM,0.15,0.21,,0.21,0
+mtg_single,9ec84f12-092c-4841-a413-da58d7be204f,Truga Jungle,MOC,161,EN,NF,NM,0.15,0.32,,0.32,0
+mtg_single,11aa61f9-a473-4182-aa24-6ae0bd04e418,Turri Island,MOC,162,EN,NF,NM,0.15,0.28,,0.28,0
+mtg_single,b7e72715-f3c4-4eb2-a5ac-c69582478e95,"Tymaret, Chosen from Death",MUL,18,EN,NF,NM,0.15,0.16,0.27,0.16,0
+mtg_single,14784b77-5b44-42d7-84e3-fa67b3f2d517,"Umori, the Collector",MUL,62,EN,NF,NM,0.15,0.19,0.38,0.19,0
+mtg_single,e81e75e0-ae51-424c-9579-dc9937b70e2f,Unbreakable Formation,MOC,213,EN,NF,NM,0.75,0.78,,0.78,0
+mtg_single,a4763327-dd8d-45c4-99ca-dcf7dd34a542,Uncivil Unrest,MOC,122,EN,NF,NM,18.69,18.29,,18.29,0
+mtg_single,b31121dc-e930-4a1a-8d9f-2c510d25c2a0,Uncivil Unrest,MOC,35,EN,NF,NM,17.99,18.27,,18.27,0
+mtg_single,e3b5da47-be40-4c8d-b2cc-c2a1c4ef8238,Undercity Reaches,MOC,163,EN,NF,NM,0.36,0.37,,0.37,0
+mtg_single,1bd26ae9-98e7-4cf4-b89f-7ff69ed2be36,Unseal the Necropolis,MOM,128,EN,NF,NM,0.15,0.17,0.38,0.17,2
+mtg_single,dcf7606b-ebed-424e-ba03-4ea653172ba0,Unyaro,MOC,68,EN,NF,NM,7.94,2.66,,2.66,0
+mtg_single,cadeebc5-98d9-4205-8cf1-d8139f3d1a47,Urabrask // The Great Work,MOM,169,EN,NF,NM,16.83,18.18,20.16,18.18,0
+mtg_single,8f283e63-a282-4b83-82a5-30b9f90a305f,Urabrask // The Great Work,MOM,299,EN,NF,NM,19.46,21.81,23.21,21.81,0
+mtg_single,89b657ed-978c-4b11-bfa3-11e3cf6d9dcf,Urabrask the Hidden,MUL,23,EN,NF,NM,3.96,4.96,5.71,4.96,0
+mtg_single,8d716686-207e-4dfc-925c-41a4e75d88ee,Urn of Godfire,MOM,266,EN,NF,NM,0.15,0.15,0.20,0.15,0
+mtg_single,83482b88-3319-4d12-995a-e1ec74f373ba,Utter End,MOC,341,EN,NF,NM,0.15,0.37,,0.37,0
+mtg_single,7b533e18-f7d0-4717-bacb-6c11bb700fd4,"Valduk, Keeper of the Flame",MUL,24,EN,NF,NM,0.15,0.18,0.16,0.18,0
+mtg_single,54e3ece9-8e3e-43bf-95c6-aa216a31c513,Valiant Knight,MOC,214,EN,NF,NM,0.35,0.47,,0.47,0
+mtg_single,5796378a-1bae-4bd9-a282-da086eaf1293,Valor's Reach,MOC,69,EN,NF,NM,0.47,0.63,,0.63,0
+mtg_single,56e8b51e-5a2a-4a59-ab75-c10796dfd0c1,Vampire,TMOM,3,EN,NF,NM,0.88,0.81,0.99,0.81,0
+mtg_single,3251a282-85ce-41c8-8903-f51f0b2cfdae,Vampire Knight,TMOC,20,EN,NF,NM,,0.48,,0.48,0
+mtg_single,3bca74ef-cb11-454a-acea-e2fd6214485d,Vampire Knight // Soldier,TMOC,8-20,EN,NF,NM,1.67,0.95,,0.95,0
+mtg_single,ba961004-ff03-45a2-ae2e-036daaa534d3,Vampires' Vengeance,MOC,289,EN,NF,NM,0.15,0.26,,0.26,0
+mtg_single,2372e584-f15d-4bb1-8663-24cf72da3cb5,Vanquish the Weak,MOM,129,EN,NF,NM,0.15,0.16,0.16,0.16,0
+mtg_single,cde6c98f-3e0f-43b4-9e86-8377f6502db1,Vanquisher's Banner,MOC,388,EN,NF,NM,4.05,5.45,,5.45,0
+mtg_single,ae841f5d-682f-4d2d-ac88-9edecf983d18,Vault of the Archangel,MOC,443,EN,NF,NM,1.97,2.80,,2.80,0
+mtg_single,617c5d76-c230-48fb-9218-c68bd053513b,Vedalken Humiliator,MOC,243,EN,NF,NM,0.20,0.39,,0.39,0
+mtg_single,7c602338-a25b-4169-ab25-247596442e48,Venerated Loxodon,MOC,215,EN,NF,NM,0.15,0.15,,0.15,0
+mtg_single,0d63feef-47b2-474e-a25e-cd04bf553335,Vengeant Earth,MOM,212,EN,NF,NM,0.15,0.18,0.42,0.18,0
+mtg_single,77112e39-89c0-43ce-99e9-a68c1434ee25,Vertex Paladin,AMOM,48,EN,NF,NM,,,,,0
+mtg_single,662fd155-1a39-4c31-b18e-1f98e64184a5,Victimize,MOC,270,EN,NF,NM,0.59,0.68,,0.68,0
+mtg_single,9b208cf6-0bc8-4f1c-9605-6bae1572f0e8,Village Bell-Ringer,MOC,216,EN,NF,NM,0.16,0.22,,0.22,0
+mtg_single,ea58bba6-4500-42a9-ae21-8669ba1cf667,Vineglimmer Snarl,MOC,444,EN,NF,NM,0.15,0.20,,0.20,0
+mtg_single,dc3dd3dc-32a2-452b-9343-3f059486cb9c,Vivien's Talent,MOC,78,EN,NF,NM,0.15,0.30,0.27,0.30,0
+mtg_single,a940f9f3-08a2-4761-8ea4-ae53c725c499,Vivien's Talent,MOC,86,EN,NF,NM,0.15,0.27,0.32,0.27,0
+mtg_single,c9539fda-e762-4f87-80cc-cd024ac8a9c0,Vodalian Wave-Knight,MOC,130,EN,NF,NM,3.74,4.05,,4.05,0
+mtg_single,92c7d454-7a81-4ce1-9dc6-f7cc31d11db6,Vodalian Wave-Knight,MOC,43,EN,NF,NM,3.81,4.50,,4.50,0
+mtg_single,b41ab379-ab66-42ac-a354-50567986fc64,Volcanic Spite,MOM,170,EN,NF,NM,0.15,0.15,0.27,0.20,0
+mtg_single,28f5f36f-e56a-4ae0-b4a2-2ad7968c8687,Voldaren Thrillseeker,MOM,171,EN,NF,NM,0.15,0.18,0.57,0.18,0
+mtg_single,e11ab1fa-f064-470b-8351-50ea1ed8c000,Voldaren Thrillseeker,PMOM,171p,EN,NF,NM,0.25,0.25,0.50,0.25,0
+mtg_single,6e1722fe-c962-495c-964b-1272ae952f76,Voldaren Thrillseeker,MOM,367,EN,NF,NM,0.17,0.39,0.37,0.39,0
+mtg_single,956e0365-5283-4bbc-b964-a553e0590786,"Vona, Butcher of Magan",MOC,342,EN,NF,NM,0.30,0.44,,0.44,0
+mtg_single,5d076d0c-709a-4067-9fa5-939a9c6c2e03,Vorinclex // The Grand Evolution,MOM,213,EN,NF,NM,5.43,6.28,6.60,6.28,0
+mtg_single,0dedf065-8243-4480-ab00-4edfdc0dbeaf,Vorinclex // The Grand Evolution,MOM,301,EN,NF,NM,5.92,6.01,8.56,6.01,0
+mtg_single,c22737b8-0a05-4233-91f4-e9a8be7d6673,"Vorinclex, Voice of Hunger",MUL,29,EN,NF,NM,11.00,12.35,13.33,12.35,0
+mtg_single,dae1c2a0-aea6-4069-b665-42192c877be2,Vulpine Harvester,MOC,106,EN,NF,NM,0.22,0.38,,0.38,0
+mtg_single,4f09bffb-611c-4bd1-b066-551bef985d95,Vulpine Harvester,MOC,19,EN,NF,NM,0.16,0.40,,0.40,0
+mtg_single,099dea97-57d2-404e-808b-bc0986960b6f,Wand of the Worldsoul,MOC,107,EN,NF,NM,3.87,4.09,,4.09,0
+mtg_single,de39f06f-a6cc-4fe9-86e2-8a432201e3c4,Wand of the Worldsoul,MOC,20,EN,NF,NM,3.85,4.21,,4.21,0
+mtg_single,59bd4b71-0a84-41d2-aaa6-fec4736db403,War Historian,MOM,214,EN,NF,NM,0.15,0.15,,0.15,0
+mtg_single,a4ac48a5-0587-4609-aa94-88320caff2e6,War-Trained Slasher,MOM,172,EN,NF,NM,0.15,0.15,0.15,0.15,1
+mtg_single,e6d33543-5ee3-4c48-8035-d4c859899e40,Warrior,TMOC,10,EN,NF,NM,1.04,,,,0
+mtg_single,d30e1043-e9a1-4c5d-8a66-c67ae58238b5,Warrior,TMOM,15,EN,NF,NM,0.15,0.27,,0.27,0
+mtg_single,b6ce4bdd-d517-43c9-b03e-268bb2e09abf,Warrior // Dinosaur,TMOM,7-15,EN,NF,NM,,,0.48,,0
+mtg_single,aa149dff-244b-427e-b445-95ab1db7c054,"Warrior // Elspeth, Sun's Champion Emblem",TMOC,10-43,EN,NF,NM,1.33,1.06,,1.06,0
+mtg_single,afd1c028-70d8-48a6-a8f9-92fd0a2771b3,Warrior // Kraken,TMOM,4-15,EN,NF,NM,,,,,0
+mtg_single,bea98342-0be7-4109-8a67-528a4b73efe2,Warrior // Phyrexian Hydra,TMOM,11-15,EN,NF,NM,,,0.24,,0
+mtg_single,73d31779-485d-4760-82f7-71f6cbac33d0,Warrior // Phyrexian Hydra,TMOM,12-15,EN,NF,NM,,,,,0
+mtg_single,5267606b-3731-41a2-b664-ccd1f49ee667,Warrior // Phyrexian Saproling,TMOM,8-15,EN,NF,NM,,,,,0
+mtg_single,8b331f35-288d-4f0a-a48a-18cfc2a16c4d,Warrior // Spirit,TMOM,13-15,EN,NF,NM,,,,,0
+mtg_single,26888ef7-a81a-451c-a4f0-a35f02e3f392,Warrior // Spirit,TMOC,13-TMOM-15,EN,NF,NM,,,,,0
+mtg_single,2852c0a2-a0df-4dd0-a1f4-f90bf6834950,Warrior // Thopter,TMOM,15-19,EN,NF,NM,0.31,,,,0
+mtg_single,882142df-e6dc-4cb6-9fed-10dc43a9affb,Warrior // Vampire,TMOM,3-15,EN,NF,NM,,,,,0
+mtg_single,dbddfc72-3a7e-4329-99d9-4176a90184b9,Warrior // Wrenn and Realmbreaker Emblem,TMOM,15-23,EN,NF,NM,,,,,0
+mtg_single,ea59af88-2ee7-4285-9a94-7b251b3ae29a,Warrior // Zombie,TMOM,5-15,EN,NF,NM,,,,,0
+mtg_single,ff75d673-39a6-4f93-b4c1-be3f74e0269f,Wary Thespian,MOM,215,EN,NF,NM,0.15,0.17,0.47,0.15,0
+mtg_single,fccd5d8d-2877-4881-95f6-17acd8c41240,Wayfarer's Bauble,MOC,389,EN,NF,NM,0.35,0.39,,0.39,0
+mtg_single,46a45ba3-e111-409e-912b-69f1f52426c6,Wear // Tear,MOC,343,EN,NF,NM,1.78,1.84,,1.84,0
+mtg_single,367f1a94-e3df-46c1-8020-82d23e7f5625,Weirding Wood,MOC,315,EN,NF,NM,0.16,0.25,,0.25,0
+mtg_single,a36267da-56a8-44be-94f4-c3f82bcfb1aa,Whirler Rogue,MOC,244,EN,NF,NM,0.15,0.19,,0.19,0
+mtg_single,ddf83217-e9f0-446c-8c7c-f2f2408da9b4,Whirlwind of Thought,MOC,344,EN,NF,NM,0.23,0.51,,0.51,0
+mtg_single,3e08adc6-354c-4c2c-ac44-7f361f1f040a,Wicked Slumber,MOM,84,EN,NF,NM,0.15,0.17,0.17,0.16,0
+mtg_single,59025525-9b48-456d-9c1d-4995367ba375,Wildfire Awakener,MOC,131,EN,NF,NM,3.39,3.51,,3.51,0
+mtg_single,162382ed-0fd0-4ec5-9e9e-3b906aac33a8,Wildfire Awakener,MOC,44,EN,NF,NM,2.83,3.24,,3.24,0
+mtg_single,e90f001a-960e-4172-8aac-ffa443a8a9a3,Wildwood Escort,MOM,216,EN,NF,NM,0.15,0.16,,0.15,0
+mtg_single,7f239f25-9033-4802-88b2-d8d0346cede8,Wind-Scarred Crag,MOM,276,EN,NF,NM,0.15,0.15,0.22,0.15,0
+mtg_single,414457e3-3115-47c3-9d23-7fc0e7d7caff,Wintermoor Commander,MOC,345,EN,NF,NM,0.19,0.33,,0.33,0
+mtg_single,88220484-0322-4e1d-a4e4-ff28f483ea54,Wood Elves,MOC,316,EN,NF,NM,0.33,0.37,,0.37,0
+mtg_single,f6d559cb-c28a-42bf-8205-2ff66c487716,Workshop Elders,MOC,245,EN,NF,NM,0.15,0.22,,0.22,0
+mtg_single,8bbf7074-5563-444c-96d8-1e74cb5ab8ca,Worthy Knight,MOC,217,EN,NF,NM,0.27,0.41,,0.41,0
+mtg_single,be2470fe-ccda-41e9-a96f-9819df0a4e38,Wrenn and Realmbreaker,MOM,217,EN,NF,NM,5.89,6.54,6.20,6.54,0
+mtg_single,e37243c0-081f-4e37-a1bd-f22e5026ad9e,Wrenn and Realmbreaker,PMOM,217p,EN,NF,NM,6.27,6.63,5.89,6.63,0
+mtg_single,1e9a2899-9637-4a28-90cd-742b577cfa11,Wrenn and Realmbreaker,MOM,322,EN,NF,NM,5.50,6.51,8.22,6.51,0
+mtg_single,66017ac5-639a-4905-8a0c-962884f3dcd6,Wrenn and Realmbreaker,AMOM,56,EN,NF,NM,,,,,0
+mtg_single,dfb84fa7-3f35-43a6-8257-af19eddda4e1,Wrenn and Realmbreaker Emblem,TMOM,23,EN,NF,NM,2.94,3.00,1.10,3.00,1
+mtg_single,fac399fc-43dc-42f1-b9f8-e9cc09f61f07,Wrenn's Resolve,MOM,173,EN,NF,NM,0.93,1.95,2.70,1.95,0
+mtg_single,bd64e464-4b24-43eb-9e96-56ddd2a4a982,Xerex Strobe-Knight,AMOM,20,EN,NF,NM,,,,,0
+mtg_single,d6c51eec-1415-421b-aa93-e5f36c5a2ffa,Xerex Strobe-Knight,MOM,85,EN,NF,NM,0.15,0.20,0.18,0.15,0
+mtg_single,8de56b80-1c01-4c41-8d75-ef297ca4773c,Yargle and Multani,MOM,256,EN,NF,NM,2.00,2.21,2.69,2.21,0
+mtg_single,a7a51f66-8d7b-454e-ad30-0cf8328040c7,Yargle and Multani,PMOM,256p,EN,NF,NM,2.83,2.60,1.75,2.60,0
+mtg_single,29e044eb-1ddf-4a53-baf5-e6bc7c5f5eb0,Yargle and Multani,MOM,317,EN,NF,NM,2.05,2.53,2.68,2.53,0
+mtg_single,18beedbc-90d2-490e-abc6-21d5d3fffff5,Yargle and Multani,AMOM,53,EN,NF,NM,0.15,,,,0
+mtg_single,b581d12d-b2c1-4027-876d-79ad40de0b18,"Yargle, Glutton of Urborg",MUL,19,EN,NF,NM,0.15,0.15,0.20,0.15,0
+mtg_single,99caa8fd-772c-4a9a-8a4f-66a070f10097,"Yargle, Glutton of Urborg",AMOM,72,EN,NF,NM,,,,,0
+mtg_single,346e3269-eef8-4879-b36b-89641fec5304,"Yarok, the Desecrated",MUL,63,EN,NF,NM,0.97,1.34,2.69,1.34,0
+mtg_single,0ddc080c-8131-424d-9d7c-4c93a7a3e4f6,Yawgmoth's Vile Offering,MOC,271,EN,NF,NM,0.33,0.50,,0.50,0
+mtg_single,87329ccc-8b41-435f-908c-b5b992ab3989,"Yedora, Grave Gardener",MUL,30,EN,NF,NM,0.15,0.21,0.46,0.21,0
+mtg_single,16984ec9-4874-44a4-b4e6-6fe8239e9c44,"Yorion, Sky Nomad",MUL,64,EN,NF,NM,0.24,0.74,1.17,0.74,0
+mtg_single,b13ba2ec-e38b-4fa8-8331-8da47a799dcd,"Zada, Hedron Grinder",MUL,25,EN,NF,NM,0.15,0.20,0.28,0.20,0
+mtg_single,5d33f7e5-956e-47a1-a3d4-1e806def2674,"Zada, Hedron Grinder",AMOM,75,EN,NF,NM,,,,,0
+mtg_single,7c265895-9321-41cf-98fc-ef3f5162f77b,Zephyr Singer,MOM,355,EN,NF,NM,0.24,0.48,0.32,0.48,0
+mtg_single,d785b9a4-42cd-4be3-9d3b-ae1197dadbf4,Zephyr Singer,MOM,86,EN,NF,NM,0.15,0.20,0.33,0.20,0
+mtg_single,31febf41-a704-42ac-85f8-2e69bf2e09ea,Zephyr Singer,PMOM,86p,EN,NF,NM,0.25,0.28,0.30,0.28,0
+mtg_single,6354136b-3591-4d04-81b0-1202c4cffba1,Zephyr Winder,MOM,328,EN,NF,NM,0.15,0.17,0.31,0.17,0
+mtg_single,523977b0-f40c-460a-a7cc-b705e3214288,Zhalfirin Lancer,MOM,45,EN,NF,NM,0.15,0.24,0.15,0.18,0
+mtg_single,708daa15-5333-4ac5-98db-7e7c7cdc3c7d,Zhalfirin Shapecraft,MOM,87,EN,NF,NM,0.15,0.19,0.24,0.17,0
+mtg_single,98c1b366-4ecc-42e1-bb8c-778c9e78c6f5,Zimone and Dina,MOM,257,EN,NF,NM,0.29,0.62,0.66,0.62,0
+mtg_single,bf922775-3b16-4f02-870a-eec06881287b,Zimone and Dina,PMOM,257p,EN,NF,NM,1.37,1.54,,1.54,0
+mtg_single,6095de17-7e46-4448-8220-17448df29ad3,Zimone and Dina,MOM,318,EN,NF,NM,0.60,1.31,1.87,1.31,0
+mtg_single,4ed95ee6-fa67-41ea-8e5c-af130ed11971,"Zirda, the Dawnwaker",MUL,65,EN,NF,NM,1.46,1.37,2.86,1.37,0
+mtg_single,1c2c54b5-d411-4b31-b847-fe1102bcd0bc,Zombie,TMOM,5,EN,NF,NM,0.18,0.26,,0.26,0
+mtg_single,5cd24438-c736-4793-8f69-100ba676ff0c,Zombie Knight,TMOC,21,EN,NF,NM,,0.48,,0.48,0
+mtg_single,eaf7bcae-d3c0-4c7d-ba5d-5d93b18f80cc,Zombie Knight // Human,TMOC,6-21,EN,NF,NM,0.24,0.23,,0.23,0
+mtg_single,9bdbb7c7-f191-4634-8177-e2e0f9bff740,Zurgo and Ojutai,MOM,258,EN,NF,NM,0.39,0.37,1.41,0.37,0
+mtg_single,60202b50-59ce-4f89-affe-6d4123e8e4c9,Zurgo and Ojutai,PMOM,258p,EN,NF,NM,1.11,0.99,,0.99,0
+mtg_single,87146213-ff2e-493c-8675-ca7cbe6fbe80,Zurgo and Ojutai,MOM,319,EN,NF,NM,0.53,0.68,1.17,0.68,0
+mtg_single,95a5ca0e-cc68-4d19-a6b1-37b50cfb193c,Zurgo and Ojutai,AMOM,66,EN,NF,NM,0.90,,,,0

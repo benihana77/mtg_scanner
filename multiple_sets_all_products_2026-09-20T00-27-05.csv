@@ -1,0 +1,820 @@
+product_type,product_id,name,set,number,language,finish,condition,market_low,market_price,market_price_foil,price,quantity
+mtg_single,2df77c32-f2b5-4083-b27e-13b931081f80,Abundance,ZNC,58,EN,NF,NM,0.69,1.32,,1.32,0
+mtg_single,3254d764-6e7f-4242-ba25-42fbee090831,Abzan Falconer,ZNC,9,EN,NF,NM,0.15,0.29,,0.29,0
+mtg_single,4360bd38-41fc-42ef-91d3-ebd61aa14c88,Acidic Slime,ZNC,59,EN,NF,NM,0.15,0.16,,0.16,0
+mtg_single,2d7f8b8d-d371-4993-9631-82819e756f83,Acquisitions Expert,ZNR,89,EN,NF,NM,0.15,0.18,0.15,0.20,0
+mtg_single,ea418640-1845-447c-b49c-68d9012243b5,Admonition Angel,ZNC,10,EN,NF,NM,0.43,0.83,,0.83,0
+mtg_single,3d2710c3-c43b-4130-84bc-253bd0c5f411,Adventure Awaits,ZNR,177,EN,NF,NM,0.15,0.20,0.36,0.15,0
+mtg_single,ac7ee5f6-18bb-48b0-b0d1-c64bb3fb438b,Aetherize,ZNC,23,EN,NF,NM,0.37,0.48,,0.48,0
+mtg_single,69623208-20c4-453b-9f3b-55354a38bcc6,"Agadeem's Awakening // Agadeem, the Undercrypt",ZNR,336,EN,NF,NM,34.58,36.15,41.21,29.93,0
+mtg_single,9eca36e2-de62-47ab-84c1-f0b01da71e5a,"Agadeem's Awakening // Agadeem, the Undercrypt",ZNR,90,EN,NF,NM,27.55,27.83,29.22,26.00,0
+mtg_single,f3306f32-ded2-45ba-9af5-61c113a7a737,"Akiri, Fearless Voyager",ZNR,220,EN,NF,NM,0.71,0.93,1.27,0.89,0
+mtg_single,1b3e53b2-f679-4758-9190-9f7a7af9ede5,"Akiri, Fearless Voyager",PZNR,220p,EN,NF,NM,1.60,1.44,1.16,1.44,0
+mtg_single,e4cc622e-af76-4074-8529-f2ef4a0695d5,"Akiri, Fearless Voyager",ZNR,365,EN,NF,NM,2.31,2.75,3.19,2.83,0
+mtg_single,347c9681-61cc-4362-881a-520786b84894,"Akiri, Fearless Voyager",AZNR,74,EN,NF,NM,0.50,,,,0
+mtg_single,f9f859a6-db0a-4383-91ed-59c9df817608,Akoum Hellhound,ZNR,133,EN,NF,NM,0.15,0.20,0.28,0.16,0
+mtg_single,c6e79ba4-2d59-426a-9bf0-863e51673e6c,Akoum Hellhound,ZNR,299,EN,NF,NM,0.15,0.16,0.21,0.15,0
+mtg_single,16b8ff6a-9512-44bd-a87a-1f1b27501153,Akoum Warrior // Akoum Teeth,ZNR,134,EN,NF,NM,0.15,0.29,0.33,0.16,0
+mtg_single,b4bf3430-0602-4d99-89ab-93166e7edeb2,Allied Assault,ZNR,1,EN,NF,NM,0.15,0.17,0.24,0.16,0
+mtg_single,a1e68fa9-b3a7-4581-96c8-1a558afd7de2,Ancient Greenwarden,ZNR,178,EN,NF,NM,11.00,12.74,13.29,13.81,0
+mtg_single,cc534fb6-ab8d-4afc-8993-fc9cc2c065fa,Ancient Greenwarden,PZNR,178p,EN,NF,NM,10.99,12.57,13.00,12.57,0
+mtg_single,9523806d-4241-41e1-a7f4-ee125cb7801e,Ancient Greenwarden,ZNR,357,EN,NF,NM,14.67,17.06,16.24,16.97,0
+mtg_single,8870e936-2a92-45ac-8285-91bc92d7ebca,Ancient Tomb,ZNE,21,EN,NF,NM,130.03,127.22,166.30,96.00,0
+mtg_single,22a04535-323f-4f8a-8387-69026454ac1b,Angel Warrior,TZNR,1,EN,NF,NM,0.20,0.36,1.50,0.73,0
+mtg_single,2430ad6d-008b-4403-bfba-d4ed11e2c6d4,Angel Warrior // Construct,TZNR,1-10,EN,NF,NM,,,0.49,,0
+mtg_single,c2462624-9f6b-4952-a984-c02591fbd660,Angel Warrior // Copy,TZNR,1-12,EN,NF,NM,,,0.85,,0
+mtg_single,26b790a7-73ef-4d69-8aad-62e8ac88e55f,Angel Warrior // Goblin Construct,TZNR,1-11,EN,NF,NM,,,0.35,,0
+mtg_single,2ecaf78b-9b6e-4717-a282-4d89d58abea3,Angel Warrior // Hydra,TZNR,1-9,EN,NF,NM,,,0.99,,0
+mtg_single,910bf05f-471b-4fc2-b2c4-470f83ea1313,Angel Warrior // Insect,TZNR,1-7,EN,NF,NM,,,0.33,,0
+mtg_single,11f09085-a01b-4885-b460-65f731e093bc,Angel Warrior // Plant,TZNR,1-8,EN,NF,NM,1.00,,0.42,,0
+mtg_single,47cf3d82-e1f0-4f87-8bd9-64d0cc9ac800,Angel of Destiny,ZNR,2,EN,NF,NM,8.43,8.15,9.12,8.34,0
+mtg_single,ca95a9bd-a80f-4373-bf5c-3c45f9960acf,Angel of Destiny,PZNR,2p,EN,NF,NM,8.43,9.33,9.00,9.33,0
+mtg_single,b9f6ed08-a269-41c9-a2b3-eae01d91d19d,Angel of Destiny,ZNR,314,EN,NF,NM,13.25,11.93,16.96,12.49,0
+mtg_single,0d0e93d9-7a44-4fc9-8fe6-ef2b08901f84,Angel of Destiny,AZNR,37,EN,NF,NM,0.75,,,,0
+mtg_single,0f397bb2-8a46-4d2e-92e2-4727598c37c9,Angelheart Protector,ZNR,3,EN,NF,NM,0.15,0.17,0.17,0.16,0
+mtg_single,78ac4593-6ad3-4de8-a8dd-134fb25fbe08,"Anowon, the Ruin Thief",ZNC,7,EN,NF,NM,1.13,1.26,1.46,1.26,0
+mtg_single,1d14dfd6-da1c-452d-9afb-91fa0d208b84,"Anowon, the Ruin Thief",AZNR,75,EN,NF,NM,0.50,,,,0
+mtg_single,97f2009a-7e40-4347-8995-04dfe762480f,Anticognition,ZNR,45,EN,NF,NM,0.15,0.18,0.23,0.15,0
+mtg_single,550a78b2-91e1-490f-a109-65d2435a2dc4,Anticognition,AZNR,46,EN,NF,NM,0.40,,,,0
+mtg_single,39d7a56d-457d-4d56-a495-5794a1c47446,Arcane Signet,ZNC,106,EN,NF,NM,0.49,0.47,,0.47,0
+mtg_single,477534a2-bc07-421e-92be-e9594acbea5d,Archon of Emeria,ZNR,315,EN,NF,NM,2.50,2.98,3.89,2.79,0
+mtg_single,8a399ab3-62a9-4235-94e0-1f7cdb1538e7,Archon of Emeria,ZNR,4,EN,NF,NM,1.07,1.85,1.73,1.59,0
+mtg_single,f5858451-3f33-45ca-bc5a-c9aba7ba8e46,Archon of Emeria,PZNR,4p,EN,NF,NM,1.79,2.16,1.97,2.16,0
+mtg_single,8adbdb89-265f-4aa9-8f0f-f57aba222599,Archpriest of Iona,ZNR,316,EN,NF,NM,0.18,0.32,0.36,0.24,0
+mtg_single,6eae7c4b-8983-4e20-a6fb-301bb83d2693,Archpriest of Iona,ZNR,5,EN,NF,NM,0.15,0.22,0.30,0.15,0
+mtg_single,9691adc2-c8ce-4806-80f9-0d821bc3b2e9,Archpriest of Iona,PZNR,5p,EN,NF,NM,0.15,0.22,,0.22,0
+mtg_single,02e7cbeb-d541-4966-8259-dcb2bc3c9c0f,Ardent Electromancer,ZNR,135,EN,NF,NM,0.15,0.17,0.15,0.17,0
+mtg_single,86f6109d-8fe6-4677-8b99-75daf748d7f4,Arid Mesa,ZNE,9,EN,NF,NM,48.01,46.03,64.01,34.94,0
+mtg_single,77ede259-1527-44e8-967a-8208e638975c,Armorcraft Judge,ZNC,60,EN,NF,NM,0.15,0.16,,0.16,0
+mtg_single,4c8005e6-48fd-4344-abb0-6939fdfb20b5,"Ashaya, Soul of the Wild",ZNR,179,EN,NF,NM,14.00,15.20,16.92,16.34,0
+mtg_single,cd56938b-b41d-48e4-a45a-22231b11c179,"Ashaya, Soul of the Wild",PZNR,179p,EN,NF,NM,15.65,19.70,,19.70,0
+mtg_single,817ed09e-0579-4b0b-960d-a03d59f07278,"Ashaya, Soul of the Wild",ZNR,358,EN,NF,NM,19.79,19.64,28.51,19.79,0
+mtg_single,da4da2c2-23da-47ff-bfff-fc91b5039725,"Ashaya, Soul of the Wild",AZNR,69,EN,NF,NM,0.45,,,,0
+mtg_single,1818f5e5-7728-4f0b-b4ac-151e9d3e7370,Attended Healer,ZNR,6,EN,NF,NM,0.15,0.21,0.22,0.20,0
+mtg_single,32140aeb-f8c7-4f86-8419-77b18ead58cd,Bala Ged Recovery // Bala Ged Sanctuary,ZNR,180,EN,NF,NM,5.49,7.00,6.93,7.49,0
+mtg_single,ad05acfc-ba0e-4b5a-b629-2919227fefd8,Banishing Light,ZNC,11,EN,NF,NM,0.15,0.18,,0.18,0
+mtg_single,59eb0210-aa2e-4168-a105-4fbda966f100,Base Camp,ZNR,257,EN,NF,NM,0.15,0.17,0.42,0.17,0
+mtg_single,364e03c0-2d34-4d8e-8cde-e0323c3f6f3a,Base Race // Base Race (cont'd),MZNR,1,EN,NF,NM,0.25,,,,0
+mtg_single,12d90469-a153-40da-bed9-3e9447821876,Beanstalk Giant // Fertile Footsteps,ZNC,61,EN,NF,NM,0.15,0.21,,0.21,0
+mtg_single,2effe1ce-c3a3-48fb-9300-14b10adebf92,Beast,TZNC,7,EN,NF,NM,,0.30,,0.30,0
+mtg_single,de12352c-6836-48d3-b43b-55d3999192fd,Beast // Saproling,TZNC,7-9,EN,NF,NM,0.15,0.15,,0.15,0
+mtg_single,4c6b6787-759b-4891-9fef-82ad11fcf50e,Beyeen Veil // Beyeen Coast,ZNR,46,EN,NF,NM,0.15,0.17,0.39,0.25,0
+mtg_single,c4985f18-6e26-4df8-8254-5833756791e5,Bird,TZNC,1,EN,NF,NM,0.35,,,,0
+mtg_single,2d5d1ad3-821c-4463-b3e7-6cd532387836,Bird // Kor Ally,TZNC,1-2,EN,NF,NM,0.15,0.21,,0.21,0
+mtg_single,27f59aab-7ba8-4c82-a9cd-8472aa42246c,Blackblade Reforged,ZNC,107,EN,NF,NM,2.84,3.44,,3.44,0
+mtg_single,752bda6b-18b7-4540-9570-737323e45ab4,Blackbloom Rogue,AZNR,53,EN,NF,NM,0.40,,,,0
+mtg_single,e784307e-3f7c-4c1f-bef2-8e606a5c63de,Blackbloom Rogue // Blackbloom Bog,ZNR,91,EN,NF,NM,0.15,0.19,0.35,0.15,0
+mtg_single,de583524-1ffe-4e1a-8f89-fff84b468ab7,Blackcleave Cliffs,ZNE,13,EN,NF,NM,3.50,3.64,5.51,4.03,0
+mtg_single,89786014-7110-44c2-9c4c-fbda1a748398,Blighted Woodland,ZNC,121,EN,NF,NM,0.24,0.36,,0.36,0
+mtg_single,4724a717-8bff-4eb6-bac8-ad82aed45561,Blood Beckoning,ZNR,92,EN,NF,NM,0.15,0.16,0.17,0.15,0
+mtg_single,eade7310-fd26-4504-bdc8-24f7dfba27a4,Blood Price,ZNR,93,EN,NF,NM,0.15,0.16,0.16,0.15,0
+mtg_single,ec421c88-14c7-4744-9f91-f77e9842e738,Bloodchief's Thirst,ZNR,388,EN,NF,NM,0.42,0.55,0.41,0.49,0
+mtg_single,3f1dbae1-d96f-4ec0-a7ce-3122029956a2,Bloodchief's Thirst,ZNR,94,EN,NF,NM,0.15,0.24,0.46,0.17,0
+mtg_single,79ff3a83-42f7-4208-804e-a24bbdb0568b,Bloodstained Mire,ZNE,3,EN,NF,NM,38.16,39.04,82.78,30.03,0
+mtg_single,d39f2e93-3e77-43ab-917d-9c04b0fff4b3,Bonehoard,ZNC,108,EN,NF,NM,0.15,0.27,,0.27,0
+mtg_single,31f4ceca-9e92-442a-9c9d-43f47f23889b,Booster Blitz,MZNR,2,EN,NF,NM,,,,,0
+mtg_single,566f4a67-120e-414a-a911-31963b638d3d,Booster Sleuth // Booster Sleuth (cont'd),MZNR,3,EN,NF,NM,,,,,0
+mtg_single,e1eccf55-40a7-4965-a047-0c1116d8e06e,Boros Garrison,ZNC,122,EN,NF,NM,0.15,0.23,,0.23,0
+mtg_single,ff94979d-4c90-4785-b2af-8e05b26b4249,Boros Guildgate,ZNC,123,EN,NF,NM,0.15,0.16,,0.16,0
+mtg_single,5ba142f7-8993-4149-a8d4-7e930a66ab72,Boulderloft Pathway,AZNR,22,EN,NF,NM,0.40,,,,0
+mtg_single,c00b69fc-3d1d-4b64-b6a6-6ec35c34d86f,Bountiful Promenade,ZNE,20,EN,NF,NM,19.87,20.03,26.91,15.88,0
+mtg_single,f2d36bb3-0737-4c12-bf00-7874c1c19546,Branchloft Pathway // Boulderloft Pathway,ZNR,258,EN,NF,NM,2.75,2.84,3.05,3.14,0
+mtg_single,97fe1621-8548-4706-864d-93cada0446b8,Branchloft Pathway // Boulderloft Pathway,ZNR,284,EN,NF,NM,2.94,3.84,3.77,2.79,0
+mtg_single,be4a8539-e2b3-4e2b-9013-6b7ef09e0232,Brightclimb Pathway,AZNR,23,EN,NF,NM,0.70,,,,0
+mtg_single,43979e89-00a3-469f-b844-fe8b4a906692,Brightclimb Pathway // Grimclimb Pathway,ZNR,259,EN,NF,NM,3.45,3.52,4.89,4.44,0
+mtg_single,8c0b7321-a699-4128-9da7-49b8b2e4b021,Brightclimb Pathway // Grimclimb Pathway,ZNR,285,EN,NF,NM,4.20,4.71,6.15,3.90,0
+mtg_single,79759ea4-d83f-4677-8eb8-58947e69de55,Broken Wings,ZNR,181,EN,NF,NM,0.15,0.16,,0.15,0
+mtg_single,150c4487-60b1-4c81-aa65-672e3437a11f,Brushfire Elemental,ZNR,221,EN,NF,NM,0.15,0.16,0.25,0.22,0
+mtg_single,ef72e84f-9463-4692-bb11-2d2f1bc3f83b,Brushfire Elemental,ZNR,311,EN,NF,NM,0.15,0.16,0.22,0.16,0
+mtg_single,f20822fb-72bd-4b95-a2f0-923645acf63c,Bubble Snare,ZNR,47,EN,NF,NM,0.15,0.15,0.20,0.16,0
+mtg_single,72e220b6-56e6-4749-ac30-c9466b59075f,Canopy Baloth,ZNR,182,EN,NF,NM,0.15,0.16,0.43,0.15,0
+mtg_single,0c8b8737-20fb-43e2-847a-152748b7dfa6,Canopy Baloth,ZNR,304,EN,NF,NM,0.15,0.17,0.18,0.16,0
+mtg_single,6ec39fbb-ed29-4ef7-a1be-d45c11088211,Canopy Baloth,AZNR,70,EN,NF,NM,0.40,,,,0
+mtg_single,7e074fe2-018e-4147-89b7-113f2727eea7,Canyon Jerboa,ZNR,290,EN,NF,NM,0.15,0.19,0.45,0.18,0
+mtg_single,4b7523c3-93f1-4dbb-a008-286191314d75,Canyon Jerboa,ZNR,7,EN,NF,NM,0.15,0.20,0.21,0.15,0
+mtg_single,9889d356-96d0-46fd-be41-638000d15696,Cascade Seer,ZNR,48,EN,NF,NM,0.15,0.16,0.15,0.15,0
+mtg_single,39c0d1ad-80e9-4e57-9c68-8d78892b968b,Cat,TZNR,2,EN,NF,NM,0.50,0.64,1.07,0.77,0
+mtg_single,3f81a50c-57d3-40aa-926b-a0eb3358cdef,Cat // Construct,TZNR,2-10,EN,NF,NM,,,0.98,,0
+mtg_single,28f30fb6-5e21-4fb9-8302-e190a77f1bec,Cat // Copy,TZNR,2-12,EN,NF,NM,,0.34,,0.34,0
+mtg_single,a52ca13d-9011-4241-ac7b-37e228a3bf8d,Cat // Goblin Construct,TZNR,2-11,EN,NF,NM,,,0.50,,0
+mtg_single,3db1516d-e98c-448b-b3ce-5bb969dc4460,Cat // Hydra,TZNR,2-9,EN,NF,NM,,,0.50,,0
+mtg_single,9459be50-5b07-4f3e-a1a6-a4dbe8770e79,Cat // Insect,TZNR,2-7,EN,NF,NM,,,0.57,,0
+mtg_single,7403400a-1723-4670-8d62-f007fab2fc5f,Cat // Plant,TZNR,2-8,EN,NF,NM,,,0.78,,0
+mtg_single,99f3428a-f4d0-4c36-a8ec-5d757acaddf9,Cat Beast,TZNR,3,EN,NF,NM,0.64,0.76,,1.00,0
+mtg_single,25039aec-d8b4-440b-9bbb-a5a357965c8e,Cat Beast // Construct,TZNR,3-10,EN,NF,NM,,,0.80,,0
+mtg_single,a03110cc-a22b-44b3-9dab-75cb4c606cc5,Cat Beast // Copy,TZNR,3-12,EN,NF,NM,,,,,0
+mtg_single,dfa39af6-971c-4bc6-bd1d-5c5d465fc1d8,Cat Beast // Goblin Construct,TZNR,3-11,EN,NF,NM,,,0.53,,0
+mtg_single,f6b681ff-6e71-4932-b738-625f18e34f46,Cat Beast // Hydra,TZNR,3-9,EN,NF,NM,,,1.04,,0
+mtg_single,6342a908-55b0-405e-8cf9-1a5559d2483a,Cat Beast // Insect,TZNR,3-7,EN,NF,NM,,,0.68,,0
+mtg_single,23cab874-59fa-46d0-8302-a9ff4d4005b3,Cat Beast // Plant,TZNR,3-8,EN,NF,NM,0.55,0.57,,0.57,0
+mtg_single,45972243-2459-4062-84d9-c0ba37e4194d,Cavern of Souls,ZNE,22,EN,NF,NM,55.00,55.82,102.12,47.69,0
+mtg_single,59e966fe-011a-4291-8f2b-aad0d58ff71f,Celestial Colonnade,ZNE,23,EN,NF,NM,1.22,1.30,2.05,1.50,0
+mtg_single,b0083830-c40f-46c7-b746-bd9e4bbfe2dc,Celestial Colonnade,AZNR,33,EN,NF,NM,0.75,,,,0
+mtg_single,c9acd761-903c-4e1f-af2b-cf05848d9792,Changeling Outcast,ZNC,40,EN,NF,NM,1.75,1.73,,1.73,0
+mtg_single,0130a18c-35d5-497b-ad6d-f45c2a9e21f4,"Charix, the Raging Isle",ZNR,325,EN,NF,NM,0.64,0.67,1.02,0.93,0
+mtg_single,1aa35302-4fa4-4937-a257-a4f0f33e7ee6,"Charix, the Raging Isle",ZNR,49,EN,NF,NM,0.19,0.45,0.52,0.45,0
+mtg_single,9e54efc5-4c43-478e-a27d-430eeecc8424,"Charix, the Raging Isle",PZNR,49p,EN,NF,NM,0.99,0.62,,0.62,0
+mtg_single,67406188-4414-409c-9b80-d165587fb210,Chilling Trap,ZNR,50,EN,NF,NM,0.15,0.20,0.19,0.15,0
+mtg_single,7790d6b7-f03d-43f4-913c-70b8580fdd9a,Cinderclasm,ZNR,136,EN,NF,NM,0.15,0.15,0.43,0.17,0
+mtg_single,1a8fa295-377d-4063-818c-f050b829479f,Circuitous Route,ZNC,62,EN,NF,NM,0.18,0.25,,0.25,0
+mtg_single,7e2dc14e-65a9-46e4-a7cb-e11717c77bf3,Cleansing Wildfire,ZNR,137,EN,NF,NM,0.48,0.74,1.33,0.38,0
+mtg_single,70d44792-f0a0-41d2-980d-e38f26ca15b3,Clearwater Pathway,AZNR,25,EN,NF,NM,0.49,,,,0
+mtg_single,f44ef9bf-efa4-428d-af48-d25c6bcae905,Clearwater Pathway // Murkwater Pathway,ZNR,260,EN,NF,NM,4.46,4.78,5.03,5.47,0
+mtg_single,8a02c1e5-d8cb-4702-bf50-1ccd3221dedf,Clearwater Pathway // Murkwater Pathway,ZNR,286,EN,NF,NM,4.50,5.01,6.85,4.98,0
+mtg_single,113cc074-63b4-4ebd-af95-3dea12a5473f,Cleric of Chill Depths,ZNR,51,EN,NF,NM,0.15,0.16,,0.18,0
+mtg_single,041bdaef-12a6-4577-8389-2f15b20d6130,Cleric of Life's Bond,ZNR,222,EN,NF,NM,0.15,0.16,0.53,0.17,0
+mtg_single,67e69f4c-0de9-4e76-9a31-72a8c85eb80f,Cliffhaven Kitesail,ZNR,243,EN,NF,NM,0.15,0.19,0.34,0.15,0
+mtg_single,5e2ec65e-64ff-4e29-bfc6-f8b648fc6f77,Cliffhaven Sell-Sword,AZNR,38,EN,NF,NM,0.65,,,,0
+mtg_single,87c6c18f-4cfd-4f63-82dd-af40f706570b,Cliffhaven Sell-Sword,ZNR,8,EN,NF,NM,0.15,0.16,0.17,0.15,0
+mtg_single,011856ce-7120-43f6-9e09-f9c950249547,Command Tower,ZNC,124,EN,NF,NM,0.15,0.29,,0.29,0
+mtg_single,c606d724-fc9b-4815-b612-3026851b979c,Commander's Sphere,ZNC,109,EN,NF,NM,0.15,0.16,,0.16,0
+mtg_single,47108905-164f-4419-8b45-31916097d0c4,Concerted Defense,ZNR,52,EN,NF,NM,0.15,0.25,0.37,0.20,0
+mtg_single,4cc34cf3-25fc-46db-b08e-a4f7d9dfdf2a,Condemn,ZNC,12,EN,NF,NM,0.15,0.18,,0.18,0
+mtg_single,846f4316-bc79-43bc-baa3-a2eaa07d8057,Confounding Conundrum,ZNR,326,EN,NF,NM,0.48,0.54,0.50,0.62,0
+mtg_single,c069a246-e9d5-4677-94d4-88de0d49f833,Confounding Conundrum,ZNR,53,EN,NF,NM,0.15,0.29,0.22,0.25,0
+mtg_single,e5bab78a-c632-4da4-8ace-9d63ad113ef8,Confounding Conundrum,PZNR,53p,EN,NF,NM,0.38,0.50,0.74,0.50,0
+mtg_single,d2f30a1d-ae41-45cc-b8d5-64e2f4949a89,Construct,TZNR,10,EN,NF,NM,0.19,0.27,,0.15,0
+mtg_single,822706d0-d0f7-492d-987e-c75a5b370b34,Construct // Drake,TZNR,5-10,EN,NF,NM,,,0.46,,0
+mtg_single,52872647-1dae-4a41-9517-b93501a3da1d,Construct // Illusion,TZNR,6-10,EN,NF,NM,0.29,,,,0
+mtg_single,dba721fd-6767-4521-944e-e3913a2f555f,Construct // Kor Warrior,TZNR,4-10,EN,NF,NM,,,,,0
+mtg_single,974ded63-121d-495d-a3f2-36d43e6e1463,Consuming Aberration,ZNC,89,EN,NF,NM,0.16,0.38,,0.38,0
+mtg_single,a1207531-fb97-4a00-80f4-ac7edc5ef045,Copperline Gorge,ZNE,14,EN,NF,NM,2.35,2.46,4.85,3.05,0
+mtg_single,05da6fd5-cc42-430d-bb3e-5e6e94acb80c,Copy,TZNR,12,EN,NF,NM,0.23,0.36,0.99,0.21,0
+mtg_single,9589ea18-5faf-4184-9972-18c54e6bc3d7,Copy // Drake,TZNR,5-12,EN,NF,NM,,,1.00,,0
+mtg_single,f2fc8ee7-57fb-4957-95af-0578ebc734dd,Copy // Illusion,TZNR,6-12,EN,NF,NM,,,,,0
+mtg_single,4ab075cd-83f8-4c32-b49e-cab757ba1b06,Copy // Kor Warrior,TZNR,4-12,EN,NF,NM,,,0.53,,0
+mtg_single,f3b86dca-2eea-43ff-9d77-5f943a305a24,Coralhelm Chronicler,ZNR,327,EN,NF,NM,0.18,,0.20,0.15,0
+mtg_single,43089434-9c06-4e7a-8d4d-eeae71b11397,Coralhelm Chronicler,ZNR,54,EN,NF,NM,0.15,0.25,0.16,0.25,0
+mtg_single,a50ab5e9-1ca1-4bc1-b69f-ebbd76048c6c,Coralhelm Chronicler,PZNR,54p,EN,NF,NM,0.30,0.18,,0.18,0
+mtg_single,7ad8a146-51b7-44c8-baea-6a0d144a0c72,Coveted Prize,ZNR,337,EN,NF,NM,0.43,0.56,0.70,0.63,0
+mtg_single,1a9e4da3-7daf-4ab1-92f3-a071b31d0ff6,Coveted Prize,ZNR,95,EN,NF,NM,0.15,0.30,0.41,0.35,0
+mtg_single,2c4c1b60-ed85-4273-92d0-d79be58edab0,Coveted Prize,PZNR,95p,EN,NF,NM,0.60,0.39,0.48,0.39,0
+mtg_single,a805e40c-523f-4b52-8c63-936d63fda123,Cragcrown Pathway // Timbercrown Pathway,ZNR,261,EN,NF,NM,2.75,3.15,3.06,3.21,0
+mtg_single,acf7d932-5778-44b7-857b-941fd4a436ae,Cragcrown Pathway // Timbercrown Pathway,ZNR,287,EN,NF,NM,2.50,3.32,4.14,3.59,0
+mtg_single,977e4ba6-42f4-4dfe-9d53-b8d09e24f35e,Cragplate Baloth,ZNR,183,EN,NF,NM,0.15,0.21,0.25,0.25,0
+mtg_single,3912191f-1cc6-4ed8-a6ad-de8b0ef907b4,Cragplate Baloth,PZNR,183p,EN,NF,NM,0.15,,,,0
+mtg_single,fd22d894-f4c0-4b49-bd4b-cc4460b55d53,Cragplate Baloth,ZNR,359,EN,NF,NM,0.19,0.48,0.34,0.17,0
+mtg_single,215bdd79-fc4e-46b6-9941-bd4122de8e39,Crawling Barrens,ZNR,262,EN,NF,NM,0.15,0.17,0.26,0.17,0
+mtg_single,14ccdf9b-1a85-41dd-a7f6-9dd41b955dcc,Crawling Barrens,PZNR,262p,EN,NF,NM,0.40,0.49,,0.49,0
+mtg_single,984372ff-3097-422a-b62e-95e6b0880ac8,Crawling Barrens,ZNR,378,EN,NF,NM,0.38,0.46,0.56,0.52,0
+mtg_single,d56e5db3-a1d3-40cd-9d63-05f3b49d38c0,Creeping Tar Pit,ZNE,24,EN,NF,NM,1.45,1.48,1.79,1.55,0
+mtg_single,40b33d22-2758-4d72-b4f6-9e581096958d,Crush Contraband,ZNC,13,EN,NF,NM,0.15,0.18,,0.18,0
+mtg_single,13408586-982d-4d16-ad24-c25620848076,Cryptic Caves,ZNC,125,EN,NF,NM,0.15,0.21,,0.21,0
+mtg_single,b77639b6-8eed-4763-a98f-e4208516dfa3,Cunning Geysermage,ZNR,55,EN,NF,NM,0.15,0.15,0.47,0.15,0
+mtg_single,d17c955d-de50-4eb6-90f1-920905d745e9,Darkslick Shores,ZNE,12,EN,NF,NM,2.84,4.16,6.64,4.95,0
+mtg_single,25932db3-2689-4b05-9587-0ccde4807670,Dauntless Survivor,ZNR,184,EN,NF,NM,0.15,0.19,,0.18,0
+mtg_single,67fb162b-4257-4b68-b99f-81170de89a34,Dauntless Unity,ZNR,9,EN,NF,NM,0.15,0.16,0.16,0.15,0
+mtg_single,f05ca008-3330-4341-9d61-95a13467e9fd,Deadly Alliance,ZNR,96,EN,NF,NM,0.15,0.19,0.32,0.21,0
+mtg_single,8cfcfd74-1cae-4cd6-a496-497484f46410,Deliberate,ZNR,56,EN,NF,NM,0.15,0.21,0.27,0.15,0
+mtg_single,855df180-1faa-46f6-b1ed-ba721a2ce8d7,Demon's Disciple,ZNR,97,EN,NF,NM,0.15,0.27,0.35,0.50,0
+mtg_single,9859613d-255d-41fe-b2a0-828e4c0eefd0,Dimir Aqueduct,ZNC,126,EN,NF,NM,0.30,0.30,,0.30,0
+mtg_single,3657ffed-7903-4c59-a8c1-f06ed8c7a648,Dimir Guildgate,ZNC,127,EN,NF,NM,0.15,0.15,,0.15,0
+mtg_single,a5d738ec-683d-40af-8045-2ffcf0dc16cf,Dimir Keyrune,ZNC,110,EN,NF,NM,0.15,0.23,,0.23,0
+mtg_single,e6d603e6-c50d-4c3b-8aac-a45f4be53bfb,Dimir Locket,ZNC,111,EN,NF,NM,0.17,0.25,,0.25,0
+mtg_single,578e5a03-0216-4e20-b7e7-491e9ab9168b,Dimir Signet,ZNC,112,EN,NF,NM,1.27,1.33,,1.33,0
+mtg_single,07596d31-7350-4d8e-ad10-7784797b3e25,Disenchant,ZNR,10,EN,NF,NM,0.15,0.18,0.16,0.15,0
+mtg_single,ec686029-56c2-4dc4-9f41-ef2cd2e701bd,Dismal Backwater,ZNC,128,EN,NF,NM,0.15,0.16,,0.16,0
+mtg_single,bd0d090e-d481-40af-aba3-35ce4c33475e,Distant Melody,ZNC,24,EN,NF,NM,0.38,0.52,,0.52,0
+mtg_single,ec49156d-6f61-4f50-ace0-410208d71b5e,Double-Faced Substitute Card,SZNR,1,EN,NF,NM,0.19,0.20,,0.19,0
+mtg_single,f5b808ff-2df4-48d4-b636-20481e3043f7,Double-Faced Substitute Card,SZNR,2,EN,NF,NM,0.22,0.42,,0.99,0
+mtg_single,ed821adf-7f77-4dd6-9a03-983be9c210e9,Double-Faced Substitute Card,SZNR,3,EN,NF,NM,0.20,0.26,,0.15,0
+mtg_single,9bd6770a-f149-4083-aca6-0080e43c66f8,Double-Faced Substitute Card,SZNR,4,EN,NF,NM,0.20,0.29,,0.15,0
+mtg_single,715b2b01-e4b9-4761-9ffc-ba9590ae727a,Double-Faced Substitute Card,SZNR,5,EN,NF,NM,0.20,0.28,,0.15,0
+mtg_single,672c63d4-57b1-4722-b5fc-6562187f2585,Double-Faced Substitute Card,SZNR,6,EN,NF,NM,0.20,0.24,,0.42,0
+mtg_single,a5f77eee-1b35-482a-8937-e2edfebe920c,Double-Faced Substitute Card,SZNR,7,EN,NF,NM,0.20,0.35,,0.23,0
+mtg_single,1888f92f-705d-41be-8ed9-17f7108b575b,Double-Faced Substitute Card,SZNR,8,EN,NF,NM,0.24,0.35,,0.15,0
+mtg_single,dadc498d-6c08-4018-b181-8f4dcc6444a2,Double-Faced Substitute Card,SZNR,9,EN,NF,NM,0.20,0.26,,0.15,0
+mtg_single,486e95fd-84a7-40a0-a1fb-c063f03ba30c,Drake,TZNR,5,EN,NF,NM,0.19,0.28,0.49,0.24,0
+mtg_single,eaf1421e-eaa6-4fb8-8d44-36edb735cd98,Drake // Goblin Construct,TZNR,5-11,EN,NF,NM,,,0.35,,0
+mtg_single,344459a1-019b-4452-9522-2946d0b88b00,Drake // Hydra,TZNR,5-9,EN,NF,NM,,,,,0
+mtg_single,027c5ca9-8c0e-4e0d-898a-5ef8059b219f,Drake // Insect,TZNR,5-7,EN,NF,NM,0.29,,0.60,,0
+mtg_single,4f232372-eabe-432c-8aab-026b83bcff28,Drake // Plant,TZNR,5-8,EN,NF,NM,,,0.51,,0
+mtg_single,39e4a8e2-e9f6-48a6-9ee8-1e494035414b,Drana's Silencer,ZNR,99,EN,NF,NM,0.15,0.16,0.15,0.15,0
+mtg_single,874be8e1-9f22-489f-a432-a4e0c444c003,"Drana, the Last Bloodchief",ZNR,338,EN,NF,NM,3.00,2.45,3.55,2.61,0
+mtg_single,a18b923d-2d23-442c-b37a-5d541cf1d0a7,"Drana, the Last Bloodchief",AZNR,54,EN,NF,NM,,,,,0
+mtg_single,4a230af7-776e-4480-831f-83ad6aaba377,"Drana, the Last Bloodchief",ZNR,98,EN,NF,NM,0.98,1.19,1.84,1.72,0
+mtg_single,a9985590-34f4-473e-9842-55ee6ec41bf2,"Drana, the Last Bloodchief",PZNR,98p,EN,NF,NM,1.98,1.65,3.43,1.65,0
+mtg_single,ad2ed42c-a58b-4655-bec9-9b8970699ae3,Dreadwurm,ZNR,100,EN,NF,NM,0.15,0.15,0.15,0.15,0
+mtg_single,50110a52-c478-4a12-84d1-77a99468e040,Dreadwurm,ZNR,297,EN,NF,NM,0.15,0.26,0.23,0.25,0
+mtg_single,e69a4159-1dd1-4573-8bf1-6459cdad6a1a,Elemental,TZNC,10,EN,NF,NM,,0.91,,0.91,0
+mtg_single,a0822083-e057-4a72-bfb7-e2131a92653f,Elemental,TZNC,8,EN,NF,NM,,,,,0
+mtg_single,24c4be8d-11ff-4b6b-b690-4d1dbf0c9069,Elemental,TZNC,8-10,EN,NF,NM,0.44,1.13,,1.13,0
+mtg_single,65c21a7a-78a0-4a92-9cb0-55f7e6bf8684,Elite Scaleguard,ZNC,14,EN,NF,NM,0.15,0.17,,0.17,0
+mtg_single,b82b10ef-3adc-4b0e-a9fa-22ab3489369e,Elvish Rejuvenator,ZNC,63,EN,NF,NM,0.15,0.15,,0.15,0
+mtg_single,6e7bebd2-2ad9-498c-a3ce-1879c88f58ac,Embodiment of Insight,ZNC,64,EN,NF,NM,0.15,0.25,,0.25,0
+mtg_single,accb3f6d-5169-4975-8962-abd0e7ef4219,Emeria Angel,ZNC,15,EN,NF,NM,0.22,0.34,,0.34,0
+mtg_single,18001483-6f44-4d43-951d-8a5a53f9ee10,Emeria Captain,ZNR,11,EN,NF,NM,0.15,0.18,0.26,0.17,0
+mtg_single,ec89926f-2bf4-41b2-8f29-c64952f9230e,Emeria Shepherd,ZNC,16,EN,NF,NM,1.49,1.74,,1.74,0
+mtg_single,8a33d7d5-00ca-4b07-82ba-1435e0a25794,"Emeria's Call // Emeria, Shattered Skyclave",ZNR,12,EN,NF,NM,4.24,4.98,4.62,2.60,0
+mtg_single,46757bcc-c1f8-4d85-9311-2ba96e182357,"Emeria's Call // Emeria, Shattered Skyclave",ZNR,317,EN,NF,NM,5.99,7.25,8.38,3.99,0
+mtg_single,fb9050df-0122-4f25-928c-c88f6b02d551,Endless Obedience,ZNC,41,EN,NF,NM,0.15,0.23,,0.23,0
+mtg_single,667f92dd-d9ad-4279-918e-0f1fdd99e8fd,Enigma Thief,ZNC,4,EN,NF,NM,0.15,0.33,,0.33,0
+mtg_single,3b1c6aa5-eb02-4da8-bedb-765699b0ebb4,Evolution Sage,ZNC,65,EN,NF,NM,2.14,2.37,,2.37,0
+mtg_single,f9ce60e8-ded4-4c61-840e-3d6b0f590ea2,Evolving Wilds,ZNC,129,EN,NF,NM,0.15,0.20,,0.20,0
+mtg_single,bcbc8ec1-9ea2-4b73-b3b9-e5addd16e5ec,Expedition Champion,ZNR,138,EN,NF,NM,0.15,0.16,0.26,0.15,0
+mtg_single,eb8aa78b-7d95-456a-9998-71dd792d756f,Expedition Diviner,AZNR,47,EN,NF,NM,0.25,,,,0
+mtg_single,9ebea33d-3a43-438e-9edf-dfc19e0bcd51,Expedition Diviner,ZNR,57,EN,NF,NM,0.15,0.16,0.19,0.15,0
+mtg_single,db5bb3b7-347e-4a90-b76b-ba5d88d62d98,Expedition Healer,ZNR,13,EN,NF,NM,0.15,0.16,0.16,0.15,0
+mtg_single,3ef03b91-598a-4c10-8455-ab1f426ea8ca,Expedition Healer,AZNR,39,EN,NF,NM,0.65,,,,0
+mtg_single,3bb14f46-358a-4c62-b538-db1d2301396e,Expedition Skulker,ZNR,101,EN,NF,NM,0.15,0.16,,0.16,0
+mtg_single,8ddc29ab-7a10-48a4-b3d4-ec5655b8910b,Extract from Darkness,ZNC,90,EN,NF,NM,0.21,0.27,,0.27,0
+mtg_single,3b5d9b4c-e4ef-45ef-a0b2-c5fcd9942447,Fact or Fiction,ZNC,25,EN,NF,NM,0.17,0.18,,0.18,0
+mtg_single,6bd4a2ca-17da-46e9-a494-034ddfc84be8,Faerie Rogue,TZNC,3,EN,NF,NM,,0.94,,0.94,0
+mtg_single,38195732-4a29-4782-b3fb-f9101ee32fc3,Faerie Rogue // Germ,TZNC,3-4,EN,NF,NM,0.35,,,,0
+mtg_single,97caee58-a13b-4493-b07a-7447b0a44b27,Faerie Rogue // Goblin Rogue,TZNC,3-5,EN,NF,NM,0.25,0.34,,0.34,0
+mtg_single,dfc923e7-bb4d-4b69-8d65-588e890aa446,Faerie Rogue // Rat,TZNC,3-6,EN,NF,NM,0.25,0.30,,0.30,0
+mtg_single,2677510d-7e73-42be-8011-b8b608a5e0a2,Faerie Rogue // Thopter,TZNC,3-11,EN,NF,NM,0.26,0.38,,0.38,0
+mtg_single,2365d0ef-8178-45d0-bcf8-aceee1e4a9e3,Faerie Vandal,ZNC,26,EN,NF,NM,0.15,0.20,,0.20,0
+mtg_single,bc95831a-371d-492f-85ef-c7dd9ca2b0ea,Far Wanderings,ZNC,66,EN,NF,NM,0.18,0.26,,0.26,0
+mtg_single,ae254853-9d91-4011-8774-8e7ae8d21a34,Farsight Adept,ZNR,14,EN,NF,NM,0.15,0.16,0.16,0.15,0
+mtg_single,7662ac8b-5ba9-4af8-b4a4-e9fe0f8426c9,Fated Return,ZNC,42,EN,NF,NM,0.15,0.29,,0.29,0
+mtg_single,13c2b8d4-7dc7-438f-99f9-969a0444e4df,Fearless Fledgling,ZNR,15,EN,NF,NM,0.15,0.17,0.15,0.15,0
+mtg_single,2d02d5af-da92-4e5f-a0a8-a1d9600803ee,Fearless Fledgling,ZNR,291,EN,NF,NM,0.15,0.16,0.21,0.15,0
+mtg_single,686a7ed1-5e89-4a12-9c0d-0c7062081ca9,Feed the Swarm,ZNR,102,EN,NF,NM,0.15,0.19,0.49,0.49,0
+mtg_single,df0f57fe-55b0-4541-b59c-5ef28c99e2df,Felidar Retreat,ZNR,16,EN,NF,NM,1.23,1.51,1.52,2.73,0
+mtg_single,fd74e3d3-e8ce-44ae-8964-03a9b35964ae,Felidar Retreat,PZNR,16p,EN,NF,NM,1.70,1.82,1.97,1.82,0
+mtg_single,4a2c17d1-f6a3-428e-b63a-5afa5f3958b8,Felidar Retreat,ZNR,292,EN,NF,NM,1.49,2.03,4.51,2.72,0
+mtg_single,fa914753-ca99-4aa7-a2bc-08df4cf97d8d,Fertilid,ZNC,67,EN,NF,NM,0.15,0.16,,0.16,0
+mtg_single,655db8b5-d6c9-44d8-86be-f87d9d0adf7e,Field Research,ZNR,58,EN,NF,NM,0.15,0.15,0.21,0.15,0
+mtg_single,5091a456-f5f5-44ba-87b6-fd278094bfcc,Fireblade Charger,ZNR,139,EN,NF,NM,0.15,0.15,0.23,0.15,0
+mtg_single,294e2bd8-4e67-408c-bab8-c7751693be06,Fissure Wizard,ZNR,140,EN,NF,NM,0.15,0.17,0.21,0.17,0
+mtg_single,0db0a943-57ed-4004-899b-ca284ef27d2e,Flooded Strand,ZNE,1,EN,NF,NM,35.74,34.32,75.22,29.00,0
+mtg_single,c75b2fc8-980f-486d-99a8-e4f0ee2da220,Flooded Strand,AZNR,29,EN,NF,NM,,2.00,,2.00,0
+mtg_single,271f2219-eb1f-437e-83b9-5714f12b777e,Forest,AZNR,19,EN,NF,NM,,0.65,,0.65,0
+mtg_single,aa57a0c0-4af6-4fe0-b65b-900bf245bc45,Forest,AZNR,20,EN,NF,NM,,0.59,,0.59,0
+mtg_single,68878086-f5e1-4876-9c81-0faacbadca5d,Forest,AZNR,21,EN,NF,NM,,2.00,,2.00,0
+mtg_single,17edb808-8ad9-49f9-aa0d-77c4043e950b,Forest,ZNR,278,EN,NF,NM,0.15,0.38,0.47,0.23,0
+mtg_single,f28e37a0-281e-45e6-9f9f-bf455959592f,Forest,ZNR,279,EN,NF,NM,0.15,0.33,0.31,0.32,0
+mtg_single,53d8e0b0-24ec-4b95-9e55-05b4e9d45c5e,Forest,ZNR,280,EN,NF,NM,0.18,0.38,0.55,0.25,0
+mtg_single,a7a3aada-fa24-4a4b-bc97-3c13a960d636,Forest,ZNR,384,EN,NF,NM,0.15,0.19,0.35,0.15,0
+mtg_single,78d6f645-4adb-4f19-81fe-15f9df8e451e,Forsaken Monument,ZNR,244,EN,NF,NM,6.52,6.90,6.96,3.84,0
+mtg_single,8523a0f2-a7e1-40e6-90f9-176004c90c13,Forsaken Monument,PZNR,244p,EN,NF,NM,6.35,7.33,6.66,7.33,0
+mtg_single,889df2ff-9c0e-4a72-b4bd-c8ad1b53bbee,Forsaken Monument,ZNR,374,EN,NF,NM,8.24,10.69,10.82,8.26,0
+mtg_single,6dd0c266-3c79-4392-9de3-330fa5d6090a,Frogtosser Banneret,ZNC,43,EN,NF,NM,0.23,0.45,,0.45,0
+mtg_single,bf3d77ae-f9a1-480b-82fb-1b7bf694a06e,Geode Rager,ZNC,6,EN,NF,NM,0.71,0.98,,0.98,0
+mtg_single,9be6e61d-bbda-442e-8ff1-867b25ec2c1c,Germ,TZNC,4,EN,NF,NM,0.56,0.50,,0.50,0
+mtg_single,2bcadad7-ac5d-4304-a85e-ed3cbc47b91f,Ghastly Gloomhunter,ZNR,103,EN,NF,NM,0.15,0.16,0.27,0.19,0
+mtg_single,9a25c042-8fea-4fc8-8aea-0d9d545d3600,Glacial Grasp,ZNR,59,EN,NF,NM,0.15,0.19,,0.18,0
+mtg_single,e158d585-cfdb-4d69-826d-e8c129d621b8,Glasspool Mimic // Glasspool Shore,ZNR,328,EN,NF,NM,7.00,8.41,9.73,8.42,0
+mtg_single,4ac72cd0-d32f-45fd-8581-7c9ba1530fad,Glasspool Mimic // Glasspool Shore,ZNR,60,EN,NF,NM,5.50,6.68,6.33,6.97,0
+mtg_single,708d084b-d08a-4ed0-b96e-5ce3277f4248,Gnarlid Colony,ZNR,185,EN,NF,NM,0.15,0.15,0.33,0.15,0
+mtg_single,6dc6106a-8c17-4cf6-9fb3-93c23048583f,Goblin Construct,TZNR,11,EN,NF,NM,0.15,0.25,1.49,0.15,0
+mtg_single,0836cb02-c398-4bd5-adbb-2ceaf71e458a,Goblin Construct // Illusion,TZNR,6-11,EN,NF,NM,,1.00,,1.00,0
+mtg_single,c49b660d-7f83-49b8-b4f0-f6bf091b7eec,Goblin Construct // Kor Warrior,TZNR,4-11,EN,NF,NM,,,0.49,,0
+mtg_single,fa98aeb0-71b6-45b0-ba8a-5f15fa833b84,Goblin Rogue,TZNC,5,EN,NF,NM,1.52,1.33,,1.33,0
+mtg_single,e26982ce-7438-4c70-b561-79c9892bacf5,Goma Fada Vanguard,ZNR,141,EN,NF,NM,0.15,0.17,0.16,0.15,0
+mtg_single,7dd6b582-e118-42ec-9cba-b0f85a1b3541,"Gonti, Lord of Luxury",ZNC,44,EN,NF,NM,0.15,0.38,,0.38,0
+mtg_single,b0813438-a2af-4e4f-8060-232952d50a3d,"Grakmaw, Skyclave Ravager",ZNR,223,EN,NF,NM,0.15,0.26,0.33,0.25,0
+mtg_single,3fe8dd1b-2492-431e-8445-68924fb4be70,"Grakmaw, Skyclave Ravager",PZNR,223p,EN,NF,NM,0.55,0.41,0.33,0.41,0
+mtg_single,45dfab7e-6b11-404a-b0e8-63280c333eb2,"Grakmaw, Skyclave Ravager",ZNR,366,EN,NF,NM,0.46,0.51,0.57,0.49,0
+mtg_single,828b9079-b776-44a0-807a-e61bdf6c17f7,"Grakmaw, Skyclave Ravager",AZNR,76,EN,NF,NM,0.75,,,,0
+mtg_single,3d0de984-9d6d-4d52-9bad-0dc050623c97,Grimclimb Pathway,AZNR,24,EN,NF,NM,0.18,,,,0
+mtg_single,7953e4d7-e0ee-4aad-a437-b8d032785f5c,Grotag Bug-Catcher,ZNR,142,EN,NF,NM,0.15,0.16,,0.15,0
+mtg_single,c9b0e20d-7c78-46b0-8df9-01418f7eaf4a,Grotag Night-Runner,ZNR,143,EN,NF,NM,0.15,0.15,0.16,0.15,0
+mtg_single,b9ce72be-20c4-4da2-a3b5-7d06e55229c6,Ground Assault,ZNC,91,EN,NF,NM,0.15,0.18,,0.18,0
+mtg_single,7027a97a-0683-4d7d-b9b4-6a5d070c376d,Grove of the Burnwillows,ZNE,25,EN,NF,NM,8.85,8.89,10.31,9.23,0
+mtg_single,678235a3-7c6d-4800-bba2-8f6f0124f8ea,Grove of the Burnwillows,AZNR,34,EN,NF,NM,1.00,,,,0
+mtg_single,6b1e15a6-4d31-4896-906c-7ee40dcdcf94,Gruul Guildgate,ZNC,130,EN,NF,NM,0.15,0.15,,0.15,0
+mtg_single,8e4fc457-2d6e-4994-a5ea-6ea4197592e0,Gruul Turf,ZNC,131,EN,NF,NM,0.18,0.23,,0.23,0
+mtg_single,2382a653-d729-4125-9e01-6dff3fcad4e0,Guul Draz Mucklord,ZNR,104,EN,NF,NM,0.15,0.16,,0.15,0
+mtg_single,66195517-f2c8-48d9-9b3e-aad263755809,Hagra Constrictor,ZNR,105,EN,NF,NM,0.15,0.20,0.33,0.17,0
+mtg_single,6a70f619-3566-4c35-9abd-ce6d53a2a342,Hagra Mauling // Hagra Broodpit,ZNR,106,EN,NF,NM,1.20,1.48,1.53,2.00,0
+mtg_single,021c9251-f652-4a33-9e57-c8bf58cc6ae5,Hagra Mauling // Hagra Broodpit,ZNR,339,EN,NF,NM,1.91,2.60,2.16,2.26,0
+mtg_single,5d2259dd-c1bf-4eff-ac24-04fcd59ddd97,Harmonize,ZNC,68,EN,NF,NM,0.15,0.24,,0.24,0
+mtg_single,8db9b309-d530-4270-9e64-5a0e2cf7597f,Harrow,ZNC,69,EN,NF,NM,0.15,0.33,,0.33,0
+mtg_single,a6f2f311-c3b9-4de3-832d-c55c83e237bf,Heirloom Blade,ZNC,113,EN,NF,NM,0.15,0.23,,0.23,0
+mtg_single,5a957992-1b77-48c2-9ae0-ebb276ad7831,Highborn Vampire,ZNR,107,EN,NF,NM,0.15,0.23,0.40,0.23,0
+mtg_single,372ffcd1-b02a-4d21-b072-85c91c4fe5fa,Highborn Vampire,AZNR,55,EN,NF,NM,0.25,,,,0
+mtg_single,77626ea0-c854-4e4a-b608-6c2a228754ac,Horizon Canopy,ZNE,26,EN,NF,NM,6.27,7.51,7.72,4.33,0
+mtg_single,3634e31b-0a0b-4490-ac5a-6c30bb284f9c,Hour of Revelation,ZNC,17,EN,NF,NM,1.10,1.18,,1.18,0
+mtg_single,8210aa63-abe9-4073-ab68-61f4628cd6e9,Hydra,TZNR,9,EN,NF,NM,0.65,0.93,1.25,0.69,0
+mtg_single,87d046e1-00f7-40f6-bfaf-c0940c42c9fd,Hydra // Illusion,TZNR,6-9,EN,NF,NM,,,,,0
+mtg_single,601b7485-ba5e-4df6-bc92-f53969218b98,Hydra // Kor Warrior,TZNR,4-9,EN,NF,NM,0.65,,0.56,,0
+mtg_single,16873777-827c-4851-824b-02b1c7e46c2e,Illusion,TZNR,6,EN,NF,NM,0.15,0.30,,0.33,0
+mtg_single,688735e0-309b-46fb-832d-d5122c549a65,Illusion // Insect,TZNR,6-7,EN,NF,NM,,,,,0
+mtg_single,8f0f7c4a-e562-4088-8dbc-e38b38be5716,Illusion // Plant,TZNR,6-8,EN,NF,NM,,,0.15,,0
+mtg_single,49a0c9b5-04b0-4a96-89ed-d2c3a987c8fe,In Garruk's Wake,ZNC,45,EN,NF,NM,2.25,2.87,,2.87,0
+mtg_single,c783c89d-aad9-4cef-a1b9-60e960764a55,Inordinate Rage,ZNR,144,EN,NF,NM,0.15,0.15,0.22,0.15,0
+mtg_single,2d276a6e-ec1b-44b3-9b01-86a3f25f15ba,Inscription of Abundance,ZNR,186,EN,NF,NM,0.15,0.33,0.43,0.59,0
+mtg_single,02f0c9db-f8a3-446a-92fa-9b9312d42daf,Inscription of Abundance,PZNR,186p,EN,NF,NM,0.45,0.47,,0.47,0
+mtg_single,aa264a7d-efa3-4da5-a92f-8237afd7ec8e,Inscription of Abundance,ZNR,360,EN,NF,NM,0.23,0.57,0.96,0.69,0
+mtg_single,f2e15921-6429-4cf4-ad0b-e19128dd711e,Inscription of Insight,ZNR,329,EN,NF,NM,0.15,0.21,0.37,0.45,0
+mtg_single,c79d724f-c4e7-4f92-b2fb-6d23bfb60376,Inscription of Insight,ZNR,61,EN,NF,NM,0.15,0.31,0.24,0.17,0
+mtg_single,da75ef12-5769-4707-9485-bf55edbd43b4,Inscription of Insight,PZNR,61p,EN,NF,NM,0.30,,,,0
+mtg_single,ee8e8f84-0658-4bd3-b2dd-731a79833df6,Inscription of Ruin,ZNR,108,EN,NF,NM,0.15,0.18,0.26,0.15,0
+mtg_single,5217bc76-574d-4f2a-9853-c355b0daf5e9,Inscription of Ruin,PZNR,108p,EN,NF,NM,0.25,0.17,,0.17,0
+mtg_single,5875cbcf-ab83-456b-b1d0-b901203ea3c2,Inscription of Ruin,ZNR,340,EN,NF,NM,0.15,0.17,0.25,0.15,0
+mtg_single,deb07a73-d1ce-4362-8c90-d49358b27dc2,Insect,TZNR,7,EN,NF,NM,0.19,0.26,0.63,0.15,0
+mtg_single,8084e9ec-9e06-4665-932b-dee958f902b4,Insect // Kor Warrior,TZNR,4-7,EN,NF,NM,0.29,,0.32,,0
+mtg_single,5a43424e-15c3-4522-9a4c-0bcbdb01b1a1,Inspiring Call,ZNC,70,EN,NF,NM,0.30,0.38,,0.38,0
+mtg_single,dffcc531-3f68-4847-a2cb-398a559dda4c,Into the Roil,ZNR,387,EN,NF,NM,0.15,0.26,0.38,0.44,0
+mtg_single,cfa4c805-e1f2-4ee8-a15c-9e28cfe532b9,Into the Roil,ZNR,62,EN,NF,NM,0.15,0.15,0.20,0.16,0
+mtg_single,81c62d52-1285-4ce3-81e1-b242db7b42f3,Invisible Stalker,ZNC,27,EN,NF,NM,0.44,0.57,,0.57,0
+mtg_single,05db8c20-78dd-4fcb-b16d-0ddccc281a23,Iridescent Hornbeetle,ZNR,187,EN,NF,NM,0.20,0.30,0.73,0.15,0
+mtg_single,2ada07cb-6cf0-4e0d-b4ae-b4e369d3fe8f,Island,AZNR,10,EN,NF,NM,0.55,,,,0
+mtg_single,cdbdbaa4-f5da-4f93-994f-e038e2270891,Island,AZNR,11,EN,NF,NM,0.50,,,,0
+mtg_single,e1ad7f45-bc97-4aab-987c-644ab781a873,Island,AZNR,12,EN,NF,NM,1.50,,,,0
+mtg_single,1b07d48e-2b26-48e4-a4b5-c0fc80d5fdb5,Island,ZNR,269,EN,NF,NM,0.15,0.16,0.26,0.25,0
+mtg_single,e4d26198-c4e0-4f70-9abc-81593fe93c15,Island,ZNR,270,EN,NF,NM,0.15,0.15,0.50,0.28,0
+mtg_single,45405cd8-efac-4eb7-8193-ee139f2b9134,Island,ZNR,271,EN,NF,NM,0.15,0.20,0.83,0.49,0
+mtg_single,8d30d5df-ec83-4cd7-b352-4d58da4dbe6c,Island,ZNR,381,EN,NF,NM,0.21,0.25,0.30,0.43,0
+mtg_single,f230408e-5ee8-4b00-bea5-cbf524891dbd,"Jace, Mirror Mage",AZNR,1,EN,NF,NM,0.75,,,,0
+mtg_single,50cb98d9-bab4-401c-82b3-5fc0755bf6fa,"Jace, Mirror Mage",AZNR,2,EN,NF,NM,1.00,,,,0
+mtg_single,cb603711-c009-4bf2-bf75-bea37937d0cf,"Jace, Mirror Mage",ZNR,281,EN,NF,NM,0.39,0.72,1.83,0.50,0
+mtg_single,c2f5a4b4-053f-4e4a-81a1-35f17025fad1,"Jace, Mirror Mage",ZNR,63,EN,NF,NM,0.22,0.54,0.64,0.40,0
+mtg_single,edbfa101-3ba7-445b-8a37-4de82c06d87e,"Jace, Mirror Mage",PZNR,63p,EN,NF,NM,0.64,0.64,,0.64,0
+mtg_single,26503248-c6d4-4828-8011-c2be5782b205,Joraga Visionary,ZNR,188,EN,NF,NM,0.15,0.15,0.17,0.15,0
+mtg_single,7cafb715-d964-4bf9-b0f9-657b0aa96d67,Journey to Oblivion,ZNR,17,EN,NF,NM,0.15,0.17,0.33,0.17,0
+mtg_single,51206857-8023-48b6-8047-9073df525473,Jungle Shrine,ZNC,132,EN,NF,NM,0.20,0.27,,0.27,0
+mtg_single,43bc3113-d8ed-48eb-b1f8-b3bc83e0d147,Jwar Isle Refuge,ZNC,133,EN,NF,NM,0.19,0.26,,0.26,0
+mtg_single,1dd76674-230d-4c1a-aac5-eff2195983cf,Jwari Disruption // Jwari Ruins,ZNR,64,EN,NF,NM,0.20,0.46,1.73,0.56,0
+mtg_single,824866fa-c562-4279-bc30-0a185e97f2a6,Kabira Outrider,ZNR,18,EN,NF,NM,0.15,0.21,0.15,0.15,0
+mtg_single,e357f24b-bb22-4d4b-833b-fd0039cb9cd3,Kabira Takedown // Kabira Plateau,ZNR,19,EN,NF,NM,0.15,0.37,0.47,0.30,0
+mtg_single,33337a88-3e3b-4656-b2ff-97126f5baccc,Kargan Intimidator,ZNR,145,EN,NF,NM,0.15,0.17,0.21,0.17,0
+mtg_single,6c415a20-f4c6-44f6-b353-c736e3ae6e98,Kargan Intimidator,PZNR,145p,EN,NF,NM,0.28,0.17,,0.17,0
+mtg_single,816c5035-1abb-4c33-b464-2b796d634f1f,Kargan Intimidator,ZNR,347,EN,NF,NM,0.17,0.35,0.51,0.24,0
+mtg_single,c2b56cf6-fb5f-4fd0-b9df-8d31250957c3,Kargan Warleader,ZNR,224,EN,NF,NM,0.15,0.24,0.29,0.25,0
+mtg_single,b9d12d7f-73cd-4052-81eb-aeec4fee559a,Kargan Warleader,ZNR,391,EN,NF,NM,0.15,0.21,0.33,0.22,0
+mtg_single,29314f5a-c643-4db1-9a0e-936265bbbb67,"Kaza, Roil Chaser",ZNR,225,EN,NF,NM,0.15,0.33,0.31,0.17,0
+mtg_single,225f158b-e299-495a-89cf-f326d54c0f08,"Kaza, Roil Chaser",PZNR,225p,EN,NF,NM,0.46,0.62,,0.62,0
+mtg_single,07d353d2-425d-45a2-a829-e4fd35f24f82,"Kaza, Roil Chaser",ZNR,367,EN,NF,NM,0.34,0.47,0.56,0.36,0
+mtg_single,43231db6-c5ed-429d-85c4-f46ae002fb5d,Kazandu Mammoth // Kazandu Valley,ZNR,189,EN,NF,NM,0.15,0.40,0.24,0.33,0
+mtg_single,31d83a23-46d2-411c-98c0-7cfe9400d8eb,Kazandu Mammoth // Kazandu Valley,ZNR,305,EN,NF,NM,0.15,0.28,0.58,0.25,0
+mtg_single,ccc0ceb7-6ab5-4643-a260-b6427523692e,Kazandu Nectarpot,ZNR,190,EN,NF,NM,0.15,0.20,0.26,0.18,0
+mtg_single,2f147247-58ac-4773-b0a7-44ea01f499f1,Kazandu Nectarpot,ZNR,306,EN,NF,NM,0.15,0.17,0.23,0.17,0
+mtg_single,dda8dbfe-4629-464f-ac7f-b4e5aae9d669,Kazandu Stomper,ZNR,191,EN,NF,NM,0.15,0.15,,0.15,0
+mtg_single,b47349fc-3157-4cfa-a5a8-ff1e095adfff,Kazuul's Fury // Kazuul's Cliffs,ZNR,146,EN,NF,NM,0.52,0.71,1.03,0.70,0
+mtg_single,eea30e7f-b641-46f1-8556-ce4a8a8ca382,Keeper of Fables,ZNC,71,EN,NF,NM,0.19,0.31,,0.31,0
+mtg_single,6f74ea27-e378-4005-af43-49cc48cb0fd3,Khalni Ambush // Khalni Territory,ZNR,192,EN,NF,NM,0.30,0.60,0.82,0.50,0
+mtg_single,990971c2-7471-4bc2-b0ad-1f29f3d09146,Khalni Heart Expedition,ZNC,72,EN,NF,NM,0.15,0.21,,0.21,0
+mtg_single,69916396-542c-4afa-9a05-bb83a0ef6f3b,Kitesail Cleric,ZNR,20,EN,NF,NM,0.15,0.20,0.22,0.17,0
+mtg_single,344cbc6b-ff6a-41ee-8b88-dff08b52c50d,Kitesail Cleric,AZNR,40,EN,NF,NM,0.40,,,,0
+mtg_single,6d04976b-244f-4a39-927c-3c72818773b9,Kodama's Reach,ZNC,73,EN,NF,NM,1.29,1.83,,1.83,0
+mtg_single,31366d8c-0844-44f6-a960-2df7750a5a21,Kor Ally,TZNC,2,EN,NF,NM,0.20,,,,0
+mtg_single,e838ce74-ffb2-41a6-ae6f-e0e4e3f80741,Kor Blademaster,ZNR,21,EN,NF,NM,0.15,0.18,,0.15,0
+mtg_single,46175737-a68f-4e4a-9d2e-d4851912ab0c,Kor Cartographer,ZNC,18,EN,NF,NM,0.15,0.24,,0.24,0
+mtg_single,2a676262-ffa6-451a-9b17-ff5dfd6dda62,Kor Celebrant,ZNR,22,EN,NF,NM,0.15,0.18,0.26,0.15,0
+mtg_single,aaecd54e-2b3e-4262-96f1-41431d8ac832,Kor Celebrant,AZNR,41,EN,NF,NM,0.45,,,,0
+mtg_single,914a450d-3eb8-4cb3-8082-32e6559630a2,Kor Warrior,TZNR,4,EN,NF,NM,0.15,0.22,0.54,0.15,0
+mtg_single,dd3136f9-4b5c-434b-917d-adb92a51dd19,Kor Warrior // Plant,TZNR,4-8,EN,NF,NM,,,,,0
+mtg_single,ce5c5789-21b8-4465-a448-87375d426214,Krosan Verge,ZNC,134,EN,NF,NM,0.15,0.24,,0.24,0
+mtg_single,f1aa63ef-7bc4-45ab-8c25-d9da42e8627c,Latchkey Faerie,ZNC,28,EN,NF,NM,0.15,0.16,,0.16,0
+mtg_single,c91cc56d-8f94-4d40-b1f4-e46277edffae,"Lazav, Dimir Mastermind",ZNC,92,EN,NF,NM,0.47,0.84,,0.84,0
+mtg_single,f2818ee3-fee2-458a-b00f-a774d1c80468,Legion Angel,ZNR,23,EN,NF,NM,0.15,0.20,0.19,0.25,0
+mtg_single,566b696b-67be-49e1-8a39-869d9c0e219e,Legion Angel,PZNR,23p,EN,NF,NM,0.41,0.69,,0.69,0
+mtg_single,a52f6595-3f6b-4524-ba86-e56f6cb766c1,Legion Angel,ZNR,318,EN,NF,NM,0.54,0.79,0.77,0.50,0
+mtg_single,1fe35677-2bd3-4f56-b76c-6b83872078a1,Leyline Tyrant,ZNR,147,EN,NF,NM,1.80,2.11,3.93,2.37,0
+mtg_single,0f884171-3cdb-495e-8dcc-2215e3ce3bd6,Leyline Tyrant,PZNR,147p,EN,NF,NM,3.49,2.67,2.97,2.67,0
+mtg_single,e8dff3b5-db08-4693-b6de-f760f17731e3,Leyline Tyrant,ZNR,348,EN,NF,NM,6.24,7.19,7.14,3.79,0
+mtg_single,1481dac5-eebf-4cd1-b2d4-8a924433e19c,"Linvala, Shield of Sea Gate",ZNR,226,EN,NF,NM,0.15,0.32,0.29,0.25,0
+mtg_single,218ce298-c6d0-4bd9-8da0-b311a05514de,"Linvala, Shield of Sea Gate",PZNR,226p,EN,NF,NM,0.49,0.42,,0.42,0
+mtg_single,a1a8410c-3ca2-4638-820d-1c38f864620b,"Linvala, Shield of Sea Gate",ZNR,368,EN,NF,NM,0.36,0.58,0.66,0.49,0
+mtg_single,15bba7c9-24d5-4872-b77b-f90d4372fca2,"Linvala, Shield of Sea Gate",AZNR,77,EN,NF,NM,0.65,,,,0
+mtg_single,05e82d0a-ac1f-4ab8-a5ab-71c985fca973,Lithoform Blight,ZNR,109,EN,NF,NM,0.15,0.17,0.33,0.15,0
+mtg_single,a7af7c0d-b766-49c3-af4e-6ee0e746d3a4,Lithoform Engine,ZNR,245,EN,NF,NM,5.81,6.25,6.95,6.48,0
+mtg_single,cdbd56d6-8308-4779-a271-11687b2ddac5,Lithoform Engine,PZNR,245p,EN,NF,NM,6.00,6.68,6.81,6.68,0
+mtg_single,c5ff0386-859d-4469-b8e7-ca7ce32372e9,Lithoform Engine,ZNR,375,EN,NF,NM,8.18,8.27,10.05,8.49,0
+mtg_single,8acab659-f2c2-418c-a2c7-dc0bdbb8bee4,Living Tempest,ZNR,65,EN,NF,NM,0.15,0.15,0.47,0.15,0
+mtg_single,7c596e5c-1802-4dbb-a72a-97901b296e6f,Living Twister,ZNC,93,EN,NF,NM,0.15,0.29,,0.29,0
+mtg_single,ed687ede-0887-4def-a57c-bdca7cdbadf6,Lotus Cobra,ZNR,193,EN,NF,NM,5.85,5.88,6.37,6.99,0
+mtg_single,148915d1-d82a-48f1-95db-d43345ff9f34,Lotus Cobra,PZNR,193p,EN,NF,NM,6.49,6.32,7.36,6.32,0
+mtg_single,31452b4b-c762-48e5-a70d-77611f90f7b7,Lotus Cobra,ZNR,307,EN,NF,NM,5.99,7.03,8.98,7.26,0
+mtg_single,7fa5acbb-6fe3-4353-a5bb-f45fe5b274fe,Lotus Cobra,AZNR,71,EN,NF,NM,0.75,,,,0
+mtg_single,31c17c14-04a2-45f1-85f0-d9a455f6a9ea,Lullmage's Domination,ZNR,66,EN,NF,NM,0.15,0.22,0.33,0.17,0
+mtg_single,a0205eed-7a6b-466b-ac32-c2bd990c9174,Lullmage's Familiar,ZNR,227,EN,NF,NM,0.15,0.28,0.15,0.19,0
+mtg_single,4b579285-913b-49c2-b4f6-02e8b68bfb15,Luminarch Aspirant,ZNR,24,EN,NF,NM,0.15,0.38,0.68,0.45,0
+mtg_single,9f25ec9a-568e-42ae-8d8a-2836ac527b6f,Luminarch Aspirant,PZNR,24p,EN,NF,NM,0.69,1.00,1.25,1.00,0
+mtg_single,f0c09fc1-2a02-4bd0-94c5-176eff17faa0,Luminarch Aspirant,ZNR,319,EN,NF,NM,0.95,1.67,1.83,1.15,0
+mtg_single,a2471c1c-dba8-41b0-b5f0-6672cd91b033,Luxury Suite,ZNE,18,EN,NF,NM,26.75,28.18,42.54,23.40,0
+mtg_single,68263e55-b53b-45a1-862e-721b7da462ed,Maddening Cacophony,ZNR,330,EN,NF,NM,7.15,7.38,8.00,7.93,0
+mtg_single,e1e3788f-707b-43c9-86fd-087757683cf7,Maddening Cacophony,AZNR,48,EN,NF,NM,0.45,,,,0
+mtg_single,66165045-63af-49a5-9b47-c019f4f7d4cc,Maddening Cacophony,ZNR,67,EN,NF,NM,4.00,5.39,7.00,5.81,0
+mtg_single,de1dbae0-a442-494a-82db-88d75f5b1d75,Maddening Cacophony,PZNR,67p,EN,NF,NM,8.38,7.72,8.22,7.72,0
+mtg_single,80817e22-fee7-4d53-b680-b28dc6137761,Magmatic Channeler,ZNR,148,EN,NF,NM,0.15,0.26,0.43,0.24,0
+mtg_single,23990ebe-80d6-426d-88f8-7f1a51e58686,Magmatic Channeler,PZNR,148p,EN,NF,NM,0.23,0.18,,0.18,0
+mtg_single,1b573632-039a-407a-844e-b2cde630494c,Magmatic Channeler,ZNR,349,EN,NF,NM,0.15,0.26,0.50,0.25,0
+mtg_single,f8037b3c-33dc-48c5-a0c1-d053c51a210f,Magmatic Channeler,AZNR,65,EN,NF,NM,0.45,,,,0
+mtg_single,0e9d2b02-b0a4-4abb-bcf3-10ffb4491cc5,Makindi Ox,ZNR,25,EN,NF,NM,0.15,0.16,0.15,0.15,0
+mtg_single,89761d20-4e3e-4d34-846f-8be8ed4148cd,Makindi Ox,ZNR,293,EN,NF,NM,0.15,0.15,0.24,0.15,0
+mtg_single,5f7fa94b-0d78-405a-b181-afaf3086870f,Makindi Stampede // Makindi Mesas,ZNR,26,EN,NF,NM,0.15,0.21,0.22,0.15,0
+mtg_single,6e6f65bb-c8c1-4734-b041-3cb83bb5ef2e,Malakir Blood-Priest,ZNR,110,EN,NF,NM,0.15,0.19,0.23,0.16,0
+mtg_single,d1910c3f-9a20-4782-a694-3a1fb660ab4c,Malakir Blood-Priest,AZNR,56,EN,NF,NM,1.00,,,,0
+mtg_single,994d77c2-38db-4ee7-b29c-909d4fe8799a,Malakir Rebirth // Malakir Mire,ZNR,111,EN,NF,NM,12.34,13.43,15.50,11.13,0
+mtg_single,030db932-8daa-4955-8706-f6061ef91cb3,Marang River Prowler,ZNC,29,EN,NF,NM,0.15,0.17,,0.17,0
+mtg_single,f1d08592-a738-4dbf-8790-0bb543c341af,Marauding Blight-Priest,ZNR,112,EN,NF,NM,0.15,0.16,0.27,0.15,0
+mtg_single,752abb40-09c7-4cf1-a8d8-9afb7139bc5b,Marsh Flats,ZNE,6,EN,NF,NM,43.98,44.29,74.28,31.87,0
+mtg_single,bb482f90-7418-446b-a718-6b1494072277,Marsh Flitter,ZNC,46,EN,NF,NM,0.15,0.17,,0.17,0
+mtg_single,88c65c2b-d4ce-4722-a7c2-7e38393c021b,Master Thief,ZNC,30,EN,NF,NM,0.15,0.15,,0.15,0
+mtg_single,fd7f92bc-da81-40d9-a5bf-48cc1738cdb0,Master of Winds,ZNR,331,EN,NF,NM,0.15,0.22,0.25,0.15,0
+mtg_single,40a66289-ba3f-4563-8745-9c35ef64abc5,Master of Winds,ZNR,68,EN,NF,NM,0.15,0.18,0.20,0.25,0
+mtg_single,803f6ac7-a569-42b0-a1e4-329f1753b2da,Master of Winds,PZNR,68p,EN,NF,NM,0.15,,,,0
+mtg_single,64afed0c-02ef-44b2-9618-5e779983d660,Maul of the Skyclaves,ZNR,27,EN,NF,NM,0.15,0.30,0.47,0.17,0
+mtg_single,3d0fc086-40e3-415a-bd08-35dbffedafa7,Maul of the Skyclaves,PZNR,27p,EN,NF,NM,0.30,0.37,,0.37,0
+mtg_single,d12abbb0-c013-44e6-b7e8-13938211d6f4,Maul of the Skyclaves,ZNR,320,EN,NF,NM,0.44,0.57,1.06,0.50,0
+mtg_single,314da74f-e611-45fe-82de-6896eedd1c67,Merfolk Falconer,ZNR,69,EN,NF,NM,0.15,0.15,,0.15,0
+mtg_single,a78403c9-13f3-48c6-9eab-3e967530bf0c,Merfolk Windrobber,ZNR,70,EN,NF,NM,0.15,0.15,0.39,0.17,0
+mtg_single,fa437d6f-2121-4db8-94f6-a80129ddd832,Mesa Lynx,ZNR,28,EN,NF,NM,0.15,0.15,,0.15,0
+mtg_single,5f45091f-2e85-487a-b7e8-d65b124f3816,Might of Murasa,ZNR,194,EN,NF,NM,0.15,0.16,0.44,0.16,0
+mtg_single,f2fec99e-63fe-4ab7-af4e-4e98ed6d4436,Military Intelligence,ZNC,31,EN,NF,NM,0.15,0.43,,0.43,0
+mtg_single,fb5f63f5-361c-4a4a-af15-c471d50c53d9,"Mina and Denn, Wildborn",ZNC,94,EN,NF,NM,0.79,0.94,,0.94,0
+mtg_single,b9d09506-bb7d-42c2-aa11-bbc66adc16c1,Mind Carver,ZNR,113,EN,NF,NM,0.15,0.17,0.25,0.15,0
+mtg_single,85e987ba-b7af-4971-9e7a-52bc2c41800e,Mind Carver,AZNR,57,EN,NF,NM,0.75,,,,0
+mtg_single,1b319779-e59a-478c-a941-7227059475db,Mind Drain,ZNR,114,EN,NF,NM,0.15,0.15,0.20,0.15,0
+mtg_single,ff66759b-fa34-415e-9238-a5ccca20daf8,Mind Stone,ZNC,114,EN,NF,NM,0.31,0.32,,0.32,0
+mtg_single,55c53be9-d228-4ee8-bd79-5b0ceeb84c63,Misty Rainforest,ZNE,10,EN,NF,NM,53.51,54.62,77.11,37.80,0
+mtg_single,201faece-bd94-4c55-b376-c296c5bc7972,Molten Blast,ZNR,149,EN,NF,NM,0.15,0.16,0.15,0.15,0
+mtg_single,5a69527d-1943-4bae-9c5d-84efa1ca8f24,"Moraug, Fury of Akoum",ZNR,150,EN,NF,NM,2.84,3.03,3.41,4.99,0
+mtg_single,ca96d504-acc3-4303-8c18-a4907e6a6c28,"Moraug, Fury of Akoum",PZNR,150p,EN,NF,NM,3.19,3.75,4.57,3.75,0
+mtg_single,e90e4a9e-ef16-4bd6-8dbc-3a09fab4ded8,"Moraug, Fury of Akoum",ZNR,300,EN,NF,NM,5.00,5.74,15.84,7.09,0
+mtg_single,536bc647-aea9-4a0b-8239-ab23fae5e3ca,"Moraug, Fury of Akoum",AZNR,66,EN,NF,NM,0.25,,,,0
+mtg_single,3c1b725e-5c26-4d91-b07f-d517bbc32325,Morphic Pool,ZNE,17,EN,NF,NM,30.99,28.41,52.57,24.59,0
+mtg_single,1cd00b1b-eb91-485e-8037-e73594c28449,Morphic Pool,AZNR,32,EN,NF,NM,0.75,,,,0
+mtg_single,dc9a7281-4650-4a04-8c66-5ea008a23461,Moss-Pit Skeleton,ZNR,228,EN,NF,NM,0.15,0.23,0.31,0.22,0
+mtg_single,3c7debac-dae6-4fe9-b200-ad51b9a3ca8c,Mountain,AZNR,16,EN,NF,NM,0.55,0.44,,0.44,0
+mtg_single,bd09aa3a-a330-4c10-a5cc-32aca9407756,Mountain,AZNR,17,EN,NF,NM,0.50,0.50,,0.50,0
+mtg_single,366d7248-3a1f-4fce-91d6-b3b416b82577,Mountain,AZNR,18,EN,NF,NM,,1.00,,1.00,0
+mtg_single,90370c12-2098-48c1-9de2-d72406cec8eb,Mountain,ZNR,275,EN,NF,NM,0.15,0.22,0.50,0.24,0
+mtg_single,5d50e0b4-0a08-4393-9636-0e1accf263d1,Mountain,ZNR,276,EN,NF,NM,0.15,0.16,0.38,0.19,0
+mtg_single,6456a5f1-ec20-489f-b117-4dfe0ab2f8e8,Mountain,ZNR,277,EN,NF,NM,0.15,0.21,0.40,0.66,0
+mtg_single,c74181a3-4fd5-4f5f-806b-14f7a75b9e9b,Mountain,ZNR,383,EN,NF,NM,0.15,0.23,,0.15,0
+mtg_single,5873f9c3-4196-41e1-976a-aebc475a1913,"Multani, Yavimaya's Avatar",ZNC,75,EN,NF,NM,0.15,0.34,,0.34,0
+mtg_single,460eecdc-8035-47f7-99a5-459ab24be876,Murasa Brute,ZNR,195,EN,NF,NM,0.15,0.17,0.15,0.15,0
+mtg_single,b0081320-b5af-4ed3-8b18-e6bfac1a4d11,Murasa Rootgrazer,ZNR,229,EN,NF,NM,0.15,0.19,0.32,0.17,0
+mtg_single,dde00206-037b-4c44-8b72-0fe0a85cfb9b,Murasa Sproutling,ZNR,196,EN,NF,NM,0.15,0.17,0.16,0.17,0
+mtg_single,5888f337-e6ed-45ad-8772-4ebe293555b2,Murder,ZNC,47,EN,NF,NM,0.15,0.16,,0.16,0
+mtg_single,52c667e1-575a-434e-995d-b35a54588d79,Murkwater Pathway,AZNR,26,EN,NF,NM,0.50,,,,0
+mtg_single,16fd3591-ecee-49e2-99d8-9be7b360607e,Myriad Construct,ZNR,246,EN,NF,NM,0.15,0.16,0.22,0.17,0
+mtg_single,497d04cb-2157-4181-9a7c-3dbcb9a689a4,Myriad Construct,PZNR,246p,EN,NF,NM,0.45,0.19,0.44,0.19,0
+mtg_single,ffcde7a6-f699-4368-933a-828aadae36c2,Myriad Construct,ZNR,376,EN,NF,NM,0.19,0.19,0.50,0.25,0
+mtg_single,3cf4b38f-41a1-41fe-968c-691762885561,Myriad Landscape,ZNC,135,EN,NF,NM,0.22,0.27,,0.27,0
+mtg_single,d35427b2-6a32-4662-a224-d9ddf4c16509,Nahiri's Binding,ZNR,29,EN,NF,NM,0.15,0.17,0.39,0.17,0
+mtg_single,8a62015e-dd01-4991-b00c-e9e4bd5faa5d,Nahiri's Binding,AZNR,42,EN,NF,NM,0.45,,,,0
+mtg_single,3b6ad8e7-e394-474e-a84e-e7a36d2a8ab5,Nahiri's Lithoforming,ZNR,151,EN,NF,NM,0.30,0.62,0.81,0.87,0
+mtg_single,72cccf6c-d6c8-4923-9868-6a54aa5009ce,Nahiri's Lithoforming,PZNR,151p,EN,NF,NM,1.13,0.92,0.98,0.92,0
+mtg_single,a557a4a6-371c-4910-b962-8ca071343f2d,Nahiri's Lithoforming,ZNR,350,EN,NF,NM,1.40,1.42,1.84,1.70,0
+mtg_single,268a9aa2-28fd-4fe7-b54b-394cbb23a911,"Nahiri, Heir of the Ancients",ZNR,230,EN,NF,NM,0.35,0.54,0.88,0.50,0
+mtg_single,d3157d2c-cc35-41ee-bb2e-9c620c819684,"Nahiri, Heir of the Ancients",PZNR,230p,EN,NF,NM,0.52,0.54,,0.54,0
+mtg_single,f860baf2-c440-41ea-93e4-03405eb2c6ce,"Nahiri, Heir of the Ancients",ZNR,282,EN,NF,NM,0.36,0.49,1.63,0.55,0
+mtg_single,cfea8d02-563c-4596-8234-f69008c8ae29,"Nahiri, Heir of the Ancients",AZNR,3,EN,NF,NM,1.00,,,,0
+mtg_single,4e094acc-f896-4201-9e5d-a927a7ef3c80,"Nahiri, Heir of the Ancients",AZNR,4,EN,NF,NM,0.75,,,,0
+mtg_single,a6066c82-ac5b-4f5e-971b-f129edae07c1,Naya Charm,ZNC,95,EN,NF,NM,0.15,0.36,,0.36,0
+mtg_single,0e752430-5a34-4dc2-8899-40a1b4135e96,Naya Panorama,ZNC,136,EN,NF,NM,0.15,0.23,,0.23,0
+mtg_single,c9e37a70-ad2d-489e-ae2d-8be0ce5068d4,Necromantic Selection,ZNC,48,EN,NF,NM,0.15,0.18,,0.18,0
+mtg_single,f22095dd-4f38-41f4-ae05-2dbf2264e9b9,Needle Spires,ZNC,137,EN,NF,NM,0.15,0.34,,0.34,0
+mtg_single,e5d398fd-ca01-476a-b937-a283e26855da,Needleverge Pathway,AZNR,27,EN,NF,NM,0.18,,,,0
+mtg_single,35f80f94-f94a-45ee-b8a8-7c24b0eac2ab,Needleverge Pathway // Pillarverge Pathway,ZNR,263,EN,NF,NM,3.95,4.41,4.61,3.99,0
+mtg_single,38427412-d5e0-4d94-99af-cd8c89c94e10,Needleverge Pathway // Pillarverge Pathway,ZNR,288,EN,NF,NM,4.00,4.38,4.72,4.59,0
+mtg_single,54b15a46-fefe-4af1-8904-7ece4b4f54ce,Negate,ZNR,71,EN,NF,NM,0.15,0.16,0.18,0.17,0
+mtg_single,0cd27722-7ce9-433f-b466-9963d9ba41d1,Nighthawk Scavenger,ZNR,115,EN,NF,NM,0.32,0.53,0.48,0.75,0
+mtg_single,8d619a54-c484-40f0-8483-43ec050b7575,Nighthawk Scavenger,PZNR,115p,EN,NF,NM,0.50,0.68,1.18,0.68,0
+mtg_single,bbcde459-77d2-4127-8c5b-f47cbc34e8a1,Nighthawk Scavenger,ZNR,341,EN,NF,NM,0.99,1.55,1.85,1.17,0
+mtg_single,5191d4f8-fc0c-41bb-ad78-4cc2d9d109d5,Nighthawk Scavenger,AZNR,58,EN,NF,NM,0.65,,,,0
+mtg_single,bda03dde-d709-4f89-aaac-cbb14b0fcc59,Nighthowler,ZNC,49,EN,NF,NM,0.16,0.28,,0.28,0
+mtg_single,dce03ca4-f89e-4488-8b7e-700435123e91,Nightveil Sprite,ZNC,32,EN,NF,NM,0.15,0.15,,0.15,0
+mtg_single,31679109-4f0c-4b3f-b008-d422c3334955,Nimana Skitter-Sneak,ZNR,116,EN,NF,NM,0.15,0.15,0.33,0.15,0
+mtg_single,f22d5400-6a59-4e58-ae26-f99283b4d2ea,Nimana Skydancer,ZNR,117,EN,NF,NM,0.15,0.15,,0.15,0
+mtg_single,b26f6070-ec29-4bb3-9e5d-f5ff52272d10,Nimble Trapfinder,ZNR,332,EN,NF,NM,0.25,0.45,0.43,0.49,0
+mtg_single,3398ee19-f255-429f-b462-c1b6e934996c,Nimble Trapfinder,ZNR,72,EN,NF,NM,0.15,0.21,0.31,0.21,0
+mtg_single,3109c3b6-c195-4093-abed-96669e9ac9e8,Nimble Trapfinder,PZNR,72p,EN,NF,NM,0.22,0.27,0.24,0.27,0
+mtg_single,b3270103-1aa1-49a7-9d8e-ec4ed2370d20,Nissa of Shadowed Boughs,ZNR,231,EN,NF,NM,1.45,1.70,1.61,1.49,0
+mtg_single,1f7888c5-1a04-4c9a-af06-aba7d270db6f,Nissa of Shadowed Boughs,PZNR,231p,EN,NF,NM,3.70,,,,0
+mtg_single,b32739c3-36fd-4167-a515-edbbc9e4ad5b,Nissa of Shadowed Boughs,ZNR,283,EN,NF,NM,1.40,1.47,3.71,1.25,0
+mtg_single,115c5ec5-e84f-4eac-8e00-4026f0adda72,Nissa of Shadowed Boughs,AZNR,5,EN,NF,NM,1.00,,,,0
+mtg_single,f10fa302-5511-41ec-a155-a40b744afb04,Nissa of Shadowed Boughs,AZNR,6,EN,NF,NM,1.00,,,,0
+mtg_single,683e61b3-a843-4234-a31d-f0a2ca3bfbbb,Nissa's Renewal,ZNC,76,EN,NF,NM,0.15,0.20,,0.20,0
+mtg_single,fd80941f-e471-4d16-ad53-8c24796a6160,Nissa's Zendikon,ZNR,197,EN,NF,NM,0.15,0.19,,0.18,0
+mtg_single,1f4e5934-8e24-43f5-964d-92bea443263e,Notion Thief,ZNC,96,EN,NF,NM,1.43,1.51,,1.51,0
+mtg_single,66e3eb49-e1a6-43a7-882d-4c8d332e71d4,Notorious Throng,ZNC,33,EN,NF,NM,2.99,3.62,,3.62,0
+mtg_single,494ab451-09a5-4a7f-bece-31947a1b88a4,Nullpriest of Oblivion,ZNR,118,EN,NF,NM,0.15,0.21,0.49,0.35,0
+mtg_single,ab225b19-2665-42d4-a0e5-fbd50cf9eaee,Nullpriest of Oblivion,PZNR,118p,EN,NF,NM,0.87,0.98,,0.98,0
+mtg_single,261b78eb-1c89-432d-a79d-c7ef6e4983e3,Nullpriest of Oblivion,ZNR,342,EN,NF,NM,0.70,0.89,0.63,1.09,0
+mtg_single,ca040d77-f7bb-4eec-97d2-1791bc5d9dc7,Obelisk of Urd,ZNC,115,EN,NF,NM,2.07,2.32,,2.32,0
+mtg_single,14b127a0-2777-4242-9ad0-bfbf7d96a5e3,Oblivion's Hunger,ZNR,119,EN,NF,NM,0.15,0.18,0.26,0.16,0
+mtg_single,a25f156b-383a-4079-88d8-11d6d5d1acf5,"Obuun, Mul Daya Ancestor",ZNC,8,EN,NF,NM,1.05,1.22,1.35,1.22,0
+mtg_single,d9f8693c-c0c2-474d-a9b2-41894c9df16d,Ogre Slumlord,ZNC,50,EN,NF,NM,0.20,0.40,,0.40,0
+mtg_single,c0b9bf04-1e54-43a9-a09d-ae977461e3b0,"Omnath, Locus of Creation",ZNR,232,EN,NF,NM,3.90,4.06,4.02,4.12,0
+mtg_single,49a320aa-9e46-4a19-81d4-60da3c3e8b0b,"Omnath, Locus of Creation",PZNR,232p,EN,NF,NM,4.49,4.17,5.54,4.17,0
+mtg_single,8a54c7bb-9ccd-489b-914f-c8236f1567b4,"Omnath, Locus of Creation",ZNR,312,EN,NF,NM,3.65,3.86,5.70,3.79,0
+mtg_single,8f38c79b-f089-432e-9707-bbb23b08d0fa,"Omnath, Locus of Creation",AZNR,78,EN,NF,NM,1.25,,,,0
+mtg_single,fae9a13b-0eba-48a5-b983-406738c08a9e,"Omnath, Locus of Rage",ZNC,97,EN,NF,NM,0.19,0.60,,0.60,0
+mtg_single,8640da25-b9b8-4c99-a5ae-9134c4c311e8,Ondu Inversion // Ondu Skyruins,ZNR,30,EN,NF,NM,0.96,1.11,1.59,1.49,0
+mtg_single,3c09e353-220e-4d5f-b8ab-0ea774f66b73,Ondu Inversion // Ondu Skyruins,ZNR,321,EN,NF,NM,2.00,2.25,2.10,1.79,0
+mtg_single,fec2ed47-65a7-4ff3-8221-27597f2af6e1,Oona's Blackguard,ZNC,51,EN,NF,NM,0.15,0.42,,0.42,0
+mtg_single,7e215478-d201-4c74-bd98-e5c2147a7d3e,"Oona, Queen of the Fae",ZNC,98,EN,NF,NM,1.03,1.08,,1.08,0
+mtg_single,d2d6f264-ec9a-472a-b3a6-5959b4ae79c6,Open into Wonder,ZNC,34,EN,NF,NM,0.20,0.25,,0.25,0
+mtg_single,ce7e6721-70a4-465e-ae13-c96fc40b8036,"Orah, Skyclave Hierophant",ZNR,233,EN,NF,NM,0.15,0.22,0.20,0.24,0
+mtg_single,1d88af9b-1c01-4d3b-af5b-43f08731fceb,"Orah, Skyclave Hierophant",PZNR,233p,EN,NF,NM,0.40,,0.53,,0
+mtg_single,28b750a4-bd9a-4e0c-a474-f7e72b34b8b9,"Orah, Skyclave Hierophant",ZNR,369,EN,NF,NM,0.22,0.24,0.39,0.15,0
+mtg_single,29587dc0-85a7-43aa-a004-fb3088205a2d,"Orah, Skyclave Hierophant",AZNR,79,EN,NF,NM,0.40,,,,0
+mtg_single,d009f532-8ecc-49b2-a66b-2d5b2c05af35,Oran-Rief Ooze,ZNR,198,EN,NF,NM,0.15,0.23,0.35,0.23,0
+mtg_single,a2f412dd-0bb3-44af-a877-7d8f3c3bd148,Oran-Rief Ooze,PZNR,198p,EN,NF,NM,0.32,0.23,0.35,0.23,0
+mtg_single,d2351d3a-9f2b-4de3-b604-1fb58852174d,Oran-Rief Ooze,ZNR,361,EN,NF,NM,0.29,0.41,0.52,0.45,0
+mtg_single,70675510-5069-42e4-bf54-b128ce2b7755,Paired Tactician,ZNR,31,EN,NF,NM,0.15,0.15,0.15,0.15,0
+mtg_single,b4e20120-667a-47b5-ad05-785cb4b06212,Pelakka Predation // Pelakka Caverns,ZNR,120,EN,NF,NM,0.15,0.18,0.43,0.19,0
+mtg_single,cb58810a-dc38-4708-bc87-56c214f3f5a6,"Phylath, World Sculptor",ZNR,234,EN,NF,NM,0.17,0.33,0.37,0.40,0
+mtg_single,490f42c9-100f-48b8-bbec-4861830a072e,"Phylath, World Sculptor",PZNR,234p,EN,NF,NM,0.50,0.64,0.64,0.64,0
+mtg_single,a046ca8c-754f-4939-b2ad-43750d45cc60,"Phylath, World Sculptor",ZNR,313,EN,NF,NM,0.20,0.24,0.83,0.39,0
+mtg_single,781aa9d1-8b31-4b41-8a7c-db02c5f3c894,Pillarverge Pathway,AZNR,28,EN,NF,NM,0.50,,,,0
+mtg_single,b753b66e-1272-451f-9f63-5a86bed7ab32,Plains,ZNR,266,EN,NF,NM,0.15,0.20,0.46,0.19,0
+mtg_single,99673998-9368-4711-b366-e168df48a9f4,Plains,ZNR,267,EN,NF,NM,0.15,0.17,0.28,0.25,0
+mtg_single,245552fb-e4af-4f05-9773-0865c9107019,Plains,ZNR,268,EN,NF,NM,0.15,0.19,0.39,0.19,0
+mtg_single,58d404cd-0575-4469-b86c-54d0fbc92446,Plains,ZNR,380,EN,NF,NM,0.18,0.18,0.15,0.15,0
+mtg_single,6dbd4435-c4b4-4e27-af57-82a09c320766,Plains,AZNR,7,EN,NF,NM,,0.55,,0.55,0
+mtg_single,6d68fbeb-2ef6-47a9-a2c8-f9f19afa3ff0,Plains,AZNR,8,EN,NF,NM,,0.55,,0.55,0
+mtg_single,644319a5-9228-4493-b0c2-6cd50fa16c92,Plains,AZNR,9,EN,NF,NM,0.55,0.39,,0.39,0
+mtg_single,d4708854-b4e9-4552-912f-01f517bd42ab,Planar Outburst,ZNC,19,EN,NF,NM,0.15,0.20,,0.20,0
+mtg_single,0ca0d4b3-1832-4aca-9f06-0be0aca07475,Plant,TZNR,8,EN,NF,NM,0.19,0.30,0.40,0.49,0
+mtg_single,6a0e10e1-1560-40e4-ab4c-9fb6441ffe30,Polluted Delta,ZNE,2,EN,NF,NM,47.10,44.57,99.02,33.60,0
+mtg_single,60e881d3-edc3-49be-96d9-783e76eb6adf,Practiced Tactics,ZNR,32,EN,NF,NM,0.15,0.19,0.22,0.17,0
+mtg_single,30369143-7991-4b3d-965e-ffa160a9967d,Pressure Point,ZNR,33,EN,NF,NM,0.15,0.18,0.25,0.15,0
+mtg_single,bbe51ba7-ef7e-450d-903e-64833bfbc0ff,Price of Fame,ZNC,52,EN,NF,NM,0.15,0.20,,0.20,0
+mtg_single,79cf8357-1d8b-4809-8758-9a41d20d2470,Prismatic Vista,ZNE,27,EN,NF,NM,41.79,44.25,67.64,36.57,0
+mtg_single,e33b0779-4ef2-4935-b1a4-1a3769497ac5,Prismatic Vista,AZNR,35,EN,NF,NM,,,,,0
+mtg_single,a152dc1b-3e70-48da-9e55-2f89204a5af8,Prowling Felidar,ZNR,294,EN,NF,NM,0.15,0.21,0.26,0.17,0
+mtg_single,f2b5a181-090e-4050-b724-cdf8cd770e82,Prowling Felidar,ZNR,34,EN,NF,NM,0.15,0.15,0.16,0.15,0
+mtg_single,49595422-da92-4a5c-9140-f5d5cb23edcb,Pyroclastic Hellion,ZNR,152,EN,NF,NM,0.15,0.16,,0.15,0
+mtg_single,8740cbe1-00b6-43bf-a471-4faf82b888bd,Rabid Bite,ZNR,199,EN,NF,NM,0.15,0.19,0.28,0.15,0
+mtg_single,07e7d808-1af5-4835-8ec3-d6c3397db981,Rampaging Baloths,ZNC,77,EN,NF,NM,0.20,0.23,,0.23,0
+mtg_single,2b37844b-d118-47ed-86fe-e2a66457945e,Rat,TZNC,6,EN,NF,NM,,0.41,,0.41,0
+mtg_single,1e6fb910-c7fc-43aa-83c7-679301bfb346,Ravager's Mace,ZNR,235,EN,NF,NM,0.15,0.17,,0.16,0
+mtg_single,2cdbeb43-b0bc-474f-8ec1-64c3552270fe,Razorverge Thicket,ZNE,15,EN,NF,NM,3.00,3.15,4.53,3.55,0
+mtg_single,5a0d07b2-cfdc-4d3d-86e1-25fc313c0e81,Reclaim the Wastes,ZNR,200,EN,NF,NM,0.15,0.34,0.17,0.27,0
+mtg_single,20530c6a-7d75-4920-8841-2339195f1c8a,Reclaim the Wastes,AZNR,72,EN,NF,NM,0.18,,,,0
+mtg_single,4a51c654-1c06-4114-8d73-609032717453,Relic Amulet,ZNR,247,EN,NF,NM,0.15,0.16,0.23,0.16,0
+mtg_single,0e2bd36f-a416-4ca0-a0ba-3a46f6503976,Relic Axe,ZNR,248,EN,NF,NM,0.15,0.15,0.15,0.15,0
+mtg_single,6ad6e2ea-7b93-47fa-8e38-6f6bcd377d9b,Relic Golem,ZNR,249,EN,NF,NM,0.15,0.26,0.38,0.15,0
+mtg_single,d48d91ae-086d-49ac-a93c-9bc336078837,Relic Robber,ZNR,153,EN,NF,NM,0.15,0.15,0.23,0.19,0
+mtg_single,0df229e8-730e-483a-b89a-d0c7c09332b8,Relic Robber,PZNR,153p,EN,NF,NM,0.37,,,,0
+mtg_single,64075cbc-08ba-4aa5-9a4b-704fe7f89abd,Relic Robber,ZNR,351,EN,NF,NM,0.15,0.43,0.36,0.39,0
+mtg_single,90cd160f-7a45-469e-8e66-70c0e098251b,Relic Vial,ZNR,250,EN,NF,NM,0.15,0.16,0.47,0.20,0
+mtg_single,88548099-19e7-4412-8033-217cbd897376,Resolute Strike,ZNR,35,EN,NF,NM,0.15,0.15,0.26,0.15,0
+mtg_single,aa498bb9-521b-4065-8ce7-81c61dfbce23,Retreat to Emeria,ZNC,20,EN,NF,NM,0.15,0.26,,0.26,0
+mtg_single,9279eb30-5bde-44e5-9d8d-bed0ceb2a0b1,Retreat to Kazandu,ZNC,78,EN,NF,NM,0.15,0.35,,0.35,0
+mtg_single,8335f983-6993-42bd-919e-98d2e26921d7,Return of the Wildspeaker,ZNC,79,EN,NF,NM,1.72,2.13,,2.13,0
+mtg_single,f60870ab-a058-4b11-be76-a24244e32a1a,Rise from the Grave,ZNC,53,EN,NF,NM,0.15,0.20,,0.20,0
+mtg_single,b1f1d97a-e030-4811-8180-b3c78abe2c81,Risen Riptide,ZNR,73,EN,NF,NM,0.15,0.23,,0.15,0
+mtg_single,06370cc2-f231-4720-937c-b2a971e9dc39,Rites of Flourishing,ZNC,80,EN,NF,NM,0.35,0.37,,0.37,0
+mtg_single,6ae2e450-c5c2-45f6-a582-b9a276829ac0,Riverglide Pathway // Lavaglide Pathway,ZNR,264,EN,NF,NM,4.99,5.10,4.78,4.49,0
+mtg_single,6748e12c-7a7a-4230-b597-2ffcb44df2f6,Riverglide Pathway // Lavaglide Pathway,ZNR,289,EN,NF,NM,4.69,5.12,6.95,4.99,0
+mtg_single,60dd5a68-bad8-4291-b6d1-2c4518f58641,Rockslide Sorcerer,ZNR,154,EN,NF,NM,0.15,0.20,0.34,0.18,0
+mtg_single,7fad55c1-2d8b-4e1e-a763-aba0744079d0,Rogue's Passage,ZNC,138,EN,NF,NM,0.46,0.51,,0.51,0
+mtg_single,6fd73a82-55ec-4646-b0a7-05336c84412c,Roil Eruption,ZNR,155,EN,NF,NM,0.15,0.16,0.18,0.16,0
+mtg_single,65894f5a-0517-46cd-9cd8-6c243bf20c7e,Roil Eruption,ZNR,389,EN,NF,NM,0.15,,0.41,0.15,0
+mtg_single,f3db28a9-8f3b-499a-ae76-9f2ac00b96fa,Roil Royale // Roil Royale (cont'd),MZNR,4,EN,NF,NM,,,,,0
+mtg_single,14a63625-d0af-4c04-96ea-de0b84b69b2e,Roiling Regrowth,ZNR,201,EN,NF,NM,0.15,0.26,0.60,0.25,0
+mtg_single,ae119659-c8f0-4258-a28c-5519634d2dd0,Roiling Regrowth,ZNR,390,EN,NF,NM,0.95,1.25,3.14,1.15,0
+mtg_single,65f3fa26-f6f9-452c-8c14-d73fe3df429a,Roiling Vortex,ZNR,156,EN,NF,NM,0.92,1.32,1.74,1.22,0
+mtg_single,15eb604c-4048-4cef-a081-ede9f6b1839c,Roiling Vortex,PZNR,156p,EN,NF,NM,1.76,0.98,,0.98,0
+mtg_single,f85f85e6-487c-4c86-8e02-c99910f402c2,Roiling Vortex,ZNR,352,EN,NF,NM,1.63,2.53,2.62,2.09,0
+mtg_single,b49bb4fa-056d-4457-81d7-e6415832100c,Roost of Drakes,ZNR,74,EN,NF,NM,0.15,0.16,0.15,0.16,0
+mtg_single,ffe8ba0f-8a3c-4b53-83f9-61c85ac96d67,Ruin Crab,ZNR,295,EN,NF,NM,0.66,1.29,1.71,1.50,0
+mtg_single,6c4bfda5-534c-46bf-aba9-9b8efdd111c7,Ruin Crab,ZNR,75,EN,NF,NM,0.67,0.83,1.52,1.32,0
+mtg_single,f50d1a18-582c-4d6b-bb29-ae9e98b51e73,Sandstone Oracle,ZNC,116,EN,NF,NM,0.15,0.25,,0.25,0
+mtg_single,dce816fb-d35c-44de-a76e-9c39cb0bb28b,Saproling,TZNC,9,EN,NF,NM,0.33,,,,0
+mtg_single,a2facdff-391e-4f28-b0f3-82212190247d,Satyr Wayfinder,ZNC,81,EN,NF,NM,0.15,0.21,,0.21,0
+mtg_single,282a05f4-fc22-467d-853a-22bfbcf1cab0,Scalding Tarn,ZNE,7,EN,NF,NM,49.75,51.58,74.67,40.45,0
+mtg_single,08b98c62-efd4-4e76-858e-4a15a2fb6856,Scale the Heights,ZNR,202,EN,NF,NM,0.15,0.19,0.43,0.15,0
+mtg_single,24a45237-d016-41aa-9ec6-3c85654c50e6,Scaretiller,ZNC,117,EN,NF,NM,0.15,0.21,,0.21,0
+mtg_single,4b103607-9feb-459a-af74-01d8ab09dfa4,Scavenged Blade,ZNR,157,EN,NF,NM,0.15,0.17,0.15,0.15,0
+mtg_single,39033d37-6bd0-40c6-bc04-30e750df18f8,Scion of the Swarm,ZNR,121,EN,NF,NM,0.15,0.16,0.31,0.17,0
+mtg_single,0c8eb382-3b99-48ea-bb08-8a15da12e328,Scion of the Swarm,AZNR,59,EN,NF,NM,0.55,,,,0
+mtg_single,779b154e-4837-4ff6-8c79-631792da29dc,Scorch Rider,ZNR,158,EN,NF,NM,0.15,0.15,0.27,0.15,0
+mtg_single,95792827-e7fa-41c4-bd77-be1137f73d04,Scourge of Fleets,ZNC,35,EN,NF,NM,0.44,0.59,,0.59,0
+mtg_single,f6d0ecfc-adfe-49c8-a2f2-dc254b8a0609,Scourge of the Skyclaves,ZNR,122,EN,NF,NM,0.30,0.42,0.83,0.50,0
+mtg_single,aadcf69e-ad11-48ca-b5fe-8f790dcce063,Scourge of the Skyclaves,PZNR,122p,EN,NF,NM,0.84,0.73,0.65,0.73,0
+mtg_single,f9fb94e6-0acc-4aff-a1b9-83a1d3bd0fb7,Scourge of the Skyclaves,ZNR,343,EN,NF,NM,1.00,1.08,1.52,0.98,0
+mtg_single,09dcc3e4-f3d6-42ea-b884-9cf32cec1f13,Scourge of the Skyclaves,AZNR,60,EN,NF,NM,0.45,,,,0
+mtg_single,91c66d99-d4bd-4bf7-9ad1-a345853f2565,Scute Swarm,ZNR,203,EN,NF,NM,8.00,8.73,8.05,5.05,0
+mtg_single,4ba5b0dd-d6bb-4a41-a841-adeadbc109be,Scute Swarm,PZNR,203p,EN,NF,NM,9.94,8.83,8.41,8.83,0
+mtg_single,d0896a75-a416-470c-810c-ae448b674f5c,Scute Swarm,ZNR,308,EN,NF,NM,7.75,8.97,10.25,5.26,0
+mtg_single,54731b9f-3c01-4f7f-b4be-da985f30b690,Scytheclaw,ZNC,118,EN,NF,NM,0.15,0.21,,0.21,0
+mtg_single,7d8f940c-6371-4a2e-976c-e6cd5289fcb5,Sea Gate Banneret,ZNR,36,EN,NF,NM,0.15,0.19,0.15,0.17,0
+mtg_single,5544ae15-3c63-4ad1-98e8-f6cc4a1ee941,Sea Gate Banneret,AZNR,43,EN,NF,NM,0.45,,,,0
+mtg_single,9068006e-71e7-4715-8ce7-532c35566660,Sea Gate Colossus,ZNR,251,EN,NF,NM,0.15,0.19,0.15,0.20,0
+mtg_single,f06c2825-a681-44ae-a89d-5fba118cfad1,Sea Gate Restoration,AZNR,49,EN,NF,NM,,,,,0
+mtg_single,c210c8f6-73be-476d-acdd-be496731c5fe,"Sea Gate Restoration // Sea Gate, Reborn",ZNR,333,EN,NF,NM,40.97,44.85,68.92,43.97,0
+mtg_single,6e11b468-396a-4952-8302-9999ba00725a,"Sea Gate Restoration // Sea Gate, Reborn",ZNR,76,EN,NF,NM,36.69,34.93,39.14,30.97,0
+mtg_single,71f550be-6214-439d-b337-a6646e50d6d0,Sea Gate Stormcaller,ZNR,334,EN,NF,NM,0.35,0.38,0.46,0.49,0
+mtg_single,03ca5c90-24bf-4018-8951-d97d1b27cf4a,Sea Gate Stormcaller,AZNR,50,EN,NF,NM,0.40,,,,0
+mtg_single,e209081e-afcb-4f3c-9768-586f1d300a97,Sea Gate Stormcaller,ZNR,77,EN,NF,NM,0.15,0.37,0.36,0.31,0
+mtg_single,708f9b4e-12bd-442e-949c-9480023bb40f,Sea Gate Stormcaller,PZNR,77p,EN,NF,NM,0.25,,,,0
+mtg_single,848d79cc-d7df-464c-a9c2-141e3ff10f5e,Sea of Clouds,ZNE,16,EN,NF,NM,24.75,26.58,37.72,20.00,0
+mtg_single,2968ba35-a8c1-4c4e-b18b-4c6e5ec92f53,Seachrome Coast,ZNE,11,EN,NF,NM,2.84,3.15,5.74,4.47,0
+mtg_single,eadf2e80-7efa-4b2d-a069-bc2d0b253389,Seachrome Coast,AZNR,31,EN,NF,NM,0.75,,,,0
+mtg_single,f1d9f7d8-7601-4a30-8d4b-f8309c3947b8,Seafloor Stalker,ZNR,78,EN,NF,NM,0.15,0.16,0.15,0.15,0
+mtg_single,46669d9b-1f3e-4133-bb4b-457355d8e207,Seer's Sundial,ZNC,119,EN,NF,NM,0.15,0.15,,0.15,0
+mtg_single,58ff56aa-cf6d-4522-9c57-c79bdc8d14bd,Sejiri Shelter // Sejiri Glacier,ZNR,37,EN,NF,NM,1.87,2.03,2.84,1.57,0
+mtg_single,ae4fd108-ae83-407c-8eb0-d042d218e77b,Selesnya Guildgate,ZNC,139,EN,NF,NM,0.15,0.17,,0.17,0
+mtg_single,a1f8e9cc-b963-45d1-810b-c908c68c2417,Selesnya Sanctuary,ZNC,140,EN,NF,NM,0.15,0.34,,0.34,0
+mtg_single,68877745-837d-4ced-a936-e48093ab9c08,Sepulchral Primordial,ZNC,54,EN,NF,NM,0.17,0.21,,0.21,0
+mtg_single,4aa2adca-708a-484b-8bd8-a569f9040f4d,Shadow Stinger,ZNR,123,EN,NF,NM,0.15,0.17,0.25,0.18,0
+mtg_single,f975ebae-a6e7-4cef-8b3e-d799da95f671,Shadows' Verdict,ZNR,124,EN,NF,NM,0.15,0.15,0.46,0.25,0
+mtg_single,b54bb2a9-7e02-4927-bbd7-052966159725,Shadows' Verdict,PZNR,124p,EN,NF,NM,0.24,0.15,,0.15,0
+mtg_single,3c451e76-c2a7-4d1b-b19e-8d3ad599c9a7,Shadows' Verdict,ZNR,344,EN,NF,NM,0.15,0.57,0.31,0.15,0
+mtg_single,135d5614-eadd-4a9e-9c51-de2ff7584c71,Shatterskull Charger,ZNR,159,EN,NF,NM,0.15,0.19,0.26,0.17,0
+mtg_single,63cc2f00-0d9a-459d-b093-1606a23768f5,Shatterskull Charger,PZNR,159p,EN,NF,NM,0.25,,,,0
+mtg_single,f4b0a26f-da19-4958-a1b7-322a9c3eb29b,Shatterskull Charger,ZNR,353,EN,NF,NM,0.15,0.29,0.26,0.21,0
+mtg_single,d3799de1-d77a-438c-af33-fecff92cf35e,Shatterskull Minotaur,ZNR,160,EN,NF,NM,0.15,0.16,,0.15,0
+mtg_single,aad0eb0e-32fe-4a43-96bc-8f0df6c1e9ed,"Shatterskull Smashing // Shatterskull, the Hammer Pass",ZNR,161,EN,NF,NM,6.99,8.98,9.29,7.99,0
+mtg_single,7ed093a4-f018-4e91-9ae0-b7dafbbe948b,"Shatterskull Smashing // Shatterskull, the Hammer Pass",ZNR,354,EN,NF,NM,12.78,15.03,17.68,11.83,0
+mtg_single,887997d3-2ee9-412d-89c9-9acf5f8022f0,Shell Shield,ZNR,79,EN,NF,NM,0.15,0.16,0.27,0.15,0
+mtg_single,7c3d46b9-1531-43b2-8094-d9e96b6100ad,Shepherd of Heroes,ZNR,38,EN,NF,NM,0.15,0.15,0.15,0.15,0
+mtg_single,f3baa8c0-506d-4fc7-9f7e-8f98b298bc38,Silumgar's Command,ZNC,99,EN,NF,NM,0.15,0.19,,0.19,0
+mtg_single,071543ff-7b25-47b6-a0fa-77c979a1ca1b,Silundi Vision // Silundi Isle,ZNR,80,EN,NF,NM,0.28,0.43,0.87,0.69,0
+mtg_single,d3039797-23c2-416d-a5a5-ffec12fabbe3,Sizzling Barrage,ZNR,162,EN,NF,NM,0.15,0.16,,0.15,0
+mtg_single,b2b5386f-e230-43d5-9c91-08701ba66396,Skyclave Apparition,ZNR,322,EN,NF,NM,1.00,1.46,2.03,1.79,0
+mtg_single,767ab3a5-002f-4e4d-8d39-34f0e860a82e,Skyclave Apparition,ZNR,39,EN,NF,NM,0.15,0.29,0.58,0.50,0
+mtg_single,903e0600-93b9-4de6-acf4-8be32626468c,Skyclave Apparition,PZNR,39p,EN,NF,NM,0.45,0.63,0.45,0.63,0
+mtg_single,556b47ac-4339-4c1e-89e0-9b82b43f9446,Skyclave Basilica,AZNR,44,EN,NF,NM,0.45,,,,0
+mtg_single,151dffde-1227-4a83-b4bb-05736d65deab,Skyclave Cleric // Skyclave Basilica,ZNR,40,EN,NF,NM,0.15,0.17,0.30,0.19,0
+mtg_single,02491ab1-1e4e-4d18-b9ad-0917f73a379c,Skyclave Geopede,ZNR,163,EN,NF,NM,0.15,0.16,,0.15,0
+mtg_single,757cc56a-f972-4b20-9cf4-b717ac4573c5,Skyclave Geopede,ZNR,301,EN,NF,NM,0.15,0.16,0.24,0.16,0
+mtg_single,a4dae3c9-d06c-4153-a5de-ba1d84282357,Skyclave Pick-Axe,ZNR,204,EN,NF,NM,0.15,0.21,0.21,0.18,0
+mtg_single,6725afaf-c504-476a-9127-eb12ee726eb8,Skyclave Pick-Axe,ZNR,309,EN,NF,NM,0.15,0.18,0.27,0.26,0
+mtg_single,e906c376-41b8-4491-beb3-e4e964a6c6bb,Skyclave Plunder,ZNR,81,EN,NF,NM,0.15,0.21,0.28,0.16,0
+mtg_single,ec9715b5-e883-4a78-9552-ca28b8c20960,Skyclave Relic,ZNR,252,EN,NF,NM,0.99,1.13,1.12,1.20,0
+mtg_single,c92bf488-0182-4cd2-b39e-356d6abf6cc5,Skyclave Relic,PZNR,252p,EN,NF,NM,1.24,1.18,1.31,1.18,0
+mtg_single,036a054d-a594-47c8-85ca-a8dd0c0164f3,Skyclave Relic,ZNR,377,EN,NF,NM,1.80,1.72,1.92,1.95,0
+mtg_single,8f28798f-e92c-4479-806a-14b47620f598,Skyclave Sentinel,ZNR,253,EN,NF,NM,0.15,0.16,0.15,0.15,0
+mtg_single,8653b75d-effc-460d-a04b-017407b1c315,Skyclave Shade,ZNR,125,EN,NF,NM,0.15,0.17,0.18,0.17,0
+mtg_single,86c95270-6b93-483b-8045-a989e525264b,Skyclave Shade,PZNR,125p,EN,NF,NM,0.18,0.22,0.17,0.22,0
+mtg_single,92425b54-adf1-4c98-abb7-c0dbb60122a2,Skyclave Shade,ZNR,298,EN,NF,NM,0.15,0.16,0.49,0.17,0
+mtg_single,dcd5919c-b037-4d35-ac61-37c38d151ad5,Skyclave Shade,AZNR,61,EN,NF,NM,0.40,,,,0
+mtg_single,61fc6136-1cf9-4a4a-935b-93cb5fecb0d1,Skyclave Shadowcat,ZNR,126,EN,NF,NM,0.15,0.18,0.20,0.17,0
+mtg_single,3ee47245-af5c-4478-b9f9-28adcba5d475,Skyclave Squid,ZNR,296,EN,NF,NM,0.15,0.15,0.25,0.15,0
+mtg_single,47c25d13-48bc-4c70-907c-9fb3a5e892cd,Skyclave Squid,ZNR,82,EN,NF,NM,0.15,0.16,,0.15,0
+mtg_single,8474a6cf-da64-4bed-9561-f2a8008e938c,Slither Blade,ZNC,36,EN,NF,NM,0.37,0.42,,0.42,0
+mtg_single,e2728d0e-3561-42d5-9ffb-67e85c24b19b,Smite the Monstrous,ZNR,42,EN,NF,NM,0.15,0.15,0.15,0.15,0
+mtg_single,dfabf577-fc3b-4601-aa83-e4d7cf47b9b5,Sneaking Guide,ZNR,164,EN,NF,NM,0.15,0.18,,0.19,0
+mtg_single,5221bff1-293d-4878-aa76-8934af3c0b5f,Soaring Thought-Thief,ZNR,236,EN,NF,NM,0.15,0.18,0.18,0.15,0
+mtg_single,86a19397-90a5-46d7-af11-8bb93ec61fd8,Sol Ring,ZNC,120,EN,NF,NM,1.55,1.68,,1.68,0
+mtg_single,70aeeb7e-e339-47ac-8ad0-e88d0485e4bc,Song-Mad Treachery // Song-Mad Ruins,ZNR,165,EN,NF,NM,0.15,0.26,0.19,0.18,0
+mtg_single,40fb7585-e4b9-44c9-bf0f-2a421239f9a9,Soul Manipulation,ZNC,100,EN,NF,NM,0.15,0.19,,0.19,0
+mtg_single,1986d9fc-8406-458a-9ed7-cf34ad6df9d5,Soul Shatter,ZNR,127,EN,NF,NM,3.35,3.57,4.20,4.23,0
+mtg_single,07e03d1d-ddb6-4d85-a1ef-cbae16114fd3,Soul Shatter,PZNR,127p,EN,NF,NM,4.70,4.54,,4.54,0
+mtg_single,3780ed5d-f9a4-45e5-9960-65b6ba9e5c20,Soul Shatter,ZNR,345,EN,NF,NM,4.79,5.61,6.70,6.80,0
+mtg_single,e24e9080-af94-4364-9fc6-dcffc2a5dba9,Soul Shatter,AZNR,62,EN,NF,NM,0.50,0.45,,0.45,0
+mtg_single,2f28bc9a-5d57-4640-a88a-fb2bb1f738cf,Spare Supplies,ZNR,254,EN,NF,NM,0.15,0.18,0.21,0.24,0
+mtg_single,7dc6b916-dd3b-4cd5-95d0-0515d76a74f6,Spikefield Hazard // Spikefield Cave,ZNR,166,EN,NF,NM,0.17,0.39,0.78,0.35,0
+mtg_single,32045987-d874-40e1-a021-a1111ced2e9a,Spinal Embrace,ZNC,101,EN,NF,NM,0.15,0.21,,0.21,0
+mtg_single,e299ddb5-c07e-4eda-9f6e-27bceeb285e1,Spire Garden,ZNE,19,EN,NF,NM,16.49,16.43,31.15,18.79,0
+mtg_single,460ba792-5e3c-4e1b-9273-59159d27d146,Spitfire Lagac,ZNR,167,EN,NF,NM,0.15,0.17,0.22,0.20,0
+mtg_single,5f34616c-a5eb-4d1f-a9a3-b003daa04b3d,Spitfire Lagac,ZNR,302,EN,NF,NM,0.15,0.17,0.25,0.15,0
+mtg_single,e4c8f13f-aa42-449f-80cd-6b5f0ef61605,Spoils of Adventure,ZNR,237,EN,NF,NM,0.15,0.17,0.30,0.20,0
+mtg_single,3b74a85b-ec67-4b90-82c4-c7f2edf2d10f,Sporemound,ZNC,82,EN,NF,NM,0.15,0.31,,0.31,0
+mtg_single,e4b27bf6-8be1-4536-a104-d1a1214b5172,Springbloom Druid,ZNC,83,EN,NF,NM,0.15,0.29,,0.29,0
+mtg_single,2efb7f89-9264-482e-ae49-4402cc0718bf,Springmantle Cleric,ZNR,205,EN,NF,NM,0.15,0.15,,0.15,0
+mtg_single,efdfae1d-bbe6-46a0-9667-ba113933781a,Squad Commander,ZNR,323,EN,NF,NM,0.15,0.35,0.44,0.24,0
+mtg_single,c956c6f9-b4aa-4c35-8fc2-456e4e64e5a3,Squad Commander,ZNR,41,EN,NF,NM,0.15,0.19,0.32,0.17,0
+mtg_single,5fb83386-ab9b-4a0c-bfe5-302c9d7c4c47,Squad Commander,PZNR,41p,EN,NF,NM,0.27,0.36,0.79,0.36,0
+mtg_single,488fdab0-5e11-4695-b921-8df4bb8cd985,Stinkdrinker Bandit,ZNC,55,EN,NF,NM,0.15,0.17,,0.17,0
+mtg_single,8eea8094-957d-4dcc-ad9e-f7ed20b85374,Stolen Identity,ZNC,37,EN,NF,NM,0.20,0.33,,0.33,0
+mtg_single,86f0e011-703e-4b84-bf35-e62744be6d18,Stonework Packbeast,ZNR,255,EN,NF,NM,0.15,0.21,0.20,0.25,0
+mtg_single,f73f7964-524f-4dfa-a5ab-36d944849bed,Strength of Solidarity,ZNR,206,EN,NF,NM,0.15,0.15,,0.15,0
+mtg_single,10829a8c-9bd8-4ab9-8444-e4d7cc5046ee,Strictly Better // Strictly Better (cont'd),MZNR,5,EN,NF,NM,,,,,0
+mtg_single,925c97a8-0001-4a24-9097-b758640c4885,Strip Mine,ZNE,28,EN,NF,NM,23.23,25.18,21.91,22.75,0
+mtg_single,32be181c-360f-4bc7-9860-c6029f1c2beb,Struggle // Survive,ZNC,102,EN,NF,NM,0.15,0.15,,0.15,0
+mtg_single,540c23ca-c70f-4d29-8747-297ad5156b00,Submerged Boneyard,ZNC,141,EN,NF,NM,0.15,0.21,,0.21,0
+mtg_single,21d650a2-9a54-4d8f-8600-0b3c93b9e9ea,Subtle Strike,ZNR,128,EN,NF,NM,0.15,0.16,0.15,0.15,0
+mtg_single,5eae1106-18ad-495c-ab2a-efa2f7ab43c1,Sun Titan,ZNC,21,EN,NF,NM,0.15,0.25,,0.25,0
+mtg_single,a08011d8-a6b9-43c4-8722-9ee8cff86c59,Sure-Footed Infiltrator,ZNR,83,EN,NF,NM,0.15,0.15,0.15,0.15,0
+mtg_single,74010aee-a68b-4c06-9db4-f5d0b5a6e137,Swamp,AZNR,13,EN,NF,NM,,,,,0
+mtg_single,b4bdf9fe-04b8-42ed-8d2b-6cdad4261b33,Swamp,AZNR,14,EN,NF,NM,0.55,,,,0
+mtg_single,a5b5b711-0eb5-4a1c-92b4-f0f6862c657a,Swamp,AZNR,15,EN,NF,NM,0.55,,,,0
+mtg_single,ef472564-1486-4d41-99fc-f1d94d26cf8a,Swamp,ZNR,272,EN,NF,NM,0.15,0.19,0.39,0.29,0
+mtg_single,453faa15-7dd2-4933-97db-49ae1aa79d89,Swamp,ZNR,273,EN,NF,NM,0.15,0.18,0.38,0.22,0
+mtg_single,fae83873-b577-4823-aa9a-ed6c8aea8832,Swamp,ZNR,274,EN,NF,NM,0.15,0.15,0.39,0.24,0
+mtg_single,e8d7a3ea-1c28-4e6d-b29b-de60a285c63f,Swamp,ZNR,382,EN,NF,NM,0.15,0.17,0.15,0.15,0
+mtg_single,0f1c8cf3-30ca-437b-a34f-abefb756c37c,Swarm Shambler,ZNR,207,EN,NF,NM,0.15,0.25,0.29,0.19,0
+mtg_single,046f5a42-2fef-4151-9157-87b05a07c292,Swarm Shambler,PZNR,207p,EN,NF,NM,0.28,,,,0
+mtg_single,b443df68-1582-46da-970b-10088663a613,Swarm Shambler,ZNR,362,EN,NF,NM,0.15,0.19,,0.18,0
+mtg_single,2a39de5b-bfb3-4576-96e2-92cad5e33231,Swarm Shambler,AZNR,73,EN,NF,NM,0.45,,,,0
+mtg_single,0ea40ab0-82a6-430b-a190-7288732ec738,"Sygg, River Cutthroat",ZNC,103,EN,NF,NM,3.64,4.54,,4.54,0
+mtg_single,19e39497-cc2b-445c-a22b-340dea6437c7,Sylvan Advocate,ZNC,84,EN,NF,NM,0.15,0.34,,0.29,0
+mtg_single,3e3361f4-cc94-46fb-99d2-114d9fa5b327,Sylvan Reclamation,ZNC,104,EN,NF,NM,0.15,0.19,,0.19,0
+mtg_single,a1486f0f-d3df-4686-a162-444cbf443deb,Synchronized Spellcraft,ZNR,168,EN,NF,NM,0.15,0.15,0.24,0.15,0
+mtg_single,a90edfeb-40b3-40ad-aba5-b8619dec6613,"Syr Konrad, the Grim",ZNC,56,EN,NF,NM,0.99,1.32,,1.32,0
+mtg_single,512e35eb-c9af-4328-9de9-d7b9454a03c1,"Taborax, Hope's Demise",ZNR,129,EN,NF,NM,0.15,0.20,0.18,0.16,0
+mtg_single,b3f111be-5b00-48a4-a085-e90d654b0a4b,"Taborax, Hope's Demise",PZNR,129p,EN,NF,NM,0.50,0.59,,0.59,0
+mtg_single,8aabea08-084f-4674-b7c6-2b14b94dc0fa,"Taborax, Hope's Demise",ZNR,346,EN,NF,NM,0.38,0.55,0.49,0.71,0
+mtg_single,69a4bcc3-69d9-43e4-8dc5-fd4c6db5e621,"Taborax, Hope's Demise",AZNR,63,EN,NF,NM,0.50,,,,0
+mtg_single,018bee7e-ec9b-4d2a-952a-426310b07540,Tajuru Blightblade,ZNR,208,EN,NF,NM,0.15,0.18,0.20,0.18,0
+mtg_single,366958a4-ece5-4b4f-b42b-fa3a8577b90f,Tajuru Paragon,ZNR,209,EN,NF,NM,0.15,0.21,0.23,0.15,0
+mtg_single,1824cd03-1f7b-4662-84ab-f1234c1d4007,Tajuru Paragon,PZNR,209p,EN,NF,NM,0.24,0.24,,0.24,0
+mtg_single,8a67bb0b-8bd0-4bff-948e-b7dc52435b17,Tajuru Paragon,ZNR,363,EN,NF,NM,0.15,0.37,0.39,0.15,0
+mtg_single,485aabd5-e409-42e3-bcc4-3f5a906e3571,Tajuru Snarecaster,ZNR,210,EN,NF,NM,0.15,0.17,0.15,0.16,0
+mtg_single,79a36fff-3a8c-4cbf-8518-dfd4ee909fa7,Tangled Florahedron // Tangled Vale,ZNR,211,EN,NF,NM,0.15,0.45,0.40,0.46,0
+mtg_single,324b37bf-e3be-4fea-90f2-21902f18624a,Taunting Arbormage,ZNR,212,EN,NF,NM,0.15,0.16,0.15,0.16,0
+mtg_single,3a870eb5-abb6-43e0-93f4-075817e7d22b,Tazeem Raptor,ZNR,43,EN,NF,NM,0.15,0.15,0.16,0.15,0
+mtg_single,8946877e-4328-4e5f-8587-9d7df59be4e5,Tazeem Roilmage,AZNR,51,EN,NF,NM,0.50,,,,0
+mtg_single,f4462cd0-947a-4241-bc46-08477a435998,Tazeem Roilmage,ZNR,84,EN,NF,NM,0.15,0.16,,0.15,0
+mtg_single,723948cb-81ec-4aa3-bc88-974a8b1d1a46,"Tazri, Beacon of Unity",ZNR,324,EN,NF,NM,0.25,0.99,0.59,0.95,0
+mtg_single,1ff7b71d-c71a-440b-b9af-df1d2daee46e,"Tazri, Beacon of Unity",ZNR,44,EN,NF,NM,0.15,0.25,0.45,0.18,0
+mtg_single,821e14b2-49c2-43f1-a0ca-4a6aff5cda74,"Tazri, Beacon of Unity",PZNR,44p,EN,NF,NM,0.70,,0.57,,0
+mtg_single,40cbaef0-dffa-4875-b178-55bb17d04d66,"Tazri, Beacon of Unity",AZNR,45,EN,NF,NM,0.50,,,,0
+mtg_single,3f2c71c7-eb12-46f8-bb27-a7dc8494b1c7,Teeterpeak Ambusher,ZNR,169,EN,NF,NM,0.15,0.15,0.15,0.15,0
+mtg_single,a0a5b351-8789-4ac4-90e4-5a874f900cef,Teeterpeak Ambusher,AZNR,67,EN,NF,NM,0.65,,,,0
+mtg_single,b47b873f-1fcd-4916-89c0-66a09b7ba69b,Terramorphic Expanse,ZNC,142,EN,NF,NM,0.15,0.16,,0.16,0
+mtg_single,6332b181-8cfa-4c99-a681-9a6b30fdd692,Territorial Scythecat,ZNR,213,EN,NF,NM,0.15,0.17,0.21,0.17,0
+mtg_single,ed37d194-6d05-4bed-abe9-3e7111d1dad3,Territorial Scythecat,ZNR,310,EN,NF,NM,0.15,0.16,0.20,0.16,0
+mtg_single,e5b31541-b05c-4a2c-b144-4ccf83e731f1,The Mending of Dominaria,ZNC,74,EN,NF,NM,0.25,0.34,,0.34,0
+mtg_single,1bfd01e9-6231-4f34-a2b0-a21efbf8bd0e,Thieving Skydiver,ZNR,335,EN,NF,NM,0.74,1.28,1.24,0.79,0
+mtg_single,fb36e934-235c-488c-8838-83e9d69edb85,Thieving Skydiver,ZNR,85,EN,NF,NM,0.20,0.41,0.76,0.18,0
+mtg_single,3e6fbd32-ece4-4a55-a711-d319086f3716,Thieving Skydiver,PZNR,85p,EN,NF,NM,0.30,0.45,0.53,0.45,0
+mtg_single,92f0e763-9d91-4900-8d93-71f10d20b146,Thopter,TZNC,11,EN,NF,NM,,0.25,,0.25,0
+mtg_single,f54fa6ea-44bd-42f7-a198-b4d8013e61f7,Throne of Makindi,ZNR,265,EN,NF,NM,0.15,0.17,,0.17,0
+mtg_single,e7fded1f-31ee-4171-80b1-12b89c96a895,Throne of Makindi,PZNR,265p,EN,NF,NM,0.18,,,,0
+mtg_single,f1e3e419-42d6-4a42-8713-a9f115a73030,Throne of Makindi,ZNR,379,EN,NF,NM,0.15,0.33,,0.32,0
+mtg_single,1f37afa1-fa00-42b5-a3ee-faa9afea7550,Thundering Rebuke,ZNR,170,EN,NF,NM,0.15,0.18,0.29,0.15,0
+mtg_single,43f5e229-4843-487c-b336-79bdfeea1ce1,Thundering Rebuke,AZNR,68,EN,NF,NM,0.45,,,,0
+mtg_single,1af28ad5-34b7-4e40-adec-77e33657e84d,Thundering Sparkmage,ZNR,171,EN,NF,NM,0.15,0.16,0.15,0.15,0
+mtg_single,09af4155-4b86-4362-9c16-092673dd6a65,Thwart the Grave,ZNR,130,EN,NF,NM,0.15,0.31,0.26,0.23,0
+mtg_single,d3e07c03-133c-415a-bb39-1537829c0662,Thwart the Grave,AZNR,64,EN,NF,NM,0.40,,,,0
+mtg_single,99811463-9c6a-4c4d-be2f-d8f2d2cbd521,Together Forever,ZNC,22,EN,NF,NM,0.15,0.45,,0.45,0
+mtg_single,a47f8aaf-4c0b-4dcb-aaf5-04d32596e493,Tormenting Voice,ZNR,172,EN,NF,NM,0.15,0.21,0.24,0.15,0
+mtg_single,894fab2f-31de-41e4-9c2d-f8a78a752b21,Treacherous Terrain,ZNC,105,EN,NF,NM,0.15,0.20,,0.20,0
+mtg_single,5c639ec2-e141-4dcc-9281-d416c830ea9d,Triton Shorestalker,ZNC,38,EN,NF,NM,0.22,0.26,,0.26,0
+mtg_single,e9dad262-3c55-4ea2-80dd-590c7da2154b,Trove Warden,ZNC,3,EN,NF,NM,0.15,0.43,,0.43,0
+mtg_single,a04c737f-6014-4ee1-850a-54ef4c2b9137,Tuktuk Rubblefort,ZNR,173,EN,NF,NM,0.15,0.21,0.34,0.15,0
+mtg_single,5f0c8d1f-b059-4acf-a8b5-09a46a7595aa,Turntimber Ascetic,ZNR,214,EN,NF,NM,0.15,,,0.15,0
+mtg_single,eba529b5-1263-428d-b7e5-20feec407a8f,"Turntimber Symbiosis // Turntimber, Serpentine Wood",ZNR,215,EN,NF,NM,3.00,5.92,5.39,2.75,0
+mtg_single,92d1c320-d2ab-49fb-a013-0c74b7730daa,"Turntimber Symbiosis // Turntimber, Serpentine Wood",ZNR,364,EN,NF,NM,6.00,7.85,10.00,4.25,0
+mtg_single,3073a16e-31ee-41b8-9070-1319cf2e1310,Tuskguard Captain,ZNC,85,EN,NF,NM,0.15,0.20,,0.20,0
+mtg_single,e54615cb-81cb-4440-b853-694e11368e7b,Umara Mystic,ZNR,238,EN,NF,NM,0.15,0.20,0.15,0.19,0
+mtg_single,0c61a8dd-323f-439f-8be8-8310c31f1d56,Umara Mystic,AZNR,80,EN,NF,NM,0.50,,,,0
+mtg_single,8f357d56-9b74-4b29-8ff5-31f379cfa6e0,Umara Wizard,AZNR,52,EN,NF,NM,0.55,,,,0
+mtg_single,27ef91c5-1dc6-45d3-b769-316180685dfa,Umara Wizard // Umara Skyfalls,ZNR,86,EN,NF,NM,0.15,0.21,0.20,0.16,0
+mtg_single,80c8dabb-cd0c-4ca8-9ba9-81c67b791fd5,Utility Knife,ZNR,256,EN,NF,NM,0.15,0.19,0.15,0.15,0
+mtg_single,ecac589e-7377-43bb-91ae-21ba68c2b691,Valakut Awakening // Valakut Stoneforge,ZNR,174,EN,NF,NM,14.25,15.70,17.04,13.50,0
+mtg_single,f892bbbb-fab0-4f8b-ba3c-8c39414cb42d,Valakut Awakening // Valakut Stoneforge,ZNR,355,EN,NF,NM,19.99,19.92,21.10,14.40,0
+mtg_single,14a4fec8-2c51-4881-b4ad-6db6320d97a8,Valakut Exploration,ZNR,175,EN,NF,NM,2.25,2.71,3.77,5.99,0
+mtg_single,4dfe9fb9-ffb7-4e03-8893-160a178b2691,Valakut Exploration,PZNR,175p,EN,NF,NM,4.22,4.07,4.19,4.07,0
+mtg_single,b057fda4-f3b7-4b17-a45e-0ce9ae53a187,Valakut Exploration,ZNR,303,EN,NF,NM,2.49,2.76,4.74,2.91,0
+mtg_single,48584a70-41ea-4dfd-8f95-ae06fc820fbb,"Valakut, the Molten Pinnacle",ZNE,29,EN,NF,NM,24.80,23.88,30.18,23.35,0
+mtg_single,051ba12d-bc8b-44cb-bd2f-04079c2a923b,Vanquish the Weak,ZNR,131,EN,NF,NM,0.15,0.15,0.15,0.15,0
+mtg_single,ed88dd69-8f4d-4562-a082-000b72b23557,Vastwood Fortification // Vastwood Thicket,ZNR,216,EN,NF,NM,0.15,0.27,0.34,0.15,0
+mtg_single,d9d0a2d0-e513-460c-998c-7d36bdd1330a,Vastwood Surge,ZNR,217,EN,NF,NM,0.15,0.16,0.38,0.15,0
+mtg_single,fd0b6039-792b-411f-91a3-199ffb1289c1,"Verazol, the Split Current",ZNR,239,EN,NF,NM,0.15,0.21,0.17,0.17,0
+mtg_single,aeb4865f-5691-4a83-bdf8-89e8d5887457,"Verazol, the Split Current",PZNR,239p,EN,NF,NM,0.18,,,,0
+mtg_single,fab8228e-3772-40d8-9f4b-46dc9d621bb7,"Verazol, the Split Current",ZNR,370,EN,NF,NM,0.25,0.29,0.36,0.15,0
+mtg_single,4c8d96fe-381c-41fd-b9fd-d26ea6ea28f3,Verdant Catacombs,ZNE,8,EN,NF,NM,47.99,48.04,62.64,31.79,0
+mtg_single,1c471d75-1be4-466c-b754-fe411d95dfe7,Veteran Adventurer,ZNR,218,EN,NF,NM,0.15,0.18,0.49,0.17,0
+mtg_single,cfa5fdfe-b0bc-46d7-96de-4164ec6ae3ec,Vine Gecko,ZNR,219,EN,NF,NM,0.15,0.16,0.32,0.15,0
+mtg_single,441c07e4-76c6-45e7-b8e6-0a37732967dc,Waker of the Wilds,ZNC,86,EN,NF,NM,0.15,0.20,,0.19,0
+mtg_single,20ee8419-620c-4a2d-8b2e-db11d69147fe,Wasteland,ZNE,30,EN,NF,NM,28.50,28.64,34.40,28.26,0
+mtg_single,80c9ff67-ac69-4256-900b-d242eda8e792,Wasteland,AZNR,36,EN,NF,NM,1.00,1.00,,1.00,0
+mtg_single,e119bc26-b3aa-4724-afae-05a950e68e0a,Wayward Guide-Beast,ZNR,176,EN,NF,NM,0.15,0.18,0.19,0.20,0
+mtg_single,44614196-ca9a-468a-8344-97a08ab6ca89,Wayward Guide-Beast,PZNR,176p,EN,NF,NM,0.39,0.19,,0.19,0
+mtg_single,7e01cfcb-421b-4413-8f33-a81c1eb378eb,Wayward Guide-Beast,ZNR,356,EN,NF,NM,0.15,0.21,,0.15,0
+mtg_single,c80c858a-3578-4406-9839-44d08f15b824,Whirler Rogue,ZNC,39,EN,NF,NM,0.15,0.17,,0.17,0
+mtg_single,9db262fc-d419-417c-8b12-4ccba10ea70f,Whispersteel Dagger,ZNC,5,EN,NF,NM,0.15,0.21,,0.21,0
+mtg_single,2049e913-24c9-4f2b-a605-a377ecf0c931,Windrider Wizard,ZNR,87,EN,NF,NM,0.15,0.18,0.27,0.15,0
+mtg_single,f3db395e-e581-423a-8b99-bf2e8a60be6b,Windswept Heath,AZNR,30,EN,NF,NM,0.70,1.00,,1.00,0
+mtg_single,7c343dd5-c779-45a1-b4b7-5686b3298720,Windswept Heath,ZNE,5,EN,NF,NM,31.00,30.76,74.49,24.81,0
+mtg_single,420cce10-dffa-49f4-9658-4266dea1de38,Wooded Foothills,ZNE,4,EN,NF,NM,33.18,33.46,60.63,27.92,0
+mtg_single,9692c402-e6ea-40e0-b9e2-8bd1e7385426,"Yasharn, Implacable Earth",ZNR,240,EN,NF,NM,0.15,0.48,0.47,0.49,0
+mtg_single,1554492a-f94d-48ae-8e84-5ce17cd3129a,"Yasharn, Implacable Earth",PZNR,240p,EN,NF,NM,0.53,0.60,,0.60,0
+mtg_single,13340fb6-018f-4d3b-bfff-68e57402652f,"Yasharn, Implacable Earth",ZNR,371,EN,NF,NM,0.78,0.86,0.88,0.72,0
+mtg_single,8021b0cd-e5e0-4678-af7a-26561d86015a,"Yasharn, Implacable Earth",AZNR,81,EN,NF,NM,0.75,,,,0
+mtg_single,5957a702-a76d-45ee-9755-d837b05483fa,Yavimaya Elder,ZNC,87,EN,NF,NM,0.15,0.20,,0.20,0
+mtg_single,0fce6231-8f5c-4c23-9aeb-5bca3c633ed7,"Zagras, Thief of Heartbeats",ZNR,241,EN,NF,NM,0.17,0.24,0.41,0.24,0
+mtg_single,a2468a14-6173-455c-ba08-d8db5e175a52,"Zagras, Thief of Heartbeats",PZNR,241p,EN,NF,NM,0.40,0.25,0.72,0.25,0
+mtg_single,f827e9aa-8462-4497-848f-06214308a8f5,"Zagras, Thief of Heartbeats",ZNR,372,EN,NF,NM,0.48,0.54,0.48,0.50,0
+mtg_single,4460afce-0f0d-4c15-b329-062aebaa54d0,"Zareth San, the Trickster",ZNR,242,EN,NF,NM,0.15,0.17,0.27,0.16,0
+mtg_single,2b98f89d-9a25-48ae-9d22-e3bbf303c296,"Zareth San, the Trickster",PZNR,242p,EN,NF,NM,0.39,0.48,0.41,0.48,0
+mtg_single,20f08c8d-cf35-487f-b3e5-a710ba7a63ef,"Zareth San, the Trickster",ZNR,373,EN,NF,NM,0.37,0.47,0.50,0.44,0
+mtg_single,1cd8dc7e-c2ee-485c-8efa-28314ad78ca8,Zendikar's Roil,ZNC,88,EN,NF,NM,0.47,0.63,,0.63,0
+mtg_single,ee5295d5-e479-4776-ae9d-59c4e2e258dd,Zof Consumption // Zof Bloodbog,ZNR,132,EN,NF,NM,0.15,0.20,0.32,0.28,0
+mtg_single,c478d9e6-6ef0-4763-8256-451e94f60c92,Zulaport Cutthroat,ZNC,57,EN,NF,NM,1.10,1.28,,1.28,0
+mtg_single,24ca42be-92e7-40ad-953c-8d456e8c1b97,Zulaport Duelist,ZNR,88,EN,NF,NM,0.15,0.18,0.15,0.16,0
+mtg_sealed,22daa1a1-a2a6-43cf-a174-fd63d4ba5e49,Zendikar Rising Bundle,ZNR,,EN,,,68.72,72.33,,0.15,0
+mtg_sealed,13335337-ff88-4fa3-942f-487a251e1710,Zendikar Rising Bundle Gift Edition,ZNR,,EN,,,,83.99,,0.15,0
+mtg_sealed,42eea626-f95a-4924-8892-afa8a7e58c0a,Zendikar Rising Collector Booster Box,ZNR,,EN,,,474.94,365.00,,0.15,0
+mtg_sealed,759cad96-3cf1-473b-bf6a-989a28bb7fe2,Zendikar Rising Collector Booster Box Case,ZNR,,EN,,,,,,0.15,0
+mtg_sealed,dc4428ed-34bc-4437-a6dd-f382099a030d,Zendikar Rising Collector Booster Hanger Pack,ZNR,,EN,,,,,,0.15,0
+mtg_sealed,a7a2d410-f615-49ab-ba9e-59e2bfeb6c6c,Zendikar Rising Collector Booster Pack,ZNR,,EN,,,37.99,37.99,,0.15,0
+mtg_sealed,2d39d824-eaa2-41b3-9e1b-4a147fccab99,Zendikar Rising Commander Deck Display,ZNC,,EN,,,,,,,0
+mtg_sealed,ff74b7fb-2b4f-40cf-bde5-8ac1d5fafbfa,Zendikar Rising Commander Deck Lands Wrath,ZNC,,EN,,,39.99,39.99,,39.99,0
+mtg_sealed,d76c79d0-6d10-4d4f-873b-4cc68aacb096,Zendikar Rising Commander Deck Sneak Attack,ZNC,,EN,,,45.00,35.00,,35.00,0
+mtg_sealed,72b1c8ee-0aea-4ee8-a9ac-470eae0469b0,Zendikar Rising Commander Decks Set of 2,ZNC,,EN,,,,,,,0
+mtg_sealed,549437cd-2c2c-414a-8bd2-ce214d01d706,Zendikar Rising Draft Booster Box,ZNR,,EN,,,187.00,135.73,,0.15,0
+mtg_sealed,852d19ee-261b-49ae-892a-529701c67e2a,Zendikar Rising Draft Booster Box Case,ZNR,,EN,,,,,,0.15,0
+mtg_sealed,884a0590-533a-4513-8b74-2b7561739376,Zendikar Rising Draft Booster Pack,ZNR,,EN,,,4.84,4.95,,0.15,0
+mtg_sealed,561699ac-2f66-4418-aea9-33b18ed90d14,Zendikar Rising Expedition Box Topper Pack,ZNE,,EN,,,53.98,43.18,,0.15,0
+mtg_sealed,42e750e0-a2e7-44f8-939d-7bb19356bb49,Zendikar Rising MTGO Redemption,ZNR,,EN,,,,,,0.15,0
+mtg_sealed,46a050d7-1135-4950-ae84-94c356269a68,Zendikar Rising MTGO Redemption Foil,ZNR,,EN,,,,,,0.15,0
+mtg_sealed,456b2208-a926-4844-9dee-af4e9c300fa5,Zendikar Rising Prerelease Pack,ZNR,,EN,,,33.99,29.58,,0.15,0
+mtg_sealed,cce64a05-b669-46e3-a782-75a90864d648,Zendikar Rising Prerelease Pack Case,ZNR,,EN,,,,,,0.15,0
+mtg_sealed,c4e43330-d5df-4e1b-bec1-c9bee0b0d474,Zendikar Rising Set Booster Box,ZNR,,EN,,,224.99,165.98,,0.15,0
+mtg_sealed,3b147f68-e4b2-4fe8-bca8-a8e1ae6d649d,Zendikar Rising Set Booster Box Case,ZNR,,EN,,,,,,0.15,0
+mtg_sealed,59d34066-3ac7-4cb9-af3e-b5b19d0fcd48,Zendikar Rising Set Booster Pack,ZNR,,EN,,,6.49,6.00,,0.15,0
+mtg_sealed,1e598504-1c9e-4dfd-ace0-cd163982ca89,Zendikar Rising Theme Booster Black,ZNR,,EN,,,34.98,,,0.15,0
+mtg_sealed,5d01c6ef-6027-467b-bfcf-b442afaccaea,Zendikar Rising Theme Booster Blue,ZNR,,EN,,,,,,0.15,0
+mtg_sealed,90688e23-77e7-4a84-adca-3ff3391dc9ee,Zendikar Rising Theme Booster Box,ZNR,,EN,,,,,,0.15,0
+mtg_sealed,2d81a691-b4fc-4b49-8a5e-635c582bc366,Zendikar Rising Theme Booster Box Case,ZNR,,EN,,,,,,0.15,0
+mtg_sealed,3e71ff6d-189b-4bad-b0c7-62960cebfc57,Zendikar Rising Theme Booster Green,ZNR,,EN,,,,,,0.15,0
+mtg_sealed,5f05d27c-080c-4f0a-ae7e-97389c2578ad,Zendikar Rising Theme Booster Party,ZNR,,EN,,,,,,0.15,0
+mtg_sealed,1cb94049-e343-4822-ac88-9ce185f35604,Zendikar Rising Theme Booster Red,ZNR,,EN,,,,,,0.15,0
+mtg_sealed,e86e1e39-2dba-4161-9f40-4786e98f1398,Zendikar Rising Theme Booster Set of 6,ZNR,,EN,,,,,,0.15,0
+mtg_sealed,fe1935cc-a412-4193-9a30-697edcec471c,Zendikar Rising Theme Booster White,ZNR,,EN,,,6.99,,,0.15,0
+mtg_sealed,9b1c4f47-312a-4e93-abd4-07f53788bf7d,Zendikar Rising Welcome Booster,ZNR,,EN,,,,,,0.15,0
