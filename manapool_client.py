@@ -277,6 +277,60 @@ def push_inventory_batch(
     return total_updated, errors
 
 
+def get_inventory_item(product_id: str, product_type: str = "mtg_single") -> Tuple[Optional[Dict[str, Any]], str]:
+    """Reads the live storefront listing for one product (GET, read only).
+
+    Args:
+        product_id (str): ManaPool product UUID.
+        product_type (str): 'mtg_single' or 'mtg_sealed'.
+
+    Returns:
+        Tuple[Optional[Dict[str, Any]], str]: (inventory item or None, status message).
+            A 404 means the seller has no listing for that product yet.
+    """
+    if not is_configured():
+        return None, "ManaPool API is not configured."
+    url = f"{BASE_URL}/seller/inventory/product/{product_type}/{product_id}"
+    resp = requests.get(url, headers=get_headers(), timeout=15)
+    if resp.status_code == 200:
+        return resp.json().get("inventory"), "ok"
+    if resp.status_code == 404:
+        return None, "no listing (404)"
+    return None, f"HTTP {resp.status_code}: {resp.text[:200]}"
+
+
+def push_one_product(product_id: str, send: bool = False) -> Dict[str, Any]:
+    """Pushes a single product's database total to ManaPool, reading the listing before and after.
+
+    Args:
+        product_id (str): ManaPool product UUID present in inventory.
+        send (bool): Actually POST. If False, only reads the live listing and shows the payload.
+
+    Returns:
+        Dict[str, Any]: payload entry, 'before' / 'after' listings, HTTP result and errors.
+    """
+    with db.get_db_cursor(commit=False) as cur:
+        cur.execute(
+            "SELECT manapool_product_id, manapool_listed_price, quantity FROM inventory WHERE manapool_product_id = %s;",
+            (product_id,),
+        )
+        rows = [dict(r) for r in cur.fetchall()]
+    if not rows:
+        raise ValueError(f"Product {product_id} is not in inventory.")
+
+    payload = build_inventory_payload(rows, aggregate_with_db=True)
+    before, before_status = get_inventory_item(product_id)
+    result: Dict[str, Any] = {"payload": payload[0], "before": before, "before_status": before_status,
+                              "sent": False, "after": None, "errors": []}
+    if not send:
+        return result
+
+    updated, errors = push_inventory_batch(rows, aggregate_with_db=True)
+    after, after_status = get_inventory_item(product_id)
+    result.update({"sent": True, "updated": updated, "errors": errors, "after": after, "after_status": after_status})
+    return result
+
+
 def preview_push(
     set_codes: Optional[List[str]] = None,
     baseline_csv: Optional[str] = None,
@@ -385,7 +439,29 @@ def main() -> None:
     p_prev.add_argument("--baseline", default="backups/inventory-manapool-audited-20260927.csv",
                         help="ManaPool export to compare against (what is live on the storefront)")
     p_prev.add_argument("--output-dir", default="exports")
+    p_one = sub.add_parser("push-one", help="Push one product's database total (reads the live listing before/after)")
+    p_one.add_argument("--product", required=True, help="ManaPool product UUID")
+    p_one.add_argument("--send", action="store_true", help="Actually send; without it only reads and shows the payload")
     args = parser.parse_args()
+
+    if args.command == "push-one":
+        def show(label: str, item: Optional[Dict[str, Any]], status: str) -> None:
+            if item:
+                price = item.get("price_cents")
+                print(f"{label}: quantity={item.get('quantity')} price={'-' if price is None else f'${price / 100:.2f}'}")
+            else:
+                print(f"{label}: {status}")
+
+        res = push_one_product(args.product, send=args.send)
+        print(f"Payload: {res['payload']}")
+        show("Live before", res["before"], res["before_status"])
+        if not res["sent"]:
+            print("[DRY RUN - nothing sent] Re-run with --send to push this one product.")
+            return
+        for e in res["errors"]:
+            print(f"[ManaPool error] {e}", file=sys.stderr)
+        show("Live after ", res["after"], res["after_status"])
+        return
 
     if args.command == "preview-push":
         res = preview_push(args.sets, args.baseline, args.output_dir)

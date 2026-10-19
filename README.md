@@ -45,6 +45,8 @@ A high-velocity inventory management station and fulfillment optimizer for Magic
 5. **ManaPool API v1 Integration (`manapool_client.py`)**:
    - `python manapool_client.py` checks credentials with a read-only `GET /account`.
    - `python manapool_client.py preview-push [--set MOM ...]` is a dry run: it builds the exact payload a push would send, compares it with the backup export (what is live while the store is frozen), and writes a comparison CSV plus the JSON payload. Nothing is sent.
+   - `python manapool_client.py push-one --product <uuid> [--send]` reads the live listing, shows the payload, and with `--send` pushes just that product and reads it back.
+   - Endpoints and payloads follow ManaPool's published spec: https://manapool.com/api/docs/v1/openapi.json
    - Direct batch inventory updates via `POST /seller/inventory/product` (up to 2,000 items per request).
    - Automated unfulfilled order retrieval and item parsing.
    - Graceful fallback to offline CSV mode when API credentials are not set.

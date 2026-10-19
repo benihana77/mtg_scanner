@@ -1009,6 +1009,29 @@ class TestMTGInterimPipeline(unittest.TestCase):
         self.assertEqual(payload, {"pid-kept": 2, "pid-grown": 3, "pid-new": 1})
 
 
+    def test_15_push_one_product_dry_run_and_send(self):
+        """push_one_product only reads unless send=True, then POSTs one entry and reads back."""
+        rows = [{**self.token_row("TESTO", "1", "One Card", layout="normal", qty="4"), "price": "0.15", "product_id": "8c454fe6-48a4-43cd-838b-b0aa6eb7ec11"}]
+        csv_file = self.create_mock_manapool_csv("one.csv", rows)
+        csv_pipeline.ingest_csv_batch(csv_file, box_label="TestBox-1", output_dir=self.test_dir)
+        pid = rows[0]["product_id"]
+
+        live = [{"inventory": {"quantity": 3, "price_cents": 15}}, {"inventory": {"quantity": 4, "price_cents": 15}}]
+        get_resp = [MagicMock(status_code=200, json=MagicMock(return_value=v)) for v in live]
+        with patch.object(manapool_client, "is_configured", return_value=True), \
+             patch("requests.get", side_effect=[get_resp[0], get_resp[0], get_resp[1]]) as mock_get, \
+             patch("requests.post", return_value=MagicMock(status_code=200)) as mock_post:
+            dry = manapool_client.push_one_product(pid)
+            mock_post.assert_not_called()
+            sent = manapool_client.push_one_product(pid, send=True)
+
+        self.assertEqual(dry["payload"], {"product_type": "mtg_single", "product_id": pid, "quantity": 4, "price_cents": 15})
+        self.assertFalse(dry["sent"])
+        self.assertEqual(mock_post.call_args[1]["json"], [dry["payload"]])
+        self.assertEqual((sent["before"]["quantity"], sent["after"]["quantity"]), (3, 4))
+        self.assertIn(f"/seller/inventory/product/mtg_single/{pid}", mock_get.call_args[0][0])
+
+
 if __name__ == "__main__":
     unittest.main()
 
