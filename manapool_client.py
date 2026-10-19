@@ -425,6 +425,54 @@ def preview_push(
     return {"rows": rows, "counts": counts, "csv_path": os.path.abspath(csv_path), "json_path": os.path.abspath(json_path)}
 
 
+def push_changed(
+    set_codes: Optional[List[str]] = None,
+    baseline_csv: Optional[str] = None,
+    send: bool = False,
+    output_dir: str = "exports",
+) -> Dict[str, Any]:
+    """Pushes only the products whose quantity differs from the baseline (or are new), then verifies.
+
+    Uses the same payload as `preview_push`. After sending, every pushed product is read back
+    from ManaPool and compared with what was sent.
+
+    Args:
+        set_codes (Optional[List[str]]): Set codes to include.
+        baseline_csv (Optional[str]): ManaPool export to compare against.
+        send (bool): Actually POST; otherwise just report what would be sent.
+        output_dir (str): Folder for the preview files.
+
+    Returns:
+        Dict[str, Any]: preview result plus 'to_push', 'updated', 'errors' and 'mismatches'.
+    """
+    import json
+
+    preview = preview_push(set_codes, baseline_csv, output_dir)
+    changed_ids = {r["product_id"] for r in preview["rows"] if "QTY CHANGE" in r["flags"] or "NOT IN BASELINE" in r["flags"]}
+    with open(preview["json_path"], encoding="utf-8") as f:
+        payload = [e for e in json.load(f) if e["product_id"] in changed_ids]
+    result: Dict[str, Any] = {**preview, "to_push": payload, "updated": 0, "errors": [], "mismatches": [], "sent": False}
+    if not send or not payload:
+        return result
+
+    url = f"{BASE_URL}/seller/inventory/product"
+    resp = requests.post(url, headers=get_headers(), json=payload, timeout=60)
+    result["sent"] = True
+    if resp.status_code not in (200, 204):
+        result["errors"].append(f"HTTP {resp.status_code}: {resp.text[:500]}")
+        return result
+    result["updated"] = len(payload)
+
+    for e in payload:
+        time.sleep(0.05)
+        item, status = get_inventory_item(e["product_id"])
+        live_qty = item.get("quantity") if item else None
+        live_price = item.get("price_cents") if item else None
+        if live_qty != e["quantity"] or (e["price_cents"] is not None and live_price != e["price_cents"]):
+            result["mismatches"].append({"product_id": e["product_id"], "sent": e, "live": item, "status": status})
+    return result
+
+
 def main() -> None:
     """CLI entry point: connection test (default) or a push dry run."""
     import argparse
@@ -439,10 +487,28 @@ def main() -> None:
     p_prev.add_argument("--baseline", default="backups/inventory-manapool-audited-20260927.csv",
                         help="ManaPool export to compare against (what is live on the storefront)")
     p_prev.add_argument("--output-dir", default="exports")
+    p_chg = sub.add_parser("push-changed", help="Push only products that differ from the baseline, then verify each")
+    p_chg.add_argument("--set", dest="sets", action="append", required=True, help="Set code to include (repeatable)")
+    p_chg.add_argument("--baseline", default="backups/inventory-manapool-audited-20260927.csv")
+    p_chg.add_argument("--send", action="store_true", help="Actually send; without it only lists what would be sent")
+    p_chg.add_argument("--output-dir", default="exports")
     p_one = sub.add_parser("push-one", help="Push one product's database total (reads the live listing before/after)")
     p_one.add_argument("--product", required=True, help="ManaPool product UUID")
     p_one.add_argument("--send", action="store_true", help="Actually send; without it only reads and shows the payload")
     args = parser.parse_args()
+
+    if args.command == "push-changed":
+        res = push_changed(args.sets, args.baseline, send=args.send, output_dir=args.output_dir)
+        print(f"{len(res['to_push'])} products differ from the baseline (payload: {res['json_path']}).")
+        if not res["sent"]:
+            print("[DRY RUN - nothing sent] Re-run with --send to push them.")
+            return
+        for e in res["errors"]:
+            print(f"[ManaPool error] {e}", file=sys.stderr)
+        print(f"Pushed {res['updated']} products; read back {len(res['to_push'])}: {len(res['mismatches'])} mismatches.")
+        for m in res["mismatches"]:
+            print(f"  MISMATCH {m['product_id']}: sent qty {m['sent']['quantity']}, live {m['live'] and m['live'].get('quantity')} ({m['status']})")
+        return
 
     if args.command == "push-one":
         def show(label: str, item: Optional[Dict[str, Any]], status: str) -> None:

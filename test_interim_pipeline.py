@@ -1032,6 +1032,39 @@ class TestMTGInterimPipeline(unittest.TestCase):
         self.assertIn(f"/seller/inventory/product/mtg_single/{pid}", mock_get.call_args[0][0])
 
 
+    def test_16_push_changed_sends_only_differences_and_verifies(self):
+        """push_changed sends only changed/new products and reports read-back mismatches."""
+        rows = [
+            {**self.token_row("TESTC", "1", "Same Card", layout="normal", qty="2"), "price": "0.30", "product_id": "pid-same"},
+            {**self.token_row("TESTC", "2", "Up Card", layout="normal", qty="3"), "price": "0.40", "product_id": "pid-up"},
+            {**self.token_row("TESTC", "3", "New Card", layout="normal", qty="1"), "price": "0.50", "product_id": "pid-new"},
+        ]
+        csv_file = self.create_mock_manapool_csv("changed.csv", rows)
+        csv_pipeline.ingest_csv_batch(csv_file, box_label="TestBox-1", output_dir=self.test_dir)
+        baseline = os.path.join(self.test_dir, "baseline_c.csv")
+        with open(baseline, "w", newline="", encoding="utf-8") as f:
+            writer = csv.writer(f)
+            writer.writerow(["product_id", "quantity", "price"])
+            writer.writerow(["pid-same", "2", "0.30"])
+            writer.writerow(["pid-up", "1", "0.40"])
+
+        live = {"pid-up": {"quantity": 3, "price_cents": 40}, "pid-new": {"quantity": 0, "price_cents": 50}}
+        def fake_get(url, **kwargs):
+            pid = url.rsplit("/", 1)[-1]
+            return MagicMock(status_code=200, json=MagicMock(return_value={"inventory": live[pid]}))
+
+        with patch.object(manapool_client, "is_configured", return_value=True), \
+             patch("requests.get", side_effect=fake_get), \
+             patch("requests.post", return_value=MagicMock(status_code=200)) as mock_post:
+            dry = manapool_client.push_changed(["TESTC"], baseline, send=False, output_dir=self.test_dir)
+            mock_post.assert_not_called()
+            res = manapool_client.push_changed(["TESTC"], baseline, send=True, output_dir=self.test_dir)
+
+        self.assertEqual(sorted(e["product_id"] for e in dry["to_push"]), ["pid-new", "pid-up"])
+        self.assertEqual(sorted(e["product_id"] for e in mock_post.call_args[1]["json"]), ["pid-new", "pid-up"])
+        self.assertEqual([m["product_id"] for m in res["mismatches"]], ["pid-new"])  # live qty 0 != sent 1
+
+
 if __name__ == "__main__":
     unittest.main()
 
