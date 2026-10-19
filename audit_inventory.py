@@ -5,8 +5,7 @@ Implements Strategy B:
 2. Updates 'Manapool Print Format - Set_Box Map.csv' with a backup.
 3. Generates a physical Token Extraction Walk Sheet (exports/token_extraction_pull_sheet.txt)
    guiding the operator to pull all 363 tokens from their base set boxes (M1..M19).
-4. Generates a clean alphabetical divider slip for the new dedicated TOKENS box.
-5. Verifies that 100% of all 44,295 cards are mapped with 0 unassigned.
+4. Verifies that 100% of all 44,295 cards are mapped with 0 unassigned.
 """
 
 import argparse
@@ -141,63 +140,6 @@ def generate_token_extraction_sheet(
     return os.path.abspath(sheet_path)
 
 
-def generate_token_box_divider_slip(
-    token_summary: List[Dict[str, Any]],
-    output_dir: str = "exports",
-    token_box_label: str = "TOKENS",
-) -> str:
-    """Generates an alphabetical index divider slip for the new dedicated token box."""
-    os.makedirs(output_dir, exist_ok=True)
-    slip_path = os.path.join(output_dir, f"divider_{token_box_label}.txt")
-
-    # Collect all token items and sort alphabetically by token name
-    all_tokens = []
-    for ts in token_summary:
-        for it in ts["items"]:
-            all_tokens.append(it)
-
-    all_tokens.sort(key=lambda x: (
-        (x.get("name") or "").strip().lower(),
-        x.get("set", "").upper(),
-        str(x.get("number") or "")
-    ))
-
-    total_cards = sum(int(it.get("quantity", 1)) for it in all_tokens)
-    header = f"""========================================================================================
-                      PHYSICAL SECTION DIVIDER SLIP: DEDICATED TOKEN BOX
-========================================================================================
- Box:       {token_box_label}
- Contents:  All Magic: The Gathering Tokens ({total_cards} cards across {len(all_tokens)} titles)
- Sorting:   Strictly Alphabetical by Token Name (Index #001 to #{len(all_tokens):03d})
-========================================================================================
-"""
-    table_rows = []
-    for idx, it in enumerate(all_tokens, start=1):
-        table_rows.append([
-            f"#{idx:03d}",
-            it.get("name", "")[:30],
-            it.get("set", "").upper(),
-            it.get("number", ""),
-            it.get("finish", "NF"),
-            it.get("condition", "NM"),
-            it.get("quantity", 1),
-            f"${float(it.get('price', 0) or 0):.2f}",
-        ])
-
-    table_txt = tabulate(
-        table_rows,
-        headers=["Index", "Token Name", "Set", "Num", "Finish", "Cond", "Qty", "Price"],
-        tablefmt="simple",
-    )
-
-    with open(slip_path, "w", encoding="utf-8") as f:
-        f.write(header)
-        f.write(table_txt)
-        f.write("\n========================================================================================\n")
-
-    return os.path.abspath(slip_path)
-
-
 def prompt_for_unmapped_sets(
     unmapped_sets: Dict[str, List[Dict[str, Any]]],
     raw_map_rows: List[Dict[str, str]],
@@ -315,21 +257,15 @@ def run_audit(
     print(f"  * Regular MTG Singles: {total_regular_cards:,} cards ({len(regular_rows):,} listings)")
     print(f"  * Tokens:              {total_token_cards:,} cards ({len(token_rows):,} listings across 37 sets)")
 
-    # 4. Strategy B: Generate Token Extraction Sheet & Divider Slip
+    # 4. Strategy B: Generate Token Extraction Sheet
     token_summary = get_token_sets_summary(active_inventory, set_to_box)
     sheet_path = generate_token_extraction_sheet(
         token_summary=token_summary,
         output_dir=output_dir,
         token_box_label=token_box_label,
     )
-    slip_path = generate_token_box_divider_slip(
-        token_summary=token_summary,
-        output_dir=output_dir,
-        token_box_label=token_box_label,
-    )
     print(f"\n[Strategy B Ready] Dedicated Token Extraction:")
     print(f"  -> Pull Sheet:  {sheet_path}")
-    print(f"  -> Divider Slip:{slip_path}")
 
     # 5. Check for unmapped regular sets
     unmapped_regular_sets: Dict[str, List[Dict[str, Any]]] = {}

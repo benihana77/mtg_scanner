@@ -1,10 +1,14 @@
 """Automated test suite for MTG Interim Inventory Management Pipeline.
 
+Runs against a separate database (TEST_DB_NAME, default 'mtg_inventory_test') that is
+created if missing and rebuilt from schema.sql on every run; the live inventory database
+is never touched. Every mock CSV row is also seeded into the test scryfall_cards table.
+
 Tests:
 1. Database schema initialization & connection.
 2. Section auto-allocation (Sec-1, Sec-2, etc.).
 3. Strict alphabetical sorting by card name & sequential 1..N index assignment.
-4. ManaPool upload CSV generation & divider slip formatting.
+4. ManaPool upload CSV generation.
 5. Box reallocation (Box Shuffle when space runs out).
 6. Fulfillment picklist path optimization (Box -> Set -> Section -> Index).
 7. Stock quantity decrement upon pick commitment.
@@ -15,6 +19,7 @@ import os
 import shutil
 import unittest
 import psycopg2
+from psycopg2 import extras
 
 import db
 import csv_pipeline
@@ -28,27 +33,86 @@ class TestMTGInterimPipeline(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        """Initializes database schema and test directory."""
+        """Points db at a dedicated test database, rebuilds its schema, creates test directory."""
         cls.test_dir = "test_exports"
         os.makedirs(cls.test_dir, exist_ok=True)
+        cls.live_db_name = db.DB_NAME
+        test_db_name = os.getenv("TEST_DB_NAME", "mtg_inventory_test")
+        if test_db_name == cls.live_db_name:
+            raise RuntimeError("TEST_DB_NAME must differ from the live DB_NAME.")
+
+        admin = psycopg2.connect(host=db.DB_HOST, port=db.DB_PORT, dbname="postgres", user=db.DB_USER, password=db.DB_PASS)
+        admin.autocommit = True
+        with admin.cursor() as cur:
+            cur.execute("SELECT 1 FROM pg_database WHERE datname = %s;", (test_db_name,))
+            if not cur.fetchone():
+                cur.execute(f'CREATE DATABASE "{test_db_name}";')
+        admin.close()
+
+        db.DB_NAME = test_db_name
+        with db.get_db_cursor() as cur:
+            cur.execute("DROP TABLE IF EXISTS price_history, inventory, cards, scryfall_cards CASCADE;")
         db.init_db()
 
     @classmethod
     def tearDownClass(cls):
-        """Cleans up test exports directory."""
+        """Restores the live database name and cleans up test exports directory."""
+        db.DB_NAME = cls.live_db_name
         if os.path.exists(cls.test_dir):
             shutil.rmtree(cls.test_dir)
 
     def setUp(self):
-        """Cleans test rows from inventory and cards tables before each test."""
-        with db.get_connection() as conn:
-            with conn.cursor() as cur:
-                cur.execute("DELETE FROM inventory WHERE box_label LIKE 'TestBox%';")
-                cur.execute("DELETE FROM cards WHERE set_code LIKE 'TEST%';")
-            conn.commit()
+        """Empties the test database's inventory and catalog before each test."""
+        with db.get_db_cursor() as cur:
+            cur.execute("TRUNCATE inventory, price_history, scryfall_cards RESTART IDENTITY;")
+        # Use a test Set/Box map (no TOKENS row) instead of the real one.
+        self.write_set_box_map({})
+
+    def tearDown(self):
+        csv_pipeline.SET_BOX_MAP_CSV = self._real_map
+
+    def write_set_box_map(self, mapping: dict) -> None:
+        """Points csv_pipeline at a test Set/Box map containing only `mapping`."""
+        path = os.path.join(self.test_dir, "set_box_map.csv")
+        with open(path, "w", newline="", encoding="utf-8") as f:
+            writer = csv.writer(f)
+            writer.writerow(["set_label", "Box"])
+            for code, box in mapping.items():
+                writer.writerow([f"({code}) Test", box])
+        if not hasattr(self, "_real_map"):
+            self._real_map = csv_pipeline.SET_BOX_MAP_CSV
+        csv_pipeline.SET_BOX_MAP_CSV = path
+
+    def seed_scryfall_cards(self, rows: list) -> None:
+        """Inserts a test scryfall_cards row for each mock ManaPool row (layout from 'layout', default normal)."""
+        values = [
+            (
+                f"sf-{r['set'].lower()}-{r['number'].lower()}",
+                r["name"],
+                r["set"].upper(),
+                "token" if r.get("layout") in ("token", "emblem", "double_faced_token") else "expansion",
+                r["number"],
+                "common",
+                r.get("layout", "normal"),
+                "Card",
+                None,
+                extras.Json({}),
+            )
+            for r in rows
+            if not r.get("_skip_seed")
+        ]
+        if not values:
+            return
+        with db.get_db_cursor() as cur:
+            extras.execute_values(cur, """
+                INSERT INTO scryfall_cards (scryfall_id, name, set_code, set_type, collector_number,
+                                            rarity, layout, type_line, image_uri, raw)
+                VALUES %s ON CONFLICT (scryfall_id) DO NOTHING;
+            """, values)
 
     def create_mock_manapool_csv(self, filename: str, rows: list) -> str:
         """Helper to create a mock ManaPool set CSV."""
+        self.seed_scryfall_cards(rows)
         path = os.path.join(self.test_dir, filename)
         fieldnames = [
             "product_type", "product_id", "name", "set", "number", "language",
@@ -56,7 +120,7 @@ class TestMTGInterimPipeline(unittest.TestCase):
             "price", "quantity"
         ]
         with open(path, "w", newline="", encoding="utf-8") as f:
-            writer = csv.DictWriter(f, fieldnames=fieldnames)
+            writer = csv.DictWriter(f, fieldnames=fieldnames, extrasaction="ignore")
             writer.writeheader()
             for r in rows:
                 writer.writerow(r)
@@ -144,7 +208,7 @@ class TestMTGInterimPipeline(unittest.TestCase):
         query = """
             SELECT i.index_num, c.name, i.section_label, i.quantity, i.is_foil
             FROM inventory i
-            JOIN cards c ON i.scryfall_id = c.scryfall_id
+            JOIN scryfall_cards c ON i.scryfall_id = c.scryfall_id
             WHERE i.box_label = 'TestBox-1' AND LOWER(c.set_code) = 'test'
             ORDER BY i.index_num;
         """
@@ -168,14 +232,9 @@ class TestMTGInterimPipeline(unittest.TestCase):
         self.assertEqual(rows[2]["name"], "Zulaport Cutthroat")
         self.assertEqual(rows[2]["quantity"], 2)
 
-        # Verify divider slip was created
-        self.assertTrue(len(res["slips"]) > 0)
-        self.assertTrue(os.path.isfile(res["slips"][0]))
-        with open(res["slips"][0], "r") as f:
-            slip_content = f.read()
-            self.assertIn("PHYSICAL SECTION DIVIDER SLIP", slip_content)
-            self.assertIn("TestBox-1", slip_content)
-            self.assertIn("Avacyn, Angel of Hope", slip_content)
+        # Verify the ManaPool upload CSV was created
+        self.assertTrue(len(res["upload_csvs"]) > 0)
+        self.assertTrue(os.path.isfile(res["upload_csvs"][0]))
 
     def test_02_auto_section_allocation(self):
         """Verifies that subsequent batches in the same box auto-allocate Sec-2, Sec-3."""
@@ -206,7 +265,7 @@ class TestMTGInterimPipeline(unittest.TestCase):
         query = """
             SELECT DISTINCT section_label 
             FROM inventory i
-            JOIN cards c ON i.scryfall_id = c.scryfall_id
+            JOIN scryfall_cards c ON i.scryfall_id = c.scryfall_id
             WHERE i.box_label = 'TestBox-1' AND LOWER(c.set_code) = 'test'
             ORDER BY section_label;
         """
@@ -243,7 +302,6 @@ class TestMTGInterimPipeline(unittest.TestCase):
             source_box="TestBox-1",
             target_box="TestBox-2",
             set_code="TEST",
-            output_dir=self.test_dir,
         )
 
         self.assertEqual(res["status"], "success")
@@ -350,7 +408,7 @@ class TestMTGInterimPipeline(unittest.TestCase):
         query = """
             SELECT c.name, i.quantity
             FROM inventory i
-            JOIN cards c ON i.scryfall_id = c.scryfall_id
+            JOIN scryfall_cards c ON i.scryfall_id = c.scryfall_id
             WHERE i.box_label IN ('TestBox-A', 'TestBox-B') AND LOWER(c.set_code) = 'test'
             ORDER BY c.name;
         """
@@ -524,7 +582,7 @@ class TestMTGInterimPipeline(unittest.TestCase):
         query_a = """
             SELECT i.section_label, i.index_num, c.name, i.box_label
             FROM inventory i
-            JOIN cards c ON i.scryfall_id = c.scryfall_id
+            JOIN scryfall_cards c ON i.scryfall_id = c.scryfall_id
             WHERE LOWER(c.set_code) = 'testa' AND i.section_label = 'Sec-2'
             ORDER BY i.index_num;
         """
@@ -546,7 +604,7 @@ class TestMTGInterimPipeline(unittest.TestCase):
         query_b = """
             SELECT i.section_label, i.index_num, c.name, i.box_label
             FROM inventory i
-            JOIN cards c ON i.scryfall_id = c.scryfall_id
+            JOIN scryfall_cards c ON i.scryfall_id = c.scryfall_id
             WHERE LOWER(c.set_code) = 'testb' AND i.section_label = 'Sec-2'
             ORDER BY i.index_num;
         """
@@ -590,7 +648,7 @@ class TestMTGInterimPipeline(unittest.TestCase):
         query = """
             SELECT i.section_label, i.box_label, i.index_num
             FROM inventory i
-            JOIN cards c ON i.scryfall_id = c.scryfall_id
+            JOIN scryfall_cards c ON i.scryfall_id = c.scryfall_id
             WHERE LOWER(c.set_code) = 'testhob';
         """
         with db.get_db_cursor(commit=False) as cur:
@@ -629,7 +687,7 @@ class TestMTGInterimPipeline(unittest.TestCase):
         query_sec2 = """
             SELECT i.section_label, i.box_label, i.index_num
             FROM inventory i
-            JOIN cards c ON i.scryfall_id = c.scryfall_id
+            JOIN scryfall_cards c ON i.scryfall_id = c.scryfall_id
             WHERE LOWER(c.set_code) = 'testhob' AND i.section_label = 'Sec-2';
         """
         with db.get_db_cursor(commit=False) as cur:
@@ -747,6 +805,116 @@ class TestMTGInterimPipeline(unittest.TestCase):
         self.assertEqual(allocated[3]["box_label"], "TestBox-2")
         self.assertEqual(allocated[3]["set_code"], "TESTA")
         self.assertEqual(allocated[3]["section_label"], "Sec-1")
+
+
+    def token_row(self, set_code: str, number: str, name: str, layout: str = "token", qty: str = "1", **extra) -> dict:
+        """Builds a mock ManaPool single row (used for token tests)."""
+        return {
+            "product_type": "mtg_single",
+            "product_id": f"pid-{set_code}-{number}",
+            "name": name,
+            "set": set_code,
+            "number": number,
+            "language": "EN",
+            "finish": "NF",
+            "condition": "NM",
+            "market_low": "0.10",
+            "market_price": "0.20",
+            "market_price_foil": "",
+            "price": "0.20",
+            "quantity": qty,
+            "layout": layout,
+            **extra,
+        }
+
+    def section_rows(self, section: str) -> list:
+        with db.get_db_cursor(commit=False) as cur:
+            cur.execute("""
+                SELECT i.box_label, i.index_num, c.name, c.set_code, i.back_scryfall_id
+                FROM inventory i JOIN scryfall_cards c ON i.scryfall_id = c.scryfall_id
+                WHERE i.section_label = %s ORDER BY i.index_num;
+            """, (section,))
+            return [dict(r) for r in cur.fetchall()]
+
+    def test_09_tokens_form_append_only_chunks_in_token_box(self):
+        """Tokens from every set in a batch become one TOKEN-n chunk; the next batch gets TOKEN-n+1."""
+        # First token chunk: box comes from the Set/Box map's TOKENS row.
+        self.write_set_box_map({"TOKENS": "TestBox-T"})
+        seed = self.create_mock_manapool_csv("tok_seed.csv", [self.token_row("TSEED", "1", "Angel")])
+        csv_pipeline.ingest_csv_batch(seed, output_dir=self.test_dir, prompt_callback=lambda s: "WrongBox")
+        self.assertEqual(self.section_rows("TOKEN-1")[0]["box_label"], "TestBox-T")
+
+        # After that the existing chunk decides the box, even if the map changes.
+        self.write_set_box_map({"TOKENS": "WrongBox"})
+
+        # Mixed batch: a regular card, tokens from two sets, an emblem from a non-token set,
+        # and a ManaPool double-sided combo whose faces exist only as separate Scryfall cards.
+        self.seed_scryfall_cards([
+            self.token_row("TCMB", "8", "Beast"),
+            self.token_row("TCMB", "11", "Spider"),
+        ])
+        batch = [
+            self.token_row("TESTR", "5", "Regular Card", layout="normal"),
+            self.token_row("TZED", "3", "Zombie"),
+            self.token_row("TANT", "2", "Ant"),
+            self.token_row("TESTD", "76", "Ob Nixilis Emblem", layout="emblem"),
+            self.token_row("TCMB", "8-11", "Beast // Spider", _skip_seed=True),
+        ]
+        csv_file = self.create_mock_manapool_csv("tok_batch.csv", batch)
+        res = csv_pipeline.ingest_csv_batch(
+            csv_file, output_dir=self.test_dir, prompt_callback=lambda s: "TestBox-R",
+        )
+
+        self.assertEqual(res["status"], "success")
+        self.assertEqual(res["set_boxes"]["TOKENS"], "TestBox-T")
+        self.assertEqual(res["set_sections"]["TOKENS"], "TOKEN-2")
+        self.assertEqual(res["set_sections"]["TESTR"], "Sec-1")
+
+        chunk = self.section_rows("TOKEN-2")
+        self.assertEqual([r["name"] for r in chunk], ["Ant", "Beast", "Ob Nixilis Emblem", "Zombie"])
+        self.assertEqual([r["index_num"] for r in chunk], [1, 2, 3, 4])
+        self.assertTrue(all(r["box_label"] == "TestBox-T" for r in chunk))
+        self.assertIsNotNone(chunk[1]["back_scryfall_id"])  # combo keeps its back face
+        self.assertEqual(self.section_rows("TOKEN-1")[0]["name"], "Angel")  # old chunk untouched
+
+    def test_10_unresolved_rows_stop_intake(self):
+        """A row missing from the Scryfall mirror aborts the whole batch and is listed."""
+        rows = [
+            self.token_row("TESTR", "5", "Regular Card", layout="normal"),
+            self.token_row("TESTR", "999", "Typo Card", layout="normal", _skip_seed=True),
+        ]
+        csv_file = self.create_mock_manapool_csv("unresolved.csv", rows)
+        res = csv_pipeline.ingest_csv_batch(csv_file, box_label="TestBox-1", output_dir=self.test_dir)
+
+        self.assertEqual(res["status"], "unresolved")
+        self.assertEqual([r["number"] for r in res["unresolved"]], ["999"])
+        self.assertEqual(db.get_distinct_boxes(), [])
+
+    def test_11_relocate_tokens_and_walk_token_chunk_by_index(self):
+        """Relocating TOKENS moves every chunk; picks in a chunk follow its index, not set code."""
+        for name, rows in [
+            ("reloc1.csv", [self.token_row("TZZZ", "1", "Angel"), self.token_row("TAAA", "1", "Zombie")]),
+            ("reloc2.csv", [self.token_row("TMMM", "1", "Bear")]),
+        ]:
+            csv_file = self.create_mock_manapool_csv(name, rows)
+            csv_pipeline.ingest_csv_batch(csv_file, output_dir=self.test_dir, prompt_callback=lambda s: "TestBox-T")
+
+        res = csv_pipeline.relocate_box(source_box="TestBox-T", target_box="TestBox-T2", set_code="TOKENS")
+        self.assertEqual(res["updated_rows"], 3)
+        self.assertEqual(db.get_token_box(), "TestBox-T2")
+        self.assertEqual({r["section_label"] for r in db.get_inventory_summary("TestBox-T2")}, {"TOKEN-1", "TOKEN-2"})
+
+        picks = [
+            {"Qty": 1, "Description": "Zombie", "Set": "TAAA", "Number": "1", "is_foil": False},
+            {"Qty": 1, "Description": "Bear", "Set": "TMMM", "Number": "1", "is_foil": False},
+            {"Qty": 1, "Description": "Angel", "Set": "TZZZ", "Number": "1", "is_foil": False},
+        ]
+        allocated, unallocated = pull_list_optimizer.resolve_and_optimize_picks(picks)
+        self.assertEqual(unallocated, [])
+        self.assertEqual(
+            [(p["section_label"], p["index_num"]) for p in allocated],
+            [("TOKEN-1", 1), ("TOKEN-1", 2), ("TOKEN-2", 1)],
+        )
 
 
 if __name__ == "__main__":

@@ -1,7 +1,11 @@
 """PostgreSQL connection management and database operations module.
 
 Handles environment configuration, connection pooling, schema initialization,
-and parameterized queries for cards, inventory, and pricing ledgers.
+and parameterized queries for inventory and pricing ledgers. Card facts come from
+the local Scryfall mirror (`scryfall_cards`, see scryfall_mirror.py).
+
+Token chunks (section labels TOKEN-1, TOKEN-2, ...) mix many real set codes but are
+handled as one shelf set named 'TOKENS' for section numbering, summaries and relocation.
 """
 
 import os
@@ -22,6 +26,11 @@ DB_PORT = int(os.getenv("DB_PORT", "5432"))
 DB_NAME = os.getenv("DB_NAME", "mtg_inventory")
 DB_USER = os.getenv("DB_USER", "mtg_admin")
 DB_PASS = os.getenv("DB_PASS", "password")
+
+TOKENS_SET = "TOKENS"
+TOKEN_SECTION_PREFIX = "TOKEN-"
+# Shelf set of an inventory row `i` joined to scryfall_cards `sc`: token chunks count as 'TOKENS'.
+SHELF_SET_SQL = "(CASE WHEN i.section_label ~* '^TOKEN' THEN 'TOKENS' ELSE sc.set_code END)"
 
 
 def get_connection():
@@ -94,112 +103,66 @@ def init_db(schema_path: str = "schema.sql") -> None:
 
 
 def get_next_section(box_label: str, set_code: str) -> str:
-    """Determines the next sequential section label for a given box and set.
+    """Determines the next sequential section label for a given box and shelf set.
 
-    For example, if 'Sec-1' exists for (box_label, set_code), this returns 'Sec-2'.
-    If none exist, defaults to 'Sec-1'.
+    For a regular set, if 'Sec-1' exists for (box_label, set_code) this returns 'Sec-2';
+    if none exist, 'Sec-1'. For the 'TOKENS' shelf set, token chunks are numbered across
+    the whole inventory (TOKEN-1, TOKEN-2, ...), regardless of box.
 
     Args:
-        box_label (str): Physical storage box identifier (e.g. 'Box-1').
-        set_code (str): 3-4 letter MTG set code (e.g. 'ZNR').
+        box_label (str): Physical storage box identifier (e.g. 'M3').
+        set_code (str): MTG set code (e.g. 'ZNR') or 'TOKENS'.
 
     Returns:
-        str: Next available section identifier (e.g. 'Sec-1', 'Sec-2').
+        str: Next available section identifier (e.g. 'Sec-2' or 'TOKEN-3').
     """
-    query = """
-        SELECT DISTINCT i.section_label
-        FROM inventory i
-        JOIN cards c ON i.scryfall_id = c.scryfall_id
-        WHERE i.box_label = %s AND LOWER(c.set_code) = LOWER(%s);
-    """
+    if set_code.strip().upper() == TOKENS_SET:
+        query = "SELECT DISTINCT section_label FROM inventory WHERE section_label ~* '^TOKEN-[0-9]+$';"
+        params: Tuple[Any, ...] = ()
+        pattern = re.compile(r"token-(\d+)", re.IGNORECASE)
+        prefix = TOKEN_SECTION_PREFIX
+    else:
+        query = f"""
+            SELECT DISTINCT i.section_label
+            FROM inventory i
+            JOIN scryfall_cards sc ON i.scryfall_id = sc.scryfall_id
+            WHERE i.box_label = %s AND {SHELF_SET_SQL} = UPPER(%s);
+        """
+        params = (box_label, set_code)
+        pattern = re.compile(r"sec[-_]?(\d+)", re.IGNORECASE)
+        prefix = "Sec-"
+
     with get_db_cursor(commit=False) as cur:
-        cur.execute(query, (box_label, set_code))
+        cur.execute(query, params)
         rows = cur.fetchall()
 
     existing_indices: List[int] = []
-    pattern = re.compile(r"sec[-_]?(\d+)", re.IGNORECASE)
-
     for row in rows:
-        label = row["section_label"]
-        match = pattern.search(label)
+        match = pattern.search(row["section_label"])
         if match:
-            try:
-                existing_indices.append(int(match.group(1)))
-            except ValueError:
-                pass
+            existing_indices.append(int(match.group(1)))
 
-    if not existing_indices:
-        return "Sec-1"
-
-    next_num = max(existing_indices) + 1
-    return f"Sec-{next_num}"
+    next_num = max(existing_indices) + 1 if existing_indices else 1
+    return f"{prefix}{next_num}"
 
 
-def get_card_by_set_number(set_code: str, collector_number: str) -> Optional[Dict[str, Any]]:
-    """Fetches a card from the local catalog by set code and collector number.
-
-    Args:
-        set_code (str): 3-4 letter MTG set code.
-        collector_number (str): Card collector number within the set.
+def get_token_box() -> Optional[str]:
+    """Returns the box that currently holds the token chunks, if any.
 
     Returns:
-        Optional[Dict[str, Any]]: Card record dictionary if found, else None.
+        Optional[str]: Box label of the highest-numbered TOKEN-n section, or None.
     """
     query = """
-        SELECT scryfall_id, name, set_code, collector_number, rarity, image_uri, image_hash
-        FROM cards
-        WHERE LOWER(set_code) = LOWER(%s) AND LOWER(collector_number) = LOWER(%s)
+        SELECT box_label
+        FROM inventory
+        WHERE section_label ~* '^TOKEN-[0-9]+$'
+        ORDER BY CAST(SUBSTRING(section_label FROM '[0-9]+$') AS INTEGER) DESC
         LIMIT 1;
     """
     with get_db_cursor(commit=False) as cur:
-        cur.execute(query, (set_code, collector_number))
-        result = cur.fetchone()
-        return dict(result) if result else None
-
-
-def upsert_cards_batch(cards_data: List[Dict[str, Any]]) -> None:
-    """Inserts or updates a batch of cards into the cards table.
-
-    Args:
-        cards_data (List[Dict[str, Any]]): List of card dictionaries containing:
-            - scryfall_id (str)
-            - name (str)
-            - set_code (str)
-            - collector_number (str)
-            - rarity (str)
-            - image_uri (Optional[str])
-            - image_hash (Optional[str])
-    """
-    if not cards_data:
-        return
-
-    query = """
-        INSERT INTO cards (scryfall_id, name, set_code, collector_number, rarity, image_uri, image_hash)
-        VALUES (%s, %s, %s, %s, %s, %s, %s)
-        ON CONFLICT (scryfall_id) DO UPDATE SET
-            name = EXCLUDED.name,
-            set_code = EXCLUDED.set_code,
-            collector_number = EXCLUDED.collector_number,
-            rarity = COALESCE(EXCLUDED.rarity, cards.rarity),
-            image_uri = COALESCE(EXCLUDED.image_uri, cards.image_uri),
-            image_hash = COALESCE(EXCLUDED.image_hash, cards.image_hash);
-    """
-    params = [
-        (
-            c["scryfall_id"],
-            c["name"],
-            c["set_code"].upper(),
-            c["collector_number"],
-            c.get("rarity"),
-            c.get("image_uri"),
-            c.get("image_hash"),
-        )
-        for c in cards_data
-    ]
-    with get_connection() as conn:
-        with conn.cursor() as cur:
-            extras.execute_batch(cur, query, params)
-        conn.commit()
+        cur.execute(query)
+        row = cur.fetchone()
+        return row["box_label"] if row else None
 
 
 def insert_inventory_batch(inventory_data: List[Dict[str, Any]]) -> None:
@@ -208,6 +171,7 @@ def insert_inventory_batch(inventory_data: List[Dict[str, Any]]) -> None:
     Args:
         inventory_data (List[Dict[str, Any]]): List of inventory dictionaries containing:
             - scryfall_id (str)
+            - back_scryfall_id (Optional[str]): back face of a double-sided token combo
             - manapool_product_id (Optional[str])
             - condition (str)
             - is_foil (bool)
@@ -223,6 +187,7 @@ def insert_inventory_batch(inventory_data: List[Dict[str, Any]]) -> None:
     query = """
         INSERT INTO inventory (
             scryfall_id,
+            back_scryfall_id,
             manapool_product_id,
             condition,
             is_foil,
@@ -231,11 +196,12 @@ def insert_inventory_batch(inventory_data: List[Dict[str, Any]]) -> None:
             box_label,
             section_label,
             index_num
-        ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s);
+        ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s);
     """
     params = [
         (
             item["scryfall_id"],
+            item.get("back_scryfall_id"),
             item.get("manapool_product_id"),
             item.get("condition", "NM"),
             item.get("is_foil", False),
@@ -262,17 +228,17 @@ def get_inventory_summary(box_label: Optional[str] = None) -> List[Dict[str, Any
     Returns:
         List[Dict[str, Any]]: List of section summary records.
     """
-    query = """
-        SELECT 
+    query = f"""
+        SELECT
             i.box_label,
-            c.set_code,
+            {SHELF_SET_SQL} as set_code,
             i.section_label,
             COUNT(i.inventory_id) as total_lines,
             SUM(i.quantity) as total_cards,
             MIN(i.index_num) as min_index,
             MAX(i.index_num) as max_index
         FROM inventory i
-        JOIN cards c ON i.scryfall_id = c.scryfall_id
+        JOIN scryfall_cards sc ON i.scryfall_id = sc.scryfall_id
     """
     params: List[Any] = []
     if box_label:
@@ -280,8 +246,8 @@ def get_inventory_summary(box_label: Optional[str] = None) -> List[Dict[str, Any
         params.append(box_label)
 
     query += """
-        GROUP BY i.box_label, c.set_code, i.section_label
-        ORDER BY i.box_label, c.set_code, i.section_label;
+        GROUP BY i.box_label, 2, i.section_label
+        ORDER BY i.box_label, 2, i.section_label;
     """
 
     with get_db_cursor(commit=False) as cur:
@@ -310,17 +276,17 @@ def get_sets_in_box(box_label: str) -> List[Dict[str, Any]]:
     Returns:
         List[Dict[str, Any]]: List of dicts with 'set_code', 'total_cards', 'sections'.
     """
-    query = """
-        SELECT 
-            c.set_code,
+    query = f"""
+        SELECT
+            {SHELF_SET_SQL} as set_code,
             COUNT(i.inventory_id) as total_lines,
             SUM(i.quantity) as total_cards,
             ARRAY_AGG(DISTINCT i.section_label) as sections
         FROM inventory i
-        JOIN cards c ON i.scryfall_id = c.scryfall_id
+        JOIN scryfall_cards sc ON i.scryfall_id = sc.scryfall_id
         WHERE i.box_label = %s
-        GROUP BY c.set_code
-        ORDER BY c.set_code;
+        GROUP BY 1
+        ORDER BY 1;
     """
     with get_db_cursor(commit=False) as cur:
         cur.execute(query, (box_label,))
@@ -334,64 +300,44 @@ def relocate_inventory(
     section_label: Optional[str] = None,
     target_section: Optional[str] = None,
 ) -> int:
-    """Moves inventory items for a given set (and optional section) from one box to another.
+    """Moves inventory items for a given shelf set (and optional section) from one box to another.
 
     Useful when a physical storage box runs out of capacity and sets or sections need
-    to be shuffled into another box.
+    to be shuffled into another box. Pass set_code 'TOKENS' to move every token chunk
+    (TOKEN-1, TOKEN-2, ...) together; section labels and index numbers are kept.
 
     Args:
-        source_box (str): Current box label (e.g. 'Box-1').
-        target_box (str): New destination box label (e.g. 'Box-2').
-        set_code (str): MTG set code (e.g. 'ZNR').
+        source_box (str): Current box label (e.g. 'M3').
+        target_box (str): New destination box label (e.g. 'M20').
+        set_code (str): MTG set code (e.g. 'ZNR') or 'TOKENS'.
         section_label (Optional[str]): If provided, only relocates this specific section.
         target_section (Optional[str]): If provided, renames the section in the destination box.
-            If None and target_box already has sections for this set, can preserve or renumber.
 
     Returns:
         int: Number of inventory rows updated.
     """
-    source_box = source_box.strip()
-    target_box = target_box.strip()
-    set_code = set_code.strip().lower()
-
+    assignments = "box_label = %s"
+    params: List[Any] = [target_box.strip()]
     if target_section:
-        query = """
-            UPDATE inventory i
-            SET box_label = %s, section_label = %s
-            FROM cards c
-            WHERE i.scryfall_id = c.scryfall_id
-              AND i.box_label = %s
-              AND LOWER(c.set_code) = %s
-        """
-        params = [target_box, target_section.strip(), source_box, set_code]
-        if section_label:
-            query += " AND i.section_label = %s;"
-            params.append(section_label.strip())
-        else:
-            query += ";"
-    else:
-        query = """
-            UPDATE inventory i
-            SET box_label = %s
-            FROM cards c
-            WHERE i.scryfall_id = c.scryfall_id
-              AND i.box_label = %s
-              AND LOWER(c.set_code) = %s
-        """
-        params = [target_box, source_box, set_code]
-        if section_label:
-            query += " AND i.section_label = %s;"
-            params.append(section_label.strip())
-        else:
-            query += ";"
+        assignments += ", section_label = %s"
+        params.append(target_section.strip())
 
-    with get_connection() as conn:
-        with conn.cursor() as cur:
-            cur.execute(query, tuple(params))
-            updated_count = cur.rowcount
-        conn.commit()
+    query = f"""
+        UPDATE inventory i
+        SET {assignments}
+        FROM scryfall_cards sc
+        WHERE i.scryfall_id = sc.scryfall_id
+          AND i.box_label = %s
+          AND {SHELF_SET_SQL} = UPPER(%s)
+    """
+    params += [source_box.strip(), set_code.strip()]
+    if section_label:
+        query += " AND i.section_label = %s"
+        params.append(section_label.strip())
 
-    return updated_count
+    with get_db_cursor() as cur:
+        cur.execute(query + ";", tuple(params))
+        return cur.rowcount
 
 
 def get_total_quantities_by_product_ids(product_ids: List[str]) -> Dict[str, int]:

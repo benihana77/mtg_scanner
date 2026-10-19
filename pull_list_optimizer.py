@@ -19,6 +19,7 @@ from tabulate import tabulate
 
 import db
 import manapool_client
+import scryfall_mirror
 
 
 def read_picklist_csv(csv_path: str) -> List[Dict[str, Any]]:
@@ -67,8 +68,14 @@ def resolve_and_optimize_picks(
 ) -> Tuple[List[Dict[str, Any]], List[Dict[str, Any]]]:
     """Matches requested pick items to PostgreSQL physical inventory and sorts by traversal path.
 
+    Order lines are resolved through the Scryfall mirror exactly like intake (so ManaPool
+    double-sided token combos such as 'TMID 8-11' match their front + back faces) and
+    matched on (scryfall_id, back_scryfall_id, foil). If a line cannot be resolved, it falls
+    back to set code + card name.
+
     Traversal sort order:
-        box_label -> set_code -> section_label -> index_num
+        regular sections: box_label -> set_code -> section_label -> index_num
+        token chunks (TOKEN-n): box_label -> section_label -> index_num (set code ignored)
 
     Args:
         pick_items (List[Dict[str, Any]]): List of items to pick.
@@ -81,12 +88,13 @@ def resolve_and_optimize_picks(
 
     # Query all available inventory joined with cards
     query = """
-        SELECT 
+        SELECT
             i.inventory_id,
             i.scryfall_id,
-            c.name,
-            c.set_code,
-            c.collector_number,
+            i.back_scryfall_id,
+            sc.name || COALESCE(' // ' || b.name, '') AS name,
+            sc.set_code,
+            sc.collector_number || COALESCE('/' || b.collector_number, '') AS collector_number,
             i.condition,
             i.is_foil,
             i.quantity,
@@ -94,9 +102,10 @@ def resolve_and_optimize_picks(
             i.section_label,
             i.index_num
         FROM inventory i
-        JOIN cards c ON i.scryfall_id = c.scryfall_id
+        JOIN scryfall_cards sc ON i.scryfall_id = sc.scryfall_id
+        LEFT JOIN scryfall_cards b ON i.back_scryfall_id = b.scryfall_id
         WHERE i.quantity > 0
-        ORDER BY i.box_label, c.set_code, i.section_label, i.index_num;
+        ORDER BY i.box_label, sc.set_code, i.section_label, i.index_num;
     """
     with db.get_db_cursor(commit=False) as cur:
         cur.execute(query)
@@ -119,6 +128,8 @@ def resolve_and_optimize_picks(
 
     db_inventory.sort(key=candidate_fifo_key)
 
+    resolved = scryfall_mirror.resolve_manapool_cards((p["Set"], p["Number"]) for p in pick_items)
+
     # In-memory allocation pool so multiple order items for the same card decrement properly
     stock_pool = {item["inventory_id"]: item["quantity"] for item in db_inventory}
     inv_lookup = {item["inventory_id"]: item for item in db_inventory}
@@ -129,6 +140,8 @@ def resolve_and_optimize_picks(
         num = order_line["Number"]
         is_foil = order_line["is_foil"]
         name = order_line["Description"]
+        res = resolved.get((set_code, num.strip().lower()))
+        want_ids = (res["front"]["scryfall_id"], res["back"]["scryfall_id"] if res["back"] else None) if res else None
 
         # Find matching inventory candidates (FIFO: Sec-1 before Sec-2)
         candidates = []
@@ -137,15 +150,16 @@ def resolve_and_optimize_picks(
             if stock_pool.get(inv_id, 0) <= 0:
                 continue
 
-            # Match criteria: Set, collector number, and foil flag
+            # Match criteria: resolved Scryfall card (front + back face) and foil flag
             match_exact = (
-                item["set_code"].upper() == set_code
-                and str(item["collector_number"]).strip().lower() == num.lower()
+                want_ids is not None
+                and (item["scryfall_id"], item["back_scryfall_id"]) == want_ids
                 and item["is_foil"] == is_foil
             )
-            # Fallback criteria: Card name match if collector number differs
+            # Fallback criteria: set + card name when the order line could not be resolved
             match_name = (
-                item["set_code"].upper() == set_code
+                want_ids is None
+                and item["set_code"].upper() == set_code
                 and item["name"].strip().lower() == name.strip().lower()
                 and item["is_foil"] == is_foil
             )
@@ -187,7 +201,8 @@ def resolve_and_optimize_picks(
 
     # Sort allocated picks strictly by physical warehouse hierarchy:
     # 1. Box: Natural numerical order (M1 -> M2 ... -> M19)
-    # 2. Set: Alphabetical set code (e.g. BRO, FEM, MID, NEO)
+    # 2. Set: Alphabetical set code (e.g. BRO, FEM, MID, NEO); token chunks use 'TOKENS'
+    #    so a TOKEN-n chunk is walked straight down its index across its many sets
     # 3. Section: Natural section order (Sec-1 -> Sec-2 -> Sec-3)
     # 4. Card Name / Index: Alphabetical by card name / sequential index in that section
     def pick_traversal_key(x: Dict[str, Any]):
@@ -195,16 +210,16 @@ def resolve_and_optimize_picks(
         m_box = re.search(r"(\d+)", box)
         box_num = int(m_box.group(1)) if m_box else 999
 
-        set_code = (x.get("set_code") or "").upper()
-
         sec = x.get("section_label", "")
+        set_code = db.TOKENS_SET if sec.upper().startswith("TOKEN") else (x.get("set_code") or "").upper()
+
         m_sec = re.search(r"(\d+)", sec)
         sec_num = int(m_sec.group(1)) if m_sec else 999
 
         card_name = (x.get("name") or "").lower()
         index_num = x.get("index_num", 0)
 
-        return (box_num, box, set_code, sec_num, sec, card_name, index_num)
+        return (box_num, box, set_code, sec_num, sec, index_num, card_name)
 
     allocated.sort(key=pick_traversal_key)
 
@@ -241,7 +256,7 @@ def generate_pick_sheet_file(
  Date:       {today_str}
  Source:     {source_label}
  Total:      {total_cards} cards to pull across {len(allocated)} pick steps
- Path:       Sorted by Box -> Set -> Section -> Card Name/Index (Zero Backtracking)
+ Path:       Sorted by Box -> Set -> Section -> Index (token chunks: Box -> Section -> Index)
 ========================================================================================
 """
     table_rows = []

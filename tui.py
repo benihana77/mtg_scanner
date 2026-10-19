@@ -7,10 +7,9 @@ Provides an interactive console dashboard for:
 3. Pulling live orders from ManaPool and generating optimized pick traversal sheets.
 4. Processing local picklist CSV files.
 5. Browsing physical inventory breakdown (Boxes, Sets, Sections, Index ranges).
-6. Relocating sets or sections between boxes (Box Shuffle when space runs out).
-7. Regenerating physical box divider slips.
-8. Connection diagnostics.
-9. Refreshing the local Scryfall mirror (scryfall_cards).
+6. Relocating sets, sections or all TOKENS between boxes (Box Shuffle when space runs out).
+7. Connection diagnostics.
+8. Refreshing the local Scryfall mirror (scryfall_cards).
 """
 
 import curses
@@ -157,7 +156,7 @@ def action_ingest_batch(stdscr) -> None:
     show_message_box(stdscr, "Processing", [
         f"Ingesting: {csv_path}",
         "Auto-resolving box locations and section numbers per set...",
-        "Resolving card metadata & alphabetizing cards...",
+        "Resolving cards against the Scryfall mirror & sorting sections...",
         "Please wait a moment...",
     ], wait_key=False)
 
@@ -180,11 +179,10 @@ def action_ingest_batch(stdscr) -> None:
                 "Set Box Allocations:",
             ]
             for s_code, b_lbl in res.get("set_boxes", {}).items():
-                msg_lines.append(f"  * Set {s_code} -> Box {b_lbl}")
+                msg_lines.append(f"  * Set {s_code} -> Box {b_lbl} / {res['set_sections'][s_code]}")
+            if res["skipped_non_singles"]:
+                msg_lines.append(f"Skipped {res['skipped_non_singles']} non-single rows.")
             msg_lines.append("")
-            msg_lines.append("Generated Divider Slips:")
-            for s in res["slips"]:
-                msg_lines.append(f"  {os.path.basename(s)}")
             msg_lines.append("Generated ManaPool Upload CSVs:")
             for c in res["upload_csvs"]:
                 msg_lines.append(f"  {os.path.basename(c)}")
@@ -197,7 +195,10 @@ def action_ingest_batch(stdscr) -> None:
 
             show_message_box(stdscr, "Ingestion Complete", msg_lines)
         else:
-            show_message_box(stdscr, "Ingestion Notice", [res.get("message", "No cards ingested.")])
+            lines = [res.get("message", "No cards ingested.")]
+            for r in res.get("unresolved", []):
+                lines.append(f"  {r.get('set')} {r.get('number')} {r.get('name')}")
+            show_message_box(stdscr, "Ingestion Notice", lines)
 
     except Exception as e:
         show_message_box(stdscr, "Ingestion Error", [f"An error occurred: {e}"])
@@ -237,7 +238,7 @@ def action_relocate_box(stdscr) -> None:
         return
 
     default_set = sets_in_src[0]["set_code"].upper()
-    set_code = prompt_input(stdscr, "Set Code to relocate (e.g. ZNR)", default_set).upper()
+    set_code = prompt_input(stdscr, "Set Code to relocate (e.g. ZNR, or TOKENS for all token chunks)", default_set).upper()
 
     sec_filter = prompt_input(stdscr, "Specific Section to move (leave empty for ALL sections of this set)", "")
     actual_sec = sec_filter if sec_filter else None
@@ -248,7 +249,7 @@ def action_relocate_box(stdscr) -> None:
     if confirm.lower() != "y":
         return
 
-    show_message_box(stdscr, "Relocating", ["Updating database records and generating new divider slips..."], wait_key=False)
+    show_message_box(stdscr, "Relocating", ["Updating database records..."], wait_key=False)
 
     try:
         res = csv_pipeline.relocate_box(
@@ -263,11 +264,7 @@ def action_relocate_box(stdscr) -> None:
                 f"Successfully relocated {res['updated_rows']} items to {target_box}!",
                 f"Source: {source_box}  -->  Target: {target_box}",
                 f"Set: {set_code}",
-                "",
-                "Updated Divider Slips generated for the new box:",
             ]
-            for s in res["new_slips"]:
-                lines.append(f"  {os.path.basename(s)}")
             show_message_box(stdscr, "Relocation Complete", lines)
         else:
             show_message_box(stdscr, "Notice", [res.get("message", "Relocation failed.")])
@@ -299,7 +296,7 @@ def action_run_picklist(stdscr, use_api: bool = False) -> None:
 
     show_message_box(stdscr, "Optimizing Traversal", [
         "Resolving order lines against PostgreSQL inventory...",
-        "Sorting pick sequence: Box -> Set -> Section -> Index...",
+        "Sorting pick sequence: Box -> Set -> Section -> Index (tokens: Box -> Section -> Index)...",
     ], wait_key=False)
 
     try:

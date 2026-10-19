@@ -9,8 +9,9 @@ A high-velocity inventory management station and fulfillment optimizer for Magic
 ## Physical Storage Model
 
 - Storage boxes are labelled **M1–M19**. `Manapool Print Format - Set_Box Map.csv` maps each set to its box.
-- Each set lives in one box, split into append-only **sections** (`Sec-1`, `Sec-2`, …). Each intake batch becomes the next section, alphabetized and indexed `1..N`, with a printed divider slip.
-- Box **M19** also holds two special sections: `TOKENS` (all tokens/emblems, alphabetized across token sets) and `PROMOS` (standalone promo sets).
+- Each set lives in one box, split into append-only **sections** (`Sec-1`, `Sec-2`, …). Each intake batch becomes the next section, sorted in shelf order and indexed `1..N`. Shelf order ignores case and accents (Éomer files under E), puts leading symbols first, and lists same-name printings by collector number (regular printing before showcase variants).
+- **Tokens** (Scryfall layout `token`, `double_faced_token` or `emblem`) form a shelf set called `TOKENS`, currently in box **M19**. Each intake batch's tokens, from any set, become the next append-only chunk (`TOKEN-1`, `TOKEN-2`, …). Tokens keep their real set code.
+- Box **M19** also holds `PROMOS` (standalone promo sets).
 
 ---
 
@@ -18,26 +19,25 @@ A high-velocity inventory management station and fulfillment optimizer for Magic
 
 1. **Interactive Curses TUI (`tui.py`)**:
    - Keyboard-driven terminal console with real-time database and API indicators.
-   - Menu: batch intake, push inventory to ManaPool, pick sheet from live API orders, pick sheet from a picklist CSV, browse inventory, box shuffle, and diagnostics.
+   - Menu: batch intake, push inventory to ManaPool, pick sheet from live API orders, pick sheet from a picklist CSV, browse inventory, box shuffle, diagnostics, and Scryfall mirror refresh.
 
 2. **ManaPool Batch Ingestion (`csv_pipeline.py`)**:
    - Ingests ManaPool set spreadsheets (`multiple_sets_all_products_*.csv`).
-   - Filters rows with `quantity > 0`.
-   - Resolves card metadata with local PostgreSQL caching and Scryfall API fallback.
+   - Filters in-stock singles (`quantity > 0`, `product_type = mtg_single`).
+   - Resolves every card against the local Scryfall mirror (`scryfall_cards`), including ManaPool double-sided token combos (`8-11`, `17-TMOM-10`). If any row is missing from the mirror, nothing is ingested and the rows are listed.
+   - Routes tokens from every set into one new `TOKEN-n` chunk in the token box.
    - Auto-resolves each set's box from existing inventory (prompts for brand-new sets).
    - Auto-allocates next physical section (`Sec-1`, `Sec-2`, ...) for each (Box, Set) pair.
-   - **Strict Alphabetical Sorting**: Alphabetizes cards by name within each section and assigns sequential index numbers (`1, 2, 3... N`).
-   - Exports:
-     - **ManaPool Upload CSV** (`exports/manapool_upload_*.csv`): Ready for immediate web dashboard upload ("Add to existing").
-     - **Physical Divider Slip** (`exports/divider_*.txt`): Print-ready table to place behind physical box dividers.
+   - Sorts each section in shelf order and assigns sequential index numbers (`1, 2, 3... N`).
+   - Exports a **ManaPool Upload CSV** (`exports/manapool_upload_*.csv`), ready for web dashboard upload ("Add to existing").
 
 3. **Box Capacity Management & "Box Shuffle" (`relocate`)**:
    - Easily move an entire set or a specific section from one storage box to another when a box runs out of capacity.
-   - Automatically updates database records and regenerates physical divider slips for the destination box.
+   - `--set TOKENS` moves every token chunk together, keeping section labels and index numbers.
 
 4. **Order Pull List Optimizer (`pull_list_optimizer.py`)**:
    - Ingests ManaPool picklists either from **live ManaPool API** (`GET /seller/orders?is_unfulfilled=true`) or local CSV exports (`picklist-*.csv`).
-   - Resolves physical coordinates: `Box -> Set -> Section -> Index`.
+   - Resolves order lines through the Scryfall mirror (same rules as intake) and physical coordinates: `Box -> Set -> Section -> Index` (token chunks: `Box -> Section -> Index`).
    - **Zero-Backtracking Path Optimization**: Sorts the picking sequence sequentially along the warehouse walking route.
    - Generates printable pick sheets (`exports/pick_sheet_*.txt`) with `[ ]` checkboxes for clipboard picking.
    - Supports stock deduction (`--commit`) directly updating PostgreSQL.
@@ -47,9 +47,14 @@ A high-velocity inventory management station and fulfillment optimizer for Magic
    - Automated unfulfilled order retrieval and item parsing.
    - Graceful fallback to offline CSV mode when API credentials are not set.
 
-6. **One-Time Setup Tools**:
-   - `import_live_inventory.py`: seeds PostgreSQL from a ManaPool inventory export plus the Set/Box map (supports `--dry-run`, `--clear-existing`).
-   - `audit_inventory.py`: assigns boxes to unmapped sets and generates the token extraction walk sheet and token-box divider slip.
+6. **Scryfall Mirror (`scryfall_mirror.py`)**:
+   - `python scryfall_mirror.py refresh` loads Scryfall's Default Cards bulk file (about a minute); `status` shows its size and age. Refresh before intaking a newly released set.
+
+7. **Setup & Audit Tools**:
+   - `import_live_inventory.py`: fresh import of a ManaPool inventory export against the Scryfall mirror and Set/Box map. Previews by default; `--rebuild` drops and recreates the inventory tables atomically.
+   - `token_validation_report.py`: read-only report of tokens filed in set sections, non-tokens in token sections, and rows missing from the mirror.
+   - `special_cases_report.py`: printable check sheet of unusual cards (combos, emblems, helper cards, promos, accent/symbol names, same-name printings, The List) at their planned locations.
+   - `audit_inventory.py`: one-time audit that assigned boxes to unmapped sets and produced the original token extraction walk sheet.
    - `migrate_inventory.py` (superseded by `import_live_inventory.py`), `db_pipeline.py` and `hashing_engine.py` (early scanner work; not part of the current workflow).
 
 ---
@@ -69,6 +74,7 @@ pip install -r requirements.txt
 ```bash
 docker compose up -d
 python db.py   # runs schema.sql
+python scryfall_mirror.py refresh
 ```
 
 ### 3. Configure Environment (`.env`)
@@ -112,6 +118,9 @@ python csv_pipeline.py relocate --source M3 --target M4 --set ZNR
 
 # Move a single section
 python csv_pipeline.py relocate --source M3 --target M4 --set ZNR --section Sec-1
+
+# Move every token chunk to a new box
+python csv_pipeline.py relocate --source M19 --target M20 --set TOKENS
 ```
 
 ### Browse Physical Inventory
@@ -136,12 +145,12 @@ python pull_list_optimizer.py --api --commit
 
 ## Running Automated Tests
 ```bash
-python -m unittest test_interim_pipeline.py -v
+python -m unittest test_interim_pipeline test_token_validation -v
 ```
+The integration tests run against a separate `mtg_inventory_test` database (override with `TEST_DB_NAME`), which they create and reset themselves; the live database is never touched.
 
 ---
 
 ## Known Limitations
-- **Tokens:** batch intake has no token handling yet, so new tokens get a `Sec-N` under their own set code instead of joining the M19 token section. The token handling design is still open (see the project status doc).
-- **Pick order in `TOKENS`:** the pick sheet sorts by set code before index, so it walks the token section set by set rather than top to bottom.
-- **Catalog metadata:** cards seeded by the live import use synthetic IDs (`mp-<set>-<num>`) with no Scryfall layout or image data.
+- **Legacy scripts:** `migrate_inventory.py` and `db_pipeline.py` still target the removed `cards` table and no longer run.
+- **ManaPool combo names:** a combo token's displayed name comes from Scryfall's face order, which can differ from ManaPool's product name (e.g. ZNR `5-10`).

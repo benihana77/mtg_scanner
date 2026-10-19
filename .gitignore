@@ -3,3 +3,5 @@
 __pycache__/
 *.pyc
 exports/
+backups/*.dump
+test_exports/

@@ -2,14 +2,15 @@
 
 Handles:
 - Reading ManaPool set inventory spreadsheets.
-- Filtering active batches (quantity > 0).
-- Resolving card metadata from PostgreSQL catalog with Scryfall fallback.
+- Filtering active batches (quantity > 0, singles only).
+- Resolving cards against the local Scryfall mirror (no live Scryfall calls), including
+  ManaPool double-sided token combos.
+- Routing tokens (by Scryfall layout) from every set in the batch into one new TOKEN-n chunk.
 - Auto-allocating physical section identifiers (Sec-1, Sec-2, etc.).
-- Strict alphabetical sorting by card name within sections.
-- Sequential index number assignment (1, 2, 3... N).
-- Committing to PostgreSQL cards & inventory tables.
-- Generating physical divider slips and ManaPool upload CSVs.
-- Relocating sets/sections across boxes when capacity runs out.
+- Shelf-order sorting within sections and sequential index numbers (1, 2, 3... N).
+- Committing to the PostgreSQL inventory table.
+- Generating ManaPool upload CSVs.
+- Relocating sets/sections (or all TOKENS) across boxes when capacity runs out.
 """
 
 import argparse
@@ -17,55 +18,16 @@ import csv
 import datetime
 import os
 import sys
-import time
 from typing import Any, Dict, List, Optional, Tuple
 
-import requests
 from tabulate import tabulate
 
 import db
+import import_live_inventory
 import manapool_client
+import scryfall_mirror
 
-SCRYFALL_API_URL = "https://api.scryfall.com/cards"
-SCRYFALL_HEADERS = {"User-Agent": os.getenv("SCRYFALL_USER_AGENT", "mtg_scanner/1.0")}
-
-
-def fetch_scryfall_card(set_code: str, collector_number: str) -> Optional[Dict[str, Any]]:
-    """Fetches card metadata directly from Scryfall API by set and collector number.
-
-    Args:
-        set_code (str): MTG set code (e.g. 'ZNR').
-        collector_number (str): Card collector number (e.g. '89' or '7d').
-
-    Returns:
-        Optional[Dict[str, Any]]: Normalized card metadata dictionary if found.
-    """
-    url = f"{SCRYFALL_API_URL}/{set_code.lower()}/{collector_number.lower()}"
-    try:
-        time.sleep(0.08)  # Comply with Scryfall rate limits (~10 requests/sec)
-        resp = requests.get(url, headers=SCRYFALL_HEADERS, timeout=10)
-        if resp.status_code == 200:
-            data = resp.json()
-            image_uri = None
-            if "image_uris" in data:
-                image_uri = data["image_uris"].get("normal")
-            elif "card_faces" in data and len(data["card_faces"]) > 0:
-                image_uri = data["card_faces"][0].get("image_uris", {}).get("normal")
-
-            return {
-                "scryfall_id": data["id"],
-                "name": data["name"],
-                "set_code": data["set"].upper(),
-                "collector_number": str(data["collector_number"]),
-                "rarity": data.get("rarity", "common"),
-                "image_uri": image_uri,
-                "image_hash": None,
-            }
-        else:
-            return None
-    except Exception as e:
-        print(f"Scryfall query error for {set_code}/{collector_number}: {e}", file=sys.stderr)
-        return None
+SET_BOX_MAP_CSV = "Manapool Print Format - Set_Box Map.csv"
 
 
 def read_manapool_csv(file_path: str) -> List[Dict[str, Any]]:
@@ -100,10 +62,11 @@ def resolve_set_box(
     interactive: bool = True,
     prompt_callback: Optional[Any] = None,
 ) -> str:
-    """Resolves the physical storage box for an MTG set from PostgreSQL inventory.
+    """Resolves the physical storage box for a shelf set (an MTG set code or 'TOKENS').
 
-    1. Checks if the set already exists in PostgreSQL inventory.
-    2. If not found in DB, the set does not currently exist in inventory:
+    1. Checks if the shelf set already exists in PostgreSQL inventory.
+    1b. For 'TOKENS' only, falls back to the '(TOKENS)' row of the Set/Box map.
+    2. If still not found, the set does not currently exist in inventory:
        a. Calls prompt_callback(set_code) if provided.
        b. Prompts the operator via stdin if interactive and a TTY.
        c. If no box is provided, raises ValueError.
@@ -119,21 +82,26 @@ def resolve_set_box(
     set_code = set_code.strip().upper()
 
     # 1. Check existing PostgreSQL inventory
-    query = """
-        SELECT DISTINCT i.box_label
-        FROM inventory i
-        JOIN cards c ON i.scryfall_id = c.scryfall_id
-        WHERE UPPER(c.set_code) = %s
-        LIMIT 1;
-    """
-    try:
+    if set_code == db.TOKENS_SET:
+        token_box = db.get_token_box()
+        if token_box:
+            return token_box.strip()
+        mapped = import_live_inventory.load_set_box_map(SET_BOX_MAP_CSV).get(db.TOKENS_SET)
+        if mapped:
+            return mapped
+    else:
+        query = f"""
+            SELECT DISTINCT i.box_label
+            FROM inventory i
+            JOIN scryfall_cards sc ON i.scryfall_id = sc.scryfall_id
+            WHERE {db.SHELF_SET_SQL} = %s
+            LIMIT 1;
+        """
         with db.get_db_cursor(commit=False) as cur:
             cur.execute(query, (set_code,))
             row = cur.fetchone()
             if row and row.get("box_label"):
                 return row["box_label"].strip()
-    except Exception:
-        pass
 
     # 2. New set not in inventory: check callback first
     if prompt_callback:
@@ -164,155 +132,104 @@ def ingest_csv_batch(
     """Ingests cards from a ManaPool CSV, auto-resolving physical boxes and sections.
 
     Auto-resolution workflow:
-    1. Groups input CSV by MTG set code.
-    2. For each set:
-       a. Automatically resolves existing box location from PostgreSQL inventory.
-       b. If set is brand new, prompts the operator for a box label.
-       c. Automatically increments to the next section (Sec-1 -> Sec-2 -> Sec-3).
-    3. Alphabetizes cards within each new section and assigns index_num = 1..N.
-    4. Commits to PostgreSQL cards & inventory tables.
-    5. Generates physical divider slips (divider_<box>_<set>_<sec>.txt) and ManaPool upload CSVs.
+    1. Keeps in-stock singles; other product types are skipped and counted.
+    2. Resolves every row against the local Scryfall mirror. If any row cannot be
+       resolved, nothing is written and the unresolved rows are returned (refresh the
+       mirror or fix the CSV, then re-run).
+    3. Tokens (by Scryfall layout) from every set form one new TOKEN-n chunk in the token box.
+    4. Every other set resolves its box from inventory (or prompts the operator for a new
+       set) and gets its next section (Sec-1 -> Sec-2 -> Sec-3).
+    5. Sorts each new section in shelf order and assigns index_num = 1..N.
+    6. Commits to the PostgreSQL inventory table and writes ManaPool upload CSVs.
 
     Args:
         file_path (str): Input ManaPool CSV file path.
-        box_label (Optional[str]): Optional box override (if omitted, auto-resolved per set).
-        section_label (Optional[str]): Optional section override (if omitted, auto-incremented).
+        box_label (Optional[str]): Optional box override for regular sets (tokens always
+            go to the token box).
+        section_label (Optional[str]): Optional section override for regular sets.
         output_dir (str): Directory for export files.
         push_to_api (bool): Whether to push directly to ManaPool API.
         interactive (bool): Whether to prompt the user if an unknown set is encountered.
         prompt_callback (Optional[Any]): Callback function to prompt user in custom UI.
 
     Returns:
-        Dict[str, Any]: Summary dictionary of the ingestion operation.
+        Dict[str, Any]: Summary dictionary of the ingestion operation. status is 'success',
+            'empty' or 'unresolved' (with 'unresolved' rows listed).
     """
     os.makedirs(output_dir, exist_ok=True)
-    raw_rows = read_manapool_csv(file_path)
+    active_rows = read_manapool_csv(file_path)
+    raw_rows = [r for r in active_rows if (r.get("product_type") or "mtg_single").strip() == "mtg_single"]
+    skipped_non_singles = len(active_rows) - len(raw_rows)
     if not raw_rows:
-        return {"status": "empty", "message": "No cards with quantity > 0 found in CSV."}
+        return {"status": "empty", "message": "No singles with quantity > 0 found in CSV."}
 
-    # Identify sets in this batch
-    sets_in_batch = sorted(list({r.get("set", "").upper() for r in raw_rows if r.get("set")}))
+    resolved = scryfall_mirror.resolve_manapool_cards((r.get("set") or "", r.get("number") or "") for r in raw_rows)
 
-    all_cards_to_upsert: List[Dict[str, Any]] = []
+    def res_for(r: Dict[str, Any]) -> Optional[Dict[str, Any]]:
+        return resolved.get(((r.get("set") or "").strip().upper(), str(r.get("number") or "").strip().lower()))
+
+    unresolved = [r for r in raw_rows if res_for(r) is None]
+    if unresolved:
+        return {
+            "status": "unresolved",
+            "message": (
+                f"{len(unresolved)} rows are not in the Scryfall mirror; nothing was ingested. "
+                "Refresh the mirror (python scryfall_mirror.py refresh) or fix the CSV, then re-run."
+            ),
+            "unresolved": unresolved,
+        }
+
+    # Group by shelf set: every token goes to 'TOKENS', everything else to its own set.
+    groups: Dict[str, List[Dict[str, Any]]] = {}
+    for r in raw_rows:
+        shelf_set = db.TOKENS_SET if res_for(r)["is_token"] else (r.get("set") or "").strip().upper()
+        groups.setdefault(shelf_set, []).append(r)
+
     all_inventory_to_insert: List[Dict[str, Any]] = []
-    generated_slips: List[str] = []
     generated_csvs: List[str] = []
     set_boxes: Dict[str, str] = {}
+    set_sections: Dict[str, str] = {}
     api_update_count = 0
     api_errors: List[str] = []
 
-    for set_code in sets_in_batch:
-        set_rows = [r for r in raw_rows if r.get("set", "").upper() == set_code]
-        if not set_rows:
-            continue
-
-        # Automatically resolve physical box for this set
-        target_box = box_label or resolve_set_box(
-            set_code,
+    for shelf_set in sorted(groups):
+        rows = groups[shelf_set]
+        is_tokens = shelf_set == db.TOKENS_SET
+        target_box = (None if is_tokens else box_label) or resolve_set_box(
+            shelf_set,
             interactive=interactive,
             prompt_callback=prompt_callback,
         )
-        set_boxes[set_code] = target_box
+        actual_section = (None if is_tokens else section_label) or db.get_next_section(target_box, shelf_set)
+        set_boxes[shelf_set] = target_box
+        set_sections[shelf_set] = actual_section
 
-        # Automatically allocate next section (Sec-1 for new sets, Sec-2, Sec-3 for new chunks)
-        actual_section = section_label or db.get_next_section(target_box, set_code)
-
-        # 1. Resolve metadata for each card
-        resolved_items = []
-        for r in set_rows:
-            num = str(r.get("number", "")).strip()
-            name = r.get("name", "").strip()
-            prod_id = r.get("product_id", "").strip()
-            finish = r.get("finish", "NF").strip()
-            is_foil = (finish.upper() == "FO")
-            condition = r.get("condition", "NM").strip()
-            qty = int(r.get("quantity", 1))
+        sort_key = import_live_inventory._token_sort_key if is_tokens else import_live_inventory._set_sort_key
+        for idx, r in enumerate(sorted(rows, key=sort_key), start=1):
+            res = res_for(r)
             price_str = r.get("price") or r.get("market_price")
             try:
                 price = float(price_str) if price_str else None
             except ValueError:
                 price = None
-
-            # Check DB cache
-            card_info = db.get_card_by_set_number(set_code, num)
-            if not card_info:
-                # Query Scryfall
-                card_info = fetch_scryfall_card(set_code, num)
-                if card_info:
-                    all_cards_to_upsert.append(card_info)
-                else:
-                    # Synthetic record fallback
-                    synth_id = f"custom-{set_code.lower()}-{num.lower()}"
-                    card_info = {
-                        "scryfall_id": synth_id,
-                        "name": name,
-                        "set_code": set_code,
-                        "collector_number": num,
-                        "rarity": "unknown",
-                        "image_uri": None,
-                        "image_hash": None,
-                    }
-                    all_cards_to_upsert.append(card_info)
-
-            resolved_items.append({
-                "card": card_info,
-                "raw_row": r,
-                "name": card_info["name"] if card_info else name,
-                "set_code": set_code,
-                "collector_number": num,
-                "product_id": prod_id,
-                "condition": condition,
-                "is_foil": is_foil,
-                "quantity": qty,
-                "price": price,
-            })
-
-        # 2. STRICT ALPHABETICAL SORTING within this section by card name
-        resolved_items.sort(key=lambda x: (x["name"].lower(), x["collector_number"]))
-
-        # 3. Assign sequential index numbers 1..N
-        section_inventory: List[Dict[str, Any]] = []
-        for idx, item in enumerate(resolved_items, start=1):
-            inv_entry = {
-                "scryfall_id": item["card"]["scryfall_id"],
-                "manapool_product_id": item["product_id"],
-                "condition": item["condition"],
-                "is_foil": item["is_foil"],
-                "quantity": item["quantity"],
-                "manapool_listed_price": item["price"],
+            all_inventory_to_insert.append({
+                "scryfall_id": res["front"]["scryfall_id"],
+                "back_scryfall_id": res["back"]["scryfall_id"] if res["back"] else None,
+                "manapool_product_id": (r.get("product_id") or "").strip(),
+                "condition": (r.get("condition") or "NM").strip(),
+                "is_foil": import_live_inventory._is_foil(r),
+                "quantity": int(r.get("quantity", 1)),
+                "manapool_listed_price": price,
                 "box_label": target_box,
                 "section_label": actual_section,
                 "index_num": idx,
-                "custom_external_id": f"{target_box}:{set_code}:{actual_section}:{idx:03d}",
-            }
-            section_inventory.append(inv_entry)
-            all_inventory_to_insert.append(inv_entry)
+            })
 
-        # 4. Generate physical divider slip text file
-        slip_path = generate_divider_slip(
-            box_label=target_box,
-            set_code=set_code,
-            section_label=actual_section,
-            indexed_items=resolved_items,
-            output_dir=output_dir,
-        )
-        generated_slips.append(slip_path)
-
-        # 5. Generate ManaPool upload CSV
-        csv_path = generate_manapool_upload_csv(
-            set_code=set_code,
-            rows=[it["raw_row"] for it in resolved_items],
-            output_dir=output_dir,
-        )
+        csv_path = generate_manapool_upload_csv(set_code=shelf_set, rows=rows, output_dir=output_dir)
         generated_csvs.append(csv_path)
 
-    # 6. Commit all to PostgreSQL
-    if all_cards_to_upsert:
-        db.upsert_cards_batch(all_cards_to_upsert)
-    if all_inventory_to_insert:
-        db.insert_inventory_batch(all_inventory_to_insert)
+    db.insert_inventory_batch(all_inventory_to_insert)
 
-    # 7. Push to ManaPool API if enabled
     if push_to_api and manapool_client.is_configured():
         api_update_count, api_errors = manapool_client.push_inventory_batch(all_inventory_to_insert)
 
@@ -321,74 +238,15 @@ def ingest_csv_batch(
         "status": "success",
         "box_label": box_label or ", ".join(sorted(set(set_boxes.values()))),
         "set_boxes": set_boxes,
-        "sets": sets_in_batch,
+        "set_sections": set_sections,
+        "sets": sorted(groups),
         "total_lines": len(all_inventory_to_insert),
         "total_cards": total_cards,
-        "slips": generated_slips,
+        "skipped_non_singles": skipped_non_singles,
         "upload_csvs": generated_csvs,
         "api_updated": api_update_count,
         "api_errors": api_errors,
     }
-
-
-def generate_divider_slip(
-    box_label: str,
-    set_code: str,
-    section_label: str,
-    indexed_items: List[Dict[str, Any]],
-    output_dir: str = "exports",
-) -> str:
-    """Creates a print-ready text file index to drop behind the physical section divider.
-
-    Args:
-        box_label (str): Box name.
-        set_code (str): Set code.
-        section_label (str): Section name.
-        indexed_items (List[Dict[str, Any]]): List of sorted cards with assigned indices.
-        output_dir (str): Output folder.
-
-    Returns:
-        str: Absolute path to the created divider slip file.
-    """
-    timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
-    file_slug = f"divider_{box_label}_{set_code}_{section_label}".replace(" ", "_")
-    slip_file = os.path.join(output_dir, f"{file_slug}.txt")
-
-    total_cards = sum(it["quantity"] for it in indexed_items)
-    header_box = f"""========================================================================
-                      PHYSICAL SECTION DIVIDER SLIP
-========================================================================
- Box:     {box_label:<20} Set:     {set_code.upper():<10} Section: {section_label}
- Date:    {timestamp:<20} Cards:   {total_cards} cards across {len(indexed_items)} titles
- Sort:    Alphabetical by Name (Index 1 to {len(indexed_items)})
-========================================================================
-"""
-    table_rows = []
-    for idx, it in enumerate(indexed_items, start=1):
-        foil_str = "FOIL" if it["is_foil"] else "NF"
-        price_str = f"${it['price']:.2f}" if it["price"] else "N/A"
-        table_rows.append([
-            f"#{idx:03d}",
-            it["name"][:35],
-            it["collector_number"],
-            foil_str,
-            it["condition"],
-            it["quantity"],
-            price_str,
-        ])
-
-    table_text = tabulate(
-        table_rows,
-        headers=["Index", "Card Name", "Num", "Finish", "Cond", "Qty", "Price"],
-        tablefmt="simple",
-    )
-
-    with open(slip_file, "w", encoding="utf-8") as f:
-        f.write(header_box)
-        f.write(table_text)
-        f.write("\n========================================================================\n")
-
-    return os.path.abspath(slip_file)
 
 
 def generate_manapool_upload_csv(
@@ -427,16 +285,14 @@ def relocate_box(
     target_box: str,
     set_code: str,
     section_label: Optional[str] = None,
-    output_dir: str = "exports",
 ) -> Dict[str, Any]:
-    """Relocates cards for a given set/section from one box to another and generates new divider slips.
+    """Relocates cards for a given shelf set/section from one box to another.
 
     Args:
         source_box (str): Current box label.
         target_box (str): Destination box label.
-        set_code (str): Set code.
+        set_code (str): Set code, or 'TOKENS' to move every token chunk together.
         section_label (Optional[str]): Specific section or None for all sections of that set.
-        output_dir (str): Folder for updated slips.
 
     Returns:
         Dict[str, Any]: Summary of relocation result.
@@ -451,48 +307,12 @@ def relocate_box(
     if updated_rows == 0:
         return {"status": "not_found", "message": f"No cards found matching {source_box} / {set_code}."}
 
-    # Fetch updated items to regenerate divider slip for the new box
-    query = """
-        SELECT i.index_num, c.name, c.collector_number, i.is_foil, i.condition, i.quantity,
-               i.manapool_listed_price as price, i.section_label
-        FROM inventory i
-        JOIN cards c ON i.scryfall_id = c.scryfall_id
-        WHERE i.box_label = %s AND LOWER(c.set_code) = LOWER(%s)
-    """
-    params = [target_box, set_code]
-    if section_label:
-        query += " AND i.section_label = %s"
-        params.append(section_label)
-    query += " ORDER BY i.section_label, i.index_num;"
-
-    with db.get_db_cursor(commit=False) as cur:
-        cur.execute(query, tuple(params))
-        moved_cards = [dict(r) for r in cur.fetchall()]
-
-    # Group by section to generate divider slips
-    sections: Dict[str, List[Dict[str, Any]]] = {}
-    for card in moved_cards:
-        sec = card["section_label"]
-        sections.setdefault(sec, []).append(card)
-
-    new_slips = []
-    for sec_name, items in sections.items():
-        slip = generate_divider_slip(
-            box_label=target_box,
-            set_code=set_code,
-            section_label=sec_name,
-            indexed_items=items,
-            output_dir=output_dir,
-        )
-        new_slips.append(slip)
-
     return {
         "status": "success",
         "updated_rows": updated_rows,
         "source_box": source_box,
         "target_box": target_box,
         "set_code": set_code,
-        "new_slips": new_slips,
     }
 
 
@@ -545,9 +365,8 @@ def main():
     p_reloc = subparsers.add_parser("relocate", help="Relocate set or section between physical boxes (Box Shuffle)")
     p_reloc.add_argument("--source", required=True, help="Source box label (e.g. Box-1)")
     p_reloc.add_argument("--target", required=True, help="Target box label (e.g. Box-2)")
-    p_reloc.add_argument("--set", required=True, help="Set code (e.g. ZNR)")
+    p_reloc.add_argument("--set", required=True, help="Set code (e.g. ZNR), or TOKENS for all token chunks")
     p_reloc.add_argument("--section", default=None, help="Optional specific section (e.g. Sec-1)")
-    p_reloc.add_argument("--output-dir", default="exports", help="Directory for updated divider slips")
 
     # Subcommand: list
     p_list = subparsers.add_parser("list", help="List physical inventory storage sections")
@@ -571,10 +390,9 @@ def main():
             print(f"Successfully ingested {res['total_cards']} cards across {res['total_lines']} titles.")
             print("Set Allocations:")
             for s_code, b_lbl in res.get("set_boxes", {}).items():
-                print(f"  - Set {s_code} -> Box {b_lbl}")
-            print("Generated physical divider slips:")
-            for s in res["slips"]:
-                print(f"  - {s}")
+                print(f"  - Set {s_code} -> Box {b_lbl} / {res['set_sections'][s_code]}")
+            if res["skipped_non_singles"]:
+                print(f"Skipped {res['skipped_non_singles']} non-single rows.")
             print("Generated ManaPool upload CSVs:")
             for c in res["upload_csvs"]:
                 print(f"  - {c}")
@@ -584,6 +402,8 @@ def main():
                     print(f"  [API Warning] {err}", file=sys.stderr)
         else:
             print(f"Ingestion result: {res.get('message')}")
+            for r in res.get("unresolved", []):
+                print(f"  - {r.get('set')} {r.get('number')} {r.get('name')}")
 
     elif args.command == "relocate":
         print(f"Relocating [{args.set}] from {args.source} to {args.target}...")
@@ -592,13 +412,9 @@ def main():
             target_box=args.target,
             set_code=args.set,
             section_label=args.section,
-            output_dir=args.output_dir,
         )
         if res.get("status") == "success":
             print(f"Relocated {res['updated_rows']} inventory items to {args.target}.")
-            print("New physical divider slips generated:")
-            for s in res["new_slips"]:
-                print(f"  - {s}")
         else:
             print(f"Relocation failed: {res.get('message')}")
 
