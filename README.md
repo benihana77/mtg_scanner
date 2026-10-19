@@ -55,7 +55,7 @@ A high-velocity inventory management station and fulfillment optimizer for Magic
    - `token_validation_report.py`: read-only report of tokens filed in set sections, non-tokens in token sections, and rows missing from the mirror.
    - `special_cases_report.py`: printable check sheet of unusual cards (combos, emblems, helper cards, promos, accent/symbol names, same-name printings, The List) at their planned locations.
    - `audit_inventory.py`: one-time audit that assigned boxes to unmapped sets and produced the original token extraction walk sheet.
-   - `migrate_inventory.py` (superseded by `import_live_inventory.py`), `db_pipeline.py` and `hashing_engine.py` (early scanner work; not part of the current workflow).
+   - `hashing_engine.py` (early scanner work; not part of the current workflow).
 
 ---
 
@@ -152,5 +152,4 @@ The integration tests run against a separate `mtg_inventory_test` database (over
 ---
 
 ## Known Limitations
-- **Legacy scripts:** `migrate_inventory.py` and `db_pipeline.py` still target the removed `cards` table and no longer run.
 - **ManaPool combo names:** a combo token's displayed name comes from Scryfall's face order, which can differ from ManaPool's product name (e.g. ZNR `5-10`).

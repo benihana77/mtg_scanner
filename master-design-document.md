@@ -45,7 +45,6 @@ benihana77/mtg_scanner/
 ├── schema.sql               # Canonical DDL for scryfall_cards / inventory / price_history (see Section 6)
 ├── db.py                    # PostgreSQL connection management & parameterized queries (active)
 ├── hashing_engine.py        # [STUB] pHash helper only; camera/OpenCV capture not yet implemented
-├── db_pipeline.py           # [LEGACY] Early Scryfall fetch + image hashing loop; not in current workflow
 ├── csv_pipeline.py          # ManaPool CSV intake, box/section allocation, relocation
 ├── manapool_client.py       # ManaPool API v1 client (orders, batch inventory push)
 ├── pull_list_optimizer.py   # Order ingestion, location optimization & printable pick sheet generator
@@ -55,18 +54,17 @@ benihana77/mtg_scanner/
 ├── token_validation_report.py # Read-only report of tokens / non-tokens filed in the wrong place
 ├── special_cases_report.py # Printable check sheet of unusual cards at their planned locations
 ├── audit_inventory.py       # One-time audit: unmapped set assignment + token extraction sheet (to be superseded by the token validation report)
-├── migrate_inventory.py     # [SUPERSEDED] Older seeding script (replaced by import_live_inventory.py)
 ├── test_interim_pipeline.py # unittest suite for the interim pipeline
 └── Manapool Print Format - Set_Box Map.csv  # Set -> physical box (M1..M19) mapping
 ```
 Module Responsibilities
 `hashing_engine.py`: Intercepts camera frames, crops card boundaries using contour detection, generates perceptual hashes, and computes Hamming distance against Scryfall hash caches.
-`db.py`: Executes parameterized SQL operations (`INSERT`/`UPDATE`) against the `scryfall_cards`, `inventory`, and `price_history` tables, and initializes the schema from `schema.sql`. (`db_pipeline.py` is an earlier prototype of this and is no longer used.)
+`db.py`: Executes parameterized SQL operations (`INSERT`/`UPDATE`) against the `scryfall_cards`, `inventory`, and `price_history` tables, and initializes the schema from `schema.sql`.
 Scryfall mirror refresh (planned): downloads Scryfall's "Default Cards" bulk file and upserts it into `scryfall_cards`. Run manually from the TUI or CLI, e.g. before an intake that contains a new set.
 `manapool_client.py`: Fetches unfulfilled orders and pushes absolute inventory quantities to the ManaPool API.
 `tui.py`: Keyboard-driven terminal front end for intake, fulfillment, browsing and relocation.
 `csv_pipeline.py`: Manages temporary spreadsheet ingestion and ManaPool inventory sync prior to hardware CV integration.
-`import_live_inventory.py`: Seeds the database from a ManaPool inventory export, using the Set/Box map to assign boxes. (`migrate_inventory.py` is the older single-box version.)
+`import_live_inventory.py`: Fresh import of a ManaPool inventory export against `scryfall_cards`, using the Set/Box map to assign boxes (preview by default, `--rebuild` to write).
 `audit_inventory.py`: One-time audit that assigned boxes to unmapped sets and produced the token extraction walk sheet.
 `pull_list_optimizer.py`: Ingests nightly order reports from ManaPool, joins with PostgreSQL inventory location metadata (`box_label`, `section_label`, `index_num`), calculates an optimal physical traversal path, and exports print-ready spreadsheets for fulfillment.
 `docker-compose.yml`: Provisions the persistent PostgreSQL instance.
