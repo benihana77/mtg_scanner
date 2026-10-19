@@ -1,22 +1,42 @@
-"""Import live ManaPool inventory backup into PostgreSQL using physical Set -> Box mapping.
+"""Fresh import of a ManaPool inventory backup into PostgreSQL against the Scryfall mirror.
 
 Reads:
-1. ManaPool live inventory export (e.g. backups/inventory-manapool-backup-20260920.csv)
-2. Physical set-to-box map ('Manapool Print Format - Set_Box Map.csv')
+1. ManaPool inventory export (default: backups/inventory-manapool-audited-20260927.csv)
+2. Physical set-to-box map ('Manapool Print Format - Set_Box Map.csv'), including a
+   '(TOKENS) Tokens' row for the token box.
 
-Assigns every card to its actual physical storage box (M1..M19), alphabetizes
-within each set, assigns index numbers (1..N), and populates PostgreSQL in seconds.
+Every single is resolved against `scryfall_cards` (real Scryfall IDs; double-sided token
+combos get a front `scryfall_id` and a `back_scryfall_id`). Rows that cannot be resolved
+are refused and listed. Tokens (by Scryfall layout) go to TOKEN-1 in the token box,
+standalone promos to PROMOS, and every other set to one alphabetized Sec-1 in its box.
+
+With --rebuild, the legacy `cards` table, `inventory` and `price_history` are dropped and
+recreated from schema.sql in a single transaction before inserting, so a failure leaves
+the old database untouched. Without --rebuild nothing is written.
+
+Sort keys match the previous import exactly, so the shelves only need re-sorting where
+the re-sort list says so.
 """
 
 import argparse
 import csv
+import datetime
 import os
 import re
 import sys
 from typing import Any, Dict, List, Optional, Tuple
 
+from psycopg2 import extras
 from tabulate import tabulate
+
 import db
+import scryfall_mirror
+
+TOKENS_SET_KEY = "TOKENS"
+TOKEN_SECTION = "TOKEN-1"
+PROMO_SETS = {"PECL", "PKHM", "PSOS"}
+
+ProductKey = Tuple[str, bool]  # (manapool_product_id, is_foil)
 
 
 def load_set_box_map(map_path: str) -> Dict[str, str]:
@@ -25,7 +45,7 @@ def load_set_box_map(map_path: str) -> Dict[str, str]:
     Format expected:
         set_label,Box
         (10E) Tenth Edition,M1
-        (2X2) Double Masters 2022,M10
+        (TOKENS) Tokens,M19
 
     Args:
         map_path (str): Path to Set_Box map CSV.
@@ -52,226 +72,325 @@ def load_set_box_map(map_path: str) -> Dict[str, str]:
     return set_to_box
 
 
+def _is_foil(row: Dict[str, Any]) -> bool:
+    return (row.get("finish") or "NF").strip().upper() in ["FO", "FOIL", "F"]
+
+
+def _product_key(row: Dict[str, Any]) -> ProductKey:
+    return ((row.get("product_id") or "").strip(), _is_foil(row))
+
+
+def _token_sort_key(x: Dict[str, Any]) -> Tuple[Any, ...]:
+    """Previous import's TOKENS order: ManaPool name -> set -> numeric digits of number -> finish."""
+    num_digits = "".join(c for c in str(x.get("number") or "") if c.isdigit())
+    return (
+        (x.get("name") or "").strip().lower(),
+        (x.get("set") or "").strip().upper(),
+        int(num_digits) if num_digits else 0,
+        (x.get("finish") or "").strip().upper(),
+    )
+
+
+def _promo_sort_key(x: Dict[str, Any]) -> Tuple[Any, ...]:
+    return (
+        (x.get("name") or "").strip().lower(),
+        (x.get("set") or "").strip().upper(),
+        str(x.get("number") or "").strip().lower(),
+    )
+
+
+def _set_sort_key(x: Dict[str, Any]) -> Tuple[Any, ...]:
+    return (
+        (x.get("name") or "").strip().lower(),
+        str(x.get("number") or "").strip().lower(),
+        (x.get("finish") or "").strip().upper(),
+    )
+
+
+def fetch_current_layout() -> Dict[Tuple[str, str], List[ProductKey]]:
+    """Reads the database's current physical order, before it is replaced.
+
+    Returns:
+        Dict[Tuple[str, str], List[ProductKey]]: (box, section) -> product keys in index order.
+            The legacy 'TOKENS' section is reported as 'TOKEN-1' so the two compare directly.
+    """
+    layout: Dict[Tuple[str, str], List[ProductKey]] = {}
+    with db.get_db_cursor(commit=False) as cur:
+        cur.execute("SELECT to_regclass('public.inventory') IS NOT NULL AS present;")
+        if not cur.fetchone()["present"]:
+            return layout
+        cur.execute("""
+            SELECT manapool_product_id, is_foil, box_label, section_label, index_num
+            FROM inventory WHERE quantity > 0
+            ORDER BY box_label, section_label, index_num;
+        """)
+        for r in cur.fetchall():
+            section = TOKEN_SECTION if r["section_label"] == "TOKENS" else r["section_label"]
+            layout.setdefault((r["box_label"], section), []).append(
+                ((r["manapool_product_id"] or "").strip(), bool(r["is_foil"]))
+            )
+    return layout
+
+
+def build_resort_list(
+    old_layout: Dict[Tuple[str, str], List[ProductKey]],
+    new_layout: Dict[Tuple[str, str], List[ProductKey]],
+    section_sets: Dict[Tuple[str, str], List[str]],
+) -> List[Dict[str, Any]]:
+    """Compares old and new physical order and lists sections that must be re-sorted.
+
+    Old sections are split per set (a regular box holds many sets, each with its own Sec-n),
+    so only sets whose card sequence actually changed are listed.
+
+    Args:
+        old_layout: (box, section) -> product keys in the current database order.
+        new_layout: (box, section) -> product keys in the new import order.
+        section_sets: (box, section) -> set code of each product in new_layout, same order.
+
+    Returns:
+        List[Dict[str, Any]]: One entry per (box, section, set) whose order changes.
+    """
+    product_set: Dict[ProductKey, str] = {}
+    for loc, keys in new_layout.items():
+        for key, set_code in zip(keys, section_sets[loc]):
+            product_set[key] = set_code
+
+    def split_by_set(keys: List[ProductKey], loc: Tuple[str, str]) -> Dict[str, List[ProductKey]]:
+        # Token chunks hold many sets but are one physical run; keep them whole.
+        if loc[1].upper().startswith("TOKEN"):
+            return {TOKENS_SET_KEY: keys}
+        out: Dict[str, List[ProductKey]] = {}
+        for k in keys:
+            out.setdefault(product_set.get(k, "?"), []).append(k)
+        return out
+
+    old_split = {(loc, s): ks for loc, keys in old_layout.items() for s, ks in split_by_set(keys, loc).items()}
+    new_split = {(loc, s): ks for loc, keys in new_layout.items() for s, ks in split_by_set(keys, loc).items()}
+
+    changes: List[Dict[str, Any]] = []
+    for (loc, set_code) in sorted(set(old_split) | set(new_split)):
+        old_keys, new_keys = old_split.get((loc, set_code), []), new_split.get((loc, set_code), [])
+        if old_keys == new_keys:
+            continue
+        old_set, new_set = set(old_keys), set(new_keys)
+        changes.append({
+            "box_label": loc[0],
+            "section_label": loc[1],
+            "set_code": set_code,
+            "cards_in": len(new_set - old_set),
+            "cards_out": len(old_set - new_set),
+            "reordered": old_set == new_set,
+            "new_count": len(new_keys),
+        })
+    return changes
+
+
+def rebuild_database(inventory_rows: List[Dict[str, Any]]) -> None:
+    """Drops legacy catalog/inventory tables, recreates them and inserts rows, atomically.
+
+    `scryfall_cards` is kept (CREATE IF NOT EXISTS). Any error rolls everything back.
+
+    Args:
+        inventory_rows (List[Dict[str, Any]]): Rows for the new inventory table.
+    """
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    with open(os.path.join(base_dir, "schema.sql"), "r", encoding="utf-8") as f:
+        schema_sql = f.read()
+
+    query = """
+        INSERT INTO inventory (
+            scryfall_id, back_scryfall_id, manapool_product_id, condition, is_foil,
+            quantity, manapool_listed_price, box_label, section_label, index_num
+        ) VALUES %s;
+    """
+    params = [
+        (
+            r["scryfall_id"], r["back_scryfall_id"], r["manapool_product_id"], r["condition"],
+            r["is_foil"], r["quantity"], r["manapool_listed_price"], r["box_label"],
+            r["section_label"], r["index_num"],
+        )
+        for r in inventory_rows
+    ]
+    with db.get_db_cursor() as cur:
+        cur.execute("DROP TABLE IF EXISTS price_history, inventory, cards CASCADE;")
+        cur.execute(schema_sql)
+        extras.execute_values(cur, query, params, page_size=1000)
+
+
+def write_summary_file(
+    refused: List[Dict[str, Any]],
+    resort: List[Dict[str, Any]],
+    output_dir: str,
+) -> str:
+    """Writes the refused rows and the re-sort list to a printable text file.
+
+    Returns:
+        str: Absolute path to the summary file.
+    """
+    os.makedirs(output_dir, exist_ok=True)
+    path = os.path.join(output_dir, f"import_summary_{datetime.date.today().isoformat()}.txt")
+    with open(path, "w", encoding="utf-8") as f:
+        f.write("SECTIONS TO PHYSICALLY RE-SORT\n")
+        if resort:
+            f.write(tabulate(
+                [[c["box_label"], c["set_code"], c["section_label"], c["new_count"], c["cards_in"],
+                  c["cards_out"], "yes" if c["reordered"] else "", "[   ]"] for c in resort],
+                headers=["Box", "Set", "Section", "Cards", "In", "Out", "Reorder only", "Done"],
+                tablefmt="simple",
+            ) + "\n")
+        else:
+            f.write("  (none - physical order is unchanged)\n")
+        f.write("\nREFUSED ROWS (not resolvable against scryfall_cards; not imported)\n")
+        if refused:
+            f.write(tabulate(
+                [[r.get("set"), r.get("number"), (r.get("name") or "")[:40], r.get("finish"), r.get("quantity")]
+                 for r in refused],
+                headers=["Set", "Num", "Name", "Finish", "Qty"],
+                tablefmt="simple",
+            ) + "\n")
+        else:
+            f.write("  (none)\n")
+    return os.path.abspath(path)
+
+
 def import_live_inventory(
     inventory_csv: str,
     map_csv: str = "Manapool Print Format - Set_Box Map.csv",
     unmapped_box: str = "Unassigned",
-    dry_run: bool = False,
-    clear_existing: bool = False,
+    rebuild: bool = False,
+    output_dir: str = "exports",
 ) -> Dict[str, Any]:
-    """Imports live ManaPool backup into PostgreSQL mapped to real physical boxes.
+    """Imports a ManaPool inventory backup, mapped to physical boxes and the Scryfall mirror.
 
     Args:
         inventory_csv (str): Path to exported ManaPool inventory CSV.
         map_csv (str): Path to Set_Box map CSV.
-        unmapped_box (str): Default box for sets without a mapped location.
-        dry_run (bool): If True, parses and tabulates statistics without modifying database.
-        clear_existing (bool): If True, truncates existing inventory table before inserting.
+        unmapped_box (str): Default box for sets (or TOKENS) without a mapped location.
+        rebuild (bool): If True, drop and recreate the tables and insert. If False, preview only.
+        output_dir (str): Directory for the summary file.
 
     Returns:
         Dict[str, Any]: Execution summary dictionary.
+
+    Raises:
+        RuntimeError: If the Scryfall mirror is empty.
     """
     if not os.path.isfile(inventory_csv):
         raise FileNotFoundError(f"Inventory CSV not found at '{inventory_csv}'")
+    if scryfall_mirror.get_mirror_status()["card_count"] == 0:
+        raise RuntimeError("scryfall_cards is empty; run 'python scryfall_mirror.py refresh' first.")
 
-    print(f"Loading physical Set -> Box mappings from '{map_csv}'...")
     set_to_box = load_set_box_map(map_csv)
-    print(f"Loaded {len(set_to_box)} set-to-box definitions across {len(set(set_to_box.values()))} physical boxes.")
-
-    print(f"Reading live inventory backup from '{inventory_csv}'...")
     with open(inventory_csv, mode="r", encoding="utf-8-sig") as f:
-        reader = csv.DictReader(f)
-        raw_rows = list(reader)
+        raw_rows = list(csv.DictReader(f))
 
-    print(f"Read {len(raw_rows):,} total inventory lines. Filtering active stock...")
-    active_rows = [r for r in raw_rows if int(r.get("quantity", 0) or 0) > 0]
-    total_physical_cards = sum(int(r.get("quantity", 1)) for r in active_rows)
-    print(f"Active in-stock listings: {len(active_rows):,} ({total_physical_cards:,} physical cards).")
+    in_stock = [r for r in raw_rows if int(r.get("quantity", 0) or 0) > 0]
+    singles = [r for r in in_stock if (r.get("product_type") or "").strip() == "mtg_single"]
+    skipped_non_singles = len(in_stock) - len(singles)
 
-    all_cards_to_upsert: Dict[str, Dict[str, Any]] = {}
-    all_inventory_to_insert: List[Dict[str, Any]] = []
-    box_stats: Dict[str, Dict[str, Any]] = {}
+    resolved = scryfall_mirror.resolve_manapool_cards((r.get("set") or "", r.get("number") or "") for r in singles)
+
+    def res_for(r: Dict[str, Any]) -> Optional[Dict[str, Any]]:
+        return resolved.get(((r.get("set") or "").strip().upper(), str(r.get("number") or "").strip().lower()))
+
+    refused = [r for r in singles if res_for(r) is None]
+    accepted = [r for r in singles if res_for(r) is not None]
+
+    tokens_items = [r for r in accepted if res_for(r)["is_token"]]
+    promo_items = [r for r in accepted if not res_for(r)["is_token"] and r["set"].strip().upper() in PROMO_SETS]
+    regular_sets: Dict[str, List[Dict[str, Any]]] = {}
+    for r in accepted:
+        if not res_for(r)["is_token"] and r["set"].strip().upper() not in PROMO_SETS:
+            regular_sets.setdefault(r["set"].strip().upper(), []).append(r)
+
     unmapped_sets: List[str] = []
 
-    def record_card_and_inv(
-        it: Dict[str, Any],
-        box_label: str,
-        idx: int,
-        section_label: str = "Sec-1",
-    ) -> None:
-        set_code = (it.get("set") or "").strip().upper()
-        num = str(it.get("number") or "").strip()
-        name = (it.get("name") or "").strip()
-        rarity = (it.get("rarity") or "unknown").strip().lower()
-        prod_id = (it.get("product_id") or "").strip()
-        finish = (it.get("finish") or "NF").strip().upper()
-        is_foil = (finish in ["FO", "FOIL", "F"])
-        cond = (it.get("condition") or "NM").strip()
+    def box_for(key: str) -> str:
+        box = set_to_box.get(key)
+        if not box:
+            box = unmapped_box
+            if key not in unmapped_sets:
+                unmapped_sets.append(key)
+        return box
 
+    placements: List[Tuple[Dict[str, Any], str, str, int]] = []
+    for idx, it in enumerate(sorted(tokens_items, key=_token_sort_key), start=1):
+        placements.append((it, box_for(TOKENS_SET_KEY), TOKEN_SECTION, idx))
+    promo_box = set_to_box.get("PROMOS", "M19")
+    for idx, it in enumerate(sorted(promo_items, key=_promo_sort_key), start=1):
+        placements.append((it, promo_box, "PROMOS", idx))
+    for set_code, items in sorted(regular_sets.items()):
+        box = box_for(set_code)
+        for idx, it in enumerate(sorted(items, key=_set_sort_key), start=1):
+            placements.append((it, box, "Sec-1", idx))
+
+    inventory_rows: List[Dict[str, Any]] = []
+    new_layout: Dict[Tuple[str, str], List[ProductKey]] = {}
+    section_sets: Dict[Tuple[str, str], List[str]] = {}
+    box_stats: Dict[str, Dict[str, Any]] = {}
+    for it, box, section, idx in placements:
+        res = res_for(it)
         price_str = it.get("price") or it.get("market_price")
         try:
             price = float(price_str) if price_str else None
         except ValueError:
             price = None
-
-        card_key = f"{set_code}:{num}".lower()
-        synth_id = f"mp-{set_code.lower()}-{num.lower()}"
-
-        if card_key not in all_cards_to_upsert:
-            all_cards_to_upsert[card_key] = {
-                "scryfall_id": synth_id,
-                "name": name,
-                "set_code": set_code,
-                "collector_number": num,
-                "rarity": rarity,
-                "image_uri": None,
-                "image_hash": None,
-            }
-
-        all_inventory_to_insert.append({
-            "scryfall_id": synth_id,
-            "manapool_product_id": prod_id,
-            "condition": cond,
-            "is_foil": is_foil,
+        inventory_rows.append({
+            "scryfall_id": res["front"]["scryfall_id"],
+            "back_scryfall_id": res["back"]["scryfall_id"] if res["back"] else None,
+            "manapool_product_id": (it.get("product_id") or "").strip(),
+            "condition": (it.get("condition") or "NM").strip(),
+            "is_foil": _is_foil(it),
             "quantity": int(it.get("quantity", 1)),
             "manapool_listed_price": price,
-            "box_label": box_label,
-            "section_label": section_label,
+            "box_label": box,
+            "section_label": section,
             "index_num": idx,
         })
+        new_layout.setdefault((box, section), []).append(_product_key(it))
+        section_sets.setdefault((box, section), []).append(it["set"].strip().upper())
+        stats = box_stats.setdefault(box, {"sets": set(), "listings": 0, "cards": 0})
+        stats["sets"].add(it["set"].strip().upper())
+        stats["listings"] += 1
+        stats["cards"] += int(it.get("quantity", 1))
 
-    # Separate tokens / emblems, standalone promos, and regular expansion cards
-    tokens_items: List[Dict[str, Any]] = []
-    promo_items: List[Dict[str, Any]] = []
-    regular_sets: Dict[str, List[Dict[str, Any]]] = {}
+    resort = build_resort_list(fetch_current_layout(), new_layout, section_sets)
+    summary_path = write_summary_file(refused, resort, output_dir)
 
-    promo_sets = {"PECL", "PKHM", "PSOS"}
+    if rebuild:
+        rebuild_database(inventory_rows)
 
-    for r in active_rows:
-        s = (r.get("set") or "").strip().upper()
-        name_lower = (r.get("name") or "").strip().lower()
-        is_token = (
-            (s.startswith("T") and len(s) >= 4)
-            or (s == "DDR" and "emblem" in name_lower)
-        )
-        if is_token:
-            tokens_items.append(r)
-        elif s in promo_sets:
-            promo_items.append(r)
-        else:
-            if s:
-                regular_sets.setdefault(s, []).append(r)
-
-    # 1. Process Dedicated TOKENS Section in Box M19: globally alphabetized matching divider_TOKENS.txt
-    if tokens_items:
-        def token_sort_key(x: Dict[str, Any]):
-            num_digits = "".join(c for c in str(x.get("number") or "") if c.isdigit())
-            num_val = int(num_digits) if num_digits else 0
-            return (
-                (x.get("name") or "").strip().lower(),
-                (x.get("set") or "").strip().upper(),
-                num_val,
-                (x.get("finish") or "").strip().upper()
-            )
-
-        tokens_items.sort(key=token_sort_key)
-        m19_stats = box_stats.setdefault("M19", {"sets": set(), "listings": 0, "cards": 0})
-        m19_stats["sets"].update(t["set"].upper() for t in tokens_items)
-        m19_stats["listings"] += len(tokens_items)
-        m19_stats["cards"] += sum(int(t.get("quantity", 1)) for t in tokens_items)
-
-        for idx, it in enumerate(tokens_items, start=1):
-            record_card_and_inv(it, "M19", idx, section_label="TOKENS")
-
-    # 2. Process Dedicated PROMOS Section in Box M19
-    if promo_items:
-        promo_items.sort(key=lambda x: (
-            (x.get("name") or "").strip().lower(),
-            (x.get("set") or "").strip().upper(),
-            str(x.get("number") or "").strip().lower(),
-        ))
-        m19_stats = box_stats.setdefault("M19", {"sets": set(), "listings": 0, "cards": 0})
-        m19_stats["sets"].update(p["set"].upper() for p in promo_items)
-        m19_stats["listings"] += len(promo_items)
-        m19_stats["cards"] += sum(int(p.get("quantity", 1)) for p in promo_items)
-
-        for idx, it in enumerate(promo_items, start=1):
-            record_card_and_inv(it, "M19", idx, section_label="PROMOS")
-
-    # 3. Process Regular Expansion Sets (M1..M19, etc.)
-    for set_code, items in sorted(regular_sets.items()):
-        box_label = set_to_box.get(set_code)
-        if not box_label:
-            box_label = unmapped_box
-            if set_code not in unmapped_sets:
-                unmapped_sets.append(set_code)
-
-        if box_label not in box_stats:
-            box_stats[box_label] = {"sets": set(), "listings": 0, "cards": 0}
-        box_stats[box_label]["sets"].add(set_code)
-        box_stats[box_label]["listings"] += len(items)
-        box_stats[box_label]["cards"] += sum(int(it.get("quantity", 1)) for it in items)
-
-        items.sort(key=lambda x: (
-            (x.get("name") or "").strip().lower(),
-            str(x.get("number") or "").strip().lower(),
-            (x.get("finish") or "").strip().upper()
-        ))
-
-        for idx, it in enumerate(items, start=1):
-            record_card_and_inv(it, box_label, idx, section_label="Sec-1")
-
-    if not dry_run:
-        if clear_existing:
-            print("\nTruncating existing PostgreSQL 'inventory' table...")
-            with db.get_db_cursor() as cur:
-                cur.execute("TRUNCATE TABLE inventory RESTART IDENTITY;")
-
-        print(f"\nUpserting {len(all_cards_to_upsert):,} unique titles into PostgreSQL 'cards' table...")
-        db.upsert_cards_batch(list(all_cards_to_upsert.values()))
-
-        print(f"Inserting {len(all_inventory_to_insert):,} physical inventory records into PostgreSQL 'inventory' table...")
-        db.insert_inventory_batch(all_inventory_to_insert)
-        print("Database commit successful!")
-
-    # Format summary table
     summary_rows = []
     for b_label in sorted(box_stats.keys()):
         b_info = box_stats[b_label]
-        sample_sets = ", ".join(sorted(list(b_info["sets"]))[:4])
+        sample_sets = ", ".join(sorted(b_info["sets"])[:4])
         if len(b_info["sets"]) > 4:
             sample_sets += f" (+{len(b_info['sets']) - 4} more)"
-
-        summary_rows.append([
-            b_label,
-            len(b_info["sets"]),
-            sample_sets,
-            f"{b_info['listings']:,}",
-            f"{b_info['cards']:,}",
-        ])
-
-    table_output = tabulate(
-        summary_rows,
-        headers=["Physical Box", "Sets Count", "Sample Sets", "Listings", "Total Cards"],
-        tablefmt="fancy_grid",
-    )
+        summary_rows.append([b_label, len(b_info["sets"]), sample_sets, f"{b_info['listings']:,}", f"{b_info['cards']:,}"])
 
     return {
         "status": "success",
-        "dry_run": dry_run,
-        "total_lines": len(all_inventory_to_insert),
-        "total_cards": total_physical_cards,
-        "unique_cards": len(all_cards_to_upsert),
-        "total_boxes": len(box_stats),
-        "unmapped_sets_count": len(unmapped_sets),
+        "rebuilt": rebuild,
+        "total_lines": len(inventory_rows),
+        "total_cards": sum(r["quantity"] for r in inventory_rows),
+        "tokens": len(tokens_items),
+        "token_combos": sum(1 for r in tokens_items if res_for(r)["back"]),
+        "skipped_non_singles": skipped_non_singles,
+        "refused": refused,
+        "resort": resort,
         "unmapped_sets": unmapped_sets,
-        "summary_table": table_output,
+        "summary_path": summary_path,
+        "summary_table": tabulate(
+            summary_rows,
+            headers=["Physical Box", "Sets Count", "Sample Sets", "Listings", "Total Cards"],
+            tablefmt="fancy_grid",
+        ),
     }
 
 
 def main():
     """CLI entry point for import_live_inventory."""
-    parser = argparse.ArgumentParser(description="Seed PostgreSQL with live ManaPool inventory mapped to physical boxes")
+    parser = argparse.ArgumentParser(description="Fresh import of ManaPool inventory against the Scryfall mirror")
     parser.add_argument(
         "--inventory-csv",
         default="backups/inventory-manapool-audited-20260927.csv",
@@ -288,15 +407,11 @@ def main():
         help="Box label for sets not found in map (default: Unassigned)",
     )
     parser.add_argument(
-        "--dry-run",
+        "--rebuild",
         action="store_true",
-        help="Parse and calculate mapping without modifying database",
+        help="Drop cards/inventory/price_history, recreate from schema.sql and insert (otherwise preview only)",
     )
-    parser.add_argument(
-        "--clear-existing",
-        action="store_true",
-        help="Truncate PostgreSQL inventory table before inserting",
-    )
+    parser.add_argument("--output-dir", default="exports", help="Directory for the import summary file")
 
     args = parser.parse_args()
 
@@ -305,19 +420,22 @@ def main():
             inventory_csv=args.inventory_csv,
             map_csv=args.map_csv,
             unmapped_box=args.unmapped_box,
-            dry_run=args.dry_run,
-            clear_existing=args.clear_existing,
+            rebuild=args.rebuild,
+            output_dir=args.output_dir,
         )
 
         print("\n" + res["summary_table"])
-        mode_str = "[DRY RUN PREVIEW - NO DB CHANGES]" if res["dry_run"] else "[COMMITTED TO POSTGRESQL]"
+        mode_str = "[DATABASE REBUILT]" if res["rebuilt"] else "[PREVIEW - NO DB CHANGES; pass --rebuild to write]"
         print(f"\n{mode_str}")
         print(f"Total Physical Cards: {res['total_cards']:,} across {res['total_lines']:,} listings.")
-        print(f"Unique Card Titles:   {res['unique_cards']:,}")
-        print(f"Physical Boxes Used: {res['total_boxes']}")
+        print(f"Tokens:               {res['tokens']:,} listings ({res['token_combos']} double-sided combos) in {TOKEN_SECTION}")
+        print(f"Skipped non-singles:  {res['skipped_non_singles']}")
+        print(f"Refused (no match):   {len(res['refused'])}")
+        print(f"Sections to re-sort:  {len(res['resort'])}")
+        print(f"Summary file:         {res['summary_path']}")
 
-        if res["unmapped_sets_count"] > 0:
-            print(f"\nNote: {res['unmapped_sets_count']} sets were not found in Set_Box map and placed into '{args.unmapped_box}':")
+        if res["unmapped_sets"]:
+            print(f"\nNote: {len(res['unmapped_sets'])} sets were not found in Set_Box map and placed into '{args.unmapped_box}':")
             print("  " + ", ".join(res["unmapped_sets"]))
 
     except Exception as e:

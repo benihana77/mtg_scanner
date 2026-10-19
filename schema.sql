@@ -19,6 +19,7 @@ CREATE TABLE IF NOT EXISTS scryfall_cards (
 CREATE TABLE IF NOT EXISTS inventory (
     inventory_id SERIAL PRIMARY KEY,
     scryfall_id VARCHAR(50) NOT NULL REFERENCES scryfall_cards(scryfall_id),
+    back_scryfall_id VARCHAR(50) REFERENCES scryfall_cards(scryfall_id),  -- Back face of a ManaPool double-sided token combo
     manapool_product_id VARCHAR(50),
     condition VARCHAR(10) DEFAULT 'NM',
     is_foil BOOLEAN DEFAULT FALSE,

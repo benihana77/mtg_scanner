@@ -14,6 +14,7 @@ import argparse
 import gzip
 import json
 import os
+import re
 import sys
 import tempfile
 from typing import Any, Dict, Iterable, Iterator, List, Optional, Tuple
@@ -33,6 +34,9 @@ SCRYFALL_HEADERS = {
 TOKEN_LAYOUTS = frozenset({"token", "double_faced_token", "emblem"})
 
 UPSERT_BATCH_SIZE = 1000
+
+# ManaPool double-sided token combo numbers: "8-11" (same set) or "17-TMOM-10" (back in TMOM).
+COMBO_NUMBER_RE = re.compile(r"^([^-]+)-(?:([A-Za-z0-9]+)-)?([^-]+)$")
 
 
 def is_token_layout(layout: Optional[str]) -> bool:
@@ -230,6 +234,67 @@ def lookup_cards(keys: Iterable[Tuple[str, str]]) -> Dict[Tuple[str, str], Dict[
     with db.get_db_cursor(commit=False) as cur:
         cur.execute(query, ([s for s, _ in norm], [n for _, n in norm]))
         return {(r["set_code"], r["collector_number"].lower()): dict(r) for r in cur.fetchall()}
+
+
+def parse_combo_number(set_code: str, number: str) -> Optional[Tuple[Tuple[str, str], Tuple[str, str]]]:
+    """Splits a ManaPool double-sided token number into front and back face keys.
+
+    Args:
+        set_code (str): Set code of the ManaPool row (the front face's set).
+        number (str): ManaPool collector number, e.g. '8-11' or '17-TMOM-10'.
+
+    Returns:
+        Optional[Tuple[Tuple[str, str], Tuple[str, str]]]: ((SET, front_num), (SET, back_num))
+            with numbers lower-cased, or None if the number is not a combo.
+    """
+    m = COMBO_NUMBER_RE.match((number or "").strip())
+    if not m:
+        return None
+    front_set = set_code.strip().upper()
+    back_set = (m.group(2) or front_set).upper()
+    return (front_set, m.group(1).lower()), (back_set, m.group(3).lower())
+
+
+def resolve_manapool_cards(keys: Iterable[Tuple[str, str]]) -> Dict[Tuple[str, str], Dict[str, Any]]:
+    """Resolves ManaPool (set, number) pairs to Scryfall cards, including token combos.
+
+    Resolution order per pair:
+        1. Exact set + collector number match in the mirror.
+        2. Combo number ('front-back' / 'front-SET-back'): resolve both faces.
+        3. If both faces are the same double_faced_token card (e.g. '18-18'), use it alone.
+        4. Otherwise the pair is unresolved (absent from the result).
+
+    Args:
+        keys (Iterable[Tuple[str, str]]): (set_code, number) pairs as written by ManaPool.
+
+    Returns:
+        Dict[Tuple[str, str], Dict[str, Any]]: Map from (SET, number lowercased) to
+            {'front': card, 'back': Optional[card], 'name': display name, 'is_token': bool}.
+    """
+    norm = {(s.strip().upper(), n.strip().lower()) for s, n in keys if s and n}
+    exact = lookup_cards(norm)
+
+    combos = {k: parse_combo_number(*k) for k in norm if k not in exact}
+    combos = {k: v for k, v in combos.items() if v}
+    faces = lookup_cards(face for pair in combos.values() for face in pair)
+
+    resolved: Dict[Tuple[str, str], Dict[str, Any]] = {
+        k: {"front": card, "back": None} for k, card in exact.items()
+    }
+    for k, (front_key, back_key) in combos.items():
+        front, back = faces.get(front_key), faces.get(back_key)
+        if not front or not back:
+            continue
+        if front["scryfall_id"] == back["scryfall_id"]:
+            if front["layout"] != "double_faced_token":
+                continue
+            back = None
+        resolved[k] = {"front": front, "back": back}
+
+    for r in resolved.values():
+        r["name"] = r["front"]["name"] + (f" // {r['back']['name']}" if r["back"] else "")
+        r["is_token"] = is_token_layout(r["front"]["layout"])
+    return resolved
 
 
 def main() -> None:

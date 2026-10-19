@@ -77,12 +77,14 @@ Tokens (approved design):
 - Set code: tokens keep their real set code (`TMOM`, `DDR`, `TCMR`, …), so orders still resolve on set + collector number.
 - `TOKENS` pseudo-set: all tokens behave as one set named `TOKENS`. Each intake batch's tokens, from any set, become one new append-only chunk with the next section label `TOKEN-1`, `TOKEN-2`, …, alphabetized by name → set code → collector number. A batch with no tokens creates no chunk.
 - Token box: resolved like any set's box: from existing `TOKEN-n` rows in the database, else the `TOKENS` row of the Set/Box map (currently `M19`), else an operator prompt. Relocating `TOKENS` moves every `TOKEN-n` chunk together, keeping section labels and indexes.
+- Double-sided token combos: ManaPool sells each double-sided token pairing as one product whose collector number joins the faces (`8-11` = front #8 / back #11 in the row's set; `17-TMOM-10` = front #17 in the row's set / back TMOM #10). Scryfall lists each face as a separate card, so a combo is stored as `inventory.scryfall_id` (front) + `inventory.back_scryfall_id` (back). Resolution order for a ManaPool set + number: (1) exact mirror match; (2) parse `front-back` / `front-SET-back` and resolve both faces; (3) if both faces are the same Scryfall card (e.g. `18-18`) and it is a `double_faced_token`, use that single card with no back; (4) otherwise refuse and list. A combo is a token if its front face is. Combos are sorted by ManaPool's product name, because ManaPool's name order does not always follow its number order (e.g. ZNR `5-10` is named "Construct // Drake" but #5 is the Drake).
+- Singles only: import and intake only take `product_type = mtg_single` rows; other product types are skipped and counted in the summary.
 - Unknown layout at intake: interactive intake asks the operator whether the card is a token; non-interactive intake treats it as a normal card and lists it as a warning in the intake summary.
 Token clean-up (one-time):
 1. Wipe the provisional Oct 7 MOM `Sec-2` test rows (box M18) from the database.
 2. Validation report against the current database: a text walk sheet (box → set → section → index) plus CSV listing (a) tokens sitting in set boxes and (b) non-tokens sitting in `TOKENS`. Report only; it moves nothing.
 3. Operator verifies and moves cards by hand.
-4. Fresh import from `backups/inventory-manapool-audited-20260927.csv` with real Scryfall IDs and the `layout` rule: one alphabetized `Sec-1` per set plus `TOKEN-1`, together with a list of sets that need physical re-sorting (sets that had several sections or gain/lose tokens).
+4. Fresh import (`python import_live_inventory.py --rebuild`; preview without the flag) from `backups/inventory-manapool-audited-20260927.csv` with real Scryfall IDs and the `layout` rule, using the previous import's sort keys: one alphabetized `Sec-1` per set plus `TOKEN-1`, together with a list of sets that need physical re-sorting (sets that had several sections or gain/lose tokens).
 ---
 4. Computer Vision & Perceptual Hashing Pipeline
 ```
@@ -149,6 +151,7 @@ CREATE TABLE IF NOT EXISTS scryfall_cards (
 CREATE TABLE IF NOT EXISTS inventory (
     inventory_id SERIAL PRIMARY KEY,
     scryfall_id VARCHAR(50) NOT NULL REFERENCES scryfall_cards(scryfall_id),
+    back_scryfall_id VARCHAR(50) REFERENCES scryfall_cards(scryfall_id),  -- Back face of a ManaPool double-sided token combo
     manapool_product_id VARCHAR(50),
     condition VARCHAR(10) DEFAULT 'NM',
     is_foil BOOLEAN DEFAULT FALSE,
@@ -170,7 +173,8 @@ CREATE TABLE IF NOT EXISTS price_history (
 );
 ```
 Catalog model: `scryfall_cards` replaces the former `cards` table and is the single source of card facts (name, set, number, rarity, layout, image). `inventory` and `price_history` reference it directly; card facts are obtained by joining, never copied.
-No synthetic IDs: a card that cannot be found in `scryfall_cards` (after a refresh) is refused at intake/import and listed in the run summary. A `custom_cards` table will only be added if such rows turn out to be a real need.
+Double-sided token combos: `back_scryfall_id` holds the back face of a ManaPool combo product and is NULL for every other card (see Section 3a).
+No synthetic IDs: a card that cannot be resolved against `scryfall_cards` (after a refresh) is refused at intake/import and listed in the run summary. A `custom_cards` table will only be added if such rows turn out to be a real need.
 `image_hash`: the only non-Scryfall catalog field. It is unused until Phase 3 and will get its own table (`scryfall_id` → hash) at that point.
 Migration: existing databases still have the old `cards` table and the synthetic `mp-<set>-<num>` IDs. They are replaced during the token clean-up fresh import (Section 3a), which wipes `inventory`/`cards` and reloads against `scryfall_cards`.
 Automated Price Sync Workflow (3:00 AM Cron Job)
