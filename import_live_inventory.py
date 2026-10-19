@@ -14,8 +14,8 @@ With --rebuild, the legacy `cards` table, `inventory` and `price_history` are dr
 recreated from schema.sql in a single transaction before inserting, so a failure leaves
 the old database untouched. Without --rebuild nothing is written.
 
-Sort keys match the previous import exactly, so the shelves only need re-sorting where
-the re-sort list says so.
+Sort keys follow the shelves: accent-insensitive names (Éomer under E), symbols first, and
+same-name printings in numeric collector order (regular printing before showcase variants).
 """
 
 import argparse
@@ -24,6 +24,7 @@ import datetime
 import os
 import re
 import sys
+import unicodedata
 from typing import Any, Dict, List, Optional, Tuple
 
 from psycopg2 import extras
@@ -80,29 +81,48 @@ def _product_key(row: Dict[str, Any]) -> ProductKey:
     return ((row.get("product_id") or "").strip(), _is_foil(row))
 
 
+def name_sort_key(name: str) -> str:
+    """Shelf alphabetization key: case- and accent-insensitive ('Éomer' files under E).
+
+    Leading symbols are kept, so names like '+2 Mace' still file at the front of a section.
+    """
+    folded = unicodedata.normalize("NFKD", (name or "").strip().replace("Æ", "Ae").replace("æ", "ae"))
+    return "".join(c for c in folded if not unicodedata.combining(c)).lower()
+
+
+def collector_number_sort_key(number: str) -> Tuple[int, str]:
+    """Numeric collector order, so the regular printing (#7) precedes showcase variants (#302).
+
+    Numbers without leading digits (e.g. The List's 'CN2-126') sort as 0 then by text.
+    """
+    num = str(number or "").strip().lower()
+    m = re.match(r"(\d+)", num)
+    return (int(m.group(1)) if m else 0, num)
+
+
 def _token_sort_key(x: Dict[str, Any]) -> Tuple[Any, ...]:
-    """Previous import's TOKENS order: ManaPool name -> set -> numeric digits of number -> finish."""
-    num_digits = "".join(c for c in str(x.get("number") or "") if c.isdigit())
+    """Token chunk order: ManaPool name -> set -> collector number -> finish."""
     return (
-        (x.get("name") or "").strip().lower(),
+        name_sort_key(x.get("name") or ""),
         (x.get("set") or "").strip().upper(),
-        int(num_digits) if num_digits else 0,
+        collector_number_sort_key(x.get("number") or ""),
         (x.get("finish") or "").strip().upper(),
     )
 
 
 def _promo_sort_key(x: Dict[str, Any]) -> Tuple[Any, ...]:
     return (
-        (x.get("name") or "").strip().lower(),
+        name_sort_key(x.get("name") or ""),
         (x.get("set") or "").strip().upper(),
-        str(x.get("number") or "").strip().lower(),
+        collector_number_sort_key(x.get("number") or ""),
     )
 
 
 def _set_sort_key(x: Dict[str, Any]) -> Tuple[Any, ...]:
+    """Set section order: name -> collector number (regular printing first) -> finish."""
     return (
-        (x.get("name") or "").strip().lower(),
-        str(x.get("number") or "").strip().lower(),
+        name_sort_key(x.get("name") or ""),
+        collector_number_sort_key(x.get("number") or ""),
         (x.get("finish") or "").strip().upper(),
     )
 
@@ -230,7 +250,8 @@ def write_summary_file(
     os.makedirs(output_dir, exist_ok=True)
     path = os.path.join(output_dir, f"import_summary_{datetime.date.today().isoformat()}.txt")
     with open(path, "w", encoding="utf-8") as f:
-        f.write("SECTIONS TO PHYSICALLY RE-SORT\n")
+        f.write("SECTIONS WHOSE ORDER DIFFERS FROM THE CURRENT DATABASE\n")
+        f.write("(The shelves follow the new order; these are database corrections unless a set was shelved by the old order.)\n")
         if resort:
             f.write(tabulate(
                 [[c["box_label"], c["set_code"], c["section_label"], c["new_count"], c["cards_in"],
@@ -239,7 +260,7 @@ def write_summary_file(
                 tablefmt="simple",
             ) + "\n")
         else:
-            f.write("  (none - physical order is unchanged)\n")
+            f.write("  (none - order is unchanged)\n")
         f.write("\nREFUSED ROWS (not resolvable against scryfall_cards; not imported)\n")
         if refused:
             f.write(tabulate(
@@ -466,7 +487,7 @@ def main():
         print(f"Tokens:               {res['tokens']:,} listings ({res['token_combos']} double-sided combos) in {TOKEN_SECTION}")
         print(f"Skipped non-singles:  {res['skipped_non_singles']}")
         print(f"Refused (no match):   {len(res['refused'])}")
-        print(f"Sections to re-sort:  {len(res['resort'])}")
+        print(f"Order differs from DB: {len(res['resort'])} sections (see summary file)")
         print(f"Summary file:         {res['summary_path']}")
 
         if res["unmapped_sets"]:

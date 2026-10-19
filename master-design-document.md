@@ -73,7 +73,7 @@ Scryfall mirror refresh (planned): downloads Scryfall's "Default Cards" bulk fil
 ---
 3a. Physical Storage Model
 Boxes: Storage boxes are labelled `M1`–`M19`. Each set is assigned to one box via `Manapool Print Format - Set_Box Map.csv`; brand-new sets are assigned at intake by operator prompt.
-Sections: Within a box, each set is split into append-only sections (`Sec-1`, `Sec-2`, …). Every intake batch for a set becomes the next section, alphabetized by card name and indexed `1..N`. Existing sections are never re-sorted. No divider slips are printed.
+Sections: Within a box, each set is split into append-only sections (`Sec-1`, `Sec-2`, …). Every intake batch for a set becomes the next section, alphabetized by card name and indexed `1..N`. Shelf order: names are compared case- and accent-insensitively (Éomer files under E; leading symbols like `+2 Mace` file first), and same-name printings go in numeric collector-number order, so the regular printing comes before showcase/other variants. Existing sections are never re-sorted. No divider slips are printed.
 Special sections (box M19): `PROMOS` holds standalone promo sets (unchanged by the token design below).
 Tokens (approved design):
 - Detection: a card is a token if and only if its Scryfall `layout` (from `scryfall_cards`) is `token`, `double_faced_token` or `emblem`. No set-code or name heuristics. Art Series cards are not sold and get no special handling.
@@ -87,7 +87,7 @@ Token clean-up (one-time):
 1. Wipe the provisional Oct 7 MOM `Sec-2` test rows (box M18) from the database.
 2. Validation report against the current database: a text walk sheet (box → set → section → index) plus CSV listing (a) tokens sitting in set boxes and (b) non-tokens sitting in `TOKENS`. Report only; it moves nothing.
 3. Operator verifies and moves cards by hand. `special_cases_report.py` prints a check sheet of every unusual card (combos, emblems, helper cards, promos, meld names, symbol/accent names, same-name printings in text order, The List) at the box / section / index the fresh import will assign.
-4. Fresh import (`python import_live_inventory.py --rebuild`; preview without the flag) from `backups/inventory-manapool-audited-20260927.csv` with real Scryfall IDs and the `layout` rule, using the previous import's sort keys: one alphabetized `Sec-1` per set plus `TOKEN-1`, together with a list of sets that need physical re-sorting (sets that had several sections or gain/lose tokens).
+4. Fresh import (`python import_live_inventory.py --rebuild`; preview without the flag) from `backups/inventory-manapool-audited-20260927.csv` with real Scryfall IDs and the `layout` rule, using the shelf sort order above: one alphabetized `Sec-1` per set plus `TOKEN-1`, together with a list of sets that need physical re-sorting (sets that had several sections or gain/lose tokens).
 ---
 4. Computer Vision & Perceptual Hashing Pipeline
 ```

@@ -154,5 +154,18 @@ class TestSpecialCases(unittest.TestCase):
         self.assertNotIn("5", checks)
 
 
+class TestShelfSortKeys(unittest.TestCase):
+    def test_accented_names_file_under_base_letter(self):
+        names = ["Zombie", "\u00c9omer of the Riddermark", "Elrond, Lord of Rivendell", "+2 Mace", "Fangorn"]
+        self.assertEqual(
+            sorted(names, key=ili.name_sort_key),
+            ["+2 Mace", "Elrond, Lord of Rivendell", "\u00c9omer of the Riddermark", "Fangorn", "Zombie"],
+        )
+
+    def test_regular_printing_before_showcase(self):
+        rows = [{"name": "Cloister Gargoyle", "number": n, "finish": "NF"} for n in ["302", "7"]]
+        self.assertEqual([r["number"] for r in sorted(rows, key=ili._set_sort_key)], ["7", "302"])
+
+
 if __name__ == "__main__":
     unittest.main()

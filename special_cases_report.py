@@ -32,28 +32,24 @@ CHECKS: Dict[str, str] = {
     "PROMO": "Standalone promo. PROMOS section.",
     "NAME-DIFF": "ManaPool name differs from Scryfall (e.g. meld pair). Check the printing.",
     "SORT-SYMBOL": "Name starts with a symbol/punctuation. Filed at the FRONT of its section.",
-    "SORT-ACCENT": "Name starts with an accented letter. Filed AFTER Z in its section.",
-    "VARIANT-ORDER": "Same-name printings ordered by collector number as text (e.g. 302 before 7). Check the order.",
+    "SORT-ACCENT": "Name starts with an accented letter. Filed under its base letter (\u00c9omer under E).",
+    "VARIANT-ORDER": "Same-name printings: regular printing (lowest number) first, then showcase/other variants.",
     "THE-LIST": "The List (PLST): collector number embeds the original set. Listed in the appendix.",
     "UNASSIGNED": "Set has no box in the Set/Box map.",
 }
 
 
 def _variant_order_keys(placements: List[Dict[str, Any]]) -> set:
-    """Finds placements in same-name groups whose index order is not numeric collector order."""
+    """Finds same-name groups whose numeric collector order differs from plain text order (7 vs 302)."""
     groups: Dict[Tuple[str, str, str, str], List[Dict[str, Any]]] = defaultdict(list)
     for p in placements:
         key = (p["box_label"], p["section_label"], p["row"]["set"].strip().upper(), p["row"]["name"].strip().lower())
         groups[key].append(p)
 
-    def numeric(n: str) -> Tuple[int, str]:
-        digits = "".join(c for c in n if c.isdigit())
-        return (int(digits) if digits else 0, n)
-
     flagged = set()
     for members in groups.values():
-        nums = [m["row"]["number"] for m in members]
-        if len(set(nums)) > 1 and nums != sorted(nums, key=numeric):
+        nums = sorted({m["row"]["number"].strip().lower() for m in members})
+        if len(nums) > 1 and nums != sorted(nums, key=ili.collector_number_sort_key):
             flagged.update(id(m) for m in members)
     return flagged
 
