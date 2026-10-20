@@ -1146,6 +1146,19 @@ class TestMTGInterimPipeline(unittest.TestCase):
         self.assertFalse(repricer.remove_pin("pid-bulk"))
 
 
+    def test_20_push_quantities_sends_null_price(self):
+        """push_quantities only sets quantity; price_cents is null so prices are left alone."""
+        with patch.object(manapool_client, "is_configured", return_value=True), \
+             patch("requests.request", return_value=MagicMock(status_code=200)) as mock_req:
+            updated, errors = manapool_client.push_quantities({"pid-a": 3, "pid-b": 0})
+        self.assertEqual((updated, errors), (2, []))
+        sent = mock_req.call_args[1]["json"]
+        self.assertEqual(sent, [
+            {"product_type": "mtg_single", "product_id": "pid-a", "price_cents": None, "quantity": 3},
+            {"product_type": "mtg_single", "product_id": "pid-b", "price_cents": None, "quantity": 0},
+        ])
+
+
 if __name__ == "__main__":
     unittest.main()
 

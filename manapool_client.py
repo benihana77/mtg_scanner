@@ -361,6 +361,33 @@ def push_prices(prices: Dict[str, int], product_type: str = "mtg_single") -> Tup
     return updated, errors
 
 
+def push_quantities(quantities: Dict[str, int], product_type: str = "mtg_single") -> Tuple[int, List[str]]:
+    """Sets quantities only (price_cents null, left unchanged) for products, in batches of 2,000.
+
+    Args:
+        quantities (Dict[str, int]): product_id -> absolute quantity.
+        product_type (str): ManaPool product type.
+
+    Returns:
+        Tuple[int, List[str]]: (items updated, error messages).
+    """
+    if not is_configured():
+        return 0, ["ManaPool API is not configured. Cannot push quantities."]
+    payload = [
+        {"product_type": product_type, "product_id": pid, "price_cents": None, "quantity": qty}
+        for pid, qty in quantities.items()
+    ]
+    updated, errors = 0, []
+    for i in range(0, len(payload), 2000):
+        chunk = payload[i : i + 2000]
+        resp = _request("POST", f"{BASE_URL}/seller/inventory/product", headers=get_headers(), json=chunk, timeout=60)
+        if resp.status_code in (200, 204):
+            updated += len(chunk)
+        else:
+            errors.append(f"Batch {i // 2000 + 1} failed: HTTP {resp.status_code} - {resp.text[:300]}")
+    return updated, errors
+
+
 def get_inventory_item(product_id: str, product_type: str = "mtg_single") -> Tuple[Optional[Dict[str, Any]], str]:
     """Reads the live storefront listing for one product (GET, read only).
 
