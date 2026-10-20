@@ -67,7 +67,12 @@ A high-velocity inventory management station and fulfillment optimizer for Magic
 8. **Scryfall Mirror (`scryfall_mirror.py`)**:
    - `python scryfall_mirror.py refresh` loads Scryfall's Default Cards bulk file (about a minute); `status` shows its size and age. Refresh before intaking a newly released set.
 
-9. **Setup & Audit Tools**:
+9. **Physical Audit (`audit.py`)**:
+   - `generate` writes a walk-order count sheet (`audits/audit_<date>.txt`) and a fillable CSV covering listings where ManaPool and the database disagree (sampled per set, `--full-sets` counted in full), a random baseline of agreeing listings, and every listing worth $1+.
+   - `apply <csv>` imports the `counted` column, updates those rows, logs them to `audits/applied_counts.csv`, and writes a follow-up full-count sheet for any set whose sample had an overcount.
+   - `push [--send]` pushes audited database quantities (quantity only) to every ManaPool listing that differs, then reads them back.
+
+10. **Setup & Audit Tools**:
    - `import_live_inventory.py`: fresh import of a ManaPool inventory export against the Scryfall mirror and Set/Box map. Previews by default; `--rebuild` drops and recreates the inventory tables atomically.
    - `token_validation_report.py`: read-only report of tokens filed in set sections, non-tokens in token sections, and rows missing from the mirror.
    - `special_cases_report.py`: printable check sheet of unusual cards (combos, emblems, helper cards, promos, accent/symbol names, same-name printings, The List) at their planned locations.

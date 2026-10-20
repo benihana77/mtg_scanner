@@ -26,6 +26,7 @@ import db
 import csv_pipeline
 import manapool_client
 import pull_list_optimizer
+import audit
 import repricer
 from unittest.mock import MagicMock, patch
 
@@ -1157,6 +1158,34 @@ class TestMTGInterimPipeline(unittest.TestCase):
             {"product_type": "mtg_single", "product_id": "pid-a", "price_cents": None, "quantity": 3},
             {"product_type": "mtg_single", "product_id": "pid-b", "price_cents": None, "quantity": 0},
         ])
+
+
+    def test_21_audit_apply_updates_rows_logs_and_flags_overcount_sets(self):
+        rows = [
+            {**self.token_row("TESTA1", "1", "Over Card", layout="normal", qty="10"), "product_id": "pid-over"},
+            {**self.token_row("TESTA1", "2", "Exact Card", layout="normal", qty="3"), "product_id": "pid-exact"},
+            {**self.token_row("TESTB1", "3", "Under Card", layout="normal", qty="2"), "product_id": "pid-under"},
+        ]
+        csv_file = self.create_mock_manapool_csv("audit.csv", rows)
+        csv_pipeline.ingest_csv_batch(csv_file, box_label="TestBox-1", output_dir=self.test_dir)
+        live = {"pid-over": 4, "pid-exact": 1, "pid-under": 0}
+        with patch.object(audit, "AUDIT_DIR", self.test_dir), \
+             patch.object(audit, "APPLIED_LOG", os.path.join(self.test_dir, "applied.csv")):
+            sheet = audit.select_audit(audit.load_rows(), live, per_set=5, baseline=0)
+            counts = {"pid-over": "7", "pid-exact": "3", "pid-under": "x"}
+            for r in sheet:
+                r["counted"] = counts[r["product_id"]]
+            _, path = audit.write_sheet(sheet, "t_audit", "TEST")
+            res = audit.apply_counts(path)
+            logged = audit.already_counted()
+
+        self.assertEqual(sorted((a["product_id"], a["previous_qty"], a["counted"]) for a in res["applied"]),
+                         [("pid-exact", 3, 3), ("pid-over", 10, 7)])
+        self.assertEqual(res["overcount_sets"], ["TESTA1"])
+        self.assertEqual([s["product_id"] for s in res["skipped"]], ["pid-under"])
+        self.assertEqual(len(logged), 2)
+        self.assertEqual(db.get_total_quantities_by_product_ids(["pid-over"]), {"pid-over": 7})
+        self.assertEqual(audit.plan_push(audit.load_rows(), live), {"pid-over": 7, "pid-exact": 3, "pid-under": 2})
 
 
 if __name__ == "__main__":

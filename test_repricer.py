@@ -2,6 +2,7 @@
 
 import unittest
 
+import audit
 import repricer
 
 CONFIG = {
@@ -82,6 +83,47 @@ class TestPlan(unittest.TestCase):
         plan = repricer.plan_reprice([product(foil=True, listed=99, sid="a")], feed, {}, {}, CONFIG)
         self.assertEqual(plan[0]["target_cents"], 99)
         self.assertEqual(plan[0]["status"], "unchanged")
+
+
+def inv_row(iid, pid, set_code, qty, total=None, price=0.15, box="M1", section="Sec-1", idx=1):
+    return {"inventory_id": iid, "product_id": pid, "box_label": box, "section_label": section, "index_num": idx,
+            "quantity": qty, "is_foil": False, "price": price, "name": f"Card {iid}", "set_code": set_code,
+            "collector_number": str(iid), "product_total": qty if total is None else total}
+
+
+class TestAuditSelection(unittest.TestCase):
+    def setUp(self):
+        self.rows = (
+            [inv_row(i, f"a{i}", "AAA", 5, idx=i) for i in range(1, 21)]          # 20 drifted in AAA
+            + [inv_row(100 + i, f"s{i}", "SOI", 3, idx=i) for i in range(1, 6)]   # 5 drifted in SOI (full)
+            + [inv_row(200 + i, f"c{i}", "CCC", 2, idx=i) for i in range(1, 51)]  # 50 clean
+            + [inv_row(300, "v1", "CCC", 1, price=4.50, idx=99)]                  # valuable, clean
+        )
+        self.live = {r["product_id"]: (r["quantity"] - 1 if r["set_code"] in ("AAA", "SOI") else r["quantity"]) for r in self.rows}
+
+    def test_parts(self):
+        sheet = audit.select_audit(self.rows, self.live, per_set=4, baseline=10, value_threshold=1.0, full_sets=["SOI"])
+        parts = {}
+        for r in sheet:
+            parts.setdefault(r["part"], []).append(r)
+        self.assertEqual(len(parts["DRIFT"]), 4)
+        self.assertEqual({r["set"] for r in parts["DRIFT"]}, {"AAA"})
+        self.assertEqual(len(parts["DRIFT-FULL"]), 5)
+        self.assertEqual(len(parts["BASELINE"]), 10)
+        self.assertTrue(any(r["product_id"] == "v1" and r["part"] in ("BASELINE", "VALUE") for r in sheet))
+        self.assertEqual(len({r["inventory_id"] for r in sheet}), len(sheet))  # no duplicates
+
+    def test_reproducible_and_skips_counted(self):
+        a = audit.select_audit(self.rows, self.live, per_set=4, baseline=10)
+        b = audit.select_audit(self.rows, self.live, per_set=4, baseline=10)
+        self.assertEqual(a, b)
+        skip = {r["inventory_id"] for r in a}
+        c = audit.select_audit(self.rows, self.live, per_set=4, baseline=10, skip_ids=skip)
+        self.assertFalse(skip & {r["inventory_id"] for r in c})
+
+    def test_plan_push_only_differences(self):
+        rows = [inv_row(1, "p1", "AAA", 2, total=5), inv_row(2, "p1", "AAA", 3, total=5), inv_row(3, "p2", "AAA", 4)]
+        self.assertEqual(audit.plan_push(rows, {"p1": 1, "p2": 4, "p3": 9}), {"p1": 5})
 
 
 if __name__ == "__main__":

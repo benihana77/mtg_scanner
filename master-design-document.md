@@ -56,6 +56,7 @@ benihana77/mtg_scanner/
 ├── collection_pull.py       # Search / pull cards (or a decklist) for a personal collection, then sync ManaPool
 ├── repricer.py              # Repricer: ManaPool market-data pricing, risers, price history snapshots, pins
 ├── repricer.toml            # Repricer settings (adjustment, floor, review limits, riser thresholds)
+├── audit.py                 # Physical audit: count sheets, count import, final ManaPool quantity push
 ├── audit_inventory.py       # One-time audit: unmapped set assignment + token extraction sheet (to be superseded by the token validation report)
 ├── test_interim_pipeline.py # unittest suite for the interim pipeline
 └── Manapool Print Format - Set_Box Map.csv  # Set -> physical box (M1..M19) mapping
