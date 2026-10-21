@@ -1,6 +1,10 @@
 """Pure unit tests for the repricer's pricing rules (no database, no network)."""
 
+import csv
+import os
+import tempfile
 import unittest
+from unittest import mock
 
 import audit
 import repricer
@@ -129,6 +133,26 @@ class TestAuditSelection(unittest.TestCase):
 class TestAuditNumbers(unittest.TestCase):
     def test_excel_style_whole_numbers(self):
         self.assertEqual([audit._whole_number(x) for x in ["3", "3.0", "0", "2.5", "-1", "x"]], [3, 3, 0, None, None, None])
+
+
+class TestAuditDropAndNeedsCount(unittest.TestCase):
+    def test_zero_ids_win_and_only_differences_pushed(self):
+        rows = [inv_row(1, "keep", "AAA", 3), inv_row(2, "same", "AAA", 2)]
+        live = {"keep": 1, "same": 2, "gone": 5, "gone0": 0}
+        self.assertEqual(audit.plan_push(rows, live, {"gone", "gone0", "keep"}), {"keep": 0, "gone": 0})
+
+    def test_needs_count_sheet_skips_counted_and_missing(self):
+        rows = [inv_row(1, "a", "CMR", 2), inv_row(2, "b", "NEO", 1), inv_row(3, "c", "NEO", 4)]
+        with tempfile.TemporaryDirectory() as d:
+            path = os.path.join(d, "needs.csv")
+            with open(path, "w", newline="") as f:
+                w = csv.writer(f)
+                w.writerow(["inventory_id", "product_id"])
+                for iid in (1, 2, 99):
+                    w.writerow([iid, "x"])
+            with mock.patch.object(audit, "NEEDS_COUNT", path):
+                sheet = audit.needs_count_sheet(rows, {"a": 2, "b": 1}, skip_ids={2})
+        self.assertEqual([(r["inventory_id"], r["part"]) for r in sheet], [(1, "NEEDS-COUNT")])
 
 
 if __name__ == "__main__":

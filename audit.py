@@ -40,6 +40,8 @@ import manapool_client
 
 AUDIT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "audits")
 APPLIED_LOG = os.path.join(AUDIT_DIR, "applied_counts.csv")
+# Listings lowered to ManaPool's (conservative) quantity until counted; holds the previous DB quantity.
+NEEDS_COUNT = os.path.join(AUDIT_DIR, "needs_count.csv")
 FIELDS = ["part", "box", "section", "index", "set", "number", "name", "finish", "db_qty", "manapool_qty",
           "product_id", "inventory_id", "counted"]
 
@@ -285,14 +287,41 @@ def apply_counts(csv_path: str) -> Dict[str, Any]:
     return {"applied": applied, "overcount_sets": over_sets, "baseline": baseline, "skipped": skipped}
 
 
-def plan_push(rows: Optional[List[Dict[str, Any]]] = None, live: Optional[Dict[str, int]] = None) -> Dict[str, int]:
-    """product_id -> database total for every listing where live ManaPool quantity differs."""
+def plan_push(
+    rows: Optional[List[Dict[str, Any]]] = None,
+    live: Optional[Dict[str, int]] = None,
+    zero_ids: Optional[set] = None,
+) -> Dict[str, int]:
+    """product_id -> target quantity for every listing where live ManaPool quantity differs.
+
+    Targets are database totals, plus 0 for `zero_ids` (products dropped from the database,
+    e.g. a set removed for a clean relist), which win over any database row.
+    """
     rows = rows if rows is not None else load_rows()
     live = live if live is not None else live_quantities()
     totals: Dict[str, int] = {}
     for r in rows:
         totals[r["product_id"]] = r["product_total"]
+    for pid in zero_ids or set():
+        totals[pid] = 0
     return {pid: qty for pid, qty in totals.items() if pid in live and live[pid] != qty}
+
+
+def read_zero_ids(path: Optional[str]) -> set:
+    """Product ids from a CSV with a product_id column (e.g. audits/dropped_sets_*.csv)."""
+    if not path:
+        return set()
+    return {r["product_id"] for r in read_sheet_rows(path) if r.get("product_id")}
+
+
+def needs_count_sheet(rows: List[Dict[str, Any]], live: Dict[str, int], skip_ids: set) -> List[Dict[str, Any]]:
+    """Count-sheet rows for listings on the needs_count list that still exist and are not yet counted."""
+    if not os.path.isfile(NEEDS_COUNT):
+        return []
+    wanted = {int(r["inventory_id"]) for r in read_sheet_rows(NEEDS_COUNT)}
+    sheet = [_sheet_row(r, "NEEDS-COUNT", live.get(r["product_id"])) for r in rows
+             if r["inventory_id"] in wanted and r["inventory_id"] not in skip_ids]
+    return sorted(sheet, key=_walk_key)
 
 
 def main() -> None:
@@ -303,18 +332,29 @@ def main() -> None:
     p_gen.add_argument("--per-set", type=int, default=8)
     p_gen.add_argument("--baseline", type=int, default=100)
     p_gen.add_argument("--value-threshold", type=float, default=1.00)
-    p_gen.add_argument("--full-sets", nargs="*", default=["SOI"])
+    p_gen.add_argument("--full-sets", nargs="*", default=[])
+    p_gen.add_argument("--needs-count", action="store_true",
+                       help="Only list listings on audits/needs_count.csv that are not counted yet")
+    p_gen.add_argument("--sets", nargs="*", help="With --needs-count: only these set codes")
     p_apply = sub.add_parser("apply", help="Import a filled-in count CSV")
     p_apply.add_argument("csv_file", help="Filled-in count sheet (.csv, or .xlsx saved from Excel)")
     p_push = sub.add_parser("push", help="Push audited database quantities to ManaPool (dry run unless --send)")
     p_push.add_argument("--send", action="store_true")
+    p_push.add_argument("--zero", help="CSV of product_ids to set to 0 (products dropped from the database)")
     args = parser.parse_args()
 
     if args.command == "generate":
-        sheet = select_audit(load_rows(), live_quantities(), args.per_set, args.baseline, args.value_threshold,
-                             args.full_sets, already_counted())
-        name = f"audit_{datetime.date.today().isoformat()}"
-        txt, csv_path = write_sheet(sheet, name, "INVENTORY AUDIT COUNT SHEET")
+        if args.needs_count:
+            sheet = needs_count_sheet(load_rows(), live_quantities(), already_counted())
+            if args.sets:
+                sheet = [r for r in sheet if r["set"] in {s.upper() for s in args.sets}]
+            name = f"needs_count_{datetime.date.today().isoformat()}" + (f"_{'_'.join(args.sets)}" if args.sets else "")
+            txt, csv_path = write_sheet(sheet, name, "NEEDS-COUNT SHEET (listed conservatively until counted)")
+        else:
+            sheet = select_audit(load_rows(), live_quantities(), args.per_set, args.baseline, args.value_threshold,
+                                 args.full_sets, already_counted())
+            name = f"audit_{datetime.date.today().isoformat()}"
+            txt, csv_path = write_sheet(sheet, name, "INVENTORY AUDIT COUNT SHEET")
         print(f"{len(sheet)} rows to count.\nPrint: {txt}\nFill:  {csv_path}")
 
     elif args.command == "apply":
@@ -341,16 +381,20 @@ def main() -> None:
                   f"drifted rows.\nPrint: {txt}\nFill:  {csv_path}")
 
     elif args.command == "push":
-        quantities = plan_push()
+        zero_ids = read_zero_ids(args.zero)
+        live = live_quantities()
+        quantities = plan_push(load_rows(), live, zero_ids)
+        zeroed = [p for p in quantities if p in zero_ids]
         print(f"{len(quantities)} listings differ between the audited database and ManaPool "
-              f"(net {sum(quantities.values()) - sum(live_quantities().get(p, 0) for p in quantities):+d} copies).")
+              f"(net {sum(quantities.values()) - sum(live.get(p, 0) for p in quantities):+d} copies); "
+              f"{len(zeroed)} of them are dropped products going to 0.")
         if not args.send:
             print("[DRY RUN - nothing sent] Re-run with --send to push these quantities.")
             return
         updated, errors = manapool_client.push_quantities(quantities)
         for e in errors:
             print(f"[ManaPool error] {e}", file=sys.stderr)
-        remaining = plan_push()
+        remaining = plan_push(load_rows(), live_quantities(), zero_ids)
         print(f"Pushed {updated}; read back: {len(remaining)} listings still differ.")
 
 

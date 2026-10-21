@@ -1,0 +1,829 @@
+product_id,inventory_id,set,number,name,finish,box,section,index,row_qty,product_db_qty,manapool_qty,set_to
+000aeafd-77b5-455b-bf99-ad9d5b5368fc,10365,UMA,153,Undying Rage,NF,M8,Sec-1,102,10,10,3,3
+008d6956-051b-4029-9f43-4e441d6bab7e,6880,MH2,482,Plains,NF,M6,Sec-1,140,6,6,4,4
+00adf29b-9e34-4f1b-bd81-6ddf6dfa1f44,9916,THB,57,Nyxborn Seaguard,NF,M13,Sec-1,87,2,2,1,1
+011ccf63-4c15-4d7d-9922-cc342556d9bd,7027,MID,22,Gavony Trapper,NF,M2,Sec-1,87,14,14,11,11
+01a3ad34-030f-4f4d-8303-e6b52aa15a3b,7993,OGW,154,Joraga Auxiliary,NF,M4,Sec-1,42,2,2,1,1
+01f69cad-a9a0-4e83-a730-60e9274df52e,7760,NEO,333,Futurist Operative,NF,M13,Sec-1,66,5,5,4,4
+0214b609-8ab6-4431-a3f4-18bc0072b320,2178,CMR,15,Captain's Call,NF,M16,Sec-1,24,15,15,12,12
+02491ab1-1e4e-4d18-b9ad-0917f73a379c,11010,ZNR,163,Skyclave Geopede,NF,M2,Sec-1,128,3,3,2,2
+024b073d-2bd4-4a6b-868b-d62a8fe09330,5558,LCI,116,Rampaging Spiketail,NF,M6,Sec-1,91,5,5,3,3
+024d9c4a-1645-4578-ae6e-3cce26409bec,6924,MH2,239,Tormod's Cryptkeeper,NF,M6,Sec-1,184,26,26,24,24
+0279b835-d690-4e63-99f4-cf5ef21e9e02,8029,OGW,33,Searing Light,NF,M4,Sec-1,78,16,16,5,5
+027c890a-c317-4a66-aa3a-a8b3d3934f54,2309,CMR,344,Staunch Throneguard,NF,M16,Sec-1,155,5,5,1,1
+02c9bfdf-5ba6-4bf1-bd34-a2a0332418fc,7836,NEO,253,Papercraft Decoy,NF,M13,Sec-1,142,2,2,1,1
+02e7cbeb-d541-4966-8259-dcb2bc3c9c0f,10892,ZNR,135,Ardent Electromancer,NF,M2,Sec-1,10,21,21,20,20
+039c5ebf-cfb8-4d22-9bc0-5cd8899818bb,6981,MID,93,Crawl from the Cellar,NF,M2,Sec-1,41,10,10,9,9
+03aa03c7-6963-438a-b345-f3379f38ed97,8027,OGW,142,Saddleback Lagac,NF,M4,Sec-1,76,12,12,10,10
+03aad129-f57c-45c1-95a4-462c7d8c4a73,9882,THB,51,Ichthyomorphosis,NF,M13,Sec-1,53,7,7,4,4
+03c56145-89da-46ac-9335-1282bd376803,6767,MH2,8,Break Ties,NF,M6,Sec-1,27,25,25,22,22
+040ebcbe-489f-4f08-bf22-d5604c9b8f48,7850,NEO,77,Saiba Trespassers,NF,M13,Sec-1,156,6,6,4,4
+041179c2-f82d-4870-b0d7-30bf12847319,6986,MID,179,Dawnhart Mentor,NF,M2,Sec-1,46,5,5,4,4
+042daabd-fb14-466d-89d5-041dcf4c32cf,10264,UMA,44,Aethersnipe,NF,M8,Sec-1,1,8,8,4,4
+04745201-9074-4060-aaca-f72e959ac61c,7975,OGW,84,Drana's Chosen,NF,M4,Sec-1,24,2,2,1,1
+051ba12d-bc8b-44cb-bd2f-04079c2a923b,11048,ZNR,131,Vanquish the Weak,NF,M2,Sec-1,166,10,10,9,9
+055e84d3-66dd-4d84-a88a-0a48dfb60236,6831,MH2,88,Hell Mongrel,NF,M6,Sec-1,91,24,24,22,22
+05e82d0a-ac1f-4ab8-a5ab-71c985fca973,10954,ZNR,109,Lithoform Blight,NF,M2,Sec-1,72,4,4,3,3
+0671f390-e1d8-4637-8a53-c3c1db895732,7821,NEO,342,Mukotai Ambusher,NF,M13,Sec-1,127,6,6,5,5
+067ffb85-e99d-4027-84db-7ed61bc014e5,2184,CMR,171,Crimson Fleet Commodore,NF,M16,Sec-1,30,11,11,5,5
+06b4bc3b-e1f7-4353-bbc5-e2c9f25fbdb3,9889,THB,142,Iroas's Blessing,NF,M13,Sec-1,60,9,9,7,7
+074abf90-31ab-46c1-b8c0-f3e3456f1666,7042,MID,228,Hungry for More,NF,M2,Sec-1,102,4,4,3,3
+0791cd1d-0de6-4f77-80ca-af97c1c96228,7782,NEO,100,Inkrise Infiltrator,NF,M13,Sec-1,88,4,4,3,3
+07f17db2-b97f-4c8a-8352-525f2f46841a,9675,STX,109,Illustrious Historian,NF,M9,Sec-1,66,7,7,4,4
+088a14a5-86dc-479b-95d3-949c11417da2,7701,NEO,1,Ancestral Katana,NF,M13,Sec-1,7,9,9,8,8
+08bdd65f-072b-4b62-badb-9254723d09d6,9757,STX,118,Twinscroll Shaman,NF,M9,Sec-1,148,5,5,2,2
+08bead8b-18b1-4b9c-b4f9-c832e3551a5d,7851,NEO,160,Scrapyard Steelbreaker,NF,M13,Sec-1,157,9,9,8,8
+08ea1f32-fc12-42e9-b11c-a68801842ce0,6784,MH2,154,Crack Open,NF,M6,Sec-1,44,26,26,25,25
+09156a35-a1f5-40ee-ba37-f727b33a563f,2181,CMR,62,Confiscate,NF,M16,Sec-1,27,6,6,5,5
+09af4155-4b86-4362-9c16-092673dd6a65,11042,ZNR,130,Thwart the Grave,NF,M2,Sec-1,160,5,5,4,4
+0a0f446c-b2ff-433e-85c9-771a40c3ba50,5590,LCI,129,Visage of Dread // Dread Osseosaur,NF,M6,Sec-1,123,2,2,1,1
+0a1c72bb-4197-4668-916d-78dd53dee132,10312,UMA,23,Lotus-Eye Mystics,NF,M8,Sec-1,49,7,7,4,4
+0a1eb7eb-dd5c-48b6-8979-16f4ec053776,10279,UMA,161,Crushing Canopy,NF,M8,Sec-1,16,6,6,2,2
+0ac15c61-e401-457d-a7f6-52b219cf5119,10367,UMA,80,Unstable Mutation,NF,M8,Sec-1,104,3,3,1,1
+0b0e6f1f-4237-4659-80f3-89e9f69cee09,8332,ORI,132,Bellows Lizard,NF,M9,Sec-1,11,3,3,2,2
+0b2fb5ba-bd5e-4080-833e-d882fa95636d,7969,OGW,42,Cultivator Drone,NF,M4,Sec-1,18,5,5,3,3
+0bc9641e-4708-480e-aa74-aff75dd8604c,10074,THS,103,Returned Centaur,NF,M5,Sec-1,89,3,3,1,1
+0bcb7390-3432-484c-beb4-58c420cd3b6c,9677,STX,195,Inkling Summoning,NF,M9,Sec-1,68,4,4,2,2
+0c021d7a-454c-4347-91c3-3737e8fc2583,6961,MID,130,Brimstone Vandal,NF,M2,Sec-1,21,7,7,6,6
+0c2429a3-3604-40ed-8403-b713ac0bb5c4,10376,UMA,43,Wingsteed Rider,NF,M8,Sec-1,113,4,4,2,2
+0c34dca1-0f07-4f45-8ac4-be5d2645e6fa,7954,OGW,101,Akoum Flameseeker,NF,M4,Sec-1,3,6,6,5,5
+0c9adcd8-fca1-43c5-995a-1ee61a5bfa85,7039,MID,24,Homestead Courage,NF,M2,Sec-1,99,2,2,0,0
+0cb561d3-6915-414c-b9da-583c7f33221e,10346,UMA,69,Skywing Aven,NF,M8,Sec-1,83,6,6,4,4
+0cd91519-2553-4cb5-9f64-d9f7ac45834a,10278,UMA,90,Crow of Dark Tidings,NF,M8,Sec-1,15,10,10,5,5
+0cdec1e1-bad7-4112-a560-cbd281d6ad72,9754,STX,88,Tenured Inkcaster,NF,M9,Sec-1,145,2,2,1,1
+0d0201ea-efd9-43f2-ac6c-3d6661694046,9963,THB,74,Thirst for Meaning,NF,M13,Sec-1,134,2,2,1,1
+0dad80fa-641f-4825-87cd-e5a445e3905d,2250,CMR,243,Molder Beast,NF,M16,Sec-1,96,17,17,15,15
+0dbee76e-ba83-4701-8a8e-4c202e339a8f,6936,MH2,217,Wavesifter,NF,M6,Sec-1,196,13,13,12,12
+0e5887ed-8f18-42ac-b0c0-c4e02d0fbac3,2305,CMR,202,Sparktongue Dragon,NF,M16,Sec-1,151,14,14,10,10
+0e7d6cb2-e9a4-4a67-abae-189180c8c496,7732,NEO,180,Commune with Spirits,NF,M13,Sec-1,38,6,6,5,5
+0e9654df-7bc1-4a7c-b765-d78bdcd13262,6758,MH2,149,Bannerhide Krushok,NF,M6,Sec-1,18,17,17,16,16
+0e9d2b02-b0a4-4abb-bcf3-10ffb4491cc5,10960,ZNR,25,Makindi Ox,NF,M2,Sec-1,78,14,14,13,13
+0ef93646-2405-4e4d-b185-84c391a20362,2325,CMR,206,Valakut Invoker,NF,M16,Sec-1,171,18,18,14,14
+0f17df10-7bdd-426e-9fba-bc287630606d,9645,STX,15,Dueling Coach,NF,M9,Sec-1,36,3,3,2,2
+0fa2d7dc-d077-4ea6-906e-608eb0506110,9699,STX,208,Needlethorn Drake,NF,M9,Sec-1,90,7,7,6,6
+0fbad055-b4b1-45b4-b394-65e893562549,2119,CLB,158,Zhentarim Bandit,NF,M19,Sec-1,187,1,1,0,0
+0fd721c1-4e6a-47ab-984b-084585cca033,9907,THB,184,Nexus Wardens,NF,M13,Sec-1,78,3,3,2,2
+103a67e8-5862-4261-9172-badad7f67050,2260,CMR,35,Orzhov Advokist,NF,M16,Sec-1,106,10,10,7,7
+103dd5c9-6bd5-474f-82ed-bcce289b58bf,2334,CMR,212,Wild Celebrants,NF,M16,Sec-1,180,14,14,10,10
+10a20cea-d134-42e5-a020-f83bff3b2d5e,9718,STX,218,Quandrix Cultivator,NF,M9,Sec-1,109,4,4,2,2
+11093e53-ec9c-49e2-aea8-b622fa25ccce,9741,STX,143,Spined Karok,NF,M9,Sec-1,132,6,6,4,4
+11321696-12bf-48d6-b323-0d176b59c4fc,6873,MH2,169,Orchard Strider,NF,M6,Sec-1,133,26,26,25,25
+113cc074-63b4-4ebd-af95-3dea12a5473f,10908,ZNR,51,Cleric of Chill Depths,NF,M2,Sec-1,26,14,14,12,12
+11d6cf7d-111a-45ed-ab5d-a9656ae89c80,10280,UMA,91,Dark Dabbling,NF,M8,Sec-1,17,9,9,5,5
+1225a342-952e-41de-abbd-8d39f46d4ed8,6304,M19,171,Centaur Courser,NF,M15,Sec-1,16,6,6,5,5
+1256e10e-f026-49c1-a280-2d82ffae3ab1,10024,THS,247,Forest,NF,M5,Sec-1,39,3,3,1,1
+12aae841-22d2-402b-a387-cd1e3ddd7ca2,9720,STX,220,"Quintorius, Field Historian",NF,M9,Sec-1,111,2,2,1,1
+12cc6142-4d94-4554-abfb-158bcf59012f,10287,UMA,54,Flight of Fancy,NF,M8,Sec-1,24,6,6,3,3
+1318d3d1-e633-4ca8-8356-e2e035b41abe,2267,CMR,333,Pirate's Cutlass,NF,M16,Sec-1,113,9,9,5,5
+132673ce-37a6-4ad3-840c-db414d239eff,7985,OGW,45,Gravity Negator,NF,M4,Sec-1,34,10,10,7,7
+13429a06-5f55-4c55-a0f3-2e2d7cd5b362,10025,THS,248,Forest,NF,M5,Sec-1,40,5,5,1,1
+1370b415-fd5d-4cfd-a562-0b54fd03206c,5596,LCI,85,Waylaying Pirates,NF,M6,Sec-1,129,2,2,1,1
+1399aa06-3ea7-4096-adc7-a2622fc43e74,5473,LCI,298,"Akawalli, the Seething Tower",NF,M6,Sec-1,6,2,2,1,1
+13b686d6-4f83-4962-b9b5-acf410b61238,7852,NEO,258,Searchlight Companion,NF,M13,Sec-1,158,3,3,2,2
+142f1450-1bb2-4876-922a-cf935c1ca671,8001,OGW,135,Loam Larva,NF,M4,Sec-1,50,7,7,5,5
+14b127a0-2777-4242-9ad0-bfbf7d96a5e3,10979,ZNR,119,Oblivion's Hunger,NF,M2,Sec-1,97,16,16,13,13
+14ccd665-7d38-4b03-a37e-e18cf4be35e3,5582,LCI,125,Synapse Necromage,NF,M6,Sec-1,115,2,2,1,1
+151dffde-1227-4a83-b4bb-05736d65deab,11009,ZNR,40,Skyclave Cleric // Skyclave Basilica,NF,M2,Sec-1,127,5,5,4,4
+159a31bc-b1cb-4dc3-9eac-a54fafcf86d6,2210,CMR,226,Fertilid,NF,M16,Sec-1,56,9,9,8,8
+169272a2-374f-4bf5-92f3-e8b38a86a823,5507,LCI,104,Echo of Dusk,NF,M6,Sec-1,40,3,3,1,1
+17ad508e-61d4-4f8d-ac0b-1fee63e01c6c,7837,NEO,156,Peerless Samurai,NF,M13,Sec-1,143,7,7,6,6
+17ddc384-9233-49d9-8ac6-1add1c9ead6b,6762,MH2,7,Blossoming Calm,NF,M6,Sec-1,22,3,3,1,1
+1818f5e5-7728-4f0b-b4ac-151e9d3e7370,10893,ZNR,6,Attended Healer,NF,M2,Sec-1,11,3,3,2,2
+18644d10-f7b6-4e21-89a6-607f7f875d26,7725,NEO,241,Brute Suit,NF,M13,Sec-1,31,3,3,1,1
+1864d154-a3fe-4403-8efa-faa3716c8958,9939,THB,152,Satyr's Cunning,NF,M13,Sec-1,110,7,7,6,6
+18c5d8f0-a4cc-4418-9d00-463d2b887e8f,7774,NEO,191,Heir of the Ancient Fang,NF,M13,Sec-1,80,5,5,2,2
+19ee03d8-a6af-47cb-ada1-d93d9a4de71e,2284,CMR,251,Scaled Behemoth,NF,M16,Sec-1,130,5,5,2,2
+1a1157a6-a7ec-4bcc-9130-37b4b8d2b5b9,7735,NEO,136,Crackling Emergence,NF,M13,Sec-1,41,7,7,4,4
+1ac4867a-0f6d-4e2a-9646-cfc53f8fc9fb,9763,STX,61,Waterfall Aerialist,NF,M9,Sec-1,154,7,7,5,5
+1b10540a-6e2f-463c-95ae-f9aa5cc8ac42,7733,NEO,49,Covert Technician,NF,M13,Sec-1,39,5,5,4,4
+1b319779-e59a-478c-a941-7227059475db,10968,ZNR,114,Mind Drain,NF,M2,Sec-1,86,17,17,16,16
+1bd68d23-293b-4d7b-be4c-7a654bb82c85,8378,ORI,152,Infectious Bloodlust,NF,M9,Sec-1,57,5,5,3,3
+1c471d75-1be4-466c-b754-fe411d95dfe7,11049,ZNR,218,Veteran Adventurer,NF,M2,Sec-1,167,10,10,9,9
+1c719e2c-d391-4798-983a-1dd1ab3c30a9,2182,CMR,113,Corpse Churn,NF,M16,Sec-1,28,15,15,8,8
+1c7e36af-6635-4cae-b601-0a7dabe1beef,2071,CLB,391,"Sarevok, Deathbringer",NF,M19,Sec-1,139,2,2,1,1
+1cc67a10-36e1-4561-9ddf-f0c411a7e32c,8425,ORI,196,Rhox Maulers,NF,M9,Sec-1,104,7,7,6,6
+1cc89eca-e350-4a88-abb2-a7115ba8b493,2333,CMR,210,Welding Sparks,NF,M16,Sec-1,179,13,13,10,10
+1d13c088-a6ea-4483-bcb9-a9cacb5e5c80,7833,NEO,117,Okiba Reckoner Raid // Nezumi Road Captain,NF,M13,Sec-1,139,2,2,0,0
+1d32851b-576f-4d08-964c-5dc4ca2b75a5,2173,CMR,111,Briarblade Adept,NF,M16,Sec-1,19,17,17,14,14
+1d7cfbbf-b594-4ed0-9fc9-7d3060f02601,10361,UMA,188,Travel Preparations,NF,M8,Sec-1,98,2,2,1,1
+1dee4184-5bad-407f-b84d-c8329053def7,7893,NEO,263,Walking Skyscraper,NF,M13,Sec-1,199,3,3,2,2
+1df2d474-82d8-48f8-bb71-248cbd72f93b,9969,THB,41,Triumphant Surge,NF,M13,Sec-1,140,6,6,3,3
+1e0b5d35-7935-416f-a5d1-8ce141ac4d2d,9712,STX,215,Prismari Pledgemage,NF,M9,Sec-1,103,4,4,2,2
+1e1e7f29-ebf0-4630-9b0b-ad45a8043d2f,2326,CMR,207,Volcanic Dragon,NF,M16,Sec-1,172,2,2,1,1
+1e6fb910-c7fc-43aa-83c7-679301bfb346,10987,ZNR,235,Ravager's Mace,NF,M2,Sec-1,105,4,4,3,3
+1f27abdc-a2e4-4941-a312-32a2605305c0,10296,UMA,166,Golgari Brownscale,NF,M8,Sec-1,33,6,6,5,5
+1f37afa1-fa00-42b5-a3ee-faa9afea7550,11040,ZNR,170,Thundering Rebuke,NF,M2,Sec-1,158,7,7,3,3
+1f3a6518-e65f-47c4-916b-02afe48259d6,6819,MH2,413,Glimmer Bairn,NF,M6,Sec-1,79,12,12,11,11
+1f3b3f8f-dc3a-4965-aa27-b82a61a65ca3,6850,MH2,134,Lightning Spear,NF,M6,Sec-1,110,26,26,25,25
+201faece-bd94-4c55-b376-c296c5bc7972,10969,ZNR,149,Molten Blast,NF,M2,Sec-1,87,16,16,14,14
+2048bf3a-e0a5-4db4-a9cb-063aaa9af1eb,6788,MH2,193,Dihada's Ploy,NF,M6,Sec-1,48,18,18,17,17
+2049e913-24c9-4f2b-a605-a377ecf0c931,11051,ZNR,87,Windrider Wizard,NF,M2,Sec-1,169,7,7,6,6
+2061d136-35ae-4532-9cdc-031c815585d5,6800,MH2,124,Flame Blitz,NF,M6,Sec-1,60,4,4,2,2
+20816cc5-e614-4cfc-a7e9-aa7fa63d1234,6803,MH2,85,Flay Essence,NF,M6,Sec-1,63,5,5,4,4
+20d25af0-6e31-423f-a9e7-8aaa1933ae39,6742,MH2,354,Abundant Harvest,NF,M6,Sec-1,2,6,6,5,5
+2172707e-b8b9-40db-8f0a-cf711732d329,2330,CMR,209,Vow of Lightning,NF,M16,Sec-1,176,3,3,2,2
+2179ea0b-7118-43ec-a92a-eb3086957d14,5517,LCI,108,Grasping Shadows // Shadows' Lair,NF,M6,Sec-1,50,2,2,1,1
+21d650a2-9a54-4d8f-8600-0b3c93b9e9ea,11028,ZNR,128,Subtle Strike,NF,M2,Sec-1,146,13,13,10,10
+21e2e8ff-c8f5-4fac-b91b-7e9afe5d04bc,7778,NEO,17,Imperial Oath,NF,M13,Sec-1,84,9,9,8,8
+21e5f3ac-998e-4955-950e-998aefdc5fdb,7808,NEO,110,Malicious Malfunction,NF,M13,Sec-1,114,5,5,4,4
+2232a9ed-ace1-47a8-ad74-e6ee48ae769f,2197,CMR,120,Elvish Doomsayer,NF,M16,Sec-1,43,15,15,13,13
+22b8c9a5-af2a-45b3-8d2e-149a7866a073,7981,OGW,18,Expedition Raptor,NF,M4,Sec-1,30,6,6,3,3
+22c44a0e-f29c-40f3-9ef5-d0fe8df97472,10305,UMA,170,Hooting Mandrills,NF,M8,Sec-1,42,5,5,1,1
+2357e30b-a982-43d0-88db-2c4d1ace00a1,2280,CMR,87,Run Away Together,NF,M16,Sec-1,126,14,14,10,10
+23dbd061-e84d-40e9-be4b-470198cb139b,6317,M19,177,Druid of the Cowl,NF,M15,Sec-1,29,3,3,2,2
+24236904-efa2-4e92-be2a-8d0d9e4d8f35,7953,OGW,14,Affa Protector,NF,M4,Sec-1,2,11,11,4,4
+24492a1a-f269-42dc-88c1-c1c5d00da19a,9872,THB,171,Gift of Strength,NF,M13,Sec-1,43,4,4,2,2
+24ca42be-92e7-40ad-953c-8d456e8c1b97,11053,ZNR,88,Zulaport Duelist,NF,M2,Sec-1,171,13,13,12,12
+24f5d72e-c8da-42c4-9e3f-11f2c6be01c9,8037,OGW,124,Stalking Drone,NF,M4,Sec-1,86,5,5,4,4
+2574fbf2-d6b6-4383-af12-c7c8c306a3bf,6741,MH2,147,Abundant Harvest,NF,M6,Sec-1,1,7,7,6,6
+25932db3-2689-4b05-9587-0ccde4807670,10914,ZNR,184,Dauntless Survivor,NF,M2,Sec-1,32,20,20,17,17
+25fc475a-e4a5-45cd-b77b-675ccd9f465d,7853,NEO,205,Season of Renewal,NF,M13,Sec-1,159,10,10,6,6
+2629b651-57d6-44c8-815a-e9970553b711,8007,OGW,28,Mighty Leap,NF,M4,Sec-1,56,18,18,7,7
+26503248-c6d4-4828-8011-c2be5782b205,10943,ZNR,188,Joraga Visionary,NF,M2,Sec-1,61,16,16,15,15
+275bc3b5-64e5-44ce-82f8-78bf64964f1f,8044,OGW,90,Tar Snare,NF,M4,Sec-1,93,12,12,11,11
+27a4d4b5-4ceb-4497-b507-e85c290a162d,2319,CMR,103,Thirst for Knowledge,NF,M16,Sec-1,165,2,2,1,1
+27b0c703-4a07-4d3f-b78c-6e4d06242cbf,2245,CMR,132,Maalfeld Twins,NF,M16,Sec-1,91,16,16,13,13
+27e3a693-33c7-43a6-b476-0c62487b2ea5,7706,NEO,87,Assassin's Ink,NF,M13,Sec-1,12,3,3,1,1
+27f40616-3e92-4c79-b45c-8758c270a2de,2061,CLB,439,"Rilsa Rael, Kingpin",NF,M19,Sec-1,129,1,1,0,0
+28426a5e-f3bb-4b19-913d-c02150fcf0cd,7858,NEO,36,Seven-Tail Mentor,NF,M13,Sec-1,164,6,6,5,5
+28544b17-2c0b-4ccc-b844-4cfdf5ccef4e,2304,CMR,150,Spark Harvest,NF,M16,Sec-1,150,12,12,11,11
+286a2515-fb16-440a-a46c-d4f523ecae21,10327,UMA,218,Plumeveil,NF,M8,Sec-1,64,5,5,1,1
+28a2d8d9-30dc-4771-91d5-f522a890b15d,9940,THB,114,Scavenging Harpy,NF,M13,Sec-1,111,4,4,3,3
+28d6266d-c49e-4a7b-9069-def1e3bcb49b,7078,MID,155,Purifying Dragon,NF,M2,Sec-1,138,2,2,1,1
+294e2bd8-4e67-408c-bab8-c7751693be06,10931,ZNR,140,Fissure Wizard,NF,M2,Sec-1,49,12,12,10,10
+29699f63-c29e-4bb3-badf-7a1f15c4d55b,9976,THB,122,Venomous Hierophant,NF,M13,Sec-1,147,5,5,4,4
+29aff712-7c61-45f4-942c-e9b66a54b22f,7754,NEO,183,Fang of Shigeki,NF,M13,Sec-1,60,4,4,2,2
+29b93485-5fd3-422d-a3c0-3ea0808c8c48,9724,STX,257,Reflective Golem,NF,M9,Sec-1,115,2,2,1,1
+2a2a8afe-f6cb-4495-b058-71cc78107de6,9947,THB,154,Skophos Warleader,NF,M13,Sec-1,118,3,3,2,2
+2a665cad-2127-45f0-b74c-6d12789e258b,7051,MID,60,Locked in the Cemetery,NF,M2,Sec-1,111,5,5,3,3
+2a676262-ffa6-451a-9b17-ff5dfd6dda62,10953,ZNR,22,Kor Celebrant,NF,M2,Sec-1,71,16,16,14,14
+2aae3ed1-2c50-4102-af40-bb9d5f28314e,2299,CMR,46,Skywhaler's Shot,NF,M16,Sec-1,145,19,19,15,15
+2af42d55-ae94-4c04-a793-6f29554b966e,7059,MID,28,Mourning Patrol // Morning Apparition,NF,M2,Sec-1,119,11,11,9,9
+2bcadad7-ac5d-4304-a85e-ed3cbc47b91f,10932,ZNR,103,Ghastly Gloomhunter,NF,M2,Sec-1,50,6,6,5,5
+2c6eb30d-766e-4215-b1fb-343618aa1d65,6866,MH2,230,Myr Scrapling,NF,M6,Sec-1,126,21,21,20,20
+2cb4ea49-9169-45e9-8122-fc9cf2a7f5da,9866,THB,134,Final Flare,NF,M13,Sec-1,37,4,4,2,2
+2d02d5af-da92-4e5f-a0a8-a1d9600803ee,10928,ZNR,291,Fearless Fledgling,NF,M2,Sec-1,46,9,9,8,8
+2d6f8faa-da72-49e0-b1ba-ce0abb27d41e,8342,ORI,50,Claustrophobia,NF,M9,Sec-1,21,6,6,3,3
+2d70df44-e03a-4538-b1ce-d56889482251,8051,OGW,92,Vampire Envoy,NF,M4,Sec-1,100,11,11,6,6
+2de101a7-6fc2-4bd0-99bb-efa559829233,9912,THB,144,Nyxborn Brute,NF,M13,Sec-1,83,2,2,1,1
+2e15ec68-aba9-435c-9061-6326d25a0cef,9638,STX,40,Curate,NF,M9,Sec-1,29,4,4,1,1
+2e1c44e1-c5ab-4062-a7ba-ef401eb30290,9696,STX,206,Moldering Karok,NF,M9,Sec-1,87,5,5,2,2
+2e539ab6-fceb-4232-a37c-681ad38d641c,2203,CMR,124,Eyeblight Cullers,NF,M16,Sec-1,49,11,11,9,9
+2e793f54-08f3-403b-b498-4d80f48f9cfd,2253,CMR,134,Murder,NF,M16,Sec-1,99,11,11,10,10
+2e83641b-d805-4329-9084-fd4dc53dae2b,7747,NEO,10,Eiganjo Exemplar,NF,M13,Sec-1,53,7,7,6,6
+2e95f875-53a5-47bb-adba-b4b55115e9c6,9830,THB,83,Agonizing Remorse,NF,M13,Sec-1,1,3,3,2,2
+2f147247-58ac-4773-b0a7-44ea01f499f1,10949,ZNR,306,Kazandu Nectarpot,NF,M2,Sec-1,67,13,13,12,12
+2fe43738-a99b-458f-a27d-ffeff6db296d,9915,THB,109,Nyxborn Marauder,NF,M13,Sec-1,86,4,4,3,3
+30aceb7f-ca08-4985-8220-d48ad01dfdc0,2231,CMR,75,Interpret the Signs,NF,M16,Sec-1,77,6,6,5,5
+313376be-dd1a-4c56-8865-0050485e361b,7838,NEO,322,Peerless Samurai,NF,M13,Sec-1,144,8,8,7,7
+314da74f-e611-45fe-82de-6896eedd1c67,10963,ZNR,69,Merfolk Falconer,NF,M2,Sec-1,81,9,9,8,8
+315ab4d1-fd71-4389-8899-b57969af5add,6335,M19,183,Giant Spider,NF,M15,Sec-1,47,9,9,7,7
+31679109-4f0c-4b3f-b008-d422c3334955,10976,ZNR,116,Nimana Skitter-Sneak,NF,M2,Sec-1,94,9,9,8,8
+31d0701a-21c4-403f-a3c5-3b448ce8edb2,6781,MH2,191,Combine Chrysalis,NF,M6,Sec-1,41,8,8,7,7
+3214f70c-1615-4ebb-a96e-674020ae6af8,2286,CMR,93,Scholar of the Ages,NF,M16,Sec-1,132,7,7,5,5
+324b37bf-e3be-4fea-90f2-21902f18624a,11033,ZNR,212,Taunting Arbormage,NF,M2,Sec-1,151,12,12,10,10
+32da67af-927a-41d2-8375-54e929f2206d,7126,MID,250,Wake to Slaughter,NF,M2,Sec-1,186,2,2,1,1
+3326eab0-0f01-4082-b2ce-0a6bdb610f85,7977,OGW,95,Eldrazi Aggressor,NF,M4,Sec-1,26,8,8,6,6
+333c246e-207d-47c1-a0de-b181bac64d3f,7741,NEO,339,Dokuchi Shadow-Walker,NF,M13,Sec-1,47,8,8,6,6
+3439881f-ea25-42c1-8bcd-2fb1c303e966,8022,OGW,100,Reality Hemorrhage,NF,M4,Sec-1,71,11,11,6,6
+34d0db14-6c3b-4c0e-bd06-d57a5ceea466,2301,CMR,49,Slith Ascendant,NF,M16,Sec-1,147,19,19,15,15
+35218adf-9f59-4389-ab0a-af7cf043c222,9875,THB,100,Grim Physician,NF,M13,Sec-1,46,3,3,1,1
+352470a3-03df-4c11-a5a4-68937f16b32d,7984,OGW,111,Goblin Freerunner,NF,M4,Sec-1,33,12,12,11,11
+3555e7c1-7995-4cf6-8939-b33337b1ad9b,9710,STX,49,Pop Quiz,NF,M9,Sec-1,101,6,6,3,3
+363c9bf0-01a7-494b-af83-f12f1cd7cc2f,7748,NEO,309,Eiganjo Exemplar,NF,M13,Sec-1,54,13,13,11,11
+3893300d-436f-4942-b5b7-afd34798683a,7017,MID,19,Flare of Faith,NF,M2,Sec-1,77,9,9,8,8
+38b4f330-fcac-46b9-bd7f-aab067834c2f,6836,MH2,356,Jade Avenger,NF,M6,Sec-1,96,15,15,13,13
+38eac520-99fd-45c4-b091-5ba79a1dafd2,9983,THB,241,Wings of Hubris,NF,M13,Sec-1,154,3,3,2,2
+3965bd18-5039-46f5-8482-4423ddb59547,10275,UMA,212,Canker Abomination,NF,M8,Sec-1,12,4,4,2,2
+397962c8-c8f9-4955-8b48-bde323e50cc8,2191,CMR,65,Deranged Assistant,NF,M16,Sec-1,37,19,19,15,15
+39e4a8e2-e9f6-48a6-9ee8-1e494035414b,10918,ZNR,99,Drana's Silencer,NF,M2,Sec-1,36,15,15,12,12
+3a48d897-b6fa-46de-823e-1599b26927a7,9758,STX,89,Umbral Juke,NF,M9,Sec-1,149,5,5,4,4
+3a870eb5-abb6-43e0-93f4-075817e7d22b,11034,ZNR,43,Tazeem Raptor,NF,M2,Sec-1,152,19,19,18,18
+3abc618b-08eb-43b1-8d1a-162f95758143,7818,NEO,335,Moonsnare Specialist,NF,M13,Sec-1,124,8,8,7,7
+3ac42dbf-bda8-4662-aac9-df73dea6ee03,9688,STX,137,Mage Duel,NF,M9,Sec-1,79,5,5,2,2
+3ac5159a-b3f0-4606-bd01-637f80c2d80e,9744,STX,144,Springmane Cervin,NF,M9,Sec-1,135,6,6,3,3
+3ae2883b-f544-4df0-9cb4-b906fa439dc4,10329,UMA,179,Pulse of Murasa,NF,M8,Sec-1,66,7,7,2,2
+3b2b5b6e-92f2-40a5-9a87-827a6632b29e,2199,CMR,224,Entourage of Trest,NF,M16,Sec-1,45,15,15,12,12
+3b4e1e78-b388-4f00-b9c0-cd868c10fa8c,9716,STX,85,Promising Duskmage,NF,M9,Sec-1,107,8,8,6,6
+3bb574f2-7f91-4869-9804-61fe8741f7c1,10340,UMA,220,Safehold Elite,NF,M8,Sec-1,77,10,10,0,0
+3c1dc435-df18-4843-a073-7a2fec1d3066,8422,ORI,115,Reave Soul,NF,M9,Sec-1,101,4,4,3,3
+3c32ab73-480a-45ce-b1b0-fa273a847eea,2240,CMR,77,Kitesail Skirmisher,NF,M16,Sec-1,86,16,16,12,12
+3c5ffafc-c5df-4935-b8d5-147d14b96202,2296,CMR,97,Skaab Goliath,NF,M16,Sec-1,142,19,19,16,16
+3ccba560-a73f-4e05-8017-3329a6d72f3b,2217,CMR,70,Galestrike,NF,M16,Sec-1,63,18,18,13,13
+3d0b227c-3f8c-468b-b799-d67efe3d2104,9690,STX,77,Mage Hunters' Onslaught,NF,M9,Sec-1,81,5,5,3,3
+3d2710c3-c43b-4130-84bc-253bd0c5f411,10884,ZNR,177,Adventure Awaits,NF,M2,Sec-1,2,19,19,18,18
+3d6a8a49-af7d-472f-8713-80f9075f729f,2324,CMR,205,Undying Rage,NF,M16,Sec-1,170,18,18,12,12
+3eb4ab2a-4eec-4542-b468-3ce7ee9c9356,6945,MID,42,Baithook Angler // Hook-Haunt Drifter,NF,M2,Sec-1,5,12,12,10,10
+3fe96f1c-d7fe-4a45-859a-fbfc7d1d94e6,6398,M19,38,Star-Crowned Stag,NF,M15,Sec-1,110,6,6,5,5
+402574f8-8785-41a0-8bd6-516b8e97c88f,8324,ORI,1,Akroan Jailer,NF,M9,Sec-1,3,3,3,2,2
+4056a168-2438-432f-91e9-8642b74b7478,7695,NEO,44,Acquisition Octopus,NF,M13,Sec-1,1,5,5,4,4
+406f36ed-ea23-4c27-96b9-ed55abda5e8c,2165,CMR,218,Armorcraft Judge,NF,M16,Sec-1,11,4,4,2,2
+40e83964-0b5d-486d-b2b2-58cde9b1914c,6918,MH2,144,Tavern Scoundrel,NF,M6,Sec-1,178,23,23,21,21
+40fa5ea1-bb55-43a0-8205-8649e4ba3b43,2242,CMR,240,Lifecrafter's Gift,NF,M16,Sec-1,88,16,16,14,14
+40fb5161-d0f1-46b2-b5ea-bbde1184d737,2292,CMR,95,"Siani, Eye of the Storm",NF,M16,Sec-1,138,7,7,5,5
+415753fe-b07c-4339-9188-e56417747909,10335,UMA,205,Reviving Vapors,NF,M8,Sec-1,72,4,4,1,1
+41595691-2fc7-44fa-9787-51ea860e30a0,7713,NEO,4,Befriending the Moths // Imperial Moth,NF,M13,Sec-1,19,14,14,11,11
+419c2a33-e5ae-4bb0-b6c4-392918324a68,6822,MH2,164,Glinting Creeper,NF,M6,Sec-1,82,11,11,10,10
+41c7c4f5-65a4-4bf5-86cc-ceda5d758edb,7804,NEO,107,Lethal Exploit,NF,M13,Sec-1,110,8,8,7,7
+41f43f62-27c9-410d-8095-456dc6e64466,9985,THB,164,Wrap in Flames,NF,M13,Sec-1,156,3,3,2,2
+422bbf43-fc91-4fe1-b4b4-80b7071c109e,2239,CMR,76,Kitesail Corsair,NF,M16,Sec-1,85,18,18,15,15
+423430e3-5e20-4c2c-bfa9-79089dc1186c,9656,STX,18,Expel,NF,M9,Sec-1,47,5,5,4,4
+42d7cbf6-fda8-4608-a3db-43c7a34e141f,2255,CMR,33,Ninth Bridge Patrol,NF,M16,Sec-1,101,15,15,12,12
+4302e624-19c8-47e3-980e-2ef96f2d2fe9,9762,STX,60,Vortex Runner,NF,M9,Sec-1,153,5,5,3,3
+430fe2b4-6569-4448-8c1f-5b1a8d0360b1,7793,NEO,269,Jungle Hollow,NF,M13,Sec-1,99,4,4,3,3
+43257263-38d4-402f-a117-4fbf6d7299ec,2170,CMR,110,Bladebrand,NF,M16,Sec-1,16,17,17,11,11
+4396ecb9-d091-440f-b588-5726af1c0475,9631,STX,11,Combat Professor,NF,M9,Sec-1,22,4,4,3,3
+43b5af8e-9d52-4b8d-afe8-ee7db465ee7b,6994,MID,48,Devious Cover-Up,NF,M2,Sec-1,54,10,10,8,8
+450b1536-324c-4481-ba53-281ddd5697da,5524,LCI,154,Hotfoot Gnome,NF,M6,Sec-1,57,2,2,1,1
+459d8731-d4e4-4b43-b450-256bb6cc30e1,7106,MID,259,Stuffed Bear,NF,M2,Sec-1,166,5,5,4,4
+460eecdc-8035-47f7-99a5-459ab24be876,10971,ZNR,195,Murasa Brute,NF,M2,Sec-1,89,17,17,14,14
+46164971-de97-4f79-8470-b6f59f8f5f85,2009,CLB,385,"Imoen, Mystic Trickster",NF,M19,Sec-1,77,2,2,1,1
+475b0c15-7740-45b6-a2df-f400cc816809,8344,ORI,138,Cobblebrute,NF,M9,Sec-1,23,3,3,2,2
+4764cc04-c302-461a-a0c6-96d200642d7b,10325,UMA,109,Olivia's Dragoon,NF,M8,Sec-1,62,7,7,3,3
+47a667e5-6504-4a85-922a-65df04416d04,10290,UMA,95,Fume Spitter,NF,M8,Sec-1,27,3,3,0,0
+47c25d13-48bc-4c70-907c-9fb3a5e892cd,11017,ZNR,82,Skyclave Squid,NF,M2,Sec-1,135,9,9,8,8
+47d374fe-85b6-4a0a-8aa4-e399d7ef2950,7710,NEO,173,Bamboo Grove Archer,NF,M13,Sec-1,16,8,8,6,6
+4803a2e4-0c81-464a-ae7e-8df53942c90b,7771,NEO,190,Harmonious Emergence,NF,M13,Sec-1,77,5,5,4,4
+485aabd5-e409-42e3-bcc4-3f5a906e3571,11032,ZNR,210,Tajuru Snarecaster,NF,M2,Sec-1,150,14,14,13,13
+48ea25ec-0434-4ea4-bd59-091eeb84a7e1,10366,UMA,120,Unholy Hunger,NF,M8,Sec-1,103,12,12,5,5
+49595422-da92-4a5c-9140-f5d5cb23edcb,10985,ZNR,152,Pyroclastic Hellion,NF,M2,Sec-1,103,19,19,15,15
+49942f7d-653d-49cd-b41b-3d3881a7dcc9,10338,UMA,33,Ronom Unicorn,NF,M8,Sec-1,75,6,6,4,4
+49bf3e13-9c20-42f3-b65a-7542a1199d41,8026,OGW,62,Roiling Waters,NF,M4,Sec-1,75,2,2,1,1
+4a123e4a-544b-4c38-ac88-f2512c52c741,7860,NEO,78,Short Circuit,NF,M13,Sec-1,166,12,12,10,10
+4a28d95b-1918-4d2a-bd12-bee11f155a1a,7963,OGW,105,Cinder Hellion,NF,M4,Sec-1,12,9,9,8,8
+4a51c654-1c06-4114-8d73-609032717453,10989,ZNR,247,Relic Amulet,NF,M2,Sec-1,107,11,11,9,9
+4a5d51fd-29ce-4385-8d70-96e88e28b338,5548,LCI,69,Out of Air,NF,M6,Sec-1,81,2,2,1,1
+4a5e7c0f-22c1-4a56-91ca-36084b06c9fd,2189,CMR,117,Defiant Salvager,NF,M16,Sec-1,35,14,14,11,11
+4aa99d85-06da-480c-baea-3199014ec495,2269,CMR,334,Prophetic Prism,NF,M16,Sec-1,115,3,3,1,1
+4b006151-2cf9-4560-8eca-7dd2914d59ef,7705,NEO,327,Asari Captain,NF,M13,Sec-1,11,2,2,1,1
+4b103607-9feb-459a-af74-01d8ab09dfa4,10997,ZNR,157,Scavenged Blade,NF,M2,Sec-1,115,19,19,16,16
+4b79c313-9c8b-4801-82c9-b0085cc7eeeb,9623,STX,166,Blood Researcher,NF,M9,Sec-1,14,3,3,1,1
+4b85bc1a-d349-417e-a4ea-4471e4f2230d,2337,CMR,264,Wildsize,NF,M16,Sec-1,183,14,14,10,10
+4b9f9952-e9e2-4006-a07e-54337c6dee96,8338,ORI,8,Celestial Flare,NF,M9,Sec-1,17,5,5,4,4
+4bb9a311-8272-4710-888b-e47d144f11b5,5543,LCI,306,"Nicanzil, Current Conductor",NF,M6,Sec-1,76,2,2,1,1
+4c3c70cc-ebde-48e1-8fad-78e1a57d9e42,2270,CMR,85,Prosperous Pirates,NF,M16,Sec-1,116,18,18,14,14
+4d6e517c-b1b1-4612-9624-7318ce95160f,7997,OGW,5,Kozilek's Pathfinder,NF,M4,Sec-1,46,2,2,1,1
+4df0333b-e9cf-4a4a-8813-a4ffb581eb33,7011,MID,136,Falkenrath Perforator,NF,M2,Sec-1,71,9,9,7,7
+4e75effe-58a6-44bb-9a3b-5b3fd65d60be,10311,UMA,103,Last Gasp,NF,M8,Sec-1,48,9,9,2,2
+4eeaf6fa-207f-47c8-9180-f4b1c798982e,9921,THB,146,Oread of Mountain's Blaze,NF,M13,Sec-1,92,7,7,6,6
+4eef6e95-f180-4cd1-a87f-2955afd62865,7865,NEO,164,Sokenzan Smelter,NF,M13,Sec-1,171,6,6,5,5
+4f3ebba3-69ed-4d7f-822c-3c4ca01eebd4,2194,CMR,19,Doomed Traveler,NF,M16,Sec-1,40,17,17,14,14
+4f3f2179-b0c7-4d07-9c65-5d99fd756fc3,2209,CMR,21,Fencing Ace,NF,M16,Sec-1,55,7,7,5,5
+4faaff1c-0009-4268-b159-418703cedafa,2298,CMR,199,Skyraker Giant,NF,M16,Sec-1,144,19,19,14,14
+4fcef0aa-9afc-4e27-9bff-22755c9f520d,6386,M19,199,Root Snare,NF,M15,Sec-1,98,5,5,4,4
+500555e2-080f-4f1c-ba8f-0694079140e4,9871,THB,136,Furious Rise,NF,M13,Sec-1,42,2,2,1,1
+503a95b2-6f67-49ba-a1e6-eb75e54af3ed,9646,STX,16,Eager First-Year,NF,M9,Sec-1,37,7,7,4,4
+50bb6f5d-ec0b-4105-ae7a-edd6dad44dbf,8003,OGW,27,Makindi Aeronaut,NF,M4,Sec-1,52,19,19,10,10
+50e1dcc8-39d1-4956-8a3a-4d29ce604023,5480,LCI,139,Calamitous Cave-In,NF,M6,Sec-1,13,2,2,1,1
+510c041c-3aa4-4c6b-857b-1d6430b0957c,7087,MID,32,Search Party Captain,NF,M2,Sec-1,147,1,1,0,0
+511922e3-d1ec-4d8c-818f-c42b0248ead0,6400,M19,122,Strangling Spores,NF,M15,Sec-1,112,3,3,2,2
+51c249c3-e4e2-4863-b8d7-e5358853021d,2237,CMR,131,"Keskit, the Flesh Sculptor",NF,M16,Sec-1,83,3,3,2,2
+51d10dad-3f6f-48a9-9b9d-2598fe2c1764,8399,ORI,26,Mighty Leap,NF,M9,Sec-1,78,3,3,2,2
+51f0aad2-fe7f-4a34-9fe5-f29d05516778,7703,NEO,46,Armguard Familiar,NF,M13,Sec-1,9,10,10,9,9
+524bf371-c4af-4e88-aeb5-5277039c5aa1,2294,CMR,255,Silverback Shaman,NF,M16,Sec-1,140,14,14,10,10
+5257a435-069a-41d2-be76-77bc830296fe,8391,ORI,25,Kytheon's Tactics,NF,M9,Sec-1,70,3,3,1,1
+5273dfbc-5c77-4e2d-87a9-e91823b1b375,7697,NEO,131,Akki Ronin,NF,M13,Sec-1,3,10,10,9,9
+52e716f5-3660-4766-a07f-a126218ef6de,9865,THB,95,Final Death,NF,M13,Sec-1,36,8,8,7,7
+53c7c51a-9a9c-4c81-81f8-ecb34a62e56b,10297,UMA,100,Grave Scrabbler,NF,M8,Sec-1,34,5,5,1,1
+54034896-7ae2-4365-80b5-0f1dc076237c,9879,THB,22,Hero of the Pride,NF,M13,Sec-1,50,5,5,4,4
+5455b2d0-4dd7-4a28-a04e-d00c4129b3c6,9707,STX,112,Pillardrop Warden,NF,M9,Sec-1,98,4,4,3,3
+55e3bfab-aec1-44cc-a6d5-c946c859b73f,6980,MID,45,Covetous Castaway // Ghostly Castigator,NF,M2,Sec-1,40,2,2,1,1
+56088e2b-1c32-4644-8564-3a752e3322e4,6959,MID,171,Bramble Armor,NF,M2,Sec-1,19,9,9,8,8
+56221ba6-76ec-4f0d-ba13-5dff185a1c6c,10368,UMA,190,Verdant Eidolon,NF,M8,Sec-1,105,7,7,4,4
+56679042-6a6e-4a17-99e7-fb54cae56ad7,7830,NEO,252,Ninja's Kunai,NF,M13,Sec-1,136,6,6,5,5
+5674d147-8749-4a41-9bd1-cfd221f22c70,9738,STX,235,Spectacle Mage,NF,M9,Sec-1,129,5,5,4,4
+572accb9-2ff7-40d1-8daf-b505fa6d20ce,2234,CMR,318,Jalum Tome,NF,M16,Sec-1,80,7,7,2,2
+57af542d-e061-425e-9a2b-4390583115e0,9674,STX,107,Igneous Inspiration,NF,M9,Sec-1,65,2,2,1,1
+581087f3-818e-4ef9-a63e-d1e4e57eb8e7,9626,STX,38,Burrog Befuddler,NF,M9,Sec-1,17,4,4,3,3
+587d5e4f-2e6b-4477-aaad-31d36e22d95b,10334,UMA,29,Repel the Darkness,NF,M8,Sec-1,71,5,5,3,3
+58b145a2-88ae-4b06-a3f0-1c6a5a479efa,2318,CMR,1,The Prismatic Piper,NF,M16,Sec-1,164,11,11,4,4
+59293498-e818-4a23-bc29-e2291e314c1f,7832,NEO,311,"Norika Yamazaki, the Poet",NF,M13,Sec-1,138,5,5,4,4
+59df4b36-9e0d-4fa4-a3b6-aefac8bd23c8,5571,LCI,76,Sinuous Benthisaur,NF,M6,Sec-1,104,3,3,1,1
+59eb2bd5-e0aa-44d0-b719-49c9f45ba383,7114,MID,39,Thraben Exorcism,NF,M2,Sec-1,174,7,7,6,6
+5a0d07b2-cfdc-4d3d-86e1-25fc313c0e81,10988,ZNR,200,Reclaim the Wastes,NF,M2,Sec-1,106,13,13,10,10
+5a105909-bc6e-478b-b7c4-71e56a2ad1be,6826,MH2,131,Gouged Zealot,NF,M6,Sec-1,86,29,29,28,28
+5a3a62b3-3f61-4589-9fd0-21dc6bc73281,2230,CMR,23,Inspiring Roar,NF,M16,Sec-1,76,21,21,16,16
+5a7c0451-713a-4b8b-9647-2f8e39090d07,6974,MID,14,Clarion Cathars,NF,M2,Sec-1,34,10,10,9,9
+5adb020b-e498-4609-b152-c9e527aec22d,2264,CMR,330,Perilous Myr,NF,M16,Sec-1,110,9,9,2,2
+5b2c3fb0-b3dd-4156-a5e1-ce1290ee8b5b,7827,NEO,318,Nezumi Bladeblesser,NF,M13,Sec-1,133,7,7,6,6
+5b4ee9f6-57cf-46dc-abb2-e8febaf675a3,2166,CMR,299,Armory of Iroas,NF,M16,Sec-1,12,6,6,1,1
+5b6a1821-a4ee-49e6-9188-b91bec1bccd2,10283,UMA,49,Deranged Assistant,NF,M8,Sec-1,20,10,10,4,4
+5b7f21db-3e45-4120-a84c-2dbabeb0e272,6795,MH2,13,Fairgrounds Patrol,NF,M6,Sec-1,55,33,33,31,31
+5bd51685-f0dc-43f8-966d-75710af8be2c,9981,THB,230,Warden of the Chained,NF,M13,Sec-1,152,2,2,1,1
+5bf097b4-58b8-4645-8ff7-8e7fb28d4c70,7800,NEO,348,Kappa Tech-Wrecker,NF,M13,Sec-1,106,4,4,3,3
+5bff8274-f02a-4455-b4c6-52487bcd6c6e,6912,MH2,213,Storm God's Oracle,NF,M6,Sec-1,172,26,26,25,25
+5c86d091-b851-45e4-9837-fa97d1cbf08d,8009,OGW,149,Mindmelter,NF,M4,Sec-1,58,3,3,1,1
+5ce1e4ea-40fa-410f-98a0-acc3ba29f5ca,2190,CMR,118,Demonic Lore,NF,M16,Sec-1,36,6,6,5,5
+5cf84cf6-2b2b-4b6e-9d30-5d19f1496f3e,2256,CMR,139,Noxious Dragon,NF,M16,Sec-1,102,4,4,3,3
+5dac35ff-985f-42fd-851c-fd929dcb3a07,7885,NEO,125,Twisted Embrace,NF,M13,Sec-1,191,8,8,6,6
+5e4f7d3e-1cee-41a9-bc79-e6b475e3f26b,9937,THB,34,Revoke Existence,NF,M13,Sec-1,108,1,1,0,0
+5e7bca70-7a9d-41ef-9b82-405b92618204,9747,STX,239,Stonebound Mentor,NF,M9,Sec-1,138,5,5,4,4
+5f0c8d1f-b059-4acf-a8b5-09a46a7595aa,11044,ZNR,214,Turntimber Ascetic,NF,M2,Sec-1,162,13,13,9,9
+5f34616c-a5eb-4d1f-a9a3-b003daa04b3d,11023,ZNR,302,Spitfire Lagac,NF,M2,Sec-1,141,13,13,12,12
+5f3a47dd-d7c1-4127-9105-cd83affc0542,7044,MID,254,Jack-o'-Lantern,NF,M2,Sec-1,104,5,5,4,4
+5f715a3b-802f-4545-916b-f2264eab88b7,9726,STX,223,Relic Sloth,NF,M9,Sec-1,117,5,5,3,3
+5f9ebeb3-0440-4988-82d4-6331ed9c9ecd,10308,UMA,59,Iridescent Drake,NF,M8,Sec-1,45,2,2,1,1
+60073dc8-66ca-40ca-9f06-c3ab69899142,9874,THB,17,Glory Bearers,NF,M13,Sec-1,45,4,4,3,3
+600e3022-5d7a-4ee9-8b96-f84639efebb3,9616,STX,63,Arrogant Poet,NF,M9,Sec-1,7,5,5,2,2
+60555701-e2af-4424-b93c-45a36d80cb46,9919,THB,30,Omen of the Sun,NF,M13,Sec-1,90,2,2,1,1
+60dd5a68-bad8-4291-b6d1-2c4518f58641,10994,ZNR,154,Rockslide Sorcerer,NF,M2,Sec-1,112,2,2,1,1
+60e881d3-edc3-49be-96d9-783e76eb6adf,10981,ZNR,32,Practiced Tactics,NF,M2,Sec-1,99,15,15,13,13
+61fc6136-1cf9-4a4a-935b-93cb5fecb0d1,11016,ZNR,126,Skyclave Shadowcat,NF,M2,Sec-1,134,4,4,3,3
+62073fae-bb13-4f22-99e0-387b9e16ffd7,7118,MID,82,Unblinking Observer,NF,M2,Sec-1,178,6,6,5,5
+62225a2e-d2e7-4028-9fe4-531477b46ee9,9714,STX,140,Professor of Zoomancy,NF,M9,Sec-1,105,7,7,5,5
+62868629-b5db-42de-80a7-d14c0197f039,7798,NEO,150,Kami's Flare,NF,M13,Sec-1,104,7,7,6,6
+6297c1d6-3803-46d1-a05a-00571cabdb1b,8453,ORI,201,Titanic Growth,NF,M9,Sec-1,132,2,2,1,1
+62e9b7c1-d2f3-4880-9c60-96f8e7aa97b7,5581,LCI,168,Sunshot Militia,NF,M6,Sec-1,114,3,3,1,1
+6332b181-8cfa-4c99-a681-9a6b30fdd692,11037,ZNR,213,Territorial Scythecat,NF,M2,Sec-1,155,7,7,6,6
+63794015-6caf-4242-8e38-fac2bbcbc337,9895,THB,28,Leonin of the Lost Pride,NF,M13,Sec-1,66,6,6,4,4
+6380dd18-4d1a-4bef-8816-a7e6d3bd7eb9,7700,NEO,133,Ambitious Assault,NF,M13,Sec-1,6,6,6,3,3
+638dc120-a552-416a-b5dd-91854aa13206,2225,CMR,73,Horizon Scholar,NF,M16,Sec-1,71,9,9,6,6
+63c6e0ee-0e8b-43d1-a351-c17c91039e7f,10066,THS,233,Plains,NF,M5,Sec-1,81,1,1,0,0
+63ce7ca8-9d2c-40fb-a449-99cdb7eef651,2185,CMR,115,Crow of Dark Tidings,NF,M16,Sec-1,31,14,14,11,11
+63d1d1f4-97e5-4d04-8f16-ef85b2621286,5589,LCI,82,Unlucky Drop,NF,M6,Sec-1,122,3,3,1,1
+6401b804-176b-481d-8f0f-3b8f4d8056cc,9840,THB,4,Banishing Light,NF,M13,Sec-1,11,2,2,1,1
+646552c9-4ebe-4177-8a4e-c9a2d7953a1d,10362,UMA,224,Turn to Mist,NF,M8,Sec-1,99,8,8,2,2
+64ab6605-6bec-4139-ba32-bd2293eca56f,7803,NEO,152,Kumano Faces Kakkazan // Etching of Kumano,NF,M13,Sec-1,109,2,2,1,1
+653f45fc-dc37-46b9-8bec-0ee531724918,9900,THB,106,Mire's Grasp,NF,M13,Sec-1,71,7,7,6,6
+655db8b5-d6c9-44d8-86be-f87d9d0adf7e,10929,ZNR,58,Field Research,NF,M2,Sec-1,47,17,17,14,14
+65691f7e-c6ae-4328-a821-e69824b92f9c,7115,MID,202,Timberland Guide,NF,M2,Sec-1,175,14,14,13,13
+658a73a2-6d98-4d45-b09c-3454dce9c831,8048,OGW,65,Umara Entangler,NF,M4,Sec-1,97,9,9,6,6
+6590833e-2a4c-4206-bc48-18ea956c4a11,6374,M19,32,Pegasus Courser,NF,M15,Sec-1,86,7,7,6,6
+6594fae3-9bdf-465c-8c75-8bd7b41fa9fb,5570,LCI,75,Shipwreck Sentry,NF,M6,Sec-1,103,2,2,1,1
+659d2cd2-c14f-4357-9d12-1d1e6d588161,5551,LCI,70,Pirate Hat,NF,M6,Sec-1,84,2,2,1,1
+66030f1b-cadd-44c6-830d-1056e454d4f5,2193,CMR,18,Dispeller's Capsule,NF,M16,Sec-1,39,20,20,13,13
+66195517-f2c8-48d9-9b3e-aad263755809,10939,ZNR,105,Hagra Constrictor,NF,M2,Sec-1,57,15,15,14,14
+661ea4d0-bff7-4e3b-bdcc-03e456229b87,6341,M19,100,Hired Blade,NF,M15,Sec-1,53,2,2,1,1
+66acf1f4-873a-4a20-aebd-3bf5e31d6e1a,10336,UMA,67,Rise from the Tides,NF,M8,Sec-1,73,2,2,0,0
+671b96a6-e3f4-41a5-8204-47d4ab156d20,8417,ORI,158,Prickleboar,NF,M9,Sec-1,96,2,2,1,1
+672c08be-833e-429a-b3ca-4354d0dd5315,2216,CMR,181,Furnace Celebration,NF,M16,Sec-1,62,3,3,2,2
+672f7ea0-02e0-40b1-befd-5dca941c4682,7730,NEO,346,Coiling Stalker,NF,M13,Sec-1,36,19,19,16,16
+67406188-4414-409c-9b80-d165587fb210,10906,ZNR,50,Chilling Trap,NF,M2,Sec-1,24,17,17,15,15
+67598595-0516-4629-be0f-fbf3c912fc64,8031,OGW,165,Seer's Lantern,NF,M4,Sec-1,80,3,3,1,1
+67fb162b-4257-4b68-b99f-81170de89a34,10915,ZNR,9,Dauntless Unity,NF,M2,Sec-1,33,19,19,17,17
+682aebf1-f019-417e-8d72-e54a58349dbe,2293,CMR,254,Sifter Wurm,NF,M16,Sec-1,139,4,4,2,2
+68455091-e7c0-4e8d-aa67-5deff0e43a93,8034,OGW,79,Slaughter Drone,NF,M4,Sec-1,83,14,14,13,13
+684a9115-9081-4413-9f00-c8c5f5a14b3a,10345,UMA,36,Skyspear Cavalry,NF,M8,Sec-1,82,9,9,5,5
+685f960d-a143-46a6-85e5-21a809e2dc61,5568,LCI,166,Seismic Monstrosaur,NF,M6,Sec-1,101,2,2,1,1
+689ed698-a2b4-4256-bacb-a02674d29c81,2220,CMR,229,Gift of Paradise,NF,M16,Sec-1,66,16,16,10,10
+68a687bc-d02c-4a52-9d36-298c5f67e49f,2258,CMR,246,"Numa, Joraga Chieftain",NF,M16,Sec-1,104,9,9,7,7
+6905d9a9-57a9-4b3f-8082-b7ce9fb67d6e,8005,OGW,99,Maw of Kozilek,NF,M4,Sec-1,54,5,5,4,4
+69916396-542c-4afa-9a05-bb83a0ef6f3b,10951,ZNR,20,Kitesail Cleric,NF,M2,Sec-1,69,2,2,1,1
+6995e793-950e-4a6b-a57c-a82cb6e47519,7722,NEO,177,Boseiju Reaches Skyward // Branch of Boseiju,NF,M13,Sec-1,28,3,3,0,0
+69a93446-0451-43d3-bea4-fa3f31a43759,7875,NEO,165,Tempered in Solitude,NF,M13,Sec-1,181,4,4,3,3
+6a112c30-5523-495c-aa6f-76fafbf05e3d,10360,UMA,78,Think Twice,NF,M8,Sec-1,97,1,1,0,0
+6a415e3d-4658-429b-af6c-3567fc9bb459,9917,THB,145,Omen of the Forge,NF,M13,Sec-1,88,4,4,3,3
+6a42777a-867c-449b-95b6-b1b646c4e733,8036,OGW,35,Spawnbinder Mage,NF,M4,Sec-1,85,7,7,5,5
+6b013036-4027-44ec-a8af-f744de92d4c0,8028,OGW,123,Scion Summoner,NF,M4,Sec-1,77,7,7,6,6
+6b7cd032-4610-488d-957f-d060cc47a0c8,7755,NEO,347,Fang of Shigeki,NF,M13,Sec-1,61,7,7,6,6
+6b809d1c-5eed-42a5-8aec-178696cf983b,2244,CMR,241,Lys Alana Bowmaster,NF,M16,Sec-1,90,13,13,9,9
+6c502823-1997-420d-9129-f5ac16c22497,7765,NEO,15,Golden-Tail Disciple,NF,M13,Sec-1,71,8,8,7,7
+6c5d6485-1fc0-4f56-bcc5-83fa18615733,10331,UMA,28,Rally the Peasants,NF,M8,Sec-1,68,3,3,1,1
+6cbe5deb-54b6-4ae1-a315-c4a8163ef960,8052,OGW,146,Vines of the Recluse,NF,M4,Sec-1,101,11,11,10,10
+6d33fd4b-bac0-45cd-9df2-e6cd3b32b9ae,9651,STX,99,Enthusiastic Study,NF,M9,Sec-1,42,2,2,1,1
+6d4659ad-b195-42f1-bd1b-0e25e477b887,10269,UMA,211,Beckon Apparition,NF,M8,Sec-1,6,5,5,2,2
+6e13f731-751a-4de6-9792-46467c237d9b,9938,THB,35,Rumbling Sentry,NF,M13,Sec-1,109,8,8,6,6
+6e6f65bb-c8c1-4734-b041-3cb83bb5ef2e,10962,ZNR,110,Malakir Blood-Priest,NF,M2,Sec-1,80,15,15,13,13
+6e7235a5-3459-4385-bbe5-52abbad3f018,6409,M19,202,Talons of Wildwood,NF,M15,Sec-1,121,5,5,4,4
+6eafac10-6801-4777-8e4c-55c08b864d0c,7048,MID,145,Lambholt Harrier,NF,M2,Sec-1,108,8,8,7,7
+6ee104be-6b8b-40e5-b847-b2fff107be47,9692,STX,110,Mascot Interception,NF,M9,Sec-1,83,3,3,2,2
+6fbe2b5d-81cc-49a5-9153-8b843b793a4d,7029,MID,56,Geistwave,NF,M2,Sec-1,89,9,9,7,7
+6fd73a82-55ec-4646-b0a7-05336c84412c,10995,ZNR,155,Roil Eruption,NF,M2,Sec-1,113,19,19,16,16
+6fdc69df-ad73-4ac2-80ab-c1cc082ab77c,2179,CMR,167,Champion of the Flame,NF,M16,Sec-1,25,12,12,8,8
+7007feef-bb88-4b43-b03d-3c0a6fbbfb23,7004,MID,99,Eaten Alive,NF,M2,Sec-1,64,2,2,1,1
+70261477-132f-47b1-8d36-f5bb4853a911,7998,OGW,73,Kozilek's Shrieker,NF,M4,Sec-1,47,5,5,4,4
+70675510-5069-42e4-bf54-b128ce2b7755,10980,ZNR,31,Paired Tactician,NF,M2,Sec-1,98,11,11,8,8
+708d084b-d08a-4ed0-b96e-5ce3277f4248,10934,ZNR,185,Gnarlid Colony,NF,M2,Sec-1,52,14,14,11,11
+7107babd-167d-4014-bab2-91c2dd362781,6997,MID,96,Diregraf Horde,NF,M2,Sec-1,57,8,8,6,6
+71181d57-bf99-4135-8798-17a9635797b9,6860,MH2,135,Mine Collapse,NF,M6,Sec-1,120,5,5,3,3
+7127a8b2-c85b-4f5e-b123-d4ea70e0249a,7052,MID,26,Loyal Gryff,NF,M2,Sec-1,112,7,7,6,6
+71364c64-f91b-4c5b-b8ec-91208bad8da1,2312,CMR,101,Strategic Planning,NF,M16,Sec-1,158,2,2,1,1
+7145c58a-f32b-4bf5-b8e1-c0f91a535407,2238,CMR,29,Kinsbaile Courier,NF,M16,Sec-1,84,19,19,12,12
+72825595-ea92-44dc-bd3d-544281afd4e2,6787,MH2,224,Dermotaxi,NF,M6,Sec-1,47,2,2,1,1
+72c4bc9d-099c-4433-9419-f19698ea0413,2323,CMR,292,Tuya Bearclaw,NF,M16,Sec-1,169,6,6,4,4
+7302ab08-02d1-43dd-9d99-d009d78ec81a,9927,THB,250,Plains,NF,M13,Sec-1,98,2,2,0,0
+735f1236-fcae-4375-bfcb-c20a78d7459e,5516,LCI,152,Goldfury Strider,NF,M6,Sec-1,49,2,2,1,1
+7380e21c-c7ca-4593-be2a-1debe24948e3,7707,NEO,239,Automated Artificer,NF,M13,Sec-1,13,3,3,1,1
+74039ada-823f-4238-9e8c-20ebe25bca7f,7790,NEO,195,Jukai Preserver,NF,M13,Sec-1,96,6,6,5,5
+746a1719-d8e4-406e-9709-7504ef5085c7,9977,THB,79,Vexing Gull,NF,M13,Sec-1,148,2,2,1,1
+758d8370-001f-49cd-b16d-b3873d8d4118,9851,THB,10,Daybreak Chimera,NF,M13,Sec-1,22,8,8,7,7
+7662b01e-f704-4c20-a180-b40ffc927024,10353,UMA,186,Stingerfling Spider,NF,M8,Sec-1,90,2,2,1,1
+766e0bec-ea09-46d2-8de9-dd152a22378f,10352,UMA,185,Staunch-Hearted Warrior,NF,M8,Sec-1,89,9,9,6,6
+76759fe7-629f-4d1c-8eaa-6e86598c83db,2202,CMR,123,Eyeblight Assassin,NF,M16,Sec-1,48,18,18,14,14
+76d16337-d218-441c-a2a9-18386fe4b92f,7075,MID,70,Phantom Carriage,NF,M2,Sec-1,135,4,4,3,3
+76f0dc3d-18fa-4b7e-8b79-0c991bc05592,8017,OGW,31,Ondu War Cleric,NF,M4,Sec-1,66,5,5,4,4
+7702eefe-bd30-448a-a7c0-2359645025b0,9856,THB,11,Dreadful Apathy,NF,M13,Sec-1,27,3,3,2,2
+779b154e-4837-4ff6-8c79-631792da29dc,10999,ZNR,158,Scorch Rider,NF,M2,Sec-1,117,16,16,14,14
+786dbe7d-5472-48c3-a5a7-2bf962ea8849,10284,UMA,213,Dimir Guildmage,NF,M8,Sec-1,21,7,7,1,1
+7876afdd-66ce-4944-8585-8462806884cb,7762,NEO,186,Geothermal Kami,NF,M13,Sec-1,68,8,8,7,7
+795f1dc4-9a32-4247-8178-0e2543e87ea9,7019,MID,54,Flip the Switch,NF,M2,Sec-1,79,6,6,4,4
+79759ea4-d83f-4677-8eb8-58947e69de55,10897,ZNR,181,Broken Wings,NF,M2,Sec-1,15,16,16,15,15
+7aab201b-747a-4dd4-8d5b-a1ce9519e93a,7072,MID,153,Pack's Betrayal,NF,M2,Sec-1,132,8,8,4,4
+7aad3731-2f9e-40fb-82c4-959b66e68011,7098,MID,35,Soul-Guide Gryff,NF,M2,Sec-1,158,7,7,6,6
+7b03b200-ac3a-487a-aa85-3019129ca110,6919,MH2,215,Terminal Agony,NF,M6,Sec-1,179,17,17,16,16
+7b2919ae-c451-44d7-b5cd-f51680417014,7064,MID,117,Novice Occultist,NF,M2,Sec-1,124,10,10,9,9
+7b5ae4e6-defe-4a29-80be-ff3e3d6da6ab,7712,NEO,174,Bearer of Memory,NF,M13,Sec-1,18,8,8,6,6
+7bb0a2da-46a1-4836-bef8-0d7cb5d72b59,2251,CMR,244,Monstrous Onslaught,NF,M16,Sec-1,97,4,4,3,3
+7bc8cdd7-e10f-43b3-bd23-8e7daf07102a,2232,CMR,25,Iona's Judgment,NF,M16,Sec-1,78,16,16,12,12
+7bec9e9f-a0d1-461b-8292-6273af4c9ac0,6972,MID,12,Celestus Sanctifier,NF,M2,Sec-1,32,12,12,11,11
+7c0f8c8b-3409-458d-9f4d-85c765bebf28,9729,STX,142,Scurrid Colony,NF,M9,Sec-1,120,4,4,1,1
+7c29a7ea-ec78-4ddb-adf5-741e92c31f0f,5522,LCI,275,Hidden Necropolis,NF,M6,Sec-1,55,3,3,2,2
+7c3d46b9-1531-43b2-8094-d9e96b6100ad,11007,ZNR,38,Shepherd of Heroes,NF,M2,Sec-1,125,14,14,11,11
+7c3f2d53-3ccd-4f74-b7ef-aec22c5bf280,7740,NEO,94,Dokuchi Shadow-Walker,NF,M13,Sec-1,46,5,5,4,4
+7cb2cf4e-361b-4083-a475-2ddeb6108d52,2192,CMR,119,Dhund Operative,NF,M16,Sec-1,38,17,17,13,13
+7d4c80ab-db70-4930-9e61-bec6b13116ae,10370,UMA,42,Wandering Champion,NF,M8,Sec-1,107,9,9,5,5
+7d7298ed-c7f5-4c55-a2fb-a3f69e4816e7,6753,MH2,112,Arcbound Tracker,NF,M6,Sec-1,13,24,24,23,23
+7d8f940c-6371-4a2e-976c-e6cd5289fcb5,11000,ZNR,36,Sea Gate Banneret,NF,M2,Sec-1,118,12,12,11,11
+7dcb3e41-afb6-48c5-b099-c37c72029fd7,6937,MH2,109,World-Weary,NF,M6,Sec-1,197,20,20,17,17
+7df1c541-d19a-40ed-b190-b80c287f72bb,5595,LCI,84,Waterwind Scout,NF,M6,Sec-1,128,3,3,1,1
+7e03d631-0e8b-4d94-9c11-61558e36ffa1,2186,CMR,221,Crushing Vines,NF,M16,Sec-1,32,17,17,11,11
+7e5622e3-db24-437b-a0f2-638ef0b753db,6387,M19,36,Rustwing Falcon,NF,M15,Sec-1,99,5,5,4,4
+7e6f1894-d1ae-4cfa-b269-66c5e805c868,2157,CMR,5,Ancestral Blade,NF,M16,Sec-1,3,17,17,14,14
+7ed04a36-6d63-435d-ad87-2a83bb69e548,6804,MH2,42,Floodhound,NF,M6,Sec-1,64,23,23,22,22
+7edd927a-a172-4c62-988d-a1f8d31634d7,7768,NEO,189,Greater Tanuki,NF,M13,Sec-1,74,1,1,0,0
+7f2efc92-6283-42d3-ab33-f395216512c0,2168,CMR,58,Azure Fleet Admiral,NF,M16,Sec-1,14,18,18,15,15
+7ff0a529-e2a2-4e58-ae07-aa1f00d104c1,9619,STX,251,Biblioplex Assistant,NF,M9,Sec-1,10,2,2,1,1
+7ffde978-5bff-4123-93d6-07b5c5b4f2bd,7819,NEO,30,Mothrider Patrol,NF,M13,Sec-1,125,3,3,2,2
+807b78b0-26a4-4bc3-a8b9-3d95ddb33c72,2212,CMR,227,Fin-Clade Fugitives,NF,M16,Sec-1,58,18,18,14,14
+81dc04a4-be66-411b-b8f9-f31cd34e73ba,7772,NEO,146,"Heiko Yamazaki, the General",NF,M13,Sec-1,78,5,5,4,4
+81fd5abd-07b8-4e17-95fd-c5d0bcae19ae,10051,THS,165,Nessian Courser,NF,M5,Sec-1,66,2,2,1,1
+824866fa-c562-4279-bc30-0a185e97f2a6,10945,ZNR,18,Kabira Outrider,NF,M2,Sec-1,63,15,15,12,12
+82a13a36-d8b8-48d6-86fd-7b736f052a8a,9913,THB,191,Nyxborn Colossus,NF,M13,Sec-1,84,3,3,2,2
+83358ad6-2060-4abe-a10f-12611d6f8eae,7994,OGW,58,Jwar Isle Avenger,NF,M4,Sec-1,43,11,11,8,8
+83467047-d4cb-4d3d-bdcf-f455c42eafe7,10323,UMA,141,Nightbird's Clutches,NF,M8,Sec-1,60,7,7,2,2
+835ec87c-2b42-4451-82c9-1858909adb7f,7868,NEO,81,Suit Up,NF,M13,Sec-1,174,4,4,3,3
+840350eb-a6f2-4d59-b325-9512666db702,2265,CMR,142,Phyrexian Rager,NF,M16,Sec-1,111,14,14,11,11
+8437ff33-0185-40a6-8822-8161c0314457,6811,MH2,161,Funnel-Web Recluse,NF,M6,Sec-1,71,22,22,20,20
+84e4c389-f331-4a7b-bef5-2a6d243f075c,7015,MID,140,Festival Crasher,NF,M2,Sec-1,75,3,3,2,2
+85933f4f-4edf-4f9b-9057-5c43bf08c6f6,2221,CMR,130,Gilt-Leaf Winnower,NF,M16,Sec-1,67,9,9,8,8
+85a77f8a-3167-44b8-8ec2-73e8368e5158,5592,LCI,172,Volatile Wanderglyph,NF,M6,Sec-1,125,3,3,2,2
+85d56084-be3d-47a5-a57e-7688e1af7356,7041,MID,188,Howl of the Hunt,NF,M2,Sec-1,101,10,10,9,9
+865dba99-3c69-47fd-8d28-8084379eee11,7886,NEO,281,Uncharted Haven,NF,M13,Sec-1,192,3,3,2,2
+866c7a04-c2f6-47b4-857a-e206233eda69,7756,NEO,184,Favor of Jukai,NF,M13,Sec-1,62,3,3,2,2
+86b6abe2-5ab8-405a-902e-b6caee23401d,5481,LCI,96,Canonized in Blood,NF,M6,Sec-1,14,3,3,2,2
+86c37caf-7604-4d7a-969b-7a3e92b385e1,5574,LCI,77,Song of Stupefaction,NF,M6,Sec-1,107,2,2,1,1
+86f0e011-703e-4b84-bf35-e62744be6d18,11026,ZNR,255,Stonework Packbeast,NF,M2,Sec-1,144,21,21,20,20
+8740cbe1-00b6-43bf-a471-4faf82b888bd,10986,ZNR,199,Rabid Bite,NF,M2,Sec-1,104,15,15,12,12
+8769e73a-deff-4df1-b168-03cf5eb4cb59,9943,THB,201,Setessan Training,NF,M13,Sec-1,114,1,1,0,0
+879ba745-c2c4-4b1d-a1bf-12c585f8b209,6309,M19,10,Daybreak Chaplain,NF,M15,Sec-1,21,5,5,4,4
+87af996b-3f85-4453-9fcb-19078a938f76,2283,CMR,148,Sanitarium Skeleton,NF,M16,Sec-1,129,19,19,13,13
+87c6c18f-4cfd-4f63-82dd-af40f706570b,10910,ZNR,8,Cliffhaven Sell-Sword,NF,M2,Sec-1,28,17,17,14,14
+87df78bd-f524-49cf-85a1-a8a4eb5e228c,10359,UMA,40,Tethmos High Priest,NF,M8,Sec-1,96,2,2,1,1
+884cce56-95c3-486a-b57e-2b560ab168a2,9701,STX,209,Oggyar Battle-Seer,NF,M9,Sec-1,92,4,4,2,2
+88548099-19e7-4412-8033-217cbd897376,10992,ZNR,35,Resolute Strike,NF,M2,Sec-1,110,20,20,19,19
+887997d3-2ee9-412d-89c9-9acf5f8022f0,11006,ZNR,79,Shell Shield,NF,M2,Sec-1,124,15,15,13,13
+89322d08-bea6-44c6-a338-65b97cf59b3e,9655,STX,185,Exhilarating Elocution,NF,M9,Sec-1,46,5,5,3,3
+8952c553-3007-4bde-9e79-ed6597eb712a,7750,NEO,11,Era of Enlightenment // Hand of Enlightenment,NF,M13,Sec-1,56,13,13,12,12
+89b4d702-0b33-42c8-91fb-c40aee2b527c,9731,STX,52,Serpentine Curve,NF,M9,Sec-1,122,8,8,5,5
+89f360f3-5fd2-43c3-b352-d176353598c4,9918,THB,192,Omen of the Hunt,NF,M13,Sec-1,89,5,5,3,3
+8a2e7182-8d1b-42c6-9835-8b0e7527f438,6768,MH2,187,Breathless Knight,NF,M6,Sec-1,28,22,22,19,19
+8a65d7ee-cf4a-4203-8cf2-f305f57a8e87,6316,M19,176,Druid of Horns,NF,M15,Sec-1,28,2,2,1,1
+8a856894-9749-4f05-9d8e-617d5e0caad0,10357,UMA,75,Sultai Skullkeeper,NF,M8,Sec-1,94,8,8,4,4
+8acab659-f2c2-418c-a2c7-dc0bdbb8bee4,10955,ZNR,65,Living Tempest,NF,M2,Sec-1,73,15,15,13,13
+8b69c403-7cb9-4211-a09f-483f5411211f,8039,OGW,37,Stone Haven Outfitter,NF,M4,Sec-1,88,5,5,3,3
+8b6b488a-ca8a-4534-b3a7-adaef06dfe77,7999,OGW,74,Kozilek's Translator,NF,M4,Sec-1,48,7,7,5,5
+8b8486e5-0121-4610-8c86-df1f0935c730,2195,CMR,173,Dragon Egg,NF,M16,Sec-1,41,12,12,7,7
+8bae9c80-97ba-4dd3-9443-31722f3259c4,8056,OGW,82,Witness the End,NF,M4,Sec-1,105,4,4,2,2
+8bdc354a-a46f-41b7-a847-554e55458d3c,9732,STX,229,Shadewing Laureate,NF,M9,Sec-1,123,2,2,1,1
+8be1c317-8d0c-454e-a0b6-237b3589b5cb,2188,CMR,64,Daring Saboteur,NF,M16,Sec-1,34,4,4,3,3
+8c547c1c-61dd-457a-a56a-3de6e3ca0f5b,7060,MID,256,Mystic Skull // Mystic Monstrosity,NF,M2,Sec-1,120,2,2,1,1
+8c7543bd-fc04-4279-98ab-13b242147c42,10295,UMA,18,Gods Willing,NF,M8,Sec-1,32,3,3,1,1
+8d812510-5e86-4a00-a731-5777f02a35f3,5553,LCI,160,Plundering Pirate,NF,M6,Sec-1,86,3,3,1,1
+8d8c31e3-fca7-4068-9e9c-c7e57a7b7090,9683,STX,198,Lorehold Apprentice,NF,M9,Sec-1,74,4,4,2,2
+8e42962b-189a-46ea-894b-19edbee75244,2327,CMR,208,Volcanic Torrent,NF,M16,Sec-1,173,2,2,1,1
+8ef2d216-9f77-4e0d-8617-14a176103ad2,5564,LCI,163,Rumbling Rockslide,NF,M6,Sec-1,97,2,2,1,1
+8effb4d7-b4d8-4de1-b94f-09c2571b1d98,2273,CMR,41,Raise the Alarm,NF,M16,Sec-1,119,18,18,14,14
+8f28798f-e92c-4479-806a-14b47620f598,11015,ZNR,253,Skyclave Sentinel,NF,M2,Sec-1,133,18,18,17,17
+8f5b5792-15bf-43b5-be65-e962994fcb32,6848,MH2,20,Lens Flare,NF,M6,Sec-1,108,26,26,25,25
+8f649d6d-1fe7-4fba-bb79-e06bf052fdc0,5578,LCI,79,Staunch Crewmate,NF,M6,Sec-1,111,3,3,1,1
+8f70e516-1a05-4bd3-beae-03534f23ccbf,7773,NEO,321,"Heiko Yamazaki, the General",NF,M13,Sec-1,79,4,4,3,3
+8fdbeacf-4b4b-4922-b73e-a3451f4e81e7,7085,MID,31,Ritual of Hope,NF,M2,Sec-1,145,5,5,4,4
+8fe04473-3eda-43a9-a595-6a2624c8e38b,9706,STX,23,Pillardrop Rescuer,NF,M9,Sec-1,97,7,7,4,4
+905f07b6-62fb-471e-aa0d-9a2eabf30296,6817,MH2,86,Gilt-Blade Prowler,NF,M6,Sec-1,77,25,25,24,24
+906243b6-42f3-49b8-999e-0b154fe1c93b,9926,THB,32,Pious Wayfarer,NF,M13,Sec-1,97,3,3,2,2
+908e3b96-3957-46da-ad2f-f587b51f497f,9663,STX,187,Fractal Summoning,NF,M9,Sec-1,54,6,6,4,4
+90cd160f-7a45-469e-8e66-70c0e098251b,10991,ZNR,250,Relic Vial,NF,M2,Sec-1,109,4,4,3,3
+911810c3-8338-4b11-a965-7596836b424b,2311,CMR,203,Stonefury,NF,M16,Sec-1,157,19,19,12,12
+915306c8-3e47-40cd-8778-63a264e6ef44,7125,MID,167,Voldaren Stinger,NF,M2,Sec-1,185,13,13,12,12
+9157a090-e610-4153-ae5e-43dea49e1bd2,7101,MID,78,Startle,NF,M2,Sec-1,161,9,9,6,6
+91b6ba0e-09ea-41fc-bc07-b3f5e931888b,8379,ORI,102,Infernal Scarring,NF,M9,Sec-1,58,9,9,8,8
+91dfe421-e8e7-4917-a473-7e73634a7725,7813,NEO,64,Mnemonic Sphere,NF,M13,Sec-1,119,10,10,8,8
+920c6969-2e95-4dc3-ae96-ce98ed02a863,7763,NEO,143,Gift of Wrath,NF,M13,Sec-1,69,9,9,8,8
+921e5398-9361-4153-ba5a-3353d20abb64,6396,M19,120,Sovereign's Bite,NF,M15,Sec-1,108,3,3,0,0
+92544750-33fd-4897-a802-363f7f327ecd,2196,CMR,174,Dragon Mantle,NF,M16,Sec-1,42,13,13,9,9
+927c8ba1-945a-4328-98e8-0f5db9db9c81,10317,UMA,65,Marang River Prowler,NF,M8,Sec-1,54,3,3,1,1
+92a77d3d-acdf-4652-8f63-ac8b43730aff,5477,LCI,95,Broodrage Mycoid,NF,M6,Sec-1,10,2,2,1,1
+9343a18d-9370-4abd-94ae-b82d22eb6d0d,7972,OGW,43,Deepfathom Skulker,NF,M4,Sec-1,21,3,3,1,1
+93c97802-c433-4681-83ca-cf8da2432371,9878,THB,219,Hero of the Nyxborn,NF,M13,Sec-1,49,2,2,1,1
+93cb2143-7b58-4df2-9dd5-9d06a7f0c569,2279,CMR,198,Rummaging Goblin,NF,M16,Sec-1,125,14,14,10,10
+943cf132-303e-4dc8-89a5-d44cd50699f4,9955,THB,38,Sunmane Pegasus,NF,M13,Sec-1,126,3,3,2,2
+9471b2ef-3c01-4137-a4e3-ee542677b150,5562,LCI,72,River Herald Scout,NF,M6,Sec-1,95,2,2,1,1
+947f73bf-29ef-46c1-a975-39b577f13b74,8012,OGW,139,Nissa's Judgment,NF,M4,Sec-1,61,2,2,1,1
+9496157a-0c0f-454a-8df4-23089d60ce84,2316,CMR,102,Supreme Will,NF,M16,Sec-1,162,2,2,1,1
+95086ae8-cfb0-4080-9316-9457527c1727,7005,MID,185,Eccentric Farmer,NF,M2,Sec-1,65,8,8,7,7
+9520d0a1-26dc-491c-903c-c95afe9a53e1,6889,MH2,139,Revolutionist,NF,M6,Sec-1,149,23,23,22,22
+958cd2a0-0742-40a7-bc8b-03292e686984,9764,STX,249,Witherbloom Pledgemage,NF,M9,Sec-1,155,4,4,3,3
+95a3dbda-72ff-4fef-9e2a-c6df1d0310a4,5496,LCI,51,Council of Echoes,NF,M6,Sec-1,29,3,3,1,1
+96d24863-b38c-406a-9082-86a3a1b4f180,7864,NEO,79,Skyswimmer Koi,NF,M13,Sec-1,170,12,12,10,10
+96f720ef-f285-4e16-90f8-78d290477d85,9735,STX,233,Silverquill Pledgemage,NF,M9,Sec-1,126,6,6,5,5
+97d71800-b4f4-444f-999a-f316af3dbfd8,5594,LCI,83,Waterlogged Hulk // Watertight Gondola,NF,M6,Sec-1,127,2,2,1,1
+97f2009a-7e40-4347-8995-04dfe762480f,10891,ZNR,45,Anticognition,NF,M2,Sec-1,9,16,16,12,12
+97f5c63d-6aec-47bd-9315-e1da402d9e90,2338,CMR,348,Workshop Assistant,NF,M16,Sec-1,184,4,4,1,1
+9889d356-96d0-46fd-be41-638000d15696,10905,ZNR,48,Cascade Seer,NF,M2,Sec-1,23,11,11,8,8
+997a8598-da6c-4269-8d0d-498fa9fb0137,10266,UMA,83,Appetite for Brains,NF,M8,Sec-1,3,2,2,1,1
+9a09d928-57fc-4d07-ae5b-92765b927d69,10010,THS,117,Deathbellow Raider,NF,M5,Sec-1,25,2,2,1,1
+9a25c042-8fea-4fc8-8aea-0d9d545d3600,10933,ZNR,59,Glacial Grasp,NF,M2,Sec-1,51,14,14,12,12
+9ac3cdff-8d93-483d-8821-f1c10fd46bbf,7777,NEO,192,Historian's Wisdom,NF,M13,Sec-1,83,5,5,4,4
+9acb4fac-bff5-459d-a660-ad1f0ca00a21,2183,CMR,17,Court Street Denizen,NF,M16,Sec-1,29,16,16,12,12
+9ad7c0c8-7518-4244-b564-8a087f850210,2257,CMR,140,Null Caller,NF,M16,Sec-1,103,7,7,6,6
+9b7c2a57-6395-468b-86d5-2f6a834a171c,8434,ORI,118,Shadows of the Past,NF,M9,Sec-1,113,1,1,0,0
+9baff239-6400-4ce5-b303-850967fb5ec2,2302,CMR,256,"Slurrk, All-Ingesting",NF,M16,Sec-1,148,5,5,4,4
+9c6d1279-1b01-4553-a1ee-cf1cbc02fb24,5566,LCI,118,Screaming Phantom,NF,M6,Sec-1,99,4,4,1,1
+9cb68c25-22f4-4e59-aae1-2ebf92efce90,2021,CLB,379,"Lulu, Loyal Hollyphant",NF,M19,Sec-1,89,2,2,1,1
+9cc58279-9382-4541-9c0e-29abfbb01ca4,2167,CMR,57,Aven Surveyor,NF,M16,Sec-1,13,18,18,14,14
+9d6c1d7e-05ae-4b07-9676-41979c465983,9748,STX,32,Stonerise Spirit,NF,M9,Sec-1,139,6,6,3,3
+9e3567ee-e92d-4703-bff0-5ec7b0ba4d36,10326,UMA,231,Patchwork Gnomes,NF,M8,Sec-1,63,10,10,3,3
+9ebea33d-3a43-438e-9edf-dfc19e0bcd51,10923,ZNR,57,Expedition Diviner,NF,M2,Sec-1,41,17,17,15,15
+9ef2c63b-48e0-441e-8e60-afbbe851694f,7874,NEO,83,Tamiyo's Compleation,NF,M13,Sec-1,180,4,4,3,3
+9f829826-51c5-4bf7-be20-282886d7c2de,6968,MID,9,Candletrap,NF,M2,Sec-1,28,11,11,9,9
+a0192a5d-598e-4882-bd14-0dd02737323e,10371,UMA,210,Warleader's Helix,NF,M8,Sec-1,108,3,3,1,1
+a0206f3c-05ec-44b5-9009-b9c92b1a3dda,8410,ORI,192,Orchard Spirit,NF,M9,Sec-1,89,2,2,1,1
+a08f07e7-7f0c-4710-a383-c68eae49eda5,10354,UMA,72,Stitched Drake,NF,M8,Sec-1,91,9,9,5,5
+a0e266da-98dd-45b1-abcb-66656ced3e50,2200,CMR,176,Explosion of Riches,NF,M16,Sec-1,46,3,3,1,1
+a1486f0f-d3df-4686-a162-444cbf443deb,11030,ZNR,168,Synchronized Spellcraft,NF,M2,Sec-1,148,13,13,12,12
+a300dd7f-72f8-47a2-bca4-3040bee8c7d8,7020,MID,276,Forest,NF,M2,Sec-1,80,1,1,0,0
+a315fc22-df2d-4c78-81a2-61614fad35ff,6956,MID,90,Bloodtithe Collector,NF,M2,Sec-1,16,5,5,3,3
+a4228943-1d57-43ee-89c3-4213d6aa69f5,6823,MH2,14,Glorious Enforcer,NF,M6,Sec-1,83,15,15,14,14
+a47f8aaf-4c0b-4dcb-aaf5-04d32596e493,11043,ZNR,172,Tormenting Voice,NF,M2,Sec-1,161,15,15,13,13
+a4dae3c9-d06c-4153-a5de-ba1d84282357,11012,ZNR,204,Skyclave Pick-Axe,NF,M2,Sec-1,130,5,5,4,4
+a5803a2d-ffcf-4b99-873c-06a8e4c5f527,6319,M19,11,Dwarven Priest,NF,M15,Sec-1,31,4,4,3,3
+a5a496d4-3744-45f1-baae-5adede2d322c,1022,AVR,149,Pillar of Flame,NF,M1,Sec-1,69,3,3,1,1
+a5abd177-efed-48fb-ac77-35f5618ba17a,2271,CMR,86,Prying Eyes,NF,M16,Sec-1,117,17,17,12,12
+a61f8f91-db30-45ce-9de7-2357af09ad6d,5527,LCI,60,Inverted Iceberg // Iceberg Titan,NF,M6,Sec-1,60,2,2,1,1
+a62d178a-1ebe-4063-94d8-7becd8727354,7724,NEO,135,Bronzeplate Boar,NF,M13,Sec-1,30,2,2,1,1
+a686040e-9fa2-45ca-8c8d-873604ccbdae,8397,ORI,187,Mantle of Webs,NF,M9,Sec-1,76,1,1,0,0
+a7a0bc41-c06f-40c4-bdba-926cc5d4dc48,9968,THB,78,Triton Waverider,NF,M13,Sec-1,139,5,5,3,3
+a7abb309-4736-405b-b8c6-548985c75e8d,10341,UMA,111,Sanitarium Skeleton,NF,M8,Sec-1,78,7,7,2,2
+aa33e775-deb5-4f29-9a2a-05545961db93,6756,MH2,185,Arcus Acolyte,NF,M6,Sec-1,16,7,7,6,6
+aa57617a-c40c-4f59-b627-25eaaaca219d,2307,CMR,100,Spontaneous Mutation,NF,M16,Sec-1,153,21,21,14,14
+aa6e0e71-f6f2-4d8d-85a4-0ae27768697d,7110,MID,201,Tapping at the Window,NF,M2,Sec-1,170,12,12,10,10
+aac4e577-2ee8-442e-817f-4b9b049b0761,10272,UMA,159,Boneyard Wurm,NF,M8,Sec-1,9,2,2,1,1
+aaf20d37-fe00-49f8-8bdf-01507a11c0e0,9622,STX,93,Blood Age General,NF,M9,Sec-1,13,10,10,7,7
+ab0ecc06-515a-4c80-a104-90533e41be9d,7105,MID,123,Stromkirk Bloodthief,NF,M2,Sec-1,165,3,3,2,2
+aba345c2-e905-4ded-bcb3-ac47ddb45f61,9649,STX,183,Elemental Summoning,NF,M9,Sec-1,40,8,8,6,6
+abcb2728-2164-42f2-aace-87d2f8b71fda,10349,UMA,149,Sparkspitter,NF,M8,Sec-1,86,6,6,2,2
+abe1e25a-5e42-4174-8a18-ddadbbd29ee0,2243,CMR,321,Lumengrid Gargoyle,NF,M16,Sec-1,89,5,5,1,1
+abf929a1-4345-4d47-ad2f-7979636bc64d,9676,STX,194,Infuse with Vitality,NF,M9,Sec-1,67,6,6,2,2
+ac62e314-7cd5-45ee-a26e-afeb14164c08,10355,UMA,73,Stitcher's Apprentice,NF,M8,Sec-1,92,8,8,4,4
+ac73f5f6-9eed-4a28-b182-6cda530cfb2a,9930,THB,194,Plummet,NF,M13,Sec-1,101,2,2,1,1
+ace5a74c-9d8d-4cec-8258-9dfbf836a8d4,6975,MID,176,Clear Shot,NF,M2,Sec-1,35,5,5,4,4
+ad2ed42c-a58b-4655-bec9-9b8970699ae3,10919,ZNR,100,Dreadwurm,NF,M2,Sec-1,37,10,10,9,9
+ad35ae35-4ff2-42d1-bec6-d598e661570a,8402,ORI,267,Mountain,NF,M9,Sec-1,81,2,2,1,1
+ad7f91ea-8478-44b1-a91e-b0104aca2037,7807,NEO,27,Lucky Offering,NF,M13,Sec-1,113,9,9,7,7
+add90158-440d-446f-9759-d12417a15cb3,8023,OGW,76,Reaver Drone,NF,M4,Sec-1,72,2,2,1,1
+aeecf737-5b9f-4e8b-b0e9-06133a1ab4bb,2213,CMR,22,First Response,NF,M16,Sec-1,59,6,6,5,5
+b0081320-b5af-4ed3-8b18-e6bfac1a4d11,10972,ZNR,229,Murasa Rootgrazer,NF,M2,Sec-1,90,4,4,3,3
+b1218eb5-2a48-4546-b6da-be145d5bc0da,6810,MH2,196,Foundry Helix,NF,M6,Sec-1,70,31,31,29,29
+b13d273e-6930-4719-9da2-6d9b26ce8fc7,10309,UMA,60,Just the Wind,NF,M8,Sec-1,46,8,8,2,2
+b19480b3-4a80-43bc-a500-a2e48195bd1d,5497,LCI,142,Daring Discovery,NF,M6,Sec-1,30,2,2,1,1
+b1e71cc0-e591-4f03-83c9-ffd2b36f358b,9680,STX,74,Lash of Malice,NF,M9,Sec-1,71,6,6,2,2
+b247f822-4dee-4d8f-8589-6441b3b08a06,7996,OGW,24,Kor Sky Climber,NF,M4,Sec-1,45,8,8,6,6
+b24b7544-caba-43f8-901c-6992ba371d11,2223,CMR,182,Goblin Trailblazer,NF,M16,Sec-1,69,15,15,13,13
+b2eca8ef-4124-4d51-8805-839366225635,2336,CMR,263,Wildheart Invoker,NF,M16,Sec-1,182,18,18,16,16
+b371e681-5ffe-45eb-abb1-943cbd57eac7,7801,NEO,151,Kindled Fury,NF,M13,Sec-1,107,9,9,8,8
+b3ca4775-99b1-4d14-b6bf-831af2d58427,9642,STX,13,Detention Vortex,NF,M9,Sec-1,33,4,4,2,2
+b3d9e6b7-bac9-4b93-82d8-69f41b65d50b,6337,M19,187,Greenwood Sentinel,NF,M15,Sec-1,49,3,3,2,2
+b45b458a-d8cf-4949-a4be-094a9f5dcc77,7699,NEO,132,Akki War Paint,NF,M13,Sec-1,5,10,10,8,8
+b46486fa-36b6-464f-95cd-55b8509d1b46,9945,THB,202,Skola Grovedancer,NF,M13,Sec-1,116,3,3,1,1
+b4fa822f-6469-4424-a485-55fa8a81a48e,8032,OGW,34,Shoulder to Shoulder,NF,M4,Sec-1,81,8,8,4,4
+b508416b-2011-4104-880e-093a73135e96,2218,CMR,129,Ghastly Demise,NF,M16,Sec-1,64,9,9,5,5
+b520ff73-5448-4c4a-84e3-001d70e003b5,9737,STX,55,Soothsayer Adept,NF,M9,Sec-1,128,4,4,2,2
+b5ff127d-5860-4efe-9c47-a1a9729fc954,8409,ORI,66,Nivix Barrier,NF,M9,Sec-1,88,2,2,1,1
+b6287d6b-6825-4d18-8ec2-a57cba73bdff,6312,M19,50,Disperse,NF,M15,Sec-1,24,2,2,1,1
+b6488f27-5fae-4e63-95ba-813b3f6c66eb,9703,STX,210,Owlin Shieldmage,NF,M9,Sec-1,94,4,4,1,1
+b68891db-d63b-4abb-915b-e77d9d394f13,6842,MH2,17,Knighted Myr,NF,M6,Sec-1,102,28,28,27,27
+b692c484-70d4-44af-affd-4b81ba4aa9ea,9612,STX,8,Ageless Guardian,NF,M9,Sec-1,3,6,6,5,5
+b6c1b177-d3eb-47f5-8196-6c9a2ae887bc,6988,MID,180,Dawnhart Rejuvenator,NF,M2,Sec-1,48,9,9,8,8
+b6d28860-4da6-4e77-9979-6991cba3904a,8057,OGW,120,Zada's Commando,NF,M4,Sec-1,106,3,3,1,1
+b73bebb6-fe22-4a69-8624-21719d5ff822,6900,MH2,62,Shattered Ego,NF,M6,Sec-1,160,26,26,25,25
+b74b7e91-1c8d-4845-b77e-6a23ec6cd674,9935,THB,195,Relentless Pursuit,NF,M13,Sec-1,106,5,5,4,4
+b77639b6-8eed-4763-a98f-e4208516dfa3,10913,ZNR,55,Cunning Geysermage,NF,M2,Sec-1,31,18,18,16,16
+b7fe7654-7e46-47fc-a63c-9b69a345d563,6352,M19,19,Knight's Pledge,NF,M15,Sec-1,64,8,8,7,7
+b802d515-cc31-43f4-a3a6-f5228999b216,9739,STX,87,Specter of the Fens,NF,M9,Sec-1,130,5,5,3,3
+b81e056b-4721-4272-b12a-2a948b76aac1,9869,THB,96,Fruit of Tizerus,NF,M13,Sec-1,40,4,4,2,2
+b843bf14-15be-4ee8-97a1-23d3b81d6562,7069,MID,66,Organ Hoarder,NF,M2,Sec-1,129,8,8,7,7
+b91798b7-5135-4f54-ae03-116ec8fdc634,9704,STX,111,Pigment Storm,NF,M9,Sec-1,95,3,3,1,1
+b9d33f57-1a74-4311-901e-e665652c84b5,2201,CMR,122,Exquisite Huntmaster,NF,M16,Sec-1,47,19,19,14,14
+ba266d0f-b168-4419-88c3-a93920ec5177,6858,MH2,51,Mental Journey,NF,M6,Sec-1,118,28,28,26,26
+babdb143-6bd5-4b7b-83d1-0835be5bb352,2268,CMR,194,Portent of Betrayal,NF,M16,Sec-1,114,13,13,11,11
+baf048e5-3012-4498-9b0e-ecd80e3d4943,6966,MID,287,Candlegrove Witch,NF,M2,Sec-1,26,19,19,17,17
+bb43062e-b2e5-4ea3-8122-b6a165937aa5,6876,MH2,55,Phantasmal Dreadmaw,NF,M6,Sec-1,136,19,19,18,18
+bbfe4b56-6240-4b9b-99ab-4ef2851b3678,7965,OGW,94,Consuming Sinkhole,NF,M4,Sec-1,14,9,9,5,5
+bcbc8ec1-9ea2-4b73-b3b9-e5addd16e5ec,10922,ZNR,138,Expedition Champion,NF,M2,Sec-1,40,15,15,14,14
+bd1e5f67-f908-4069-965c-b3599b483527,8049,OGW,80,Unnatural Endurance,NF,M4,Sec-1,98,9,9,6,6
+bdd272f6-0541-4f7f-befc-fcabd3556938,9725,STX,50,Reject,NF,M9,Sec-1,116,9,9,3,3
+bfbe1670-555b-45e2-a53d-6e6b56adba12,7888,NEO,127,Unforgiving One,NF,M13,Sec-1,194,4,4,2,2
+bfc412ce-7d7d-4a08-bced-92cd51ac3538,9630,STX,254,Cogwork Archivist,NF,M9,Sec-1,21,6,6,4,4
+bffb2860-80f6-4d43-a4ac-ffa023d29915,10289,UMA,56,Forbidden Alchemy,NF,M8,Sec-1,26,3,3,1,1
+c0472eb1-bc88-4540-a8c7-2eaea69c699d,8384,ORI,259,Island,NF,M9,Sec-1,63,8,8,1,1
+c04e99b9-936c-4909-8eb1-b7ef804285ab,7714,NEO,48,Behold the Unspeakable // Vision of the Unspeakable,NF,M13,Sec-1,20,11,11,10,10
+c0891681-75f4-41f3-9bc2-9932b0e87dfb,10274,UMA,125,Brazen Scourge,NF,M8,Sec-1,11,7,7,1,1
+c0d27cde-3247-4afe-8cdb-f8471a523f08,9635,STX,170,Cram Session,NF,M9,Sec-1,26,8,8,5,5
+c0f50668-9b66-428c-bd32-04ceac60e68b,1024,AVR,117,Predator's Gambit,NF,M1,Sec-1,71,2,2,1,1
+c0f58ce1-97a8-461f-b270-c60f7d4855ab,9736,STX,53,Snow Day,NF,M9,Sec-1,127,5,5,4,4
+c0fe3ffe-2766-4952-871a-d64de86a1f72,5489,LCI,140,Child of the Volcano,NF,M6,Sec-1,22,4,4,1,1
+c1081d34-1559-4cc9-87c0-f003e827e088,7077,MID,193,Plummet,NF,M2,Sec-1,137,7,7,6,6
+c137d3d0-5cd6-4c9f-9fcf-dc0405013655,9870,THB,97,Funeral Rites,NF,M13,Sec-1,41,4,4,3,3
+c1d6c657-e51a-4c42-bf35-28dc8e7bb283,7033,MID,143,Harvesttide Infiltrator // Harvesttide Assailant,NF,M2,Sec-1,93,8,8,7,7
+c1f92ff2-4839-4137-837f-df629eb414bc,7791,NEO,196,Jukai Trainee,NF,M13,Sec-1,97,7,7,6,6
+c2efd02b-eca0-4c93-a2f6-fd14565b4d25,10294,UMA,97,Ghoulsteed,NF,M8,Sec-1,31,2,2,1,1
+c32b5dcd-ed25-421e-bada-d24677c4a877,6897,MH2,61,Scuttletide,NF,M6,Sec-1,157,17,17,15,15
+c3a74f2e-ce47-4873-8d82-22a302152ab3,7102,MID,161,Stolen Vitality,NF,M2,Sec-1,162,6,6,5,5
+c3eb6b55-fe55-477a-890a-2724e449f4bd,9979,THB,203,Voracious Typhon,NF,M13,Sec-1,150,8,8,5,5
+c401dc40-a693-4ff4-99ed-aff9f099013d,6385,M19,117,Rise from the Grave,NF,M15,Sec-1,97,2,2,1,1
+c41a5e21-b8c1-4ac9-84bd-4f9473133507,8337,ORI,86,Catacomb Slug,NF,M9,Sec-1,16,4,4,3,3
+c4c0ca3a-a18d-4c65-926d-23f6adf94aff,7081,MID,72,Revenge of the Drowned,NF,M2,Sec-1,141,6,6,5,5
+c4c94d4a-60cc-4f9a-92c0-c541b526dbf9,7991,OGW,21,Iona's Blessing,NF,M4,Sec-1,40,2,2,1,1
+c510211c-56e1-430a-ab8c-7afd5ba234c2,7727,NEO,90,Chainflail Centipede,NF,M13,Sec-1,33,9,9,6,6
+c585fb92-40f1-4409-920f-2811ba592ef4,6827,MH2,201,Graceful Restoration,NF,M6,Sec-1,87,17,17,16,16
+c5ac0800-7005-4758-809f-9e45ad05401f,2156,CMR,213,Ambush Viper,NF,M16,Sec-1,2,12,12,8,8
+c6219dcf-ed2a-416f-b560-669a560e0cd5,7894,NEO,41,Wanderer's Intervention,NF,M13,Sec-1,200,10,10,8,8
+c73196bb-56a6-4f8d-b8ab-bf348842f515,7063,MID,116,No Way Out,NF,M2,Sec-1,123,9,9,8,8
+c829fa64-b7fb-4539-8c1c-ba85a13c8dba,7960,OGW,102,Boulder Salvo,NF,M4,Sec-1,9,10,10,5,5
+c8365f7b-fafd-40cc-8941-5cebd1d9fe9a,7023,MID,55,Galedrifter // Waildrifter,NF,M2,Sec-1,83,11,11,10,10
+c8ca4d17-f8b8-4d0c-a07a-159824321479,2275,CMR,195,Renegade Tactics,NF,M16,Sec-1,121,7,7,2,2
+c8cebb8c-a7a3-48c8-a3de-8c813dbe42c6,7055,MID,189,Might of the Old Ways,NF,M2,Sec-1,115,8,8,6,6
+c8ea4afc-80a6-40e4-8f42-d1f11e01b675,2159,CMR,6,Angel of the Dawn,NF,M16,Sec-1,5,17,17,14,14
+c90bb6a3-da1a-4001-87cd-4e3d555d2d79,7026,MID,21,Gavony Silversmith,NF,M2,Sec-1,86,11,11,10,10
+c95069fa-476b-48b1-9360-d0a8abce2b93,2254,CMR,245,Natural Reclamation,NF,M16,Sec-1,100,18,18,13,13
+c956b5ff-a660-498e-b38d-b2c3ffdb8ff2,9621,STX,164,Biomathematician,NF,M9,Sec-1,12,7,7,4,4
+c96a12be-4459-4e08-b4fb-ccce8fb31cdb,6964,MID,132,Burn the Accursed,NF,M2,Sec-1,24,3,3,2,2
+c9be2728-034e-42d8-915d-446121747e88,7737,NEO,50,Discover the Impossible,NF,M13,Sec-1,43,4,4,3,3
+c9d82ce0-da6f-4284-9fd2-fb9259858f83,5591,LCI,130,Vito's Inquisitor,NF,M6,Sec-1,124,2,2,1,1
+c9e438fb-505e-4414-a16e-5e2404900585,5572,LCI,119,Skullcap Snail,NF,M6,Sec-1,105,2,2,1,1
+c9f86623-edb4-40ad-a1b1-e6789106eb2f,10303,UMA,169,Hero of Leina Tower,NF,M8,Sec-1,40,3,3,1,1
+ca0d1463-a4e5-45c3-9ea0-0d743b9f920d,7863,NEO,314,Sky-Blessed Samurai,NF,M13,Sec-1,169,5,5,4,4
+ca396149-a70a-4dec-a5c4-d5bfcc34b4f9,6864,MH2,136,Mount Velus Manticore,NF,M6,Sec-1,124,22,22,21,21
+ca7f9d96-c99a-4a0f-8343-18864bb20d9c,6902,MH2,140,Skophos Reaver,NF,M6,Sec-1,162,27,27,25,25
+ca91a029-f42c-4e6c-8946-ab35b3d6d975,9648,STX,182,Elemental Masterpiece,NF,M9,Sec-1,39,5,5,4,4
+cab83087-4b18-46f4-b7fd-ff3758bbda6b,7797,NEO,105,Kami of Terrible Secrets,NF,M13,Sec-1,103,5,5,4,4
+cacbb75e-2286-4833-a0c4-b4c041f3c967,10374,UMA,193,Wild Hunger,NF,M8,Sec-1,111,4,4,1,1
+cae61d47-9f77-4c9c-a5a7-1a529c4786fe,2206,CMR,68,Fall from Favor,NF,M16,Sec-1,52,15,15,10,10
+caff8964-e4d3-499d-957d-9ef280952d79,2278,CMR,196,Ripscale Predator,NF,M16,Sec-1,124,12,12,10,10
+cb709878-8f88-415c-a0aa-6e24d2d22e58,6953,MID,87,Bladebrand,NF,M2,Sec-1,13,10,10,9,9
+cbc9e980-f221-4019-a449-f4e7d9d8d8a6,9896,THB,177,Loathsome Chimera,NF,M13,Sec-1,67,3,3,1,1
+cbd49ada-5df2-465a-b7c7-0591f69dd640,10373,UMA,192,Wickerbough Elder,NF,M8,Sec-1,110,4,4,0,0
+cc0991ac-b39a-4297-88b8-f0afe51a110a,10298,UMA,101,Grave Strength,NF,M8,Sec-1,35,3,3,1,1
+cc0ab5ce-6ae8-41b6-99b0-92c268517bff,6820,MH2,129,Glimpse of Tomorrow,NF,M6,Sec-1,80,2,2,1,1
+cc2758b5-2af6-4eb0-b4f1-7eafa1f2dc92,9881,THB,173,Hyrax Tower Scout,NF,M13,Sec-1,52,3,3,1,1
+ccc0ceb7-6ab5-4643-a260-b6427523692e,10948,ZNR,190,Kazandu Nectarpot,NF,M2,Sec-1,66,8,8,7,7
+cd613ce5-7f1d-4139-911e-425b3832576a,2331,CMR,262,Vow of Wildness,NF,M16,Sec-1,177,8,8,5,5
+cd61cbdb-13c5-4ed0-9250-e3735e1fee92,6351,M19,18,Knight of the Tusk,NF,M15,Sec-1,63,5,5,4,4
+cd83b289-b177-4d64-b36e-a432e3a435f1,2226,CMR,316,Howling Golem,NF,M16,Sec-1,72,7,7,3,3
+ce778d40-8af2-4286-92da-cc498212e9f0,6749,MH2,4,Arcbound Prototype,NF,M6,Sec-1,9,28,28,27,27
+cf7856ff-0cd9-4405-992e-c1aedd5dc50e,8371,ORI,15,Grasp of the Hieromancer,NF,M9,Sec-1,50,3,3,2,2
+cfa5fdfe-b0bc-46d7-96de-4164ec6ae3ec,11050,ZNR,219,Vine Gecko,NF,M2,Sec-1,168,7,7,5,5
+cfaa2a27-d17d-403c-ab82-7c23d22a4eb3,5525,LCI,59,Hurl into History,NF,M6,Sec-1,58,2,2,1,1
+cfdd9e3c-8e1b-4c6c-b7b7-3061193c9251,2164,CMR,298,Armillary Sphere,NF,M16,Sec-1,10,4,4,1,1
+d0c7a01b-7370-4380-9572-9c1cd704a4b3,2169,CMR,109,Bitter Revelation,NF,M16,Sec-1,15,16,16,10,10
+d11c463b-7f21-4ebd-bebd-08298b347ab0,5483,LCI,302,Caparocti Sunborn,NF,M6,Sec-1,16,2,2,1,1
+d166b901-535c-415f-8f66-a82761c55318,9665,STX,103,Fuming Effigy,NF,M9,Sec-1,56,7,7,5,5
+d19ac239-74ba-48d8-a5fd-0fa236a89af3,7057,MID,114,Morkrut Behemoth,NF,M2,Sec-1,117,9,9,7,7
+d1db6b0a-1fe5-4058-9374-c565c96ace54,2222,CMR,72,"Glacian, Powerstone Engineer",NF,M16,Sec-1,68,5,5,4,4
+d35427b2-6a32-4662-a224-d9ddf4c16509,10974,ZNR,29,Nahiri's Binding,NF,M2,Sec-1,92,14,14,13,13
+d3799de1-d77a-438c-af33-fecff92cf35e,11005,ZNR,160,Shatterskull Minotaur,NF,M2,Sec-1,123,6,6,4,4
+d3ae50f2-3754-435a-9373-9e9e00872b68,2266,CMR,332,Pilgrim's Eye,NF,M16,Sec-1,112,5,5,4,4
+d3f95be8-fbc7-4536-a924-7d39d45570a7,7840,NEO,75,Reality Heist,NF,M13,Sec-1,146,2,2,1,1
+d4169284-cf04-4a7e-8da8-6887c17d122c,2282,CMR,88,Sailor of Means,NF,M16,Sec-1,128,17,17,15,15
+d440c40f-48b5-4856-b64c-4bd67af06984,5580,LCI,167,Sunfire Torch,NF,M6,Sec-1,113,2,2,1,1
+d48fade4-6722-43d6-8490-facca13fc966,7792,NEO,326,Jukai Trainee,NF,M13,Sec-1,98,12,12,11,11
+d4e8469a-605d-4819-9ed3-bdf39639beeb,10347,UMA,114,Slum Reaper,NF,M8,Sec-1,84,2,2,1,1
+d51ca49d-4291-432a-962d-811d73530dfb,2172,CMR,165,"Breeches, Brazen Plunderer",NF,M16,Sec-1,18,2,2,1,1
+d57b5640-f495-4b8b-a969-8c10fa47f9d1,2204,CMR,125,Eyeblight Massacre,NF,M16,Sec-1,50,14,14,10,10
+d595f2e4-5e22-4330-b2c1-c4317bcafadc,2317,CMR,357,Terramorphic Expanse,NF,M16,Sec-1,163,4,4,3,3
+d5ce452b-851a-4343-ba31-8dab5741a7ac,6789,MH2,82,Discerning Taste,NF,M6,Sec-1,49,19,19,18,18
+d62df7e6-d02c-43d2-9039-ec5015518085,5526,LCI,155,Idol of the Deep King // Sovereign's Macuahuitl,NF,M6,Sec-1,59,3,3,2,2
+d6c5ac5a-05ed-466d-aefd-f5f7cbb67e40,9934,THB,113,Rage-Scarred Berserker,NF,M13,Sec-1,105,2,2,1,1
+d6d8ba7c-8c4a-4968-91f9-da5de39e4b3e,7781,NEO,310,Imperial Subduer,NF,M13,Sec-1,87,13,13,11,11
+d6e36aa8-e703-47ec-9ebe-8070620ae6e9,7766,NEO,188,Grafted Growth,NF,M13,Sec-1,72,1,1,0,0
+d702cf93-49ea-48fd-a268-580003bcd89c,7896,NEO,43,When We Were Young,NF,M13,Sec-1,202,7,7,5,5
+d724126a-4c99-44c7-97d1-7b2258910790,6978,MID,214,Corpse Cobble,NF,M2,Sec-1,38,3,3,2,2
+d72652f7-4dea-46ec-88c0-c639167d8f3e,10372,UMA,82,Whirlwind Adept,NF,M8,Sec-1,109,10,10,4,4
+d7cb0ebc-f06f-4343-8126-cd7736104680,10267,UMA,123,Arena Athlete,NF,M8,Sec-1,4,10,10,2,2
+d7eadf88-cb76-4ada-ac51-8a6eaf809266,10277,UMA,12,Conviction,NF,M8,Sec-1,14,8,8,5,5
+d808b333-fddc-459f-a5d8-ce3b16a4e3b5,9671,STX,106,Heated Debate,NF,M9,Sec-1,62,5,5,4,4
+d85cf69d-be1c-4fc3-9c6a-c4768b8265fa,7978,OGW,130,Elemental Uprising,NF,M4,Sec-1,27,5,5,4,4
+d8bca5be-ed25-418c-b8a9-6488ff442385,7753,NEO,182,Fade into Antiquity,NF,M13,Sec-1,59,7,7,6,6
+d9827930-b6d0-4033-b452-86fbbb0b6aca,7090,MID,198,Shadowbeast Sighting,NF,M2,Sec-1,150,16,16,15,15
+d9b677e9-239e-49f2-9256-e96c2fe81b42,5476,LCI,136,Brazen Blademaster,NF,M6,Sec-1,9,3,3,2,2
+da63d9c8-1c5c-4fc8-b498-381e86205f9e,10324,UMA,108,Offalsnout,NF,M8,Sec-1,61,8,8,4,4
+daf2f822-9da9-45bc-8107-eee273a1d4ea,10102,THS,72,Vaporkin,NF,M5,Sec-1,117,2,2,1,1
+db17dd52-efd7-4428-816e-2125701c2094,8035,OGW,117,Sparkmage's Gambit,NF,M4,Sec-1,84,9,9,6,6
+db2531d7-245d-4798-b406-13292fb8af73,8420,ORI,159,Ravaging Blaze,NF,M9,Sec-1,99,7,7,6,6
+db5bb3b7-347e-4a90-b76b-ba5d88d62d98,10924,ZNR,13,Expedition Healer,NF,M2,Sec-1,42,12,12,9,9
+dbb99b0c-7fa0-408e-b15c-9e3487db2a5f,9914,THB,29,Nyxborn Courser,NF,M13,Sec-1,85,2,2,1,1
+dbef8127-8ab2-49e4-bd1c-b4d3cf4349f4,6915,MH2,485,Swamp,NF,M6,Sec-1,175,2,2,1,1
+dc072eb6-5113-4fff-a685-e70b853e9d66,9756,STX,117,Tome Shredder,NF,M9,Sec-1,147,6,6,4,4
+dc0ace11-a09f-485c-b6cb-ce4021feffec,7014,MID,292,Fangblade Brigand // Fangblade Eviscerator,NF,M2,Sec-1,74,5,5,2,2
+dc341925-b5a7-4fc2-8cc2-b19593895836,6874,MH2,54,Parcel Myr,NF,M6,Sec-1,134,30,30,28,28
+dc4580ba-862b-4885-bc26-52d8c3885c72,7966,OGW,52,Containment Membrane,NF,M4,Sec-1,15,8,8,6,6
+dc53ea64-7287-4e2b-b674-19dc09a5886a,2248,CMR,81,Merchant Raiders,NF,M16,Sec-1,94,7,7,5,5
+dc9c93cf-56e6-4852-853c-d4b5039d06b0,6346,M19,15,Inspired Charge,NF,M15,Sec-1,58,3,3,2,2
+dcd5efc0-33f5-4344-967c-49acaa1510ee,5499,LCI,99,Dead Weight,NF,M6,Sec-1,32,3,3,1,1
+dcf05875-d9e0-4bde-a0d3-1a4babe3f075,2177,CMR,14,Cage of Hands,NF,M16,Sec-1,23,19,19,15,15
+dda1ac62-2bdc-44d3-b0d7-3036574d166a,7826,NEO,115,Nezumi Bladeblesser,NF,M13,Sec-1,132,6,6,3,3
+dda8dbfe-4629-464f-ac7f-b4e5aae9d669,10950,ZNR,191,Kazandu Stomper,NF,M2,Sec-1,68,18,18,13,13
+dde1230c-56ef-43b5-a4d9-8e8646278da5,2313,CMR,259,Strength of the Pack,NF,M16,Sec-1,159,4,4,2,2
+ddf05c28-0073-43eb-83c7-0b625e32bfde,2290,CMR,253,Sentinel Spider,NF,M16,Sec-1,136,17,17,14,14
+de9a03ae-1f6b-4106-9c8f-249af8f7d509,6979,MID,92,Covert Cutpurse // Covetous Geist,NF,M2,Sec-1,39,4,4,3,3
+dea5f2fa-528c-44a5-b521-786c8bf8a1e6,7723,NEO,240,Bronze Cudgels,NF,M13,Sec-1,29,3,3,1,1
+df9537c6-2041-440b-a943-de02ed4dc019,9672,STX,134,Honor Troll,NF,M9,Sec-1,63,6,6,5,5
+dfabf577-fc3b-4601-aa83-e4d7cf47b9b5,11020,ZNR,164,Sneaking Guide,NF,M2,Sec-1,138,16,16,14,14
+e00d3f44-13e0-4801-9fda-4000323fc0d3,6843,MH2,18,Landscaper Colos,NF,M6,Sec-1,103,27,27,26,26
+e038e2be-0408-46f3-8f59-a9e2e06f6efa,5560,LCI,71,Relic's Roar,NF,M6,Sec-1,93,5,5,3,3
+e05b365b-1819-4a81-a220-ccc8256f2693,6857,MH2,382,Marble Gargoyle,NF,M6,Sec-1,117,15,15,14,14
+e074877e-d19c-44c4-b1b4-c24431fc910b,9745,STX,238,Square Up,NF,M9,Sec-1,136,7,7,4,4
+e0d22e5a-1539-44b4-9cc3-a5327a82e4a3,2171,CMR,164,Brazen Freebooter,NF,M16,Sec-1,17,12,12,9,9
+e1bc7491-cfdc-461a-b190-77a0b1c83457,10285,UMA,214,Double Cleave,NF,M8,Sec-1,22,8,8,2,2
+e1c64bb3-7343-4dfd-a5b7-da0aab63b2b1,9715,STX,84,Professor's Warning,NF,M9,Sec-1,106,4,4,2,2
+e1e87832-4005-409b-8528-0592c5c53746,9659,STX,131,Field Trip,NF,M9,Sec-1,50,3,3,2,2
+e2728d0e-3561-42d5-9ffb-67e85c24b19b,11019,ZNR,42,Smite the Monstrous,NF,M2,Sec-1,137,14,14,13,13
+e2c79d72-ab4e-4d00-b502-be3078a86a5d,6869,MH2,94,Necromancer's Familiar,NF,M6,Sec-1,129,13,13,12,12
+e2e16be2-a052-47f6-b4fc-770f503aaef4,7111,MID,163,Tavern Ruffian // Tavern Smasher,NF,M2,Sec-1,171,6,6,5,5
+e2e566d5-9387-416f-bfde-d09153fd52e3,2198,CMR,223,Elvish Visionary,NF,M16,Sec-1,44,5,5,2,2
+e31be145-c8c8-41ac-b919-8d5289c27d4a,6774,MH2,119,Captain Ripley Vance,NF,M6,Sec-1,34,17,17,16,16
+e36fef55-f160-4f7d-a105-cb1311c5a5da,2310,CMR,258,Stingerfling Spider,NF,M16,Sec-1,156,4,4,3,3
+e3a4f616-90cc-4b8d-afd1-110de76d2b14,9742,STX,236,Spirit Summoning,NF,M9,Sec-1,133,9,9,7,7
+e3e93bdf-1d1a-4afd-84ae-64bc7cac0559,2322,CMR,53,Trusty Packbeast,NF,M16,Sec-1,168,23,23,17,17
+e5c773af-d07d-4b1f-a350-cb808327b9a9,6950,MID,4,Bereaved Survivor // Dauntless Avenger,NF,M2,Sec-1,10,9,9,8,8
+e677e69c-524b-48e5-93e0-9d8d7745980d,8016,OGW,75,Oblivion Strike,NF,M4,Sec-1,65,11,11,10,10
+e6e2668f-d574-40f4-8cb2-03bfdbb1fcc4,10271,UMA,86,Bloodflow Connoisseur,NF,M8,Sec-1,8,7,7,2,2
+e72cf420-83ec-44f7-a9eb-fe3587a4921a,9705,STX,22,Pilgrim of the Ages,NF,M9,Sec-1,96,4,4,2,2
+e831fbe5-a724-4c78-ba8e-ac130ff4bc23,9843,THB,232,Bronze Sword,NF,M13,Sec-1,14,3,3,2,2
+e838ce74-ffb2-41a6-ae6f-e0e4e3f80741,10952,ZNR,21,Kor Blademaster,NF,M2,Sec-1,70,5,5,4,4
+e883797a-81ec-4d9e-a08a-d9d3e9d2a217,8393,ORI,153,Lightning Javelin,NF,M9,Sec-1,72,7,7,5,5
+e8ea27ee-3c23-4357-9c13-2e7b09437864,10293,UMA,96,Ghoulcaller's Accomplice,NF,M8,Sec-1,30,10,10,4,4
+e906c376-41b8-4491-beb3-e4e964a6c6bb,11014,ZNR,81,Skyclave Plunder,NF,M2,Sec-1,132,6,6,4,4
+e988aaa9-12b8-43ed-bf19-14aa03adfab4,2224,CMR,311,Golem Artisan,NF,M16,Sec-1,70,3,3,1,1
+e9f7adc3-30c3-4bcd-af85-7f45bdbe1615,7849,NEO,257,Runaway Trash-Bot,NF,M13,Sec-1,155,3,3,2,2
+eabba630-f11a-4e4f-b369-3fcca65e8723,8050,OGW,91,Untamed Hunger,NF,M4,Sec-1,99,11,11,8,8
+eade7310-fd26-4504-bdc8-24f7dfba27a4,10896,ZNR,93,Blood Price,NF,M2,Sec-1,14,7,7,6,6
+eae4b900-15ea-4066-90f5-7c0c9d241806,5490,LCI,97,Chupacabra Echo,NF,M6,Sec-1,23,2,2,1,1
+eb09b5a4-04d7-4756-b999-e2739990b080,7842,NEO,32,Regent's Authority,NF,M13,Sec-1,148,10,10,8,8
+ec5f3991-2261-48fb-88a3-80763bd6e58d,9625,STX,65,Brackish Trudge,NF,M9,Sec-1,16,4,4,2,2
+ec975c09-2eb4-42a8-a7c7-53fb5bf878aa,2162,CMR,8,Anointer of Valor,NF,M16,Sec-1,8,21,21,16,16
+ecf61ccc-d848-4536-bef3-4ff43938f7e4,7794,NEO,103,Kaito's Pursuit,NF,M13,Sec-1,100,5,5,3,3
+ed30b179-4f42-4009-bd2a-57d5a03043eb,9673,STX,73,Hunt for Specimens,NF,M9,Sec-1,64,8,8,7,7
+ed37d194-6d05-4bed-abe9-3e7111d1dad3,11038,ZNR,310,Territorial Scythecat,NF,M2,Sec-1,156,13,13,11,11
+eda0ce10-b109-47a1-8bf8-30d589da061c,7094,MID,121,Siege Zombie,NF,M2,Sec-1,154,10,10,9,9
+edc203f2-5462-487b-8101-c7c518fd2680,9749,STX,34,Study Break,NF,M9,Sec-1,140,5,5,3,3
+eddc9685-cbd8-4871-9a73-df5522a8f992,7709,NEO,172,Azusa's Many Journeys // Likeness of the Seeker,NF,M13,Sec-1,15,3,3,1,1
+ee8da64b-5ea4-4550-8ece-28b89789c768,7859,NEO,313,Seven-Tail Mentor,NF,M13,Sec-1,165,14,14,13,13
+eea8549e-726c-4c71-beaa-01c4a0db225e,10313,UMA,137,Mad Prophet,NF,M8,Sec-1,50,9,9,3,3
+ef60ba17-84a2-42ac-b137-2af076f4b277,7752,NEO,139,Explosive Entry,NF,M13,Sec-1,58,5,5,3,3
+ef61be67-1513-41f1-995f-71d92613a241,7881,NEO,262,Towashi Guide-Bot,NF,M13,Sec-1,187,2,2,1,1
+ef651a8d-ae5d-4f3f-8c06-d3a332cbc74d,7959,OGW,161,Bone Saw,NF,M4,Sec-1,8,10,10,8,8
+ef69f853-8b29-49ad-98e7-d38eb7dfe6c9,9885,THB,25,Indomitable Will,NF,M13,Sec-1,56,5,5,4,4
+efa8c7a5-3ec1-4e51-a3e5-c5b86d599011,7038,MID,106,Hobbling Zombie,NF,M2,Sec-1,98,14,14,13,13
+efdd5e4a-a7e2-4c26-a59e-f2070f643db5,9743,STX,237,Spiteful Squad,NF,M9,Sec-1,134,5,5,2,2
+f05ca008-3330-4341-9d61-95a13467e9fd,10916,ZNR,96,Deadly Alliance,NF,M2,Sec-1,34,11,11,8,8
+f078afff-0701-4ee7-b2c8-5a3ccac3fe13,6347,M19,16,Invoke the Divine,NF,M15,Sec-1,59,6,6,4,4
+f0858d67-3e23-42a7-b102-fbbd5beaa7d9,6747,MH2,2,Arcbound Javelineer,NF,M6,Sec-1,7,15,15,14,14
+f0c09a20-1cb7-4a55-a4ad-8368da31da79,2315,CMR,151,Supernatural Stamina,NF,M16,Sec-1,161,8,8,5,5
+f121f03d-91c2-4bdc-b6f7-3f72fa80b75e,7820,NEO,112,Mukotai Ambusher,NF,M13,Sec-1,126,3,3,1,1
+f171abc5-622d-47ce-8da2-efd7261b364d,2262,CMR,37,Patron of the Valiant,NF,M16,Sec-1,108,5,5,4,4
+f1799c3c-56ab-40f6-a1a5-8ca29eef5930,6330,M19,56,Frilled Sea Serpent,NF,M15,Sec-1,42,3,3,2,2
+f1d2c864-d1af-46cf-99e8-5941ac4e9f37,9842,THB,44,Brine Giant,NF,M13,Sec-1,13,3,3,2,2
+f20822fb-72bd-4b95-a2f0-923645acf63c,10900,ZNR,47,Bubble Snare,NF,M2,Sec-1,18,15,15,12,12
+f2877550-7070-459e-ad77-6dfd4774b3f0,7964,OGW,51,Comparative Analysis,NF,M4,Sec-1,13,8,8,6,6
+f2b40b94-7804-45e6-8b6c-d2204b7f59c8,5510,LCI,149,Etali's Favor,NF,M6,Sec-1,43,2,2,1,1
+f2bb9ce8-6e63-452c-8417-9f270cbc84a8,9669,STX,104,Grinning Ignus,NF,M9,Sec-1,60,1,1,0,0
+f2f4775a-c998-4cfa-8301-c0d9c6d43389,6752,MH2,111,Arcbound Slasher,NF,M6,Sec-1,12,29,29,28,28
+f3108df8-db3e-42f5-880a-dfd7065d5a04,7869,NEO,39,Sunblade Samurai,NF,M13,Sec-1,175,8,8,7,7
+f3186c87-3ee9-4a84-b111-4be8c47b300d,7955,OGW,15,Allied Reinforcements,NF,M4,Sec-1,4,4,4,1,1
+f42590ff-35e1-403f-bfe3-3de97e0a78ce,6940,MH2,110,Young Necromancer,NF,M6,Sec-1,200,15,15,12,12
+f4462cd0-947a-4241-bc46-08477a435998,11035,ZNR,84,Tazeem Roilmage,NF,M2,Sec-1,153,15,15,13,13
+f5eeaccf-1cad-4cde-9284-f570682b2aa2,10276,UMA,226,Cathodion,NF,M8,Sec-1,13,8,8,1,1
+f73f7964-524f-4dfa-a5ab-36d944849bed,11027,ZNR,206,Strength of Solidarity,NF,M2,Sec-1,145,19,19,16,16
+f7873e7b-ea62-4586-97fd-59c097088850,10319,UMA,173,Miming Slime,NF,M8,Sec-1,56,7,7,1,1
+f7f51c92-3c70-4216-a689-1591e6d32661,7049,MID,58,Larder Zombie,NF,M2,Sec-1,109,8,8,6,6
+f806e66a-d255-4c12-9db1-316128f734e7,8000,OGW,134,Lead by Example,NF,M4,Sec-1,49,7,7,6,6
+f8230516-2ad1-4d8d-8835-368092d123bf,7961,OGW,103,Brute Strength,NF,M4,Sec-1,10,9,9,4,4
+f82d01a0-3dac-4450-b32d-a283fd504cde,2277,CMR,147,Revenant,NF,M16,Sec-1,123,7,7,6,6
+f90e96dc-c288-45e5-be2a-0f1ed9090c30,2287,CMR,94,Scrapdiver Serpent,NF,M16,Sec-1,133,21,21,16,16
+f9401c41-7f7c-470b-bf71-fe0358c7c413,7761,NEO,54,Futurist Sentinel,NF,M13,Sec-1,67,8,8,7,7
+f94d7500-b907-4d29-8e19-465df91877f3,10322,UMA,230,Myr Servitor,NF,M8,Sec-1,59,5,5,1,1
+f9b88771-c23f-44d2-a133-b94c47b33e03,9746,STX,30,Star Pupil,NF,M9,Sec-1,137,10,10,7,7
+fa7b8d6a-b80f-4f38-ba51-524043151b52,7043,MID,144,Immolation,NF,M2,Sec-1,103,11,11,9,9
+fa9b2c6d-68d3-4c1c-b41f-2e507d869724,9628,STX,252,Campus Guide,NF,M9,Sec-1,19,9,9,5,5
+faf97126-20b3-4ef4-808c-8979d1725be4,9681,STX,75,Leech Fanatic,NF,M9,Sec-1,72,4,4,2,2
+fb148825-ee65-4557-8d75-dd4c82b74b2d,9898,THB,54,Memory Drain,NF,M13,Sec-1,69,7,7,4,4
+fb228d4c-0128-4c8c-a390-538a958bd834,6942,MID,210,Arcane Infusion,NF,M2,Sec-1,2,3,3,1,1
+fb2a270b-d084-44ee-bab2-2fa55a652822,6976,MID,43,Component Collector,NF,M2,Sec-1,36,11,11,9,9
+fb303206-4fa9-4565-b169-548f7f042b18,2303,CMR,257,Soul's Might,NF,M16,Sec-1,149,18,18,14,14
+fcc7b54f-60e2-4e81-8793-b78c51a48049,5514,LCI,150,Geological Appraiser,NF,M6,Sec-1,47,4,4,2,2
+fcfb6c78-7b8f-48bf-8e7f-bbda1e75d2a6,10343,UMA,181,Shed Weakness,NF,M8,Sec-1,80,9,9,5,5
+fd3d7517-78fd-42c9-83d0-96b4e13629dc,2087,CLB,151,Summon Undead,NF,M19,Sec-1,155,3,3,1,1
+fd4bde30-65d9-4ea4-b938-d722ba196be2,6779,MH2,190,Chrome Courier,NF,M6,Sec-1,39,25,25,24,24
+fd8ed7d5-3244-43cf-8c06-ef453ad7ddad,7862,NEO,37,Sky-Blessed Samurai,NF,M13,Sec-1,168,4,4,3,3
+ff5a5d32-138e-4834-8225-c002a67f1446,10004,THS,155,Commune with the Gods,NF,M5,Sec-1,19,1,1,0,0

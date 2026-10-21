@@ -429,3 +429,137 @@ applied_at,source,part,inventory_id,product_id,set,number,name,finish,previous_q
 2026-10-20T20:54:31,audit_2026-10-19_results.csv,DRIFT,91,874283d0-b863-4d1d-ad22-7c020d7df859,TMH2,20,Treasure,NF,7,7
 2026-10-20T20:54:31,audit_2026-10-19_results.csv,BASELINE,108,6bacd8f2-df8f-4cf6-98b4-4b424d456160,TMID,15,Zombie,NF,1,1
 2026-10-20T20:54:31,audit_2026-10-19_results.csv,VALUE,11134,dfb84fa7-3f35-43a6-8257-af19eddda4e1,TMOM,23,Wrenn and Realmbreaker Emblem,NF,1,1
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,1204,fc0f48e0-5381-4fae-a7a1-859efbeec39e,BFZ,19,Angelic Gift,NF,17,17
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,1205,7f93ee87-11ed-4e5c-84c9-fa24388bad0a,BFZ,69,Anticipate,NF,25,25
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,1213,bac5554f-800e-4b7c-a019-58c4a96024c1,BFZ,142,Boiling Earth,NF,3,3
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,1214,2d6c257c-cadb-48d6-924e-bb7afbf7842d,BFZ,105,Bone Splinters,NF,12,12
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,1217,a3dfbe04-a998-402b-b979-c23d66ad06de,BFZ,165,Call the Scions,NF,29,29
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,1219,f003555d-49d8-42bc-8e14-3c69bb67a601,BFZ,20,Cliffside Lookout,NF,22,22
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,1220,5ae3b99a-e35c-48c3-b3fb-b4d8970c5a5a,BFZ,71,Cloud Manta,NF,33,33
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,1221,00a0e3b3-663b-40b9-9bb3-011c4c0753da,BFZ,72,Clutch of Currents,NF,4,4
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,1222,07176fd2-2142-4b96-ba62-2f21f4eaf201,BFZ,90,Complete Disregard,NF,12,12
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,1223,048ae06e-ca34-4909-8927-2f1162432263,BFZ,74,Coralhelm Guide,NF,14,14
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,1224,2de874b2-22d0-41e4-b523-62f646a1ea05,BFZ,21,Courier Griffin,NF,31,31
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,1226,fe51dce5-510e-4056-9aa1-a46b303d6520,BFZ,75,Dampening Pulse,NF,2,1
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,1231,33f4f87e-4cc8-479a-bc1a-f5e5bed4268c,BFZ,110,Dutiful Return,NF,12,12
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,1232,c2ee5e92-7c08-4cbb-b35d-073474752192,BFZ,172,Earthen Arms,NF,8,8
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,1238,563b531f-4c83-4387-9506-a26daed7e9ef,BFZ,25,Felidar Cub,NF,8,4
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,1250,ea5f7318-e8d4-4d60-9cd7-f2895fbabddc,BFZ,28,Ghostly Sentinel,NF,29,29
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,1252,57eae8b1-f57d-4e4c-afe5-6b78b116e72e,BFZ,30,Gideon's Reproach,NF,30,30
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,1254,a8a24b08-e87f-483a-a5d1-9f0453f802ef,BFZ,146,Goblin War Paint,NF,14,14
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,1256,c193d904-e447-468f-9542-0e98cb857081,BFZ,94,Grip of Desolation,NF,2,2
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,1262,a1ed95cf-3109-4abc-8984-13aee9dfc470,BFZ,32,Inspired Charge,NF,20,20
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,1266,b339cc98-c1eb-4bbd-b0aa-5455aba3cb7e,BFZ,256a,Island,NF,7,2
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,1267,c877e2aa-bc3f-441d-8856-e904f1c033ea,BFZ,257,Island,NF,1,5
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,1270,2f101b0f-3d73-45e4-91fa-0c46a35bdaa1,BFZ,114,Kalastria Healer,NF,10,9
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,1271,7c40a54f-6be6-41ed-8325-155c13996e43,BFZ,115,Kalastria Nightwatch,NF,11,11
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,1272,985332b7-3533-4669-81ee-b312786f0844,BFZ,33,Kitesail Scout,NF,28,28
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,1274,421657c5-a04f-4098-b8af-ec59faf8660c,BFZ,35,Kor Castigator,NF,17,17
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,1276,fbdf816b-6164-4968-93b1-756695be084e,BFZ,129,Kozilek's Sentinel,NF,12,12
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,1278,5370392e-8249-4229-a9be-ed89b54ad566,BFZ,147,Lavastep Raider,NF,14,14
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,1280,3c58778b-f5ab-4914-a75b-c5d51f4468c3,BFZ,38,Lithomancer's Focus,NF,12,12
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,1281,659bd12c-017a-4c0c-95ce-f5963fa7f414,BFZ,238,Looming Spires,NF,9,9
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,1282,564ba51b-8bbf-4cd5-a1bd-66f93de35f60,BFZ,39,Makindi Patrol,NF,24,24
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,1285,34d1fd96-1deb-4050-98fb-741c05f1db69,BFZ,95,Mind Raker,NF,20,11
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,1287,e6f71ad6-6641-4458-a0de-fcf193298cd9,BFZ,61,Mist Intruder,NF,11,11
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,1288,392ab7f9-d0f4-4ab7-9acc-b9c762753e5d,BFZ,130,Molten Nursery,NF,3,3
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,1291,495c1062-a9c3-4318-89e3-43fe103b4188,BFZ,266a,Mountain,NF,1,1
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,1292,61b11a4e-c8b7-4938-bd24-d93003dbd184,BFZ,267,Mountain,NF,4,7
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,1293,4688cad5-09c5-4b07-a947-07a6080e1d19,BFZ,267a,Mountain,NF,6,4
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,1295,f72118b4-e82a-4de0-b022-44ca48749cca,BFZ,268a,Mountain,NF,9,1
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,1298,6c5c730d-b12f-464f-bd71-6d5ac9b72209,BFZ,62,Murk Strider,NF,31,31
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,1300,4ace33b0-cdb4-4782-a4f8-e365fa2d2af9,BFZ,131,Nettle Drone,NF,5,5
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,1302,fa551583-30db-47b4-ad2a-fbb4d1b93cbf,BFZ,149,Ondu Champion,NF,21,21
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,1307,20a1a7c6-c5e8-4618-b476-08a58fa06042,BFZ,150,Outnumber,NF,17,17
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,1321,019a71a3-4a57-41ec-a72a-c081b82c2379,BFZ,152,Reckless Cohort,NF,9,9
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,1328,33655931-1800-49ff-acd3-1c104fc0e6b6,BFZ,12,Ruin Processor,NF,18,18
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,1329,350f56dd-448c-42bb-92b2-d69793ba73ba,BFZ,84,Rush of Ice,NF,8,8
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,1331,6ea91ae8-43c0-4555-a5dd-003c262f4d34,BFZ,243,Sandstone Bridge,NF,19,19
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,1334,05da9d30-96d9-44c2-b452-1e8c4eb94fb2,BFZ,46,Serene Steward,NF,7,7
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,1336,98a9bb36-b92f-47d8-8f9c-2215db50d54d,BFZ,47,Shadow Glider,NF,11,11
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,1337,8b9fe849-b961-415c-945c-4f6259a99df3,BFZ,155,Shatterskull Recruit,NF,13,13
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,1338,31742661-7001-4995-afd2-8ea2a0a05a91,BFZ,48,Sheer Drop,NF,13,13
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,1339,b909d005-d445-4229-9386-1337cd89dfc3,BFZ,96,Silent Skimmer,NF,8,8
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,1340,b5916713-6943-4ad2-961c-548a553174df,BFZ,246,Skyline Cascade,NF,9,9
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,1341,8c351872-4f4d-4c21-8c1b-dbd8dbfd14fb,BFZ,98,Sludge Crawler,NF,7,7
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,1342,1cd947ac-820f-4af4-9d6e-903c4f1e45eb,BFZ,49,Smite the Monstrous,NF,32,33
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,1343,4eaa4e0b-b974-4459-adba-2667c6645ad7,BFZ,190,Snapping Gnarlid,NF,32,32
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,1349,263c5b52-25f8-49fa-8bac-83f19c41ec36,BFZ,157,Sure Strike,NF,11,11
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,1357,6a1cb297-3773-43f6-b480-430c92e8239e,BFZ,100,Swarm Surge,NF,15,15
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,1358,022da7ec-a815-4448-8294-04582f402540,BFZ,191,Swell of Growth,NF,12,12
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,1360,364a5b8e-807c-4b11-94c0-d1754dbdcca9,BFZ,194,Tajuru Stalwart,NF,12,11
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,1362,f9adcb24-5693-40dc-ac36-d7542d89f3af,BFZ,52,Tandem Tactics,NF,14,14
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,1365,77a3a5fd-f928-49d7-afd5-7d4551066f8a,BFZ,134,Touch of the Void,NF,26,26
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,1374,376e3d06-f51e-4a56-a8ab-68452bb04cdf,BFZ,136,Vestige of Emrakul,NF,10,10
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,1376,455bc83b-da3f-4a3a-99c2-3815604b476d,BFZ,161,Volcanic Upheaval,NF,10,10
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,1377,07175abd-52aa-4f88-8f84-464cb40ff992,BFZ,125,Voracious Null,NF,17,17
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,1379,57434112-7410-415f-adaa-4ba0248f3763,BFZ,89,Windrider Patrol,NF,3,3
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,6513,d1a6399b-78a6-4c29-a294-eeff69495cf0,M21,87,Alchemist's Gift,NF,3,3
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,6516,4965a3e6-57dd-473e-b817-844e47bcd0e8,M21,4,Anointed Chorister,NF,2,2
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,6518,46984336-75cd-4e9c-a29c-455fc1e51716,M21,8,Basri's Acolyte,NF,5,5
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,6522,04847876-6a1a-487e-bfc1-58a7ce5abc00,M21,90,Blood Glutton,NF,2,2
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,6523,2d67dd4a-5f86-46cc-b1b8-d74465ebe086,M21,243,Bloodfell Caves,NF,2,2
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,6524,2c757efe-0fce-4863-a27c-5ce71347c9c0,M21,244,Blossoming Sands,NF,1,1
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,6526,f3cc420b-219f-4aa2-9ff8-fa2d65ca2236,M21,174,Burlfist Oak,NF,2,2
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,6528,f9f31570-e646-43e5-a622-902cedbb81d9,M21,91,Caged Zombie,NF,5,5
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,6529,f5ad11cf-842f-4fcf-8c48-cd50b17cff55,M21,46,Cancel,NF,3,3
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,6531,c868ba02-7405-4699-9333-3f0407262bf8,M21,47,Capture Sphere,NF,2,2
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,6532,f4f60d4d-095d-474d-9839-509ff9c8d574,M21,92,Carrion Grub,NF,4,4
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,6534,fed780a5-b774-4f00-a56a-3f51b6342bb2,M21,137,Chandra's Magmutt,NF,2,2
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,6539,e46d3c90-0a14-46ef-8c06-7b5162466b78,M21,176,Colossal Dreadmaw,NF,2,2
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,6541,1fa50aa7-7e93-4a7f-baf2-996c4999fcd3,M21,12,Concordia Pegasus,NF,6,6
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,6543,0786b0cc-4ff1-465c-8abd-f5bed98df87c,M21,93,Crypt Lurker,NF,2,2
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,6545,ecc2bd50-2e18-44cc-85b4-c3de04b75473,M21,94,Deathbloom Thallid,NF,4,4
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,6546,47494b07-b3fa-4a23-9098-85ddb09f7eb3,M21,15,Defiant Strike,NF,1,1
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,6547,bdd4ee3e-8a12-4b01-843f-3d36b42c7c08,M21,141,Destructive Tampering,NF,3,3
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,6548,8715be1c-31e9-4948-bd55-b485e2209edc,M21,178,Drowsing Tyrannodon,NF,3,3
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,6549,6cd2767a-6dff-44ff-b147-bb271ad08565,M21,16,Dub,NF,3,3
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,6550,45f0107b-1e73-43ef-bccb-b0fb93a38821,M21,96,Duress,NF,4,3
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,6555,13556b27-1427-42aa-a2b9-b581f085e2fb,M21,19,Feat of Resistance,NF,4,4
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,6562,af30bc2d-9524-472a-83dd-684ea18c3deb,M21,231,Forgotten Sentinel,NF,3,3
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,6563,b66ef9dd-d3af-47d2-a7b1-89acadbbb0da,M21,50,Frantic Inventory,NF,2,2
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,6564,641484ce-2898-4af7-9e25-68c00edf8c1e,M21,51,Frost Breath,NF,3,3
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,6565,86bdaf41-a1f2-4318-8668-ae4e4c36dc48,M21,145,Furor of the Bitten,NF,1,1
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,6566,2d064400-3e2b-4123-b56b-830373a25341,M21,20,Gale Swooper,NF,4,4
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,6567,84452f4e-6db8-4e5a-be0d-cfc29e97729a,M21,184,Garruk's Gorehorn,NF,3,3
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,6570,0932cf4e-1c55-4a54-b1ef-b84924df9ae5,M21,100,Gloom Sower,NF,2,2
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,6573,11feeba2-2ac7-42ff-9322-e7d77d1105c4,M21,148,Goblin Wizardry,NF,1,2
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,6579,557bb930-bdf5-43b9-a4b6-fb377f5d9847,M21,189,Hunter's Edge,NF,2,2
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,6580,b5c13b79-9295-4bce-8f4c-aa46a78d7298,M21,153,Igneous Cur,NF,3,3
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,6581,9dc2a199-f215-450b-8c81-818786ec3479,M21,105,Infernal Scarring,NF,5,5
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,6589,2ba93820-220d-43e1-88fe-1c1ffb6e924a,M21,24,Legion's Judgment,NF,2,2
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,6590,833e28ec-b288-4dff-a9df-70eb27803abe,M21,55,Library Larcenist,NF,9,9
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,6591,3293822d-730a-4b6b-99f7-f69138ec5588,M21,192,Life Goes On,NF,3,3
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,6593,662bcf14-d135-4496-84bd-0b8701451816,M21,109,Liliana's Devotee,NF,3,3
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,6597,30f37a1a-e4ad-4130-aacb-74bef8c6f0ee,M21,111,Liliana's Steward,NF,3,3
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,6599,596f2e7e-d110-42b1-81c3-311d0b6ec2e3,M21,26,Makeshift Battalion,NF,5,5
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,6600,d6596fe0-814d-419b-895d-ec1c0ab995c9,M21,112,Malefic Scythe,NF,3,3
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,6601,5bdeef22-6b68-441b-a9de-66549f7b9ff5,M21,113,Masked Blackguard,NF,5,5
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,6603,c93b7e9a-ddbb-41ac-9aa2-8ca9ca97372c,M21,115,Mind Rot,NF,3,3
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,6604,38fc3227-2476-4910-813e-1d206a1ba4d4,M21,58,Mistral Singer,NF,1,1
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,6612,bf5bcd89-974e-4ca0-85f6-1482a952b0ac,M21,194,Ornery Dilophosaur,NF,3,3
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,6625,d91dc5b2-b6dd-47f9-8e3c-621b559244d5,M21,31,Revitalize,NF,4,4
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,6626,a38a16d8-7dd2-46a2-8acc-7bfc27de40a3,M21,64,Riddleform,NF,2,2
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,6627,a5f058d7-18e7-458b-8771-a8a3eb6d9439,M21,119,Rise Again,NF,4,4
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,6628,8a673585-2d82-4c15-a7db-a3515a6b0902,M21,65,Roaming Ghostlight,NF,9,9
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,6629,15cbd0c1-417a-4d3f-981a-cdfcabdc56e4,M21,66,Rookie Mistake,NF,8,8
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,6630,afe7b3f5-b1aa-49a9-b26e-a4104bdd6c63,M21,67,Rousing Read,NF,2,2
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,6635,8da27d4b-a34e-4c50-bb9f-bc58ebecff62,M21,121,Sanguine Indulgence,NF,5,5
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,6639,bacf08fb-7598-4b56-bf6d-3045aa8aba43,M21,205,Setessan Training,NF,2,2
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,6642,fe000ada-42ae-4245-9461-091cd9e4dd9f,M21,159,Shock,NF,2,2
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,6643,cfcbea00-6011-4ec5-a206-e5a9ab3f5119,M21,236,Short Sword,NF,4,4
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,6652,cb263948-575c-4748-b2f5-f3d650894279,M21,161,Spellgorger Weird,NF,5,5
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,6653,b4c37ea3-62c0-434b-9378-91b9c94c5ad0,M21,72,Spined Megalodon,NF,3,3
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,6654,97f2a96b-5e29-4f62-8dd8-32608d046dd0,M21,39,Staunch Shieldmate,NF,8,8
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,6656,0976b93d-9568-4076-ad7a-888c73322adc,M21,163,Sure Strike,NF,4,4
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,6657,cd1e4420-fc73-465d-997a-885b36f9fd5f,M21,267,Swamp,NF,3,3
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,6660,6d2b7518-d4d0-41a0-91e7-22e03ecf0f64,M21,40,Swift Response,NF,8,8
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,6669,7f3e1f37-9ec6-4127-952f-78f146fb3e95,M21,210,Titanic Growth,NF,3,3
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,6670,0bae549d-e047-4f10-a682-ea5ac46c60a1,M21,81,Tome Anima,NF,4,4
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,6671,1a4889dc-a57a-4785-bd53-d673c9a4a9bc,M21,211,Track Down,NF,3,3
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,6675,01f536c7-9a31-4a20-8dbc-da66101047e8,M21,212,Trufflesnout,NF,4,4
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,6676,fec4a737-45b2-471c-bdec-a5533a590a25,M21,168,Turn to Slag,NF,5,5
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,6677,877e8dcb-c63e-41ad-a105-873845361023,M21,169,Turret Ogre,NF,5,5
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,6679,487b0d82-4e4b-4da5-9b36-6c52394ee267,M21,83,Vodalian Arcanist,NF,7,7
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,6682,97bb9c82-da9f-459c-b28b-670b66e2a0b8,M21,44,Warded Battlements,NF,5,5
+2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,6685,b3312427-09e9-4979-ba9c-2647c0be38b3,M21,86,Wishcoin Crab,NF,4,4

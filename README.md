@@ -70,7 +70,9 @@ A high-velocity inventory management station and fulfillment optimizer for Magic
 9. **Physical Audit (`audit.py`)**:
    - `generate` writes a walk-order count sheet (`audits/audit_<date>.txt`) and a fillable CSV covering listings where ManaPool and the database disagree (sampled per set, `--full-sets` counted in full), a random baseline of agreeing listings, and every listing worth $1+.
    - `apply <csv>` imports the `counted` column, updates those rows, logs them to `audits/applied_counts.csv`, and writes a follow-up full-count sheet for any set whose sample had an overcount.
-   - `push [--send]` pushes audited database quantities (quantity only) to every ManaPool listing that differs, then reads them back.
+   - `push [--send] [--zero <csv>]` pushes audited database quantities (quantity only) to every ManaPool listing that differs, then reads them back; `--zero` sets dropped products (e.g. `audits/dropped_sets_*.csv`) to 0.
+   - Conservative listing: listings not yet counted are held at ManaPool's lower quantity and recorded in `audits/needs_count.csv` (with the previous database quantity); `generate --needs-count [--sets CMR NEO]` prints a count sheet for them.
+   - Oct 2026: SOI and BFZ were dropped from the database and ManaPool for a clean relist (`audits/dropped_sets_2026-10-21_SOI_BFZ.csv`).
 
 10. **Setup & Audit Tools**:
    - `import_live_inventory.py`: fresh import of a ManaPool inventory export against the Scryfall mirror and Set/Box map. Previews by default; `--rebuild` drops and recreates the inventory tables atomically.
