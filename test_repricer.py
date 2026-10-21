@@ -126,5 +126,10 @@ class TestAuditSelection(unittest.TestCase):
         self.assertEqual(audit.plan_push(rows, {"p1": 1, "p2": 4, "p3": 9}), {"p1": 5})
 
 
+class TestAuditNumbers(unittest.TestCase):
+    def test_excel_style_whole_numbers(self):
+        self.assertEqual([audit._whole_number(x) for x in ["3", "3.0", "0", "2.5", "-1", "x"]], [3, 3, 0, None, None, None])
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -28,6 +28,8 @@ import os
 import random
 import re
 import sys
+import zipfile
+import xml.etree.ElementTree as ET
 from collections import defaultdict
 from typing import Any, Dict, List, Optional, Tuple
 
@@ -188,6 +190,51 @@ def write_sheet(sheet: List[Dict[str, Any]], name: str, title: str) -> Tuple[str
     return txt_path, csv_path
 
 
+def read_sheet_rows(path: str) -> List[Dict[str, str]]:
+    """Reads a filled-in count sheet from .csv or .xlsx (first worksheet; standard library only)."""
+    if not path.lower().endswith(".xlsx"):
+        with open(path, encoding="utf-8-sig") as f:
+            return list(csv.DictReader(f))
+    ns = {"m": "http://schemas.openxmlformats.org/spreadsheetml/2006/main",
+          "r": "http://schemas.openxmlformats.org/officeDocument/2006/relationships"}
+    with zipfile.ZipFile(path) as z:
+        shared = []
+        if "xl/sharedStrings.xml" in z.namelist():
+            for si in ET.fromstring(z.read("xl/sharedStrings.xml")).findall("m:si", ns):
+                shared.append("".join(t.text or "" for t in si.iter(f"{{{ns['m']}}}t")))
+        first = ET.fromstring(z.read("xl/workbook.xml")).find("m:sheets", ns)[0]
+        rels = {r.get("Id"): r.get("Target") for r in ET.fromstring(z.read("xl/_rels/workbook.xml.rels"))}
+        target = rels[first.get(f"{{{ns['r']}}}id")].lstrip("/")
+        sheet = ET.fromstring(z.read(target if target.startswith("xl/") else f"xl/{target}"))
+    table: List[List[str]] = []
+    for row in sheet.iter(f"{{{ns['m']}}}row"):
+        cells: Dict[int, str] = {}
+        for c in row.findall("m:c", ns):
+            col = 0
+            for ch in re.match(r"[A-Z]+", c.get("r")).group():
+                col = col * 26 + ord(ch) - 64
+            v, kind = c.find("m:v", ns), c.get("t")
+            if kind == "inlineStr":
+                val = "".join(t.text or "" for t in c.iter(f"{{{ns['m']}}}t"))
+            elif v is None:
+                val = ""
+            else:
+                val = shared[int(v.text)] if kind == "s" else v.text
+            cells[col - 1] = val
+        table.append([cells.get(i, "") for i in range(max(cells) + 1)] if cells else [])
+    header = table[0]
+    return [dict(zip(header, r + [""] * (len(header) - len(r)))) for r in table[1:] if any(r)]
+
+
+def _whole_number(raw: str) -> Optional[int]:
+    """'3', '3.0' (as Excel writes it) -> 3; anything else -> None."""
+    try:
+        f = float(raw)
+    except ValueError:
+        return None
+    return int(f) if f >= 0 and f == int(f) else None
+
+
 def apply_counts(csv_path: str) -> Dict[str, Any]:
     """Imports counted quantities: updates database rows, logs them, and finds sets needing a full count.
 
@@ -195,25 +242,25 @@ def apply_counts(csv_path: str) -> Dict[str, Any]:
         Dict[str, Any]: 'applied' rows (with previous and counted qty), 'overcount_sets' (DRIFT parts),
             'baseline' stats, 'skipped' rows (blank or invalid counts).
     """
-    with open(csv_path, encoding="utf-8") as f:
-        rows = list(csv.DictReader(f))
+    rows = read_sheet_rows(csv_path)
     applied, skipped = [], []
     with db.get_db_cursor() as cur:
         for r in rows:
             raw = (r.get("counted") or "").strip()
             if not raw:
                 continue
-            if not raw.isdigit():
+            counted = _whole_number(raw)
+            inventory_id = _whole_number(str(r.get("inventory_id") or ""))
+            if counted is None or inventory_id is None:
                 skipped.append({**r, "reason": f"not a whole number: {raw!r}"})
                 continue
-            cur.execute("SELECT quantity FROM inventory WHERE inventory_id = %s;", (int(r["inventory_id"]),))
+            cur.execute("SELECT quantity FROM inventory WHERE inventory_id = %s;", (inventory_id,))
             found = cur.fetchone()
             if not found:
                 skipped.append({**r, "reason": "inventory row no longer exists"})
                 continue
-            counted = int(raw)
-            cur.execute("UPDATE inventory SET quantity = %s WHERE inventory_id = %s;", (counted, int(r["inventory_id"])))
-            applied.append({**r, "previous_qty": found["quantity"], "counted": counted})
+            cur.execute("UPDATE inventory SET quantity = %s WHERE inventory_id = %s;", (counted, inventory_id))
+            applied.append({**r, "inventory_id": inventory_id, "previous_qty": found["quantity"], "counted": counted})
 
     os.makedirs(AUDIT_DIR, exist_ok=True)
     new_log = not os.path.isfile(APPLIED_LOG)
@@ -258,7 +305,7 @@ def main() -> None:
     p_gen.add_argument("--value-threshold", type=float, default=1.00)
     p_gen.add_argument("--full-sets", nargs="*", default=["SOI"])
     p_apply = sub.add_parser("apply", help="Import a filled-in count CSV")
-    p_apply.add_argument("csv_file")
+    p_apply.add_argument("csv_file", help="Filled-in count sheet (.csv, or .xlsx saved from Excel)")
     p_push = sub.add_parser("push", help="Push audited database quantities to ManaPool (dry run unless --send)")
     p_push.add_argument("--send", action="store_true")
     args = parser.parse_args()
