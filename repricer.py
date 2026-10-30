@@ -3,6 +3,8 @@
 Base price for each listing (settings in repricer.toml):
     max(lowest NM listing, market price) * (1 + adjustment_pct / 100), rounded to the cent,
     never below the floor. Foil listings use the foil fields of ManaPool's price feed.
+    If the lowest NM listing equals our own price (it may be ours), the price is held or
+    raised to the market anchor, never undercut, so repeated runs cannot ratchet it down.
 
 A change is applied automatically unless it exceeds BOTH review limits (percent and dollars);
 those go to a review list. Risers (lowest listing far above market, supply draining, or market
@@ -301,17 +303,26 @@ def plan_reprice(
     pins: Dict[str, Optional[int]],
     history_starts: Dict[str, Dict[str, Any]],
     config: Dict[str, Any],
+    not_listed: Optional[set] = None,
 ) -> List[Dict[str, Any]]:
     """Decides a target price for every in-stock product.
+
+    When the lowest NM listing equals our listed price it is treated as our own listing:
+    the price is held (or raised to the market anchor) instead of undercut. Products in
+    `not_listed` (no live ManaPool listing) are skipped.
 
     Each returned item has 'status': 'auto', 'review', 'unchanged', 'pinned' or 'skipped',
     plus 'target_cents', 'low', 'market', 'signals' and 'reason' where relevant.
     """
+    not_listed = not_listed or set()
     plan: List[Dict[str, Any]] = []
     for p in products:
         if p["quantity"] <= 0:
             continue
         item = {**p, "target_cents": None, "low": None, "market": None, "signals": [], "reason": ""}
+        if p["product_id"] in not_listed:
+            plan.append({**item, "status": "skipped", "reason": "not listed on ManaPool"})
+            continue
         if p["product_id"] in pins:
             fixed = pins[p["product_id"]]
             if fixed is None or fixed == p["listed_cents"]:
@@ -324,8 +335,14 @@ def plan_reprice(
             continue
         row = feed.get(p["scryfall_id"])
         low, market = feed_prices(row, p["is_foil"])
-        target = base_price_cents(low, market, config)
         item.update({"low": low, "market": market})
+        if low is not None and low == p["listed_cents"]:
+            # The lowest NM listing may be our own: undercutting it would ratchet our price down
+            # every run. Hold the price unless the market anchor alone is higher.
+            target = max(p["listed_cents"], base_price_cents(None, market, config) or 0)
+            item["reason"] = "own listing is the lowest"
+        else:
+            target = base_price_cents(low, market, config)
         if target is None:
             plan.append({**item, "status": "skipped", "reason": "no market data"})
             continue
@@ -436,7 +453,8 @@ def run_reprice(
         return result
 
     as_of, feed = load_feed(config)
-    plan = plan_reprice(load_products(), feed, load_pins(), load_history_starts(config["risers"]["window_days"]), config)
+    plan = plan_reprice(load_products(), feed, load_pins(), load_history_starts(config["risers"]["window_days"]), config,
+                        not_listed={p["product_id"] for p in drift["not_listed"]})
     summary = summarize(plan)
     result.update({"plan": plan, "summary": summary, "feed_as_of": as_of})
 

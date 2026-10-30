@@ -334,6 +334,19 @@ def fetch_seller_inventory(page_size: int = 10000) -> List[Dict[str, Any]]:
             return items
 
 
+def _post_inventory(entries: List[Dict[str, Any]]) -> Tuple[int, List[str]]:
+    """POSTs inventory entries in batches of 2,000 (retrying rate limits); returns (updated, errors)."""
+    updated, errors = 0, []
+    for i in range(0, len(entries), 2000):
+        chunk = entries[i : i + 2000]
+        resp = _request("POST", f"{BASE_URL}/seller/inventory/product", headers=get_headers(), json=chunk, timeout=60)
+        if resp.status_code in (200, 204):
+            updated += len(chunk)
+        else:
+            errors.append(f"Batch {i // 2000 + 1} failed: HTTP {resp.status_code} - {resp.text[:300]}")
+    return updated, errors
+
+
 def push_prices(prices: Dict[str, int], product_type: str = "mtg_single") -> Tuple[int, List[str]]:
     """Sets prices only (quantity null, left unchanged) for products, in batches of 2,000.
 
@@ -346,19 +359,10 @@ def push_prices(prices: Dict[str, int], product_type: str = "mtg_single") -> Tup
     """
     if not is_configured():
         return 0, ["ManaPool API is not configured. Cannot push prices."]
-    payload = [
+    return _post_inventory([
         {"product_type": product_type, "product_id": pid, "price_cents": cents, "quantity": None}
         for pid, cents in prices.items()
-    ]
-    updated, errors = 0, []
-    for i in range(0, len(payload), 2000):
-        chunk = payload[i : i + 2000]
-        resp = _request("POST", f"{BASE_URL}/seller/inventory/product", headers=get_headers(), json=chunk, timeout=60)
-        if resp.status_code in (200, 204):
-            updated += len(chunk)
-        else:
-            errors.append(f"Batch {i // 2000 + 1} failed: HTTP {resp.status_code} - {resp.text[:300]}")
-    return updated, errors
+    ])
 
 
 def push_quantities(quantities: Dict[str, int], product_type: str = "mtg_single") -> Tuple[int, List[str]]:
@@ -373,19 +377,10 @@ def push_quantities(quantities: Dict[str, int], product_type: str = "mtg_single"
     """
     if not is_configured():
         return 0, ["ManaPool API is not configured. Cannot push quantities."]
-    payload = [
+    return _post_inventory([
         {"product_type": product_type, "product_id": pid, "price_cents": None, "quantity": qty}
         for pid, qty in quantities.items()
-    ]
-    updated, errors = 0, []
-    for i in range(0, len(payload), 2000):
-        chunk = payload[i : i + 2000]
-        resp = _request("POST", f"{BASE_URL}/seller/inventory/product", headers=get_headers(), json=chunk, timeout=60)
-        if resp.status_code in (200, 204):
-            updated += len(chunk)
-        else:
-            errors.append(f"Batch {i // 2000 + 1} failed: HTTP {resp.status_code} - {resp.text[:300]}")
-    return updated, errors
+    ])
 
 
 def get_inventory_item(product_id: str, product_type: str = "mtg_single") -> Tuple[Optional[Dict[str, Any]], str]:
@@ -542,10 +537,10 @@ def push_changed(
     send: bool = False,
     output_dir: str = "exports",
 ) -> Dict[str, Any]:
-    """Pushes only the products whose quantity differs from the baseline (or are new), then verifies.
+    """Pushes the quantity of products that differ from the baseline (or are new), then verifies.
 
-    Uses the same payload as `preview_push`. After sending, every pushed product is read back
-    from ManaPool and compared with what was sent.
+    Quantities come from the same payload as `preview_push`; prices are sent as null so live
+    prices are left alone. After sending, every pushed product's quantity is read back.
 
     Args:
         set_codes (Optional[List[str]]): Set codes to include.
@@ -566,20 +561,16 @@ def push_changed(
     if not send or not payload:
         return result
 
-    url = f"{BASE_URL}/seller/inventory/product"
-    resp = requests.post(url, headers=get_headers(), json=payload, timeout=60)
+    result["to_push"] = payload = [{**e, "price_cents": None} for e in payload]
     result["sent"] = True
-    if resp.status_code not in (200, 204):
-        result["errors"].append(f"HTTP {resp.status_code}: {resp.text[:500]}")
+    result["updated"], result["errors"] = push_quantities({e["product_id"]: e["quantity"] for e in payload})
+    if result["errors"]:
         return result
-    result["updated"] = len(payload)
 
     for e in payload:
         time.sleep(0.05)
         item, status = get_inventory_item(e["product_id"])
-        live_qty = item.get("quantity") if item else None
-        live_price = item.get("price_cents") if item else None
-        if live_qty != e["quantity"] or (e["price_cents"] is not None and live_price != e["price_cents"]):
+        if (item.get("quantity") if item else None) != e["quantity"]:
             result["mismatches"].append({"product_id": e["product_id"], "sent": e, "live": item, "status": status})
     return result
 

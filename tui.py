@@ -483,7 +483,7 @@ def action_personal_pull(stdscr) -> None:
         if not qty_str.isdigit() or int(qty_str) < 1:
             return
         requests_ = [{"qty": int(qty_str), "name": row["name"], "set_code": row["set_code"],
-                      "ids": (row["scryfall_id"], row["back_scryfall_id"]), "foil": row["is_foil"]}]
+                      "inventory_id": row["inventory_id"], "foil": row["is_foil"]}]
         label = f"{qty_str} x {row['name']} ({row['set_code']} {row['collector_number']})"
 
     def confirm(summary: List[str]) -> bool:
@@ -493,6 +493,11 @@ def action_personal_pull(stdscr) -> None:
     show_message_box(stdscr, "Planning", ["Checking open orders and choosing copies..."], wait_key=False)
     try:
         res = collection_pull.run_pull(requests_, label, confirm=confirm)
+        if res["blocked"]:
+            show_message_box(stdscr, "Open Orders Not Checked", [res["order_status"]], wait_key=False)
+            if prompt_input(stdscr, "Pull anyway, without holding open-order copies? (y/n)", "n").lower() != "y":
+                return
+            res = collection_pull.run_pull(requests_, label, confirm=confirm, force=True)
     except Exception as e:
         show_message_box(stdscr, "Pull Error", [f"Error: {e}"])
         return

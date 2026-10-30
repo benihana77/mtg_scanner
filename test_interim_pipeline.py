@@ -940,10 +940,10 @@ class TestMTGInterimPipeline(unittest.TestCase):
         self.assertTrue(held["Counterspell"]["held_for_orders"])
         self.assertFalse(held["Missing Card"]["found_any"])
 
-        # Commit with the API mocked: ManaPool receives new absolute totals and prices.
+        # Commit with the API mocked: ManaPool receives new absolute totals, price left alone (null).
         with patch.object(collection_pull, "reserved_by_open_orders", return_value=({"pid-cs": 1}, "checked")), \
              patch.object(manapool_client, "is_configured", return_value=True), \
-             patch("requests.post") as mock_post:
+             patch("requests.request") as mock_post:
             mock_post.return_value = MagicMock(status_code=200)
             res = collection_pull.run_pull(reqs, "deck.txt", confirm=lambda lines: True, output_dir=self.test_dir)
 
@@ -952,7 +952,7 @@ class TestMTGInterimPipeline(unittest.TestCase):
         payload = {e["product_id"]: e for e in mock_post.call_args[1]["json"]}
         self.assertEqual(payload["pid-bolt-2"]["quantity"], 0)  # sold out, row kept at 0
         self.assertEqual(payload["pid-bolt-1"]["quantity"], 2)
-        self.assertEqual(payload["pid-bolt-1"]["price_cents"], 50)
+        self.assertIsNone(payload["pid-bolt-1"]["price_cents"])
         self.assertNotIn("pid-cs", payload)
         self.assertEqual(db.get_total_quantities_by_product_ids(["pid-bolt-2", "pid-cs"]), {"pid-bolt-2": 0, "pid-cs": 1})
 
@@ -963,14 +963,22 @@ class TestMTGInterimPipeline(unittest.TestCase):
         csv_pipeline.ingest_csv_batch(csv_file, box_label="TestBox-1", output_dir=self.test_dir)
 
         with patch.object(manapool_client, "is_configured", return_value=False):
-            res = collection_pull.run_pull(
+            blocked = collection_pull.run_pull(
                 [{"qty": 2, "name": "island", "set_code": None, "number": None, "foil": None}],
                 "single", confirm=None, output_dir=self.test_dir,
             )
+            res = collection_pull.run_pull(
+                [{"qty": 2, "name": "island", "set_code": None, "number": None, "foil": None}],
+                "single", confirm=None, force=True, output_dir=self.test_dir,
+            )
             declined = collection_pull.run_pull(
                 [{"qty": 1, "name": "Island", "set_code": None, "number": None, "foil": None}],
-                "single", confirm=lambda lines: False, output_dir=self.test_dir,
+                "single", confirm=lambda lines: False, force=True, output_dir=self.test_dir,
             )
+
+        # Open orders could not be checked: nothing is pulled without --force.
+        self.assertIn("--force", blocked["blocked"])
+        self.assertFalse(blocked["committed"])
 
         self.assertEqual(res["sync"]["mode"], "csv")
         self.assertIn("not configured", res["order_status"])
@@ -1057,13 +1065,14 @@ class TestMTGInterimPipeline(unittest.TestCase):
 
         with patch.object(manapool_client, "is_configured", return_value=True), \
              patch("requests.get", side_effect=fake_get), \
-             patch("requests.post", return_value=MagicMock(status_code=200)) as mock_post:
+             patch("requests.request", return_value=MagicMock(status_code=200)) as mock_post:
             dry = manapool_client.push_changed(["TESTC"], baseline, send=False, output_dir=self.test_dir)
             mock_post.assert_not_called()
             res = manapool_client.push_changed(["TESTC"], baseline, send=True, output_dir=self.test_dir)
 
         self.assertEqual(sorted(e["product_id"] for e in dry["to_push"]), ["pid-new", "pid-up"])
         self.assertEqual(sorted(e["product_id"] for e in mock_post.call_args[1]["json"]), ["pid-new", "pid-up"])
+        self.assertTrue(all(e["price_cents"] is None for e in mock_post.call_args[1]["json"]))  # prices untouched
         self.assertEqual([m["product_id"] for m in res["mismatches"]], ["pid-new"])  # live qty 0 != sent 1
 
 
@@ -1175,9 +1184,15 @@ class TestMTGInterimPipeline(unittest.TestCase):
             counts = {"pid-over": "7", "pid-exact": "3", "pid-under": "x"}
             for r in sheet:
                 r["counted"] = counts[r["product_id"]]
+            moved = {**sheet[0], "box": "OtherBox", "counted": "1"}  # same inventory_id, stale location
             _, path = audit.write_sheet(sheet, "t_audit", "TEST")
+            _, moved_path = audit.write_sheet([moved], "t_moved", "TEST")
+            moved_res = audit.apply_counts(moved_path)
             res = audit.apply_counts(path)
             logged = audit.already_counted()
+
+        self.assertEqual(moved_res["applied"], [])
+        self.assertIn("changed since the sheet was printed", moved_res["skipped"][0]["reason"])
 
         self.assertEqual(sorted((a["product_id"], a["previous_qty"], a["counted"]) for a in res["applied"]),
                          [("pid-exact", 3, 3), ("pid-over", 10, 7)])

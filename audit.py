@@ -69,12 +69,22 @@ def live_quantities() -> Dict[str, int]:
     return {i["product_id"]: i.get("quantity") or 0 for i in manapool_client.fetch_seller_inventory()}
 
 
-def already_counted() -> set:
-    """inventory_ids counted in earlier `apply` runs."""
+def already_counted(within_days: Optional[int] = 30) -> set:
+    """inventory_ids counted by `apply` in the last `within_days` days (None = ever).
+
+    Bounded so a later audit counts those rows again instead of skipping them forever.
+    """
     if not os.path.isfile(APPLIED_LOG):
         return set()
+    cutoff = None if within_days is None else datetime.datetime.now() - datetime.timedelta(days=within_days)
     with open(APPLIED_LOG, encoding="utf-8") as f:
-        return {int(r["inventory_id"]) for r in csv.DictReader(f)}
+        return {int(r["inventory_id"]) for r in csv.DictReader(f)
+                if cutoff is None or datetime.datetime.fromisoformat(r["applied_at"]) >= cutoff}
+
+
+def unlisted_products(rows: List[Dict[str, Any]], live: Dict[str, int]) -> Dict[str, int]:
+    """product_id -> database total for in-stock products with no live ManaPool listing at all."""
+    return {r["product_id"]: r["product_total"] for r in rows if r["product_id"] not in live and r["product_total"] > 0}
 
 
 def _walk_key(r: Dict[str, Any]) -> Tuple[Any, ...]:
@@ -141,7 +151,8 @@ def select_audit(
     skip_ids = skip_ids or set()
     full = {s.upper() for s in (full_sets or [])}
     in_stock = [r for r in rows if r["quantity"] > 0 and r["inventory_id"] not in skip_ids]
-    drifted = [r for r in rows if r["product_id"] in live and live[r["product_id"]] != r["product_total"]
+    # A product with stock but no live listing counts as drifted (live quantity 0).
+    drifted = [r for r in rows if live.get(r["product_id"], 0) != r["product_total"]
                and r["inventory_id"] not in skip_ids]
 
     chosen: Dict[int, Tuple[str, Dict[str, Any]]] = {}
@@ -240,6 +251,10 @@ def _whole_number(raw: str) -> Optional[int]:
 def apply_counts(csv_path: str) -> Dict[str, Any]:
     """Imports counted quantities: updates database rows, logs them, and finds sets needing a full count.
 
+    A count is applied only if its inventory row still holds the same product at the same
+    box / section / index as on the sheet; otherwise (e.g. the inventory was rebuilt or
+    relocated since the sheet was printed) the row is skipped.
+
     Returns:
         Dict[str, Any]: 'applied' rows (with previous and counted qty), 'overcount_sets' (DRIFT parts),
             'baseline' stats, 'skipped' rows (blank or invalid counts).
@@ -256,10 +271,19 @@ def apply_counts(csv_path: str) -> Dict[str, Any]:
             if counted is None or inventory_id is None:
                 skipped.append({**r, "reason": f"not a whole number: {raw!r}"})
                 continue
-            cur.execute("SELECT quantity FROM inventory WHERE inventory_id = %s;", (inventory_id,))
+            cur.execute("SELECT quantity, manapool_product_id, box_label, section_label, index_num "
+                        "FROM inventory WHERE inventory_id = %s;", (inventory_id,))
             found = cur.fetchone()
             if not found:
                 skipped.append({**r, "reason": "inventory row no longer exists"})
+                continue
+            sheet_loc = ((r.get("product_id") or "").strip(), (r.get("box") or "").strip(),
+                         (r.get("section") or "").strip(), _whole_number(str(r.get("index") or "")))
+            db_loc = (found["manapool_product_id"] or "", found["box_label"] or "", found["section_label"] or "",
+                      found["index_num"])
+            if sheet_loc != db_loc:
+                skipped.append({**r, "reason": f"inventory row changed since the sheet was printed (now {db_loc[1]} "
+                                               f"{db_loc[2]} #{db_loc[3]}, product {db_loc[0] or '-'})"})
                 continue
             cur.execute("UPDATE inventory SET quantity = %s WHERE inventory_id = %s;", (counted, inventory_id))
             applied.append({**r, "inventory_id": inventory_id, "previous_qty": found["quantity"], "counted": counted})
@@ -295,7 +319,8 @@ def plan_push(
     """product_id -> target quantity for every listing where live ManaPool quantity differs.
 
     Targets are database totals, plus 0 for `zero_ids` (products dropped from the database,
-    e.g. a set removed for a clean relist), which win over any database row.
+    e.g. a set removed for a clean relist), which win over any database row. Products with
+    no live listing are left out (see `unlisted_products`).
     """
     rows = rows if rows is not None else load_rows()
     live = live if live is not None else live_quantities()
@@ -336,6 +361,8 @@ def main() -> None:
     p_gen.add_argument("--needs-count", action="store_true",
                        help="Only list listings on audits/needs_count.csv that are not counted yet")
     p_gen.add_argument("--sets", nargs="*", help="With --needs-count: only these set codes")
+    p_gen.add_argument("--skip-counted-days", type=int, default=30,
+                       help="Leave out rows counted in the last N days (default 30)")
     p_apply = sub.add_parser("apply", help="Import a filled-in count CSV")
     p_apply.add_argument("csv_file", help="Filled-in count sheet (.csv, or .xlsx saved from Excel)")
     p_push = sub.add_parser("push", help="Push audited database quantities to ManaPool (dry run unless --send)")
@@ -345,14 +372,14 @@ def main() -> None:
 
     if args.command == "generate":
         if args.needs_count:
-            sheet = needs_count_sheet(load_rows(), live_quantities(), already_counted())
+            sheet = needs_count_sheet(load_rows(), live_quantities(), already_counted(args.skip_counted_days))
             if args.sets:
                 sheet = [r for r in sheet if r["set"] in {s.upper() for s in args.sets}]
             name = f"needs_count_{datetime.date.today().isoformat()}" + (f"_{'_'.join(args.sets)}" if args.sets else "")
             txt, csv_path = write_sheet(sheet, name, "NEEDS-COUNT SHEET (listed conservatively until counted)")
         else:
             sheet = select_audit(load_rows(), live_quantities(), args.per_set, args.baseline, args.value_threshold,
-                                 args.full_sets, already_counted())
+                                 args.full_sets, already_counted(args.skip_counted_days))
             name = f"audit_{datetime.date.today().isoformat()}"
             txt, csv_path = write_sheet(sheet, name, "INVENTORY AUDIT COUNT SHEET")
         print(f"{len(sheet)} rows to count.\nPrint: {txt}\nFill:  {csv_path}")
@@ -383,7 +410,15 @@ def main() -> None:
     elif args.command == "push":
         zero_ids = read_zero_ids(args.zero)
         live = live_quantities()
-        quantities = plan_push(load_rows(), live, zero_ids)
+        rows = load_rows()
+        quantities = plan_push(rows, live, zero_ids)
+        unlisted = {pid: qty for pid, qty in unlisted_products(rows, live).items() if pid not in zero_ids}
+        if unlisted:
+            print(f"[!] {len(unlisted)} in-stock products have no ManaPool listing and are NOT pushed here "
+                  "(a quantity-only push cannot set their price). List each with: "
+                  "python manapool_client.py push-one --product <id> --send", file=sys.stderr)
+            for pid, qty in sorted(unlisted.items())[:20]:
+                print(f"    {pid}  database qty {qty}", file=sys.stderr)
         zeroed = [p for p in quantities if p in zero_ids]
         print(f"{len(quantities)} listings differ between the audited database and ManaPool "
               f"(net {sum(quantities.values()) - sum(live.get(p, 0) for p in quantities):+d} copies); "

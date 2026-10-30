@@ -161,8 +161,10 @@ def reserved_by_open_orders() -> Tuple[Optional[Dict[str, int]], str]:
     if not manapool_client.is_configured():
         return None, "ManaPool API not configured: open orders were NOT checked."
     items, errors = manapool_client.fetch_unfulfilled_orders()
-    if not items and errors and not any("No unfulfilled orders" in e for e in errors):
-        return None, f"Could not check open orders: {errors[0]}"
+    # Any error but "no orders" means some orders may be missing: treat the check as failed.
+    problems = [e for e in errors if "No unfulfilled orders" not in e]
+    if problems:
+        return None, f"Could not check open orders ({len(problems)} errors): {problems[0]}"
     reserved: Dict[str, int] = defaultdict(int)
     for it in items:
         if it.get("manapool_product_id"):
@@ -185,7 +187,8 @@ def plan_pulls(
     Args:
         stock (List[Dict[str, Any]]): Output of `load_stock`.
         requests_ (List[Dict[str, Any]]): Pull requests (qty, name, set_code, number, foil;
-            optional 'ids' = (scryfall_id, back_scryfall_id) for an exact printing).
+            optional 'ids' = (scryfall_id, back_scryfall_id) for an exact printing, or
+            'inventory_id' for one exact inventory row).
         reserved (Optional[Dict[str, int]]): product_id -> quantity reserved by open orders.
         force (bool): Ignore open-order reservations.
 
@@ -213,7 +216,9 @@ def plan_pulls(
     shortfalls: List[Dict[str, Any]] = []
 
     for req in requests_:
-        if req.get("ids"):
+        if req.get("inventory_id"):
+            candidates = [r for r in stock if r["inventory_id"] == req["inventory_id"]]
+        elif req.get("ids"):
             candidates = [r for r in stock if (r["scryfall_id"], r["back_scryfall_id"]) == tuple(req["ids"])]
         elif req.get("set_code") and req.get("number"):
             res = resolved.get((req["set_code"].upper(), str(req["number"]).strip().lower()))
@@ -320,6 +325,7 @@ def sync_manapool(picks: List[Dict[str, Any]], output_dir: str = "exports") -> D
     """Pushes new absolute totals for the pulled products to ManaPool, or writes a CSV.
 
     Must run after the deduction is committed: quantities are read back from PostgreSQL.
+    The push sets quantity only (price null), so live prices are left alone.
 
     Returns:
         Dict[str, Any]: {'mode': 'api' | 'csv' | 'none', 'updated': int, 'errors': [...], 'csv_path': ...}.
@@ -340,7 +346,7 @@ def sync_manapool(picks: List[Dict[str, Any]], output_dir: str = "exports") -> D
     errors: List[str] = []
     if manapool_client.is_configured():
         try:
-            updated, errors = manapool_client.push_inventory_batch(items, aggregate_with_db=True)
+            updated, errors = manapool_client.push_quantities({it["manapool_product_id"]: it["quantity"] for it in items})
         except Exception as e:  # keep the deduction; fall back to the CSV below
             updated, errors = 0, [f"Push failed: {e}"]
         if not errors:
@@ -374,20 +380,26 @@ def run_pull(
         requests_ (List[Dict[str, Any]]): Pull requests.
         label (str): Source description for the sheet header.
         confirm (Any): Callable(summary_lines) -> bool; None means confirmed.
-        force (bool): Ignore open-order reservations.
+        force (bool): Ignore open-order reservations (and pull even if orders could not be checked).
         output_dir (str): Folder for the sheet and any sync CSV.
 
     Returns:
         Dict[str, Any]: Summary including picks, shortfalls, sheet path, committed flag and sync result.
+            'blocked' holds a message (and nothing else is done) if open orders could not be
+            checked and `force` is False.
     """
     reserved, order_status = reserved_by_open_orders()
+    if reserved is None and not force:
+        return {"picks": [], "shortfalls": [], "sheet_path": None, "order_status": order_status,
+                "committed": False, "sync": None,
+                "blocked": f"{order_status} Nothing pulled; re-run with --force to pull without holding open-order copies."}
     if force:
         order_status += " (--force: reservations ignored)"
     picks, shortfalls = plan_pulls(load_stock(), requests_, reserved, force=force)
     sheet_path = write_pull_sheet(picks, shortfalls, label, order_status, output_dir)
     result: Dict[str, Any] = {
         "picks": picks, "shortfalls": shortfalls, "sheet_path": sheet_path,
-        "order_status": order_status, "committed": False, "sync": None,
+        "order_status": order_status, "committed": False, "sync": None, "blocked": None,
     }
     if not picks:
         return result
@@ -483,6 +495,9 @@ def main() -> None:
         return input("Deduct these from inventory and sync ManaPool? (y/n): ").strip().lower() == "y"
 
     res = run_pull(requests_, label, confirm=None if args.yes else ask, force=args.force, output_dir=args.output_dir)
+    if res["blocked"]:
+        print(res["blocked"], file=sys.stderr)
+        sys.exit(1)
     for s in res["shortfalls"]:
         why = "held for open order" if s["held_for_orders"] else ("not enough in stock" if s["found_any"] else "not in stock")
         print(f"[short] {s['request']['name']}: missing {s['missing_qty']} ({why})")

@@ -1,12 +1,14 @@
-"""Pure unit tests for the repricer's pricing rules (no database, no network)."""
+"""Pure unit tests for the repricer, audit and personal-pull rules (no database, no network)."""
 
 import csv
+import datetime
 import os
 import tempfile
 import unittest
 from unittest import mock
 
 import audit
+import collection_pull
 import repricer
 
 CONFIG = {
@@ -88,6 +90,23 @@ class TestPlan(unittest.TestCase):
         self.assertEqual(plan[0]["target_cents"], 99)
         self.assertEqual(plan[0]["status"], "unchanged")
 
+    def test_own_lowest_listing_is_not_undercut(self):
+        feed = {"held": {"price_cents_nm": 200, "price_market": 100},    # we are the low, above market
+                "raised": {"price_cents_nm": 200, "price_market": 250},  # market alone is higher
+                "under": {"price_cents_nm": 150, "price_market": 100}}   # someone else is cheaper
+        products = [product("held", listed=200, sid="held"), product("raised", listed=200, sid="raised"),
+                    product("under", listed=200, sid="under")]
+        plan = {i["product_id"]: i for i in repricer.plan_reprice(products, feed, {}, {}, CONFIG)}
+        self.assertEqual((plan["held"]["status"], plan["held"]["target_cents"]), ("unchanged", 200))
+        self.assertEqual(plan["raised"]["target_cents"], 248)
+        self.assertEqual(plan["under"]["target_cents"], 149)
+
+    def test_not_listed_products_are_skipped(self):
+        feed = {"a": {"price_cents_nm": 15, "price_market": 23}}
+        plan = repricer.plan_reprice([product("gone", sid="a"), product("pinned", sid="a")], feed,
+                                     {"pinned": 75}, {}, CONFIG, not_listed={"gone", "pinned"})
+        self.assertEqual([(i["status"], i["reason"]) for i in plan], [("skipped", "not listed on ManaPool")] * 2)
+
 
 def inv_row(iid, pid, set_code, qty, total=None, price=0.15, box="M1", section="Sec-1", idx=1):
     return {"inventory_id": iid, "product_id": pid, "box_label": box, "section_label": section, "index_num": idx,
@@ -125,6 +144,28 @@ class TestAuditSelection(unittest.TestCase):
         c = audit.select_audit(self.rows, self.live, per_set=4, baseline=10, skip_ids=skip)
         self.assertFalse(skip & {r["inventory_id"] for r in c})
 
+    def test_unlisted_in_stock_products_count_as_drift(self):
+        rows = [inv_row(1, "listed", "AAA", 2), inv_row(2, "unlisted", "AAA", 3), inv_row(3, "empty", "AAA", 0)]
+        live = {"listed": 2}
+        sheet = audit.select_audit(rows, live, per_set=5, baseline=0, value_threshold=99)
+        self.assertEqual([(r["product_id"], r["manapool_qty"]) for r in sheet], [("unlisted", "")])
+        self.assertEqual(audit.unlisted_products(rows, live), {"unlisted": 3})
+        self.assertEqual(audit.plan_push(rows, live), {})
+
+    def test_already_counted_is_bounded_in_time(self):
+        old = (datetime.datetime.now() - datetime.timedelta(days=90)).isoformat(timespec="seconds")
+        new = datetime.datetime.now().isoformat(timespec="seconds")
+        with tempfile.TemporaryDirectory() as d:
+            path = os.path.join(d, "applied.csv")
+            with open(path, "w", newline="") as f:
+                w = csv.writer(f)
+                w.writerow(["applied_at", "inventory_id"])
+                w.writerow([old, 1])
+                w.writerow([new, 2])
+            with mock.patch.object(audit, "APPLIED_LOG", path):
+                self.assertEqual(audit.already_counted(), {2})
+                self.assertEqual(audit.already_counted(None), {1, 2})
+
     def test_plan_push_only_differences(self):
         rows = [inv_row(1, "p1", "AAA", 2, total=5), inv_row(2, "p1", "AAA", 3, total=5), inv_row(3, "p2", "AAA", 4)]
         self.assertEqual(audit.plan_push(rows, {"p1": 1, "p2": 4, "p3": 9}), {"p1": 5})
@@ -153,6 +194,34 @@ class TestAuditDropAndNeedsCount(unittest.TestCase):
             with mock.patch.object(audit, "NEEDS_COUNT", path):
                 sheet = audit.needs_count_sheet(rows, {"a": 2, "b": 1}, skip_ids={2})
         self.assertEqual([(r["inventory_id"], r["part"]) for r in sheet], [(1, "NEEDS-COUNT")])
+
+
+def stock_row(iid, pid, price, section="Sec-1", idx=1):
+    return {"inventory_id": iid, "scryfall_id": "s1", "back_scryfall_id": None, "name": "Bolt", "set_code": "AAA",
+            "collector_number": "1", "is_foil": False, "condition": "NM", "quantity": 2,
+            "manapool_listed_price": price, "manapool_product_id": pid, "box_label": "M1",
+            "section_label": section, "index_num": idx}
+
+
+class TestPersonalPull(unittest.TestCase):
+    def test_chosen_inventory_row_is_pulled(self):
+        stock = [stock_row(1, "cheap", 0.25), stock_row(2, "pricey", 0.50, idx=2)]
+        picks, short = collection_pull.plan_pulls(stock, [{"qty": 1, "name": "Bolt", "inventory_id": 2}])
+        self.assertEqual([(p["inventory_id"], p["qty_to_pull"]) for p in picks], [(2, 1)])
+        self.assertEqual(short, [])
+
+    def test_partial_order_check_counts_as_unchecked(self):
+        items = [{"manapool_product_id": "p1", "Qty": 1}]
+        with mock.patch.object(collection_pull.manapool_client, "is_configured", return_value=True), \
+             mock.patch.object(collection_pull.manapool_client, "fetch_unfulfilled_orders",
+                               return_value=(items, ["Failed to fetch details for order 7: HTTP 500"])):
+            reserved, status = collection_pull.reserved_by_open_orders()
+        self.assertIsNone(reserved)
+        self.assertIn("Could not check open orders", status)
+        with mock.patch.object(collection_pull.manapool_client, "is_configured", return_value=True), \
+             mock.patch.object(collection_pull.manapool_client, "fetch_unfulfilled_orders",
+                               return_value=([], ["No unfulfilled orders found on ManaPool."])):
+            self.assertEqual(collection_pull.reserved_by_open_orders()[0], {})
 
 
 if __name__ == "__main__":
