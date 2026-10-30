@@ -197,7 +197,7 @@ def write_sheet(flagged: List[Dict[str, Any]], inventory_csv: str, output_dir: s
 def main() -> None:
     """CLI entry point for the special-case check sheet."""
     parser = argparse.ArgumentParser(description="Printable check sheet for unusual cards (read only)")
-    parser.add_argument("--inventory-csv", default="backups/inventory-manapool-audited-20260927.csv")
+    parser.add_argument("--inventory-csv", required=True, help="Path to ManaPool inventory export CSV")
     parser.add_argument("--map-csv", default="Manapool Print Format - Set_Box Map.csv")
     parser.add_argument("--output-dir", default="exports")
     args = parser.parse_args()

@@ -211,7 +211,7 @@ def prompt_for_unmapped_sets(
 
 
 def run_audit(
-    inventory_csv: str = "backups/inventory-manapool-backup-20260920.csv",
+    inventory_csv: str,
     map_csv: str = "Manapool Print Format - Set_Box Map.csv",
     interactive: bool = True,
     token_box_label: str = "TOKENS",
@@ -340,7 +340,7 @@ def run_audit(
 
 def main():
     parser = argparse.ArgumentParser(description="MTG Inventory Audit & Token Strategy B Tool")
-    parser.add_argument("--inventory", default="backups/inventory-manapool-backup-20260920.csv")
+    parser.add_argument("--inventory", required=True, help="Path to ManaPool inventory export CSV")
     parser.add_argument("--map", default="Manapool Print Format - Set_Box Map.csv")
     parser.add_argument("--non-interactive", action="store_true", help="Do not prompt for unmapped sets")
     parser.add_argument("--token-box", default="TOKENS", help="Box label for dedicated token storage")

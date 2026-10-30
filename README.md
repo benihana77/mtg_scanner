@@ -44,8 +44,8 @@ A high-velocity inventory management station and fulfillment optimizer for Magic
 
 5. **ManaPool API v1 Integration (`manapool_client.py`)**:
    - `python manapool_client.py` checks credentials with a read-only `GET /account`.
-   - `python manapool_client.py preview-push [--set MOM ...] [--baseline <csv>]` is a dry run: it builds the exact payload a push would send, compares it with a ManaPool inventory export, and writes a comparison CSV plus the JSON payload. Nothing is sent. The default baseline is the Sept 27, 2026 export, which no longer reflects the live store; pass a fresh export, or use `audit.py push` / `repricer.py sync`, which compare against live ManaPool.
-   - `python manapool_client.py push-changed --set MOM [--set ...] [--baseline <csv>] [--send]` pushes the quantity (price left unchanged) of products whose quantity differs from the baseline (or that are new), then reads each one back and reports mismatches.
+   - `python manapool_client.py preview-push [--set MOM ...] [--baseline <csv>]` is a dry run: it builds the exact payload a push would send, optionally compares it with a ManaPool inventory export, and writes a comparison CSV plus the JSON payload. Nothing is sent. Use a fresh export as the baseline, or use `audit.py push` / `repricer.py sync`, which compare against live ManaPool.
+   - `python manapool_client.py push-changed --set MOM [--set ...] --baseline <csv> [--send]` pushes the quantity (price left unchanged) of products whose quantity differs from the baseline (or that are new), then reads each one back and reports mismatches.
    - `python manapool_client.py push-one --product <uuid> [--send]` reads the live listing, shows the payload, and with `--send` pushes just that product's database total and price and reads it back. Use it to list an in-stock product that has no ManaPool listing yet.
    - Endpoints and payloads follow ManaPool's published spec: https://manapool.com/api/docs/v1/openapi.json
    - Direct batch inventory updates via `POST /seller/inventory/product` (up to 2,000 items per request, retried when rate-limited). Quantity syncs send `price_cents: null` and price pushes send `quantity: null`, so each leaves the other field as it is on ManaPool.
@@ -72,14 +72,15 @@ A high-velocity inventory management station and fulfillment optimizer for Magic
    - `generate` writes a walk-order count sheet (`audits/audit_<date>.txt`) and a fillable CSV covering listings where ManaPool and the database disagree (sampled per set, `--full-sets` counted in full; in-stock products with no ManaPool listing count as disagreeing), a random baseline of agreeing listings, and every listing worth $1+. Rows counted in the last 30 days are left out (`--skip-counted-days N` to change).
    - `apply <csv|xlsx>` imports the `counted` column, updates those rows, logs them to `audits/applied_counts.csv`, and writes a follow-up full-count sheet for any set whose sample had an overcount. A count is skipped if its row no longer holds the sheet's product at the sheet's box / section / index (e.g. inventory rebuilt or relocated since printing).
    - `push [--send] [--zero <csv>]` pushes audited database quantities (quantity only) to every ManaPool listing that differs, then reads them back; `--zero` sets dropped products (e.g. `audits/dropped_sets_*.csv`) to 0. In-stock products with no ManaPool listing are reported, not pushed (list them with `push-one`).
-   - Conservative listing: listings not yet counted are held at ManaPool's lower quantity and recorded in `audits/needs_count.csv` (with the previous database quantity); `generate --needs-count [--sets CMR NEO]` prints a count sheet for them.
+   - Conservative listing: listings not yet counted are held at ManaPool's lower quantity and recorded in `audits/needs_count.csv` (with the previous database quantity); `generate --needs-count [--sets CMR NEO]` prints a count sheet for them. All 828 such listings were counted by Oct 29, 2026 and the list was removed.
    - Oct 2026: SOI and BFZ were dropped from the database and ManaPool for a clean relist (`audits/dropped_sets_2026-10-21_SOI_BFZ.csv`).
-   - `audits/` holds data, not code: it is git-ignored, so count sheets, `applied_counts.csv`, `needs_count.csv` and the dropped-sets list live only on the station's machine.
+   - `audits/` holds data, not code: it is git-ignored, so count sheets, `applied_counts.csv` and the dropped-sets list live only on the station's machine.
+   - Oct 30, 2026: the counted database was declared final and dumped to `backups/pg_dump_locked_20261030-101257.dump`. `backups/pg_dump_pre_drop_20261021-104925.dump` is kept until SOI/BFZ are relisted. Dumps are git-ignored. Restore with `docker exec -i mtg_postgres pg_restore -U mtg_admin -d mtg_inventory --clean < backups/<file>.dump`.
 
 10. **Setup & Audit Tools**:
-   - `import_live_inventory.py`: fresh import of a ManaPool inventory export against the Scryfall mirror and Set/Box map. Previews by default; `--rebuild` drops and recreates the inventory tables atomically.
+   - `import_live_inventory.py --inventory-csv <export>`: fresh import of a ManaPool inventory export against the Scryfall mirror and Set/Box map. Previews by default; `--rebuild` drops and recreates the inventory tables atomically (take a `pg_dump` first).
    - `token_validation_report.py`: read-only report of tokens filed in set sections, non-tokens in token sections, and rows missing from the mirror.
-   - `special_cases_report.py`: printable check sheet of unusual cards (combos, emblems, helper cards, promos, accent/symbol names, same-name printings, The List) at their planned locations.
+   - `special_cases_report.py --inventory-csv <export>`: printable check sheet of unusual cards (combos, emblems, helper cards, promos, accent/symbol names, same-name printings, The List) at their planned locations.
    - `audit_inventory.py`: one-time audit that assigned boxes to unmapped sets and produced the original token extraction walk sheet.
    - `hashing_engine.py` (early scanner work; not part of the current workflow).
 
@@ -129,7 +130,7 @@ python tui.py
 ### Ingest ManaPool Set Batch
 ```bash
 # Ingest batch (box auto-resolved per set, next section auto-allocated)
-python csv_pipeline.py ingest multiple_sets_singles_2026-10-08T00-51-00.csv
+python csv_pipeline.py ingest multiple_sets_singles_<timestamp>.csv
 
 # Force a specific box
 python csv_pipeline.py ingest batch.csv --box M18
@@ -190,10 +191,10 @@ python csv_pipeline.py list --box M1
 ### Run Order Fulfillment Picklist
 ```bash
 # Preview optimized pick sheet from CSV (no stock deduction)
-python pull_list_optimizer.py picklist-2026-09-20.csv
+python pull_list_optimizer.py picklist-<date>.csv
 
 # Process CSV and deduct pulled cards from PostgreSQL inventory
-python pull_list_optimizer.py picklist-2026-09-20.csv --commit
+python pull_list_optimizer.py picklist-<date>.csv --commit
 
 # Pull unfulfilled orders directly from ManaPool API and deduct
 python pull_list_optimizer.py --api --commit

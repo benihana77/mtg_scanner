@@ -1,7 +1,7 @@
 """Fresh import of a ManaPool inventory backup into PostgreSQL against the Scryfall mirror.
 
 Reads:
-1. ManaPool inventory export (default: backups/inventory-manapool-audited-20260927.csv)
+1. ManaPool inventory export (--inventory-csv, required)
 2. Physical set-to-box map ('Manapool Print Format - Set_Box Map.csv'), including a
    '(TOKENS) Tokens' row for the token box.
 
@@ -449,8 +449,8 @@ def main():
     parser = argparse.ArgumentParser(description="Fresh import of ManaPool inventory against the Scryfall mirror")
     parser.add_argument(
         "--inventory-csv",
-        default="backups/inventory-manapool-audited-20260927.csv",
-        help="Path to ManaPool inventory export CSV (default: backups/inventory-manapool-audited-20260927.csv)",
+        required=True,
+        help="Path to ManaPool inventory export CSV",
     )
     parser.add_argument(
         "--map-csv",

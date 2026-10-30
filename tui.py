@@ -139,8 +139,8 @@ def action_ingest_batch(stdscr) -> None:
     stdscr.addstr(3, 2, "=== INGEST NEW BATCH FROM CSV ===", curses.A_BOLD)
 
     # Suggest available CSV files in current directory
-    csv_candidates = [f for f in os.listdir(".") if f.endswith(".csv") and "picklist" not in f]
-    default_csv = csv_candidates[0] if csv_candidates else "multiple_sets_all_products_2026-09-20T00-27-05.csv"
+    csv_candidates = [f for f in os.listdir(".") if f.endswith(".csv") and "picklist" not in f and "Set_Box Map" not in f]
+    default_csv = csv_candidates[0] if csv_candidates else ""
 
     csv_path = prompt_input(stdscr, "Enter path to ManaPool CSV", default_csv)
     if not os.path.isfile(csv_path):
@@ -289,7 +289,7 @@ def action_run_picklist(stdscr, use_api: bool = False) -> None:
     if not use_api:
         # Check for picklist CSVs
         picks = [f for f in os.listdir(".") if "picklist" in f and f.endswith(".csv")]
-        default_pick = picks[0] if picks else "picklist-2026-09-20.csv"
+        default_pick = picks[0] if picks else ""
         csv_path = prompt_input(stdscr, "Path to Picklist CSV", default_pick)
         if not os.path.isfile(csv_path):
             show_message_box(stdscr, "Error", [f"Picklist file not found: {csv_path}"])
