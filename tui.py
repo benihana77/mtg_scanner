@@ -21,13 +21,13 @@ import sys
 import time
 from typing import Any, Dict, List, Optional, Tuple
 
-import db
-import collection_pull
-import csv_pipeline
-import manapool_client
-import pull_list_optimizer
-import repricer
-import scryfall_mirror
+from station import db
+from station import collection_pull
+from station import csv_pipeline
+from station import manapool_client
+from station import pull_list_optimizer
+from station import repricer
+from station import scryfall_mirror
 
 
 def prompt_input(stdscr, prompt_text: str, default_val: str = "") -> str:
@@ -139,7 +139,7 @@ def action_ingest_batch(stdscr) -> None:
     stdscr.addstr(3, 2, "=== INGEST NEW BATCH FROM CSV ===", curses.A_BOLD)
 
     # Suggest available CSV files in current directory
-    csv_candidates = [f for f in os.listdir(".") if f.endswith(".csv") and "picklist" not in f and "Set_Box Map" not in f]
+    csv_candidates = [f for f in os.listdir(".") if f.endswith(".csv") and "picklist" not in f]
     default_csv = csv_candidates[0] if csv_candidates else ""
 
     csv_path = prompt_input(stdscr, "Enter path to ManaPool CSV", default_csv)

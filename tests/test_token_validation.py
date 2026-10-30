@@ -4,11 +4,11 @@ import unittest
 
 from unittest import mock
 
-import collection_pull
-import import_live_inventory as ili
-import special_cases_report as scr
-import scryfall_mirror
-import token_validation_report as tvr
+from station import collection_pull
+from station import import_live_inventory as ili
+from tools import special_cases_report as scr
+from station import scryfall_mirror
+from tools import token_validation_report as tvr
 
 
 def _row(set_code: str, num: str, section: str, name: str = "X") -> dict:

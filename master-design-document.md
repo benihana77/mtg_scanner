@@ -40,26 +40,31 @@ Input Controller	Mechanical USB Numpad	Operator control interface for fast quant
 3. Repository File Structure & Module Map
 ```text
 benihana77/mtg_scanner/
-├── .gitignore               # Git ignore configuration (Python, Docker, DB files)
+├── .gitignore               # Git ignore configuration (Python, Docker, DB files, generated data)
 ├── docker-compose.yml       # PostgreSQL container deployment
-├── schema.sql               # Canonical DDL for scryfall_cards / inventory / price_history (see Section 6)
-├── db.py                    # PostgreSQL connection management & parameterized queries (active)
-├── hashing_engine.py        # [STUB] pHash helper only; camera/OpenCV capture not yet implemented
-├── csv_pipeline.py          # ManaPool CSV intake, box/section allocation, relocation
-├── manapool_client.py       # ManaPool API v1 client (orders, batch inventory push)
-├── pull_list_optimizer.py   # Order ingestion, location optimization & printable pick sheet generator
-├── tui.py                   # Curses terminal UI over the interim workflow
-├── import_live_inventory.py # Fresh import of a ManaPool backup against scryfall_cards (preview, or --rebuild)
-├── scryfall_mirror.py       # Local Scryfall mirror: bulk refresh, set/number + token-combo resolution
-├── token_validation_report.py # Read-only report of tokens / non-tokens filed in the wrong place
-├── special_cases_report.py # Printable check sheet of unusual cards at their planned locations
-├── collection_pull.py       # Search / pull cards (or a decklist) for a personal collection, then sync ManaPool
-├── repricer.py              # Repricer: ManaPool market-data pricing, risers, price history snapshots, pins
-├── repricer.toml            # Repricer settings (adjustment, floor, review limits, riser thresholds)
-├── audit.py                 # Physical audit: count sheets, count import, final ManaPool quantity push
-├── audit_inventory.py       # One-time audit: unmapped set assignment + token extraction sheet (to be superseded by the token validation report)
-├── test_interim_pipeline.py # unittest suite for the interim pipeline
-└── Manapool Print Format - Set_Box Map.csv  # Set -> physical box (M1..M19) mapping
+├── tui.py                   # Curses terminal UI over the interim workflow (python tui.py)
+├── station/                 # Daily tools + shared library (python -m station.<module>)
+│   ├── __init__.py          # Repository paths (ROOT, config/, Set/Box map)
+│   ├── schema.sql           # Canonical DDL for scryfall_cards / inventory / price_history / price_pins (see Section 6)
+│   ├── db.py                # PostgreSQL connection management & parameterized queries
+│   ├── scryfall_mirror.py   # Local Scryfall mirror: bulk refresh, set/number + token-combo resolution
+│   ├── manapool_client.py   # ManaPool API v1 client (orders, inventory push, price feed)
+│   ├── csv_pipeline.py      # ManaPool CSV intake, box/section allocation, relocation
+│   ├── pull_list_optimizer.py # Order ingestion, location optimization & printable pick sheet generator
+│   ├── collection_pull.py   # Search / pull cards (or a decklist) for a personal collection, then sync ManaPool
+│   ├── repricer.py          # Repricer: ManaPool market-data pricing, risers, price history snapshots, pins
+│   ├── audit.py             # Physical audit: count sheets, count import, ManaPool quantity push
+│   └── import_live_inventory.py # Fresh import of a ManaPool export against scryfall_cards (preview, or --rebuild)
+├── tools/                   # Occasional reports (python -m tools.<module>)
+│   ├── token_validation_report.py # Read-only report of tokens / non-tokens filed in the wrong place
+│   └── special_cases_report.py    # Printable check sheet of unusual cards at their planned locations
+├── archive/                 # Finished one-time code, kept for reference
+│   ├── audit_inventory.py   # One-time audit: unmapped set assignment + token extraction sheet
+│   └── hashing_engine.py    # [STUB] pHash helper only; camera/OpenCV capture not yet implemented
+├── tests/                   # unittest suites (python -m unittest discover -s tests)
+└── config/
+    ├── repricer.toml        # Repricer settings (adjustment, floor, review limits, riser thresholds)
+    └── set_box_map.csv      # Set -> physical box (M1..M19) mapping
 ```
 Module Responsibilities
 `hashing_engine.py`: Intercepts camera frames, crops card boundaries using contour detection, generates perceptual hashes, and computes Hamming distance against Scryfall hash caches.
@@ -75,7 +80,7 @@ Scryfall mirror refresh (planned): downloads Scryfall's "Default Cards" bulk fil
 `docker-compose.yml`: Provisions the persistent PostgreSQL instance.
 ---
 3a. Physical Storage Model
-Boxes: Storage boxes are labelled `M1`–`M19`. Each set is assigned to one box via `Manapool Print Format - Set_Box Map.csv`; brand-new sets are assigned at intake by operator prompt.
+Boxes: Storage boxes are labelled `M1`–`M19`. Each set is assigned to one box via `config/set_box_map.csv`; brand-new sets are assigned at intake by operator prompt.
 Sections: Within a box, each set is split into append-only sections (`Sec-1`, `Sec-2`, …). Every intake batch for a set becomes the next section, alphabetized by card name and indexed `1..N`. Shelf order: names are compared case- and accent-insensitively (Éomer files under E; leading symbols like `+2 Mace` file first), and same-name printings go in numeric collector-number order, so the regular printing comes before showcase/other variants. Existing sections are never re-sorted. No divider slips are printed.
 Special sections (box M19): `PROMOS` holds standalone promo sets (unchanged by the token design below).
 Tokens (approved design):
@@ -90,7 +95,7 @@ Token clean-up (one-time):
 1. Wipe the provisional Oct 7 MOM `Sec-2` test rows (box M18) from the database.
 2. Validation report against the current database: a text walk sheet (box → set → section → index) plus CSV listing (a) tokens sitting in set boxes and (b) non-tokens sitting in `TOKENS`. Report only; it moves nothing.
 3. Operator verifies and moves cards by hand. `special_cases_report.py` prints a check sheet of every unusual card (combos, emblems, helper cards, promos, meld names, symbol/accent names, same-name printings in text order, The List) at the box / section / index the fresh import will assign.
-4. Fresh import (`python import_live_inventory.py --rebuild`; preview without the flag) from `backups/inventory-manapool-audited-20260927.csv` with real Scryfall IDs and the `layout` rule, using the shelf sort order above: one alphabetized `Sec-1` per set plus `TOKEN-1`, together with a list of sets that need physical re-sorting (sets that had several sections or gain/lose tokens).
+4. Fresh import (`python -m station.import_live_inventory --rebuild`; preview without the flag) from `backups/inventory-manapool-audited-20260927.csv` with real Scryfall IDs and the `layout` rule, using the shelf sort order above: one alphabetized `Sec-1` per set plus `TOKEN-1`, together with a list of sets that need physical re-sorting (sets that had several sections or gain/lose tokens).
 ---
 4. Computer Vision & Perceptual Hashing Pipeline
 ```
@@ -200,14 +205,14 @@ Double-sided token combos: `back_scryfall_id` holds the back face of a ManaPool 
 No synthetic IDs: a card that cannot be resolved against `scryfall_cards` (after a refresh) is refused at intake/import and listed in the run summary. A `custom_cards` table will only be added if such rows turn out to be a real need.
 `image_hash`: the only non-Scryfall catalog field. It is unused until Phase 3 and will get its own table (`scryfall_id` → hash) at that point.
 Migration: existing databases still have the old `cards` table and the synthetic `mp-<set>-<num>` IDs. They are replaced during the token clean-up fresh import (Section 3a), which wipes `inventory`/`cards` and reloads against `scryfall_cards`.
-Repricer (`repricer.py`, settings in `repricer.toml`) — replaces ManaPool's bulk pricer
+Repricer (`station/repricer.py`, settings in `config/repricer.toml`) — replaces ManaPool's bulk pricer
 Market data: ManaPool's public `GET /prices/singles` feed (one unauthenticated request covering every in-stock single, refreshed about hourly, keyed by Scryfall ID, prices in cents). Feed data older than `[feed] max_age_hours` is refused.
 Base price per listing: max(lowest NM listing, market price) × (1 + adjustment_pct/100) — default −1%, matching ManaPool's "High of Low Listed & Market Price −1%" — using foil fields for foils, rounded half up to the cent, never below the $0.15 floor (ManaPool's minimum). Cards with neither anchor (including double-sided combo tokens) are skipped and keep their price.
 Review: a change is applied automatically unless it exceeds BOTH `max_auto_change_pct` and `max_auto_change_dollars` (default 30% and $0.50); those go to a review list (accept all / reject all / one by one with optional custom price).
 Risers: flagged if any signal fires — lowest listing ≥ 1.5× market; ManaPool-wide available quantity down ≥ 50% within 7 days; market up ≥ 50% and ≥ $0.25 within 7 days. Risers use the normal formula and only need review when over the limits; they are highlighted in the report.
 Pins: `price_pins` (by ManaPool product ID) hold the listed price or a fixed price; managed via CLI (`pin`/`unpin`/`pins`) and the TUI.
 Run flow (manual, CLI `run` or TUI [R]): drift check against live prices (`GET /seller/inventory`, cursor-paged) — refuses to push if any live price differs from the database (`sync --apply` copies live prices in) → plan → review → confirm → price-only push (`quantity: null`, batches of 2,000, 429/Retry-After honoured) → read back and update `manapool_listed_price` for verified products → report (`exports/reprice_*.txt/.csv`). `--preview` plans and reports without pushing.
-Nightly snapshot (cron, 3:00 AM): `repricer.py snapshot` upserts one `price_history` row per inventory card per day (combos excluded) and never changes prices. Automatic nightly repricing is deferred until manual runs are validated.
+Nightly snapshot (cron, 3:00 AM): `python -m station.repricer snapshot` upserts one `price_history` row per inventory card per day (combos excluded) and never changes prices. Automatic nightly repricing is deferred until manual runs are validated.
 ---
 7. Nightly Order Pull List Optimizer (`pull_list_optimizer.py`)
 To optimize physical order fulfillment, a nightly batch job processes incoming ManaPool orders and generates an optimized physical pick sheet.

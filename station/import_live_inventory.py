@@ -2,7 +2,7 @@
 
 Reads:
 1. ManaPool inventory export (--inventory-csv, required)
-2. Physical set-to-box map ('Manapool Print Format - Set_Box Map.csv'), including a
+2. Physical set-to-box map (config/set_box_map.csv), including a
    '(TOKENS) Tokens' row for the token box.
 
 Every single is resolved against `scryfall_cards` (real Scryfall IDs; double-sided token
@@ -30,8 +30,9 @@ from typing import Any, Dict, List, Optional, Tuple
 from psycopg2 import extras
 from tabulate import tabulate
 
-import db
-import scryfall_mirror
+from station import db
+from station import scryfall_mirror
+from station import SET_BOX_MAP_CSV
 
 TOKENS_SET_KEY = "TOKENS"
 TOKEN_SECTION = "TOKEN-1"
@@ -41,7 +42,7 @@ ProductKey = Tuple[str, bool]  # (manapool_product_id, is_foil)
 
 
 def load_set_box_map(map_path: str) -> Dict[str, str]:
-    """Parses 'Manapool Print Format - Set_Box Map.csv' to extract set_code -> box mapping.
+    """Parses the Set/Box map CSV (config/set_box_map.csv) to extract set_code -> box mapping.
 
     Format expected:
         set_label,Box
@@ -276,7 +277,7 @@ def write_summary_file(
 
 def plan_import(
     inventory_csv: str,
-    map_csv: str = "Manapool Print Format - Set_Box Map.csv",
+    map_csv: str = SET_BOX_MAP_CSV,
     unmapped_box: str = "Unassigned",
 ) -> Dict[str, Any]:
     """Resolves a ManaPool inventory backup and assigns every row its physical location.
@@ -299,7 +300,7 @@ def plan_import(
     if not os.path.isfile(inventory_csv):
         raise FileNotFoundError(f"Inventory CSV not found at '{inventory_csv}'")
     if scryfall_mirror.get_mirror_status()["card_count"] == 0:
-        raise RuntimeError("scryfall_cards is empty; run 'python scryfall_mirror.py refresh' first.")
+        raise RuntimeError("scryfall_cards is empty; run 'python -m station.scryfall_mirror refresh' first.")
 
     set_to_box = load_set_box_map(map_csv)
     with open(inventory_csv, mode="r", encoding="utf-8-sig") as f:
@@ -390,7 +391,7 @@ def plan_import(
 
 def import_live_inventory(
     inventory_csv: str,
-    map_csv: str = "Manapool Print Format - Set_Box Map.csv",
+    map_csv: str = SET_BOX_MAP_CSV,
     unmapped_box: str = "Unassigned",
     rebuild: bool = False,
     output_dir: str = "exports",
@@ -454,8 +455,8 @@ def main():
     )
     parser.add_argument(
         "--map-csv",
-        default="Manapool Print Format - Set_Box Map.csv",
-        help="Path to Set_Box map CSV (default: Manapool Print Format - Set_Box Map.csv)",
+        default=SET_BOX_MAP_CSV,
+        help="Path to Set_Box map CSV (default: config/set_box_map.csv)",
     )
     parser.add_argument(
         "--unmapped-box",

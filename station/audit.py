@@ -16,9 +16,9 @@ of its remaining drifted rows.
 differing quantities (quantity only, prices untouched) and reads every one back.
 
 Usage:
-    python audit.py generate [--per-set 8] [--baseline 100] [--value-threshold 1.00] [--full-sets SOI]
-    python audit.py apply audits/audit_YYYY-MM-DD.csv
-    python audit.py push [--send]
+    python -m station.audit generate [--per-set 8] [--baseline 100] [--value-threshold 1.00] [--full-sets SOI]
+    python -m station.audit apply audits/audit_YYYY-MM-DD.csv
+    python -m station.audit push [--send]
 """
 
 import argparse
@@ -35,10 +35,11 @@ from typing import Any, Dict, List, Optional, Tuple
 
 from tabulate import tabulate
 
-import db
-import manapool_client
+from station import db
+from station import manapool_client
+from station import ROOT
 
-AUDIT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "audits")
+AUDIT_DIR = os.path.join(ROOT, "audits")
 APPLIED_LOG = os.path.join(AUDIT_DIR, "applied_counts.csv")
 # Listings lowered to ManaPool's (conservative) quantity until counted; holds the previous DB quantity.
 NEEDS_COUNT = os.path.join(AUDIT_DIR, "needs_count.csv")
@@ -194,7 +195,7 @@ def write_sheet(sheet: List[Dict[str, Any]], name: str, title: str) -> Tuple[str
         f.write("=" * 106 + f"\n {title}\n" + "=" * 106 + "\n")
         f.write(f" Rows: {len(sheet)} ({', '.join(f'{k} {v}' for k, v in sorted(parts.items()))})\n")
         f.write(" Count the copies at each Box / Section / Index and write the number in the 'counted' column of\n")
-        f.write(f" {os.path.basename(csv_path)} (leave blank if not counted), then run: python audit.py apply {os.path.relpath(csv_path)}\n")
+        f.write(f" {os.path.basename(csv_path)} (leave blank if not counted), then run: python -m station.audit apply {os.path.relpath(csv_path)}\n")
         f.write("=" * 106 + "\n\n")
         f.write(tabulate([[r["box"], r["section"], f"#{int(r['index']):03d}", r["set"], r["number"], r["name"][:32],
                            r["finish"], r["db_qty"], r["manapool_qty"], r["part"], "[    ]"] for r in sheet],
@@ -416,7 +417,7 @@ def main() -> None:
         if unlisted:
             print(f"[!] {len(unlisted)} in-stock products have no ManaPool listing and are NOT pushed here "
                   "(a quantity-only push cannot set their price). List each with: "
-                  "python manapool_client.py push-one --product <id> --send", file=sys.stderr)
+                  "python -m station.manapool_client push-one --product <id> --send", file=sys.stderr)
             for pid, qty in sorted(unlisted.items())[:20]:
                 print(f"    {pid}  database qty {qty}", file=sys.stderr)
         zeroed = [p for p in quantities if p in zero_ids]
