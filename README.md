@@ -2,7 +2,7 @@
 
 A high-velocity inventory management station and fulfillment optimizer for Magic: The Gathering card singles, designed for seamless integration with **ManaPool** and backed by **PostgreSQL**.
 
-> **Status:** In design and development. The inventory and fulfillment software is built but not yet verified end to end. The camera/scanner hardware pipeline is not built yet; card intake currently uses ManaPool CSV exports.
+> **Status:** In use. As of Oct 2026 the database and ManaPool match after a physical audit, and the repricer and quantity pushes have run against the live store with read-back verification. The camera/scanner hardware pipeline is not built yet; card intake currently uses ManaPool CSV exports.
 
 ---
 
@@ -19,7 +19,7 @@ A high-velocity inventory management station and fulfillment optimizer for Magic
 
 1. **Interactive Curses TUI (`tui.py`)**:
    - Keyboard-driven terminal console with real-time database and API indicators.
-   - Menu: batch intake, push inventory to ManaPool, pick sheet from live API orders, pick sheet from a picklist CSV, browse inventory, box shuffle, diagnostics, and Scryfall mirror refresh.
+   - Menu: batch intake, push inventory to ManaPool, pick sheet from live API orders, pick sheet from a picklist CSV, browse inventory, box shuffle, diagnostics, Scryfall mirror refresh, personal collection pulls, [R] reprice, and [P] price pins.
 
 2. **ManaPool Batch Ingestion (`csv_pipeline.py`)**:
    - Ingests ManaPool set spreadsheets (`multiple_sets_all_products_*.csv`).
@@ -43,14 +43,40 @@ A high-velocity inventory management station and fulfillment optimizer for Magic
    - Supports stock deduction (`--commit`) directly updating PostgreSQL.
 
 5. **ManaPool API v1 Integration (`manapool_client.py`)**:
-   - Direct batch inventory updates via `POST /seller/inventory/product` (up to 2,000 items per request).
+   - `python manapool_client.py` checks credentials with a read-only `GET /account`.
+   - `python manapool_client.py preview-push [--set MOM ...] [--baseline <csv>]` is a dry run: it builds the exact payload a push would send, compares it with a ManaPool inventory export, and writes a comparison CSV plus the JSON payload. Nothing is sent. The default baseline is the Sept 27, 2026 export, which no longer reflects the live store; pass a fresh export, or use `audit.py push` / `repricer.py sync`, which compare against live ManaPool.
+   - `python manapool_client.py push-changed --set MOM [--set ...] [--baseline <csv>] [--send]` pushes the quantity (price left unchanged) of products whose quantity differs from the baseline (or that are new), then reads each one back and reports mismatches.
+   - `python manapool_client.py push-one --product <uuid> [--send]` reads the live listing, shows the payload, and with `--send` pushes just that product's database total and price and reads it back. Use it to list an in-stock product that has no ManaPool listing yet.
+   - Endpoints and payloads follow ManaPool's published spec: https://manapool.com/api/docs/v1/openapi.json
+   - Direct batch inventory updates via `POST /seller/inventory/product` (up to 2,000 items per request, retried when rate-limited). Quantity syncs send `price_cents: null` and price pushes send `quantity: null`, so each leaves the other field as it is on ManaPool.
    - Automated unfulfilled order retrieval and item parsing.
    - Graceful fallback to offline CSV mode when API credentials are not set.
 
-6. **Scryfall Mirror (`scryfall_mirror.py`)**:
+6. **Personal Collection Pulls (`collection_pull.py`)**:
+   - Search in-stock cards by name (case/accent-insensitive), or pull one card or a whole decklist (`4 Lightning Bolt`, `1 Name (SET) 123`, `*F*` for foil).
+   - Takes the cheapest in-stock printing first (oldest section first), prints a pull sheet in walk order (`exports/personal_pull_*.txt`), and lists anything missing or short. A row picked from a TUI search pulls exactly that copy (condition and location).
+   - Holds back copies needed by unfulfilled ManaPool orders. If open orders cannot be fully checked (API error, or no API credentials), nothing is pulled unless `--force` is given; the TUI asks before forcing.
+   - On confirmation, deducts the cards and pushes the new absolute quantities (price left unchanged) for just those products to ManaPool; without API credentials (or if the push fails) it writes `exports/manapool_sync_*.csv` to upload by hand.
+
+7. **Repricer (`repricer.py`, settings in `repricer.toml`)**:
+   - Prices every in-stock listing at max(lowest NM listing, market) −1%, floor $0.15, from ManaPool's public price feed (one request per run).
+   - Never undercuts itself: when the lowest NM listing equals our own price (it may be our listing), the price is held, or raised if the market anchor alone is higher. Products with no ManaPool listing are skipped.
+   - Changes over both review limits (30% and $0.50) need your review; everything else is applied automatically. Risers (lowest listing far above market, supply draining, market climbing) are flagged in the report.
+   - Refuses to push while live ManaPool prices differ from the database (`sync --apply` fixes that); pushes price only, then reads prices back to verify.
+   - `snapshot` records daily price history (run nightly from cron, see below); pins hold or fix individual prices. TUI: [R] reprice, [P] pins.
+
+8. **Scryfall Mirror (`scryfall_mirror.py`)**:
    - `python scryfall_mirror.py refresh` loads Scryfall's Default Cards bulk file (about a minute); `status` shows its size and age. Refresh before intaking a newly released set.
 
-7. **Setup & Audit Tools**:
+9. **Physical Audit (`audit.py`)**:
+   - `generate` writes a walk-order count sheet (`audits/audit_<date>.txt`) and a fillable CSV covering listings where ManaPool and the database disagree (sampled per set, `--full-sets` counted in full; in-stock products with no ManaPool listing count as disagreeing), a random baseline of agreeing listings, and every listing worth $1+. Rows counted in the last 30 days are left out (`--skip-counted-days N` to change).
+   - `apply <csv|xlsx>` imports the `counted` column, updates those rows, logs them to `audits/applied_counts.csv`, and writes a follow-up full-count sheet for any set whose sample had an overcount. A count is skipped if its row no longer holds the sheet's product at the sheet's box / section / index (e.g. inventory rebuilt or relocated since printing).
+   - `push [--send] [--zero <csv>]` pushes audited database quantities (quantity only) to every ManaPool listing that differs, then reads them back; `--zero` sets dropped products (e.g. `audits/dropped_sets_*.csv`) to 0. In-stock products with no ManaPool listing are reported, not pushed (list them with `push-one`).
+   - Conservative listing: listings not yet counted are held at ManaPool's lower quantity and recorded in `audits/needs_count.csv` (with the previous database quantity); `generate --needs-count [--sets CMR NEO]` prints a count sheet for them.
+   - Oct 2026: SOI and BFZ were dropped from the database and ManaPool for a clean relist (`audits/dropped_sets_2026-10-21_SOI_BFZ.csv`).
+   - `audits/` holds data, not code: it is git-ignored, so count sheets, `applied_counts.csv`, `needs_count.csv` and the dropped-sets list live only on the station's machine.
+
+10. **Setup & Audit Tools**:
    - `import_live_inventory.py`: fresh import of a ManaPool inventory export against the Scryfall mirror and Set/Box map. Previews by default; `--rebuild` drops and recreates the inventory tables atomically.
    - `token_validation_report.py`: read-only report of tokens filed in set sections, non-tokens in token sections, and rows missing from the mirror.
    - `special_cases_report.py`: printable check sheet of unusual cards (combos, emblems, helper cards, promos, accent/symbol names, same-name printings, The List) at their planned locations.
@@ -84,6 +110,7 @@ DB_PORT=5432
 DB_NAME=mtg_inventory
 DB_USER=mtg_admin
 DB_PASS=password
+SCRYFALL_USER_AGENT=mtg_scanner/1.0
 
 # Optional: For live ManaPool API integration
 MANAPOOL_EMAIL=your_email@example.com
@@ -123,6 +150,37 @@ python csv_pipeline.py relocate --source M3 --target M4 --set ZNR --section Sec-
 python csv_pipeline.py relocate --source M19 --target M20 --set TOKENS
 ```
 
+### Pull Cards for a Personal Collection
+```bash
+python collection_pull.py search "lightning bolt"
+python collection_pull.py pull "Lightning Bolt" --qty 4
+python collection_pull.py pull --decklist mydeck.txt
+python collection_pull.py pull --decklist mydeck.txt --force   # pull even if open orders cannot be checked
+```
+
+### Reprice
+```bash
+python repricer.py run --preview     # plan and report only
+python repricer.py run               # drift check, review, confirm, push, verify
+python repricer.py sync [--apply]    # compare / copy live ManaPool prices into the database
+python repricer.py snapshot          # record today's price history (nightly via cron)
+python repricer.py pin --set CMR --number 123 [--foil] [--price 2.50]
+```
+
+Nightly price history (crontab):
+```
+0 3 * * * cd /home/bbrown/mtg_scanner && venv/bin/python repricer.py snapshot >> exports/snapshot.log 2>&1
+```
+
+### Physical Audit
+```bash
+python audit.py generate [--full-sets SOI] [--skip-counted-days 30]
+python audit.py generate --needs-count [--sets CMR NEO]
+python audit.py apply audits/audit_2026-10-19.csv
+python audit.py push             # dry run against live ManaPool
+python audit.py push --send      # push differing quantities, then read back
+```
+
 ### Browse Physical Inventory
 ```bash
 python csv_pipeline.py list
@@ -145,7 +203,7 @@ python pull_list_optimizer.py --api --commit
 
 ## Running Automated Tests
 ```bash
-python -m unittest test_interim_pipeline test_token_validation -v
+python -m unittest test_interim_pipeline test_token_validation test_repricer -v
 ```
 The integration tests run against a separate `mtg_inventory_test` database (override with `TEST_DB_NAME`), which they create and reset themselves; the live database is never touched.
 

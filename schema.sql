@@ -40,6 +40,23 @@ CREATE TABLE IF NOT EXISTS price_history (
     market_price_foil DECIMAL(10, 2)
 );
 
+-- Price history additions for the repricer (idempotent, so init_db migrates older databases).
+-- One row per Scryfall card per snapshot date; prices are dollars, quantities are ManaPool-wide.
+ALTER TABLE price_history ADD COLUMN IF NOT EXISTS low_price_normal DECIMAL(10, 2);   -- Lowest NM listing
+ALTER TABLE price_history ADD COLUMN IF NOT EXISTS low_price_foil DECIMAL(10, 2);
+ALTER TABLE price_history ADD COLUMN IF NOT EXISTS available_quantity INTEGER;         -- Copies listed on ManaPool
+ALTER TABLE price_history ADD COLUMN IF NOT EXISTS listed_price_normal DECIMAL(10, 2); -- Our listing price at snapshot
+ALTER TABLE price_history ADD COLUMN IF NOT EXISTS listed_price_foil DECIMAL(10, 2);
+ALTER TABLE price_history ADD COLUMN IF NOT EXISTS feed_as_of TIMESTAMP;               -- ManaPool feed timestamp
+
+-- Repricer pins: products the repricer must not change (or must hold at fixed_price)
+CREATE TABLE IF NOT EXISTS price_pins (
+    manapool_product_id VARCHAR(50) PRIMARY KEY,
+    fixed_price DECIMAL(10, 2),              -- NULL = keep whatever price is listed
+    note TEXT,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
 -- Performance Indexes
 CREATE INDEX IF NOT EXISTS idx_scryfall_cards_lookup ON scryfall_cards (set_code, collector_number);
 CREATE INDEX IF NOT EXISTS idx_scryfall_cards_name ON scryfall_cards (name);
@@ -47,3 +64,4 @@ CREATE INDEX IF NOT EXISTS idx_scryfall_cards_layout ON scryfall_cards (layout);
 CREATE INDEX IF NOT EXISTS idx_inventory_location ON inventory (box_label, section_label, index_num);
 CREATE INDEX IF NOT EXISTS idx_inventory_scryfall ON inventory (scryfall_id);
 CREATE INDEX IF NOT EXISTS idx_inventory_product_id ON inventory (manapool_product_id);
+CREATE UNIQUE INDEX IF NOT EXISTS idx_price_history_card_date ON price_history (scryfall_id, recorded_date);

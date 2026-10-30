@@ -21,10 +21,13 @@ import unittest
 import psycopg2
 from psycopg2 import extras
 
+import collection_pull
 import db
 import csv_pipeline
 import manapool_client
 import pull_list_optimizer
+import audit
+import repricer
 from unittest.mock import MagicMock, patch
 
 
@@ -64,7 +67,7 @@ class TestMTGInterimPipeline(unittest.TestCase):
     def setUp(self):
         """Empties the test database's inventory and catalog before each test."""
         with db.get_db_cursor() as cur:
-            cur.execute("TRUNCATE inventory, price_history, scryfall_cards RESTART IDENTITY;")
+            cur.execute("TRUNCATE inventory, price_history, price_pins, scryfall_cards RESTART IDENTITY;")
         # Use a test Set/Box map (no TOKENS row) instead of the real one.
         self.write_set_box_map({})
 
@@ -915,6 +918,289 @@ class TestMTGInterimPipeline(unittest.TestCase):
             [(p["section_label"], p["index_num"]) for p in allocated],
             [("TOKEN-1", 1), ("TOKEN-1", 2), ("TOKEN-2", 1)],
         )
+
+
+    def test_12_personal_pull_decklist_reservations_and_sync(self):
+        """Decklist pull takes the cheapest copies, holds open-order copies, deducts, and syncs totals."""
+        rows = [
+            {**self.token_row("TESTP", "1", "Lightning Bolt", layout="normal", qty="3"), "price": "0.50", "product_id": "pid-bolt-1"},
+            {**self.token_row("TESTP", "2", "Lightning Bolt", layout="normal", qty="2"), "price": "0.25", "product_id": "pid-bolt-2"},
+            {**self.token_row("TESTP", "3", "Counterspell", layout="normal", qty="1"), "price": "1.00", "product_id": "pid-cs"},
+        ]
+        csv_file = self.create_mock_manapool_csv("personal.csv", rows)
+        csv_pipeline.ingest_csv_batch(csv_file, box_label="TestBox-1", output_dir=self.test_dir)
+
+        reqs, unparsed = collection_pull.parse_decklist(["Deck", "3 Lightning Bolt", "1x Counterspell", "2 Missing Card", "???"])
+        self.assertEqual(unparsed, ["???"])
+
+        # Counterspell's only copy is on an open order -> held back.
+        picks, short = collection_pull.plan_pulls(collection_pull.load_stock(), reqs, reserved={"pid-cs": 1})
+        self.assertEqual([(p["collector_number"], p["qty_to_pull"]) for p in picks], [("2", 2), ("1", 1)])
+        held = {s["request"]["name"]: s for s in short}
+        self.assertTrue(held["Counterspell"]["held_for_orders"])
+        self.assertFalse(held["Missing Card"]["found_any"])
+
+        # Commit with the API mocked: ManaPool receives new absolute totals, price left alone (null).
+        with patch.object(collection_pull, "reserved_by_open_orders", return_value=({"pid-cs": 1}, "checked")), \
+             patch.object(manapool_client, "is_configured", return_value=True), \
+             patch("requests.request") as mock_post:
+            mock_post.return_value = MagicMock(status_code=200)
+            res = collection_pull.run_pull(reqs, "deck.txt", confirm=lambda lines: True, output_dir=self.test_dir)
+
+        self.assertTrue(res["committed"])
+        self.assertEqual(res["sync"]["mode"], "api")
+        payload = {e["product_id"]: e for e in mock_post.call_args[1]["json"]}
+        self.assertEqual(payload["pid-bolt-2"]["quantity"], 0)  # sold out, row kept at 0
+        self.assertEqual(payload["pid-bolt-1"]["quantity"], 2)
+        self.assertIsNone(payload["pid-bolt-1"]["price_cents"])
+        self.assertNotIn("pid-cs", payload)
+        self.assertEqual(db.get_total_quantities_by_product_ids(["pid-bolt-2", "pid-cs"]), {"pid-bolt-2": 0, "pid-cs": 1})
+
+    def test_13_personal_pull_without_api_writes_sync_csv(self):
+        """Without ManaPool credentials the pull still deducts and writes a CSV of absolute quantities."""
+        rows = [{**self.token_row("TESTP", "9", "Island", layout="normal", qty="5"), "product_id": "pid-island"}]
+        csv_file = self.create_mock_manapool_csv("island.csv", rows)
+        csv_pipeline.ingest_csv_batch(csv_file, box_label="TestBox-1", output_dir=self.test_dir)
+
+        with patch.object(manapool_client, "is_configured", return_value=False):
+            blocked = collection_pull.run_pull(
+                [{"qty": 2, "name": "island", "set_code": None, "number": None, "foil": None}],
+                "single", confirm=None, output_dir=self.test_dir,
+            )
+            res = collection_pull.run_pull(
+                [{"qty": 2, "name": "island", "set_code": None, "number": None, "foil": None}],
+                "single", confirm=None, force=True, output_dir=self.test_dir,
+            )
+            declined = collection_pull.run_pull(
+                [{"qty": 1, "name": "Island", "set_code": None, "number": None, "foil": None}],
+                "single", confirm=lambda lines: False, force=True, output_dir=self.test_dir,
+            )
+
+        # Open orders could not be checked: nothing is pulled without --force.
+        self.assertIn("--force", blocked["blocked"])
+        self.assertFalse(blocked["committed"])
+
+        self.assertEqual(res["sync"]["mode"], "csv")
+        self.assertIn("not configured", res["order_status"])
+        with open(res["sync"]["csv_path"], encoding="utf-8") as f:
+            synced = list(csv.DictReader(f))
+        self.assertEqual([(r["product_id"], r["quantity"]) for r in synced], [("pid-island", "3")])
+        self.assertFalse(declined["committed"])
+        self.assertEqual(db.get_total_quantities_by_product_ids(["pid-island"]), {"pid-island": 3})
+
+
+    def test_14_preview_push_sends_nothing_and_compares_baseline(self):
+        """preview_push builds the real payload, compares it with a baseline export, and never POSTs."""
+        rows = [
+            {**self.token_row("TESTV", "1", "Kept Card", layout="normal", qty="2"), "price": "0.30", "product_id": "pid-kept"},
+            {**self.token_row("TESTV", "2", "Grown Card", layout="normal", qty="3"), "price": "0.40", "product_id": "pid-grown"},
+            {**self.token_row("TESTV", "3", "New Card", layout="normal", qty="1"), "price": "0.50", "product_id": "pid-new"},
+        ]
+        csv_file = self.create_mock_manapool_csv("preview.csv", rows)
+        csv_pipeline.ingest_csv_batch(csv_file, box_label="TestBox-1", output_dir=self.test_dir)
+
+        baseline = os.path.join(self.test_dir, "baseline.csv")
+        with open(baseline, "w", newline="", encoding="utf-8") as f:
+            writer = csv.writer(f)
+            writer.writerow(["product_id", "quantity", "price"])
+            writer.writerow(["pid-kept", "2", "0.30"])
+            writer.writerow(["pid-grown", "1", "0.40"])
+
+        with patch("requests.post") as mock_post:
+            res = manapool_client.preview_push(["TESTV"], baseline, self.test_dir)
+        mock_post.assert_not_called()
+
+        flags = {r["product_id"]: r["flags"] for r in res["rows"]}
+        self.assertEqual(flags, {"pid-kept": "", "pid-grown": "QTY CHANGE", "pid-new": "NOT IN BASELINE"})
+        self.assertEqual(res["counts"]["unchanged"], 1)
+        with open(res["json_path"], encoding="utf-8") as f:
+            import json
+            payload = {e["product_id"]: e["quantity"] for e in json.load(f)}
+        self.assertEqual(payload, {"pid-kept": 2, "pid-grown": 3, "pid-new": 1})
+
+
+    def test_15_push_one_product_dry_run_and_send(self):
+        """push_one_product only reads unless send=True, then POSTs one entry and reads back."""
+        rows = [{**self.token_row("TESTO", "1", "One Card", layout="normal", qty="4"), "price": "0.15", "product_id": "8c454fe6-48a4-43cd-838b-b0aa6eb7ec11"}]
+        csv_file = self.create_mock_manapool_csv("one.csv", rows)
+        csv_pipeline.ingest_csv_batch(csv_file, box_label="TestBox-1", output_dir=self.test_dir)
+        pid = rows[0]["product_id"]
+
+        live = [{"inventory": {"quantity": 3, "price_cents": 15}}, {"inventory": {"quantity": 4, "price_cents": 15}}]
+        get_resp = [MagicMock(status_code=200, json=MagicMock(return_value=v)) for v in live]
+        with patch.object(manapool_client, "is_configured", return_value=True), \
+             patch("requests.get", side_effect=[get_resp[0], get_resp[0], get_resp[1]]) as mock_get, \
+             patch("requests.post", return_value=MagicMock(status_code=200)) as mock_post:
+            dry = manapool_client.push_one_product(pid)
+            mock_post.assert_not_called()
+            sent = manapool_client.push_one_product(pid, send=True)
+
+        self.assertEqual(dry["payload"], {"product_type": "mtg_single", "product_id": pid, "quantity": 4, "price_cents": 15})
+        self.assertFalse(dry["sent"])
+        self.assertEqual(mock_post.call_args[1]["json"], [dry["payload"]])
+        self.assertEqual((sent["before"]["quantity"], sent["after"]["quantity"]), (3, 4))
+        self.assertIn(f"/seller/inventory/product/mtg_single/{pid}", mock_get.call_args[0][0])
+
+
+    def test_16_push_changed_sends_only_differences_and_verifies(self):
+        """push_changed sends only changed/new products and reports read-back mismatches."""
+        rows = [
+            {**self.token_row("TESTC", "1", "Same Card", layout="normal", qty="2"), "price": "0.30", "product_id": "pid-same"},
+            {**self.token_row("TESTC", "2", "Up Card", layout="normal", qty="3"), "price": "0.40", "product_id": "pid-up"},
+            {**self.token_row("TESTC", "3", "New Card", layout="normal", qty="1"), "price": "0.50", "product_id": "pid-new"},
+        ]
+        csv_file = self.create_mock_manapool_csv("changed.csv", rows)
+        csv_pipeline.ingest_csv_batch(csv_file, box_label="TestBox-1", output_dir=self.test_dir)
+        baseline = os.path.join(self.test_dir, "baseline_c.csv")
+        with open(baseline, "w", newline="", encoding="utf-8") as f:
+            writer = csv.writer(f)
+            writer.writerow(["product_id", "quantity", "price"])
+            writer.writerow(["pid-same", "2", "0.30"])
+            writer.writerow(["pid-up", "1", "0.40"])
+
+        live = {"pid-up": {"quantity": 3, "price_cents": 40}, "pid-new": {"quantity": 0, "price_cents": 50}}
+        def fake_get(url, **kwargs):
+            pid = url.rsplit("/", 1)[-1]
+            return MagicMock(status_code=200, json=MagicMock(return_value={"inventory": live[pid]}))
+
+        with patch.object(manapool_client, "is_configured", return_value=True), \
+             patch("requests.get", side_effect=fake_get), \
+             patch("requests.request", return_value=MagicMock(status_code=200)) as mock_post:
+            dry = manapool_client.push_changed(["TESTC"], baseline, send=False, output_dir=self.test_dir)
+            mock_post.assert_not_called()
+            res = manapool_client.push_changed(["TESTC"], baseline, send=True, output_dir=self.test_dir)
+
+        self.assertEqual(sorted(e["product_id"] for e in dry["to_push"]), ["pid-new", "pid-up"])
+        self.assertEqual(sorted(e["product_id"] for e in mock_post.call_args[1]["json"]), ["pid-new", "pid-up"])
+        self.assertTrue(all(e["price_cents"] is None for e in mock_post.call_args[1]["json"]))  # prices untouched
+        self.assertEqual([m["product_id"] for m in res["mismatches"]], ["pid-new"])  # live qty 0 != sent 1
+
+
+    def repricer_fixture(self):
+        """Two in-stock products with a fresh fake feed; returns (config, feed rows, scryfall ids)."""
+        rows = [
+            {**self.token_row("TESTZ", "1", "Bulk Card", layout="normal", qty="3"), "price": "0.15", "product_id": "pid-bulk"},
+            {**self.token_row("TESTZ", "2", "Spike Card", layout="normal", qty="1"), "price": "0.20", "product_id": "pid-spike"},
+        ]
+        csv_file = self.create_mock_manapool_csv("reprice.csv", rows)
+        csv_pipeline.ingest_csv_batch(csv_file, box_label="TestBox-1", output_dir=self.test_dir)
+        config = repricer.load_config()
+        now = __import__("datetime").datetime.now(__import__("datetime").timezone.utc).isoformat()
+        feed = [
+            {"scryfall_id": "sf-testz-1", "price_cents_nm": 15, "price_market": 23, "price_cents_nm_foil": None,
+             "price_market_foil": None, "available_quantity": 500},
+            {"scryfall_id": "sf-testz-2", "price_cents_nm": 120, "price_market": 40, "price_cents_nm_foil": None,
+             "price_market_foil": None, "available_quantity": 4},
+        ]
+        return config, now, feed
+
+    def test_17_snapshot_records_history_once_per_day(self):
+        config, now, feed = self.repricer_fixture()
+        with patch.object(manapool_client, "fetch_price_feed", return_value=(now, feed)):
+            first = repricer.snapshot(config)
+            again = repricer.snapshot(config)
+        self.assertEqual((first["recorded"], again["recorded"]), (2, 2))
+        with db.get_db_cursor(commit=False) as cur:
+            cur.execute("SELECT scryfall_id, market_price_normal, low_price_normal, available_quantity, listed_price_normal "
+                        "FROM price_history ORDER BY scryfall_id;")
+            hist = [dict(r) for r in cur.fetchall()]
+        self.assertEqual(len(hist), 2)  # upserted, not duplicated
+        self.assertEqual((float(hist[1]["low_price_normal"]), hist[1]["available_quantity"], float(hist[1]["listed_price_normal"])),
+                         (1.20, 4, 0.20))
+
+    def test_18_reprice_blocks_on_drift_then_reviews_pushes_and_verifies(self):
+        config, now, feed = self.repricer_fixture()
+        live = {"pid-bulk": 15, "pid-spike": 25}  # spike's live price drifted from the DB's $0.20
+
+        def fake_inventory():
+            return [{"product_id": pid, "price_cents": c, "quantity": 1} for pid, c in live.items()]
+
+        with patch.object(manapool_client, "fetch_price_feed", return_value=(now, feed)), \
+             patch.object(manapool_client, "fetch_seller_inventory", side_effect=fake_inventory), \
+             patch.object(manapool_client, "is_configured", return_value=True), \
+             patch("requests.request") as mock_req:
+            blocked = repricer.run_reprice(config=config, output_dir=self.test_dir)
+            self.assertIn("differ", blocked["blocked"])
+            self.assertEqual(repricer.apply_drift(repricer.check_drift()["price_drift"]), 1)
+
+            # bulk: 0.15 -> 0.23 automatic; spike: 0.25 -> 1.19 needs review (LOW>MARKET riser), accepted at $1.00.
+            def post(method, url, **kw):
+                for e in kw["json"]:
+                    live[e["product_id"]] = e["price_cents"]
+                return MagicMock(status_code=200)
+            mock_req.side_effect = post
+            res = repricer.run_reprice(review=lambda items: {i["product_id"]: 100 for i in items},
+                                       confirm=lambda lines: True, config=config, output_dir=self.test_dir)
+
+        plan = {i["product_id"]: i for i in res["plan"]}
+        self.assertEqual((plan["pid-bulk"]["status"], plan["pid-bulk"]["target_cents"]), ("auto", 23))
+        self.assertEqual((plan["pid-spike"]["status"], plan["pid-spike"]["signals"]), ("review", ["LOW>MARKET"]))
+        sent = mock_req.call_args[1]["json"]
+        self.assertTrue(all(e["quantity"] is None for e in sent))  # price-only push
+        self.assertEqual(res["applied"], {"pid-bulk": 23, "pid-spike": 100})
+        prices = {p["product_id"]: p["listed_cents"] for p in repricer.load_products()}
+        self.assertEqual(prices, {"pid-bulk": 23, "pid-spike": 100})
+
+    def test_19_pins_hold_or_fix_prices(self):
+        config, now, feed = self.repricer_fixture()
+        repricer.add_pin("pid-bulk", None, "hold")
+        repricer.add_pin("pid-spike", 0.50)
+        with self.assertRaises(ValueError):
+            repricer.add_pin("pid-spike", 0.10)
+        plan = {i["product_id"]: i for i in repricer.plan_reprice(
+            repricer.load_products(), {f["scryfall_id"]: f for f in feed}, repricer.load_pins(), {}, config)}
+        self.assertEqual(plan["pid-bulk"]["status"], "pinned")
+        self.assertEqual((plan["pid-spike"]["status"], plan["pid-spike"]["target_cents"]), ("auto", 50))
+        self.assertEqual(len(repricer.list_pins()), 2)
+        self.assertTrue(repricer.remove_pin("pid-bulk"))
+        self.assertFalse(repricer.remove_pin("pid-bulk"))
+
+
+    def test_20_push_quantities_sends_null_price(self):
+        """push_quantities only sets quantity; price_cents is null so prices are left alone."""
+        with patch.object(manapool_client, "is_configured", return_value=True), \
+             patch("requests.request", return_value=MagicMock(status_code=200)) as mock_req:
+            updated, errors = manapool_client.push_quantities({"pid-a": 3, "pid-b": 0})
+        self.assertEqual((updated, errors), (2, []))
+        sent = mock_req.call_args[1]["json"]
+        self.assertEqual(sent, [
+            {"product_type": "mtg_single", "product_id": "pid-a", "price_cents": None, "quantity": 3},
+            {"product_type": "mtg_single", "product_id": "pid-b", "price_cents": None, "quantity": 0},
+        ])
+
+
+    def test_21_audit_apply_updates_rows_logs_and_flags_overcount_sets(self):
+        rows = [
+            {**self.token_row("TESTA1", "1", "Over Card", layout="normal", qty="10"), "product_id": "pid-over"},
+            {**self.token_row("TESTA1", "2", "Exact Card", layout="normal", qty="3"), "product_id": "pid-exact"},
+            {**self.token_row("TESTB1", "3", "Under Card", layout="normal", qty="2"), "product_id": "pid-under"},
+        ]
+        csv_file = self.create_mock_manapool_csv("audit.csv", rows)
+        csv_pipeline.ingest_csv_batch(csv_file, box_label="TestBox-1", output_dir=self.test_dir)
+        live = {"pid-over": 4, "pid-exact": 1, "pid-under": 0}
+        with patch.object(audit, "AUDIT_DIR", self.test_dir), \
+             patch.object(audit, "APPLIED_LOG", os.path.join(self.test_dir, "applied.csv")):
+            sheet = audit.select_audit(audit.load_rows(), live, per_set=5, baseline=0)
+            counts = {"pid-over": "7", "pid-exact": "3", "pid-under": "x"}
+            for r in sheet:
+                r["counted"] = counts[r["product_id"]]
+            moved = {**sheet[0], "box": "OtherBox", "counted": "1"}  # same inventory_id, stale location
+            _, path = audit.write_sheet(sheet, "t_audit", "TEST")
+            _, moved_path = audit.write_sheet([moved], "t_moved", "TEST")
+            moved_res = audit.apply_counts(moved_path)
+            res = audit.apply_counts(path)
+            logged = audit.already_counted()
+
+        self.assertEqual(moved_res["applied"], [])
+        self.assertIn("changed since the sheet was printed", moved_res["skipped"][0]["reason"])
+
+        self.assertEqual(sorted((a["product_id"], a["previous_qty"], a["counted"]) for a in res["applied"]),
+                         [("pid-exact", 3, 3), ("pid-over", 10, 7)])
+        self.assertEqual(res["overcount_sets"], ["TESTA1"])
+        self.assertEqual([s["product_id"] for s in res["skipped"]], ["pid-under"])
+        self.assertEqual(len(logged), 2)
+        self.assertEqual(db.get_total_quantities_by_product_ids(["pid-over"]), {"pid-over": 7})
+        self.assertEqual(audit.plan_push(audit.load_rows(), live), {"pid-over": 7, "pid-exact": 3, "pid-under": 2})
 
 
 if __name__ == "__main__":

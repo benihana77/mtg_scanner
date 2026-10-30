@@ -149,57 +149,39 @@ def fetch_unfulfilled_orders() -> Tuple[List[Dict[str, Any]], List[str]]:
         return [], [f"Exception while retrieving orders: {e}"]
 
 
-def push_inventory_batch(
+def build_inventory_payload(
     items: List[Dict[str, Any]],
     aggregate_with_db: bool = True,
-) -> Tuple[int, List[str]]:
-    """Pushes a list of inventory updates to ManaPool in chunks of up to 2,000 items.
+) -> List[Dict[str, Any]]:
+    """Builds the exact JSON entries `push_inventory_batch` would send, without sending them.
 
-    CRITICAL NOTE ON QUANTITIES:
-    The ManaPool API (POST /seller/inventory/product) SETS (replaces) the absolute
-    inventory quantity on the storefront. It does NOT increment or add.
-    
-    When aggregate_with_db=True (default), this method queries PostgreSQL for the
-    CUMULATIVE total quantity in stock across all boxes and sections for each product ID.
-    This guarantees that adding a new batch of 2 copies to an existing stock of 3 copies
-    sends quantity=5 to ManaPool, preventing existing inventory from being overwritten.
+    One entry per ManaPool product. With aggregate_with_db=True the quantity is the
+    cumulative in-stock total for that product across all boxes and sections.
 
     Args:
-        items (List[Dict[str, Any]]): List of inventory items containing:
-            - product_id or manapool_product_id (str): ManaPool product UUID.
-            - quantity (int): Stock quantity (used directly only if aggregate_with_db=False).
-            - price or manapool_listed_price (Optional[float]): Price in dollars.
-            - custom_external_id (Optional[str]): E.g. 'Box-1:Sec-2:042'.
-        aggregate_with_db (bool): If True, replaces item quantity with the total
-            in-stock sum from PostgreSQL for that product across all boxes.
+        items (List[Dict[str, Any]]): Same shape as for `push_inventory_batch`.
+        aggregate_with_db (bool): Use PostgreSQL totals instead of each item's quantity.
 
     Returns:
-        Tuple[int, List[str]]: (Total items updated, list of error messages).
+        List[Dict[str, Any]]: Payload entries (product_id, quantity, price_cents, ...).
+
+    Raises:
+        Exception: If the PostgreSQL totals cannot be read while aggregating.
     """
-    if not is_configured():
-        return 0, ["ManaPool API is not configured. Cannot push inventory."]
-
-    url = f"{BASE_URL}/seller/inventory/product"
-    batch_size = 2000
-    total_updated = 0
-    errors: List[str] = []
-
     # Filter items with valid product_id
     valid_items = [
         it for it in items
         if (it.get("product_id") or it.get("manapool_product_id"))
     ]
     if not valid_items:
-        return 0, ["No valid items with product_id found to update."]
+        return []
 
     # If aggregating with DB, fetch cumulative totals across all boxes
     db_totals: Dict[str, int] = {}
     if aggregate_with_db:
         prod_ids = [str(it.get("product_id") or it.get("manapool_product_id")).strip() for it in valid_items]
-        try:
-            db_totals = db.get_total_quantities_by_product_ids(prod_ids)
-        except Exception as e:
-            print(f"[Warning] Failed to query cumulative DB totals for ManaPool push: {e}", file=sys.stderr)
+        # Fail loudly: falling back to per-item quantities would overwrite storefront totals.
+        db_totals = db.get_total_quantities_by_product_ids(prod_ids)
 
     # Deduplicate by product_id so each product is sent once with its true total
     seen_products = set()
@@ -238,6 +220,48 @@ def push_inventory_batch(
 
         formatted_payload.append(entry)
 
+    return formatted_payload
+
+
+def push_inventory_batch(
+    items: List[Dict[str, Any]],
+    aggregate_with_db: bool = True,
+) -> Tuple[int, List[str]]:
+    """Pushes a list of inventory updates to ManaPool in chunks of up to 2,000 items.
+
+    CRITICAL NOTE ON QUANTITIES:
+    The ManaPool API (POST /seller/inventory/product) SETS (replaces) the absolute
+    inventory quantity on the storefront. It does NOT increment or add.
+    
+    When aggregate_with_db=True (default), this method queries PostgreSQL for the
+    CUMULATIVE total quantity in stock across all boxes and sections for each product ID.
+    This guarantees that adding a new batch of 2 copies to an existing stock of 3 copies
+    sends quantity=5 to ManaPool, preventing existing inventory from being overwritten.
+
+    Args:
+        items (List[Dict[str, Any]]): List of inventory items containing:
+            - product_id or manapool_product_id (str): ManaPool product UUID.
+            - quantity (int): Stock quantity (used directly only if aggregate_with_db=False).
+            - price or manapool_listed_price (Optional[float]): Price in dollars.
+            - custom_external_id (Optional[str]): E.g. 'Box-1:Sec-2:042'.
+        aggregate_with_db (bool): If True, replaces item quantity with the total
+            in-stock sum from PostgreSQL for that product across all boxes.
+
+    Returns:
+        Tuple[int, List[str]]: (Total items updated, list of error messages).
+    """
+    if not is_configured():
+        return 0, ["ManaPool API is not configured. Cannot push inventory."]
+
+    url = f"{BASE_URL}/seller/inventory/product"
+    batch_size = 2000
+    total_updated = 0
+    errors: List[str] = []
+
+    formatted_payload = build_inventory_payload(items, aggregate_with_db)
+    if not formatted_payload:
+        return 0, ["No valid items with product_id found to update."]
+
     # Send in chunks of 2,000
     for i in range(0, len(formatted_payload), batch_size):
         chunk = formatted_payload[i : i + batch_size]
@@ -253,7 +277,380 @@ def push_inventory_batch(
     return total_updated, errors
 
 
-if __name__ == "__main__":
+def _request(method: str, url: str, max_retries: int = 3, **kwargs: Any) -> requests.Response:
+    """Sends a request, waiting and retrying when ManaPool rate-limits it (HTTP 429 + Retry-After)."""
+    for attempt in range(max_retries + 1):
+        resp = requests.request(method, url, **kwargs)
+        if resp.status_code != 429 or attempt == max_retries:
+            return resp
+        wait = resp.headers.get("Retry-After", "5")
+        time.sleep(min(float(wait) if wait.replace(".", "", 1).isdigit() else 5.0, 120.0))
+    return resp
+
+
+def fetch_price_feed() -> Tuple[Optional[str], List[Dict[str, Any]]]:
+    """Downloads ManaPool's public price feed for every in-stock single (one request, no auth).
+
+    Prices in the feed are integer cents. The feed is refreshed roughly hourly.
+
+    Returns:
+        Tuple[Optional[str], List[Dict[str, Any]]]: (feed 'as_of' ISO timestamp, rows keyed
+            by scryfall_id with price_cents_nm, price_cents_nm_foil, price_market,
+            price_market_foil and available_quantity).
+
+    Raises:
+        requests.HTTPError: If the feed cannot be downloaded.
+    """
+    resp = _request("GET", f"{BASE_URL}/prices/singles", headers={"User-Agent": "mtg_scanner/1.0"}, timeout=120)
+    resp.raise_for_status()
+    body = resp.json()
+    return body.get("meta", {}).get("as_of"), body.get("data", [])
+
+
+def fetch_seller_inventory(page_size: int = 10000) -> List[Dict[str, Any]]:
+    """Reads every live listing in the seller's ManaPool inventory (cursor-paged, authenticated).
+
+    Returns:
+        List[Dict[str, Any]]: Items with product_type, product_id, price_cents and quantity.
+
+    Raises:
+        RuntimeError: If the API is not configured or a page cannot be read.
+    """
+    if not is_configured():
+        raise RuntimeError("ManaPool API is not configured.")
+    items: List[Dict[str, Any]] = []
+    cursor: Optional[str] = None
+    while True:
+        params: Dict[str, Any] = {"limit": page_size}
+        if cursor:
+            params["cursor"] = cursor
+        resp = _request("GET", f"{BASE_URL}/seller/inventory", headers=get_headers(), params=params, timeout=60)
+        if resp.status_code != 200:
+            raise RuntimeError(f"Reading seller inventory failed: HTTP {resp.status_code} {resp.text[:200]}")
+        body = resp.json()
+        items.extend(body.get("inventory", []))
+        cursor = body.get("pagination", {}).get("next_cursor")
+        if not cursor:
+            return items
+
+
+def _post_inventory(entries: List[Dict[str, Any]]) -> Tuple[int, List[str]]:
+    """POSTs inventory entries in batches of 2,000 (retrying rate limits); returns (updated, errors)."""
+    updated, errors = 0, []
+    for i in range(0, len(entries), 2000):
+        chunk = entries[i : i + 2000]
+        resp = _request("POST", f"{BASE_URL}/seller/inventory/product", headers=get_headers(), json=chunk, timeout=60)
+        if resp.status_code in (200, 204):
+            updated += len(chunk)
+        else:
+            errors.append(f"Batch {i // 2000 + 1} failed: HTTP {resp.status_code} - {resp.text[:300]}")
+    return updated, errors
+
+
+def push_prices(prices: Dict[str, int], product_type: str = "mtg_single") -> Tuple[int, List[str]]:
+    """Sets prices only (quantity null, left unchanged) for products, in batches of 2,000.
+
+    Args:
+        prices (Dict[str, int]): product_id -> price in cents.
+        product_type (str): ManaPool product type.
+
+    Returns:
+        Tuple[int, List[str]]: (items updated, error messages).
+    """
+    if not is_configured():
+        return 0, ["ManaPool API is not configured. Cannot push prices."]
+    return _post_inventory([
+        {"product_type": product_type, "product_id": pid, "price_cents": cents, "quantity": None}
+        for pid, cents in prices.items()
+    ])
+
+
+def push_quantities(quantities: Dict[str, int], product_type: str = "mtg_single") -> Tuple[int, List[str]]:
+    """Sets quantities only (price_cents null, left unchanged) for products, in batches of 2,000.
+
+    Args:
+        quantities (Dict[str, int]): product_id -> absolute quantity.
+        product_type (str): ManaPool product type.
+
+    Returns:
+        Tuple[int, List[str]]: (items updated, error messages).
+    """
+    if not is_configured():
+        return 0, ["ManaPool API is not configured. Cannot push quantities."]
+    return _post_inventory([
+        {"product_type": product_type, "product_id": pid, "price_cents": None, "quantity": qty}
+        for pid, qty in quantities.items()
+    ])
+
+
+def get_inventory_item(product_id: str, product_type: str = "mtg_single") -> Tuple[Optional[Dict[str, Any]], str]:
+    """Reads the live storefront listing for one product (GET, read only).
+
+    Args:
+        product_id (str): ManaPool product UUID.
+        product_type (str): 'mtg_single' or 'mtg_sealed'.
+
+    Returns:
+        Tuple[Optional[Dict[str, Any]], str]: (inventory item or None, status message).
+            A 404 means the seller has no listing for that product yet.
+    """
+    if not is_configured():
+        return None, "ManaPool API is not configured."
+    url = f"{BASE_URL}/seller/inventory/product/{product_type}/{product_id}"
+    resp = requests.get(url, headers=get_headers(), timeout=15)
+    if resp.status_code == 200:
+        return resp.json().get("inventory"), "ok"
+    if resp.status_code == 404:
+        return None, "no listing (404)"
+    return None, f"HTTP {resp.status_code}: {resp.text[:200]}"
+
+
+def push_one_product(product_id: str, send: bool = False) -> Dict[str, Any]:
+    """Pushes a single product's database total to ManaPool, reading the listing before and after.
+
+    Args:
+        product_id (str): ManaPool product UUID present in inventory.
+        send (bool): Actually POST. If False, only reads the live listing and shows the payload.
+
+    Returns:
+        Dict[str, Any]: payload entry, 'before' / 'after' listings, HTTP result and errors.
+    """
+    with db.get_db_cursor(commit=False) as cur:
+        cur.execute(
+            "SELECT manapool_product_id, manapool_listed_price, quantity FROM inventory WHERE manapool_product_id = %s;",
+            (product_id,),
+        )
+        rows = [dict(r) for r in cur.fetchall()]
+    if not rows:
+        raise ValueError(f"Product {product_id} is not in inventory.")
+
+    payload = build_inventory_payload(rows, aggregate_with_db=True)
+    before, before_status = get_inventory_item(product_id)
+    result: Dict[str, Any] = {"payload": payload[0], "before": before, "before_status": before_status,
+                              "sent": False, "after": None, "errors": []}
+    if not send:
+        return result
+
+    updated, errors = push_inventory_batch(rows, aggregate_with_db=True)
+    after, after_status = get_inventory_item(product_id)
+    result.update({"sent": True, "updated": updated, "errors": errors, "after": after, "after_status": after_status})
+    return result
+
+
+def preview_push(
+    set_codes: Optional[List[str]] = None,
+    baseline_csv: Optional[str] = None,
+    output_dir: str = "exports",
+) -> Dict[str, Any]:
+    """Dry run: shows exactly what a push of the current database would send. Sends nothing.
+
+    Builds the payload for every in-stock or zero-quantity product whose front-face set is
+    in `set_codes` (all products if None) and compares it with a baseline ManaPool export,
+    which stands in for what is live on the storefront.
+
+    Args:
+        set_codes (Optional[List[str]]): Set codes to include (e.g. ['MOM', 'TMOM']).
+        baseline_csv (Optional[str]): ManaPool inventory export to compare against.
+        output_dir (str): Folder for the preview CSV and the exact JSON payload.
+
+    Returns:
+        Dict[str, Any]: rows (per-product comparison), counts, csv_path, json_path.
+    """
+    import csv
+    import datetime
+    import json
+
+    query = """
+        SELECT i.manapool_product_id, i.manapool_listed_price, i.quantity, i.is_foil,
+               sc.name || COALESCE(' // ' || b.name, '') AS name, sc.set_code,
+               sc.collector_number || COALESCE('/' || b.collector_number, '') AS collector_number
+        FROM inventory i
+        JOIN scryfall_cards sc ON i.scryfall_id = sc.scryfall_id
+        LEFT JOIN scryfall_cards b ON i.back_scryfall_id = b.scryfall_id
+        WHERE i.manapool_product_id IS NOT NULL AND i.manapool_product_id <> ''
+    """
+    params: List[Any] = []
+    if set_codes:
+        query += " AND sc.set_code = ANY(%s)"
+        params.append([c.upper() for c in set_codes])
+    with db.get_db_cursor(commit=False) as cur:
+        cur.execute(query + " ORDER BY sc.set_code, sc.collector_number;", tuple(params))
+        inv_rows = [dict(r) for r in cur.fetchall()]
+
+    payload = build_inventory_payload(inv_rows, aggregate_with_db=True)
+
+    baseline: Dict[str, Dict[str, str]] = {}
+    if baseline_csv:
+        with open(baseline_csv, encoding="utf-8-sig") as f:
+            for r in csv.DictReader(f):
+                baseline[(r.get("product_id") or "").strip()] = r
+
+    info = {r["manapool_product_id"]: r for r in inv_rows}
+    rows: List[Dict[str, Any]] = []
+    for e in payload:
+        pid = e["product_id"]
+        r = info[pid]
+        live = baseline.get(pid)
+        live_qty = int(live.get("quantity") or 0) if live else None
+        live_price = float(live["price"]) if live and live.get("price") else None
+        new_price = e["price_cents"] / 100 if e["price_cents"] is not None else None
+        flags = []
+        if baseline_csv and live is None:
+            flags.append("NOT IN BASELINE")
+        if live_qty is not None and e["quantity"] != live_qty:
+            flags.append("QTY CHANGE")
+        if new_price is None:
+            flags.append("NO PRICE (sends null)")
+        elif live_price is not None and abs(new_price - live_price) > 0.001:
+            flags.append("PRICE CHANGE")
+        rows.append({
+            "product_id": pid, "name": r["name"], "set": r["set_code"], "number": r["collector_number"],
+            "finish": "FO" if r["is_foil"] else "NF", "live_qty": live_qty, "new_qty": e["quantity"],
+            "live_price": live_price, "new_price": new_price, "flags": ", ".join(flags),
+        })
+
+    os.makedirs(output_dir, exist_ok=True)
+    stamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+    csv_path = os.path.join(output_dir, f"manapool_push_preview_{stamp}.csv")
+    json_path = os.path.join(output_dir, f"manapool_push_preview_{stamp}.json")
+    with open(csv_path, "w", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=list(rows[0].keys()) if rows else ["product_id"])
+        writer.writeheader()
+        writer.writerows(rows)
+    with open(json_path, "w", encoding="utf-8") as f:
+        json.dump(payload, f, indent=2)
+
+    counts = {
+        "products": len(rows),
+        "not_in_baseline": sum("NOT IN BASELINE" in r["flags"] for r in rows),
+        "qty_change": sum("QTY CHANGE" in r["flags"] for r in rows),
+        "price_change": sum("PRICE CHANGE" in r["flags"] for r in rows),
+        "no_price": sum("NO PRICE" in r["flags"] for r in rows),
+        "unchanged": sum(not r["flags"] for r in rows),
+    }
+    return {"rows": rows, "counts": counts, "csv_path": os.path.abspath(csv_path), "json_path": os.path.abspath(json_path)}
+
+
+def push_changed(
+    set_codes: Optional[List[str]] = None,
+    baseline_csv: Optional[str] = None,
+    send: bool = False,
+    output_dir: str = "exports",
+) -> Dict[str, Any]:
+    """Pushes the quantity of products that differ from the baseline (or are new), then verifies.
+
+    Quantities come from the same payload as `preview_push`; prices are sent as null so live
+    prices are left alone. After sending, every pushed product's quantity is read back.
+
+    Args:
+        set_codes (Optional[List[str]]): Set codes to include.
+        baseline_csv (Optional[str]): ManaPool export to compare against.
+        send (bool): Actually POST; otherwise just report what would be sent.
+        output_dir (str): Folder for the preview files.
+
+    Returns:
+        Dict[str, Any]: preview result plus 'to_push', 'updated', 'errors' and 'mismatches'.
+    """
+    import json
+
+    preview = preview_push(set_codes, baseline_csv, output_dir)
+    changed_ids = {r["product_id"] for r in preview["rows"] if "QTY CHANGE" in r["flags"] or "NOT IN BASELINE" in r["flags"]}
+    with open(preview["json_path"], encoding="utf-8") as f:
+        payload = [e for e in json.load(f) if e["product_id"] in changed_ids]
+    result: Dict[str, Any] = {**preview, "to_push": payload, "updated": 0, "errors": [], "mismatches": [], "sent": False}
+    if not send or not payload:
+        return result
+
+    result["to_push"] = payload = [{**e, "price_cents": None} for e in payload]
+    result["sent"] = True
+    result["updated"], result["errors"] = push_quantities({e["product_id"]: e["quantity"] for e in payload})
+    if result["errors"]:
+        return result
+
+    for e in payload:
+        time.sleep(0.05)
+        item, status = get_inventory_item(e["product_id"])
+        if (item.get("quantity") if item else None) != e["quantity"]:
+            result["mismatches"].append({"product_id": e["product_id"], "sent": e, "live": item, "status": status})
+    return result
+
+
+def main() -> None:
+    """CLI entry point: connection test (default) or a push dry run."""
+    import argparse
+
+    from tabulate import tabulate
+
+    parser = argparse.ArgumentParser(description="ManaPool API client")
+    sub = parser.add_subparsers(dest="command")
+    sub.add_parser("test", help="Check credentials with a read-only GET /account (default)")
+    p_prev = sub.add_parser("preview-push", help="Dry run: show what a push of the database would send (sends nothing)")
+    p_prev.add_argument("--set", dest="sets", action="append", help="Set code to include (repeatable); default all")
+    p_prev.add_argument("--baseline", default="backups/inventory-manapool-audited-20260927.csv",
+                        help="ManaPool export to compare against (what is live on the storefront)")
+    p_prev.add_argument("--output-dir", default="exports")
+    p_chg = sub.add_parser("push-changed", help="Push only products that differ from the baseline, then verify each")
+    p_chg.add_argument("--set", dest="sets", action="append", required=True, help="Set code to include (repeatable)")
+    p_chg.add_argument("--baseline", default="backups/inventory-manapool-audited-20260927.csv")
+    p_chg.add_argument("--send", action="store_true", help="Actually send; without it only lists what would be sent")
+    p_chg.add_argument("--output-dir", default="exports")
+    p_one = sub.add_parser("push-one", help="Push one product's database total (reads the live listing before/after)")
+    p_one.add_argument("--product", required=True, help="ManaPool product UUID")
+    p_one.add_argument("--send", action="store_true", help="Actually send; without it only reads and shows the payload")
+    args = parser.parse_args()
+
+    if args.command == "push-changed":
+        res = push_changed(args.sets, args.baseline, send=args.send, output_dir=args.output_dir)
+        print(f"{len(res['to_push'])} products differ from the baseline (payload: {res['json_path']}).")
+        if not res["sent"]:
+            print("[DRY RUN - nothing sent] Re-run with --send to push them.")
+            return
+        for e in res["errors"]:
+            print(f"[ManaPool error] {e}", file=sys.stderr)
+        print(f"Pushed {res['updated']} products; read back {len(res['to_push'])}: {len(res['mismatches'])} mismatches.")
+        for m in res["mismatches"]:
+            print(f"  MISMATCH {m['product_id']}: sent qty {m['sent']['quantity']}, live {m['live'] and m['live'].get('quantity')} ({m['status']})")
+        return
+
+    if args.command == "push-one":
+        def show(label: str, item: Optional[Dict[str, Any]], status: str) -> None:
+            if item:
+                price = item.get("price_cents")
+                print(f"{label}: quantity={item.get('quantity')} price={'-' if price is None else f'${price / 100:.2f}'}")
+            else:
+                print(f"{label}: {status}")
+
+        res = push_one_product(args.product, send=args.send)
+        print(f"Payload: {res['payload']}")
+        show("Live before", res["before"], res["before_status"])
+        if not res["sent"]:
+            print("[DRY RUN - nothing sent] Re-run with --send to push this one product.")
+            return
+        for e in res["errors"]:
+            print(f"[ManaPool error] {e}", file=sys.stderr)
+        show("Live after ", res["after"], res["after_status"])
+        return
+
+    if args.command == "preview-push":
+        res = preview_push(args.sets, args.baseline, args.output_dir)
+        changed = [r for r in res["rows"] if r["flags"]]
+        if changed:
+            print(tabulate(
+                [[r["name"][:34], r["set"], r["number"], r["finish"],
+                  "-" if r["live_qty"] is None else r["live_qty"], r["new_qty"],
+                  "-" if r["live_price"] is None else f"${r['live_price']:.2f}",
+                  "-" if r["new_price"] is None else f"${r['new_price']:.2f}", r["flags"]] for r in changed],
+                headers=["Card", "Set", "Num", "Fin", "Live Qty", "New Qty", "Live $", "New $", "Flags"],
+                tablefmt="simple",
+            ))
+        c = res["counts"]
+        print(f"\n[DRY RUN - nothing sent] {c['products']} products would be pushed: "
+              f"{c['unchanged']} unchanged, {c['qty_change']} quantity changes, {c['not_in_baseline']} not in baseline, "
+              f"{c['price_change']} price changes, {c['no_price']} without a price.")
+        print(f"Comparison CSV: {res['csv_path']}")
+        print(f"Exact payload:  {res['json_path']}")
+        return
+
     configured = is_configured()
     print(f"ManaPool API configured: {configured}")
     if configured:
@@ -261,3 +658,7 @@ if __name__ == "__main__":
         print(f"Connection test: {msg}")
     else:
         print("To configure, add MANAPOOL_EMAIL and MANAPOOL_API_TOKEN to .env")
+
+
+if __name__ == "__main__":
+    main()
