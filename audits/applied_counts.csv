@@ -563,3 +563,829 @@ applied_at,source,part,inventory_id,product_id,set,number,name,finish,previous_q
 2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,6679,487b0d82-4e4b-4da5-9b36-6c52394ee267,M21,83,Vodalian Arcanist,NF,7,7
 2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,6682,97bb9c82-da9f-459c-b28b-670b66e2a0b8,M21,44,Warded Battlements,NF,5,5
 2026-10-20T22:12:32,Untitled_spreadsheet_-_audit_followup_2026-10-20_BFZ_M21.csv,DRIFT-FULL,6685,b3312427-09e9-4979-ba9c-2647c0be38b3,M21,86,Wishcoin Crab,NF,4,4
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,1022,a5a496d4-3744-45f1-baae-5adede2d322c,AVR,149,Pillar of Flame,NF,1,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,1024,c0f50668-9b66-428c-bd32-04ceac60e68b,AVR,117,Predator's Gambit,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6942,fb228d4c-0128-4c8c-a390-538a958bd834,MID,210,Arcane Infusion,NF,1,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6945,3eb4ab2a-4eec-4542-b468-3ce7ee9c9356,MID,42,Baithook Angler // Hook-Haunt Drifter,NF,10,12
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6950,e5c773af-d07d-4b1f-a350-cb808327b9a9,MID,4,Bereaved Survivor // Dauntless Avenger,NF,8,9
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6953,cb709878-8f88-415c-a0aa-6e24d2d22e58,MID,87,Bladebrand,NF,9,10
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6956,a315fc22-df2d-4c78-81a2-61614fad35ff,MID,90,Bloodtithe Collector,NF,3,5
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6959,56088e2b-1c32-4644-8564-3a752e3322e4,MID,171,Bramble Armor,NF,8,9
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6961,0c021d7a-454c-4347-91c3-3737e8fc2583,MID,130,Brimstone Vandal,NF,6,7
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6964,c96a12be-4459-4e08-b4fb-ccce8fb31cdb,MID,132,Burn the Accursed,NF,2,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6966,baf048e5-3012-4498-9b0e-ecd80e3d4943,MID,287,Candlegrove Witch,NF,17,19
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6968,9f829826-51c5-4bf7-be20-282886d7c2de,MID,9,Candletrap,NF,9,11
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6972,7bec9e9f-a0d1-461b-8292-6273af4c9ac0,MID,12,Celestus Sanctifier,NF,11,12
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6974,5a7c0451-713a-4b8b-9647-2f8e39090d07,MID,14,Clarion Cathars,NF,9,10
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6975,ace5a74c-9d8d-4cec-8258-9dfbf836a8d4,MID,176,Clear Shot,NF,4,5
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6976,fb2a270b-d084-44ee-bab2-2fa55a652822,MID,43,Component Collector,NF,9,11
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6978,d724126a-4c99-44c7-97d1-7b2258910790,MID,214,Corpse Cobble,NF,2,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6979,de9a03ae-1f6b-4106-9c8f-249af8f7d509,MID,92,Covert Cutpurse // Covetous Geist,NF,3,4
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6980,55e3bfab-aec1-44cc-a6d5-c946c859b73f,MID,45,Covetous Castaway // Ghostly Castigator,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6981,039c5ebf-cfb8-4d22-9bc0-5cd8899818bb,MID,93,Crawl from the Cellar,NF,9,10
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6986,041179c2-f82d-4870-b0d7-30bf12847319,MID,179,Dawnhart Mentor,NF,4,5
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6988,b6c1b177-d3eb-47f5-8196-6c9a2ae887bc,MID,180,Dawnhart Rejuvenator,NF,8,9
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6994,43b5af8e-9d52-4b8d-afe8-ee7db465ee7b,MID,48,Devious Cover-Up,NF,8,10
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6997,7107babd-167d-4014-bab2-91c2dd362781,MID,96,Diregraf Horde,NF,6,8
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7004,7007feef-bb88-4b43-b03d-3c0a6fbbfb23,MID,99,Eaten Alive,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7005,95086ae8-cfb0-4080-9316-9457527c1727,MID,185,Eccentric Farmer,NF,7,8
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7011,4df0333b-e9cf-4a4a-8813-a4ffb581eb33,MID,136,Falkenrath Perforator,NF,7,9
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7014,dc0ace11-a09f-485c-b6cb-ce4021feffec,MID,292,Fangblade Brigand // Fangblade Eviscerator,NF,2,5
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7015,84e4c389-f331-4a7b-bef5-2a6d243f075c,MID,140,Festival Crasher,NF,2,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7017,3893300d-436f-4942-b5b7-afd34798683a,MID,19,Flare of Faith,NF,8,9
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7019,795f1dc4-9a32-4247-8178-0e2543e87ea9,MID,54,Flip the Switch,NF,4,9
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7020,a300dd7f-72f8-47a2-bca4-3040bee8c7d8,MID,276,Forest,NF,0,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7023,c8365f7b-fafd-40cc-8941-5cebd1d9fe9a,MID,55,Galedrifter // Waildrifter,NF,10,11
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7026,c90bb6a3-da1a-4001-87cd-4e3d555d2d79,MID,21,Gavony Silversmith,NF,10,11
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7027,011ccf63-4c15-4d7d-9922-cc342556d9bd,MID,22,Gavony Trapper,NF,11,14
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7029,6fbe2b5d-81cc-49a5-9153-8b843b793a4d,MID,56,Geistwave,NF,7,9
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7033,c1d6c657-e51a-4c42-bf35-28dc8e7bb283,MID,143,Harvesttide Infiltrator // Harvesttide Assailant,NF,7,8
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7038,efa8c7a5-3ec1-4e51-a3e5-c5b86d599011,MID,106,Hobbling Zombie,NF,13,14
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7039,0c9adcd8-fca1-43c5-995a-1ee61a5bfa85,MID,24,Homestead Courage,NF,0,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7041,85d56084-be3d-47a5-a57e-7688e1af7356,MID,188,Howl of the Hunt,NF,9,10
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7042,074abf90-31ab-46c1-b8c0-f3e3456f1666,MID,228,Hungry for More,NF,3,4
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7043,fa7b8d6a-b80f-4f38-ba51-524043151b52,MID,144,Immolation,NF,9,11
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7044,5f3a47dd-d7c1-4127-9105-cd83affc0542,MID,254,Jack-o'-Lantern,NF,4,5
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7048,6eafac10-6801-4777-8e4c-55c08b864d0c,MID,145,Lambholt Harrier,NF,7,8
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7049,f7f51c92-3c70-4216-a689-1591e6d32661,MID,58,Larder Zombie,NF,6,8
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7051,2a665cad-2127-45f0-b74c-6d12789e258b,MID,60,Locked in the Cemetery,NF,3,5
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7052,7127a8b2-c85b-4f5e-b123-d4ea70e0249a,MID,26,Loyal Gryff,NF,6,7
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7055,c8cebb8c-a7a3-48c8-a3de-8c813dbe42c6,MID,189,Might of the Old Ways,NF,6,8
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7057,d19ac239-74ba-48d8-a5fd-0fa236a89af3,MID,114,Morkrut Behemoth,NF,7,9
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7059,2af42d55-ae94-4c04-a793-6f29554b966e,MID,28,Mourning Patrol // Morning Apparition,NF,9,11
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7060,8c547c1c-61dd-457a-a56a-3de6e3ca0f5b,MID,256,Mystic Skull // Mystic Monstrosity,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7063,c73196bb-56a6-4f8d-b8ab-bf348842f515,MID,116,No Way Out,NF,8,9
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7064,7b2919ae-c451-44d7-b5cd-f51680417014,MID,117,Novice Occultist,NF,9,10
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7069,b843bf14-15be-4ee8-97a1-23d3b81d6562,MID,66,Organ Hoarder,NF,7,8
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7072,7aab201b-747a-4dd4-8d5b-a1ce9519e93a,MID,153,Pack's Betrayal,NF,4,8
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7075,76d16337-d218-441c-a2a9-18386fe4b92f,MID,70,Phantom Carriage,NF,3,4
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7077,c1081d34-1559-4cc9-87c0-f003e827e088,MID,193,Plummet,NF,6,7
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7078,28d6266d-c49e-4a7b-9069-def1e3bcb49b,MID,155,Purifying Dragon,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7081,c4c0ca3a-a18d-4c65-926d-23f6adf94aff,MID,72,Revenge of the Drowned,NF,5,6
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7085,8fdbeacf-4b4b-4922-b73e-a3451f4e81e7,MID,31,Ritual of Hope,NF,4,5
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7087,510c041c-3aa4-4c6b-857b-1d6430b0957c,MID,32,Search Party Captain,NF,0,1
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7090,d9827930-b6d0-4033-b452-86fbbb0b6aca,MID,198,Shadowbeast Sighting,NF,15,16
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7094,eda0ce10-b109-47a1-8bf8-30d589da061c,MID,121,Siege Zombie,NF,9,10
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7098,7aad3731-2f9e-40fb-82c4-959b66e68011,MID,35,Soul-Guide Gryff,NF,6,7
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7101,9157a090-e610-4153-ae5e-43dea49e1bd2,MID,78,Startle,NF,6,9
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7102,c3a74f2e-ce47-4873-8d82-22a302152ab3,MID,161,Stolen Vitality,NF,5,6
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7105,ab0ecc06-515a-4c80-a104-90533e41be9d,MID,123,Stromkirk Bloodthief,NF,2,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7106,459d8731-d4e4-4b43-b450-256bb6cc30e1,MID,259,Stuffed Bear,NF,4,5
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7110,aa6e0e71-f6f2-4d8d-85a4-0ae27768697d,MID,201,Tapping at the Window,NF,10,12
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7111,e2e16be2-a052-47f6-b4fc-770f503aaef4,MID,163,Tavern Ruffian // Tavern Smasher,NF,5,6
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7114,59eb2bd5-e0aa-44d0-b719-49c9f45ba383,MID,39,Thraben Exorcism,NF,6,7
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7115,65691f7e-c6ae-4328-a821-e69824b92f9c,MID,202,Timberland Guide,NF,13,14
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7118,62073fae-bb13-4f22-99e0-387b9e16ffd7,MID,82,Unblinking Observer,NF,5,6
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7125,915306c8-3e47-40cd-8778-63a264e6ef44,MID,167,Voldaren Stinger,NF,12,13
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7126,32da67af-927a-41d2-8375-54e929f2206d,MID,250,Wake to Slaughter,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10884,3d2710c3-c43b-4130-84bc-253bd0c5f411,ZNR,177,Adventure Awaits,NF,18,19
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10891,97f2009a-7e40-4347-8995-04dfe762480f,ZNR,45,Anticognition,NF,12,16
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10892,02e7cbeb-d541-4966-8259-dcb2bc3c9c0f,ZNR,135,Ardent Electromancer,NF,20,21
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10893,1818f5e5-7728-4f0b-b4ac-151e9d3e7370,ZNR,6,Attended Healer,NF,2,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10896,eade7310-fd26-4504-bdc8-24f7dfba27a4,ZNR,93,Blood Price,NF,6,7
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10897,79759ea4-d83f-4677-8eb8-58947e69de55,ZNR,181,Broken Wings,NF,15,16
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10900,f20822fb-72bd-4b95-a2f0-923645acf63c,ZNR,47,Bubble Snare,NF,12,15
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10905,9889d356-96d0-46fd-be41-638000d15696,ZNR,48,Cascade Seer,NF,8,11
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10906,67406188-4414-409c-9b80-d165587fb210,ZNR,50,Chilling Trap,NF,15,17
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10908,113cc074-63b4-4ebd-af95-3dea12a5473f,ZNR,51,Cleric of Chill Depths,NF,12,14
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10910,87c6c18f-4cfd-4f63-82dd-af40f706570b,ZNR,8,Cliffhaven Sell-Sword,NF,14,16
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10913,b77639b6-8eed-4763-a98f-e4208516dfa3,ZNR,55,Cunning Geysermage,NF,16,18
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10914,25932db3-2689-4b05-9587-0ccde4807670,ZNR,184,Dauntless Survivor,NF,17,20
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10915,67fb162b-4257-4b68-b99f-81170de89a34,ZNR,9,Dauntless Unity,NF,17,19
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10916,f05ca008-3330-4341-9d61-95a13467e9fd,ZNR,96,Deadly Alliance,NF,8,11
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10918,39e4a8e2-e9f6-48a6-9ee8-1e494035414b,ZNR,99,Drana's Silencer,NF,12,15
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10919,ad2ed42c-a58b-4655-bec9-9b8970699ae3,ZNR,100,Dreadwurm,NF,9,10
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10922,bcbc8ec1-9ea2-4b73-b3b9-e5addd16e5ec,ZNR,138,Expedition Champion,NF,14,15
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10923,9ebea33d-3a43-438e-9edf-dfc19e0bcd51,ZNR,57,Expedition Diviner,NF,15,17
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10924,db5bb3b7-347e-4a90-b76b-ba5d88d62d98,ZNR,13,Expedition Healer,NF,9,12
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10928,2d02d5af-da92-4e5f-a0a8-a1d9600803ee,ZNR,291,Fearless Fledgling,NF,8,9
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10929,655db8b5-d6c9-44d8-86be-f87d9d0adf7e,ZNR,58,Field Research,NF,14,17
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10931,294e2bd8-4e67-408c-bab8-c7751693be06,ZNR,140,Fissure Wizard,NF,10,12
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10932,2bcadad7-ac5d-4304-a85e-ed3cbc47b91f,ZNR,103,Ghastly Gloomhunter,NF,5,6
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10933,9a25c042-8fea-4fc8-8aea-0d9d545d3600,ZNR,59,Glacial Grasp,NF,12,14
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10934,708d084b-d08a-4ed0-b96e-5ce3277f4248,ZNR,185,Gnarlid Colony,NF,11,14
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10939,66195517-f2c8-48d9-9b3e-aad263755809,ZNR,105,Hagra Constrictor,NF,14,15
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10943,26503248-c6d4-4828-8011-c2be5782b205,ZNR,188,Joraga Visionary,NF,15,16
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10945,824866fa-c562-4279-bc30-0a185e97f2a6,ZNR,18,Kabira Outrider,NF,12,15
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10948,ccc0ceb7-6ab5-4643-a260-b6427523692e,ZNR,190,Kazandu Nectarpot,NF,7,8
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10949,2f147247-58ac-4773-b0a7-44ea01f499f1,ZNR,306,Kazandu Nectarpot,NF,12,13
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10950,dda8dbfe-4629-464f-ac7f-b4e5aae9d669,ZNR,191,Kazandu Stomper,NF,13,18
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10951,69916396-542c-4afa-9a05-bb83a0ef6f3b,ZNR,20,Kitesail Cleric,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10952,e838ce74-ffb2-41a6-ae6f-e0e4e3f80741,ZNR,21,Kor Blademaster,NF,4,5
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10953,2a676262-ffa6-451a-9b17-ff5dfd6dda62,ZNR,22,Kor Celebrant,NF,14,16
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10954,05e82d0a-ac1f-4ab8-a5ab-71c985fca973,ZNR,109,Lithoform Blight,NF,3,4
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10955,8acab659-f2c2-418c-a2c7-dc0bdbb8bee4,ZNR,65,Living Tempest,NF,13,15
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10960,0e9d2b02-b0a4-4abb-bcf3-10ffb4491cc5,ZNR,25,Makindi Ox,NF,13,14
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10962,6e6f65bb-c8c1-4734-b041-3cb83bb5ef2e,ZNR,110,Malakir Blood-Priest,NF,13,15
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10963,314da74f-e611-45fe-82de-6896eedd1c67,ZNR,69,Merfolk Falconer,NF,8,9
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10968,1b319779-e59a-478c-a941-7227059475db,ZNR,114,Mind Drain,NF,16,17
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10969,201faece-bd94-4c55-b376-c296c5bc7972,ZNR,149,Molten Blast,NF,14,16
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10971,460eecdc-8035-47f7-99a5-459ab24be876,ZNR,195,Murasa Brute,NF,14,17
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10972,b0081320-b5af-4ed3-8b18-e6bfac1a4d11,ZNR,229,Murasa Rootgrazer,NF,3,4
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10974,d35427b2-6a32-4662-a224-d9ddf4c16509,ZNR,29,Nahiri's Binding,NF,13,14
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10976,31679109-4f0c-4b3f-b008-d422c3334955,ZNR,116,Nimana Skitter-Sneak,NF,8,9
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10979,14b127a0-2777-4242-9ad0-bfbf7d96a5e3,ZNR,119,Oblivion's Hunger,NF,13,16
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10980,70675510-5069-42e4-bf54-b128ce2b7755,ZNR,31,Paired Tactician,NF,8,11
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10981,60e881d3-edc3-49be-96d9-783e76eb6adf,ZNR,32,Practiced Tactics,NF,13,15
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10985,49595422-da92-4a5c-9140-f5d5cb23edcb,ZNR,152,Pyroclastic Hellion,NF,15,19
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10986,8740cbe1-00b6-43bf-a471-4faf82b888bd,ZNR,199,Rabid Bite,NF,12,15
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10987,1e6fb910-c7fc-43aa-83c7-679301bfb346,ZNR,235,Ravager's Mace,NF,3,4
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10988,5a0d07b2-cfdc-4d3d-86e1-25fc313c0e81,ZNR,200,Reclaim the Wastes,NF,10,13
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10989,4a51c654-1c06-4114-8d73-609032717453,ZNR,247,Relic Amulet,NF,9,11
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10991,90cd160f-7a45-469e-8e66-70c0e098251b,ZNR,250,Relic Vial,NF,3,4
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10992,88548099-19e7-4412-8033-217cbd897376,ZNR,35,Resolute Strike,NF,19,20
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10994,60dd5a68-bad8-4291-b6d1-2c4518f58641,ZNR,154,Rockslide Sorcerer,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10995,6fd73a82-55ec-4646-b0a7-05336c84412c,ZNR,155,Roil Eruption,NF,16,19
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10997,4b103607-9feb-459a-af74-01d8ab09dfa4,ZNR,157,Scavenged Blade,NF,16,19
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10999,779b154e-4837-4ff6-8c79-631792da29dc,ZNR,158,Scorch Rider,NF,14,16
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,11000,7d8f940c-6371-4a2e-976c-e6cd5289fcb5,ZNR,36,Sea Gate Banneret,NF,11,12
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,11005,d3799de1-d77a-438c-af33-fecff92cf35e,ZNR,160,Shatterskull Minotaur,NF,4,6
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,11006,887997d3-2ee9-412d-89c9-9acf5f8022f0,ZNR,79,Shell Shield,NF,13,15
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,11007,7c3d46b9-1531-43b2-8094-d9e96b6100ad,ZNR,38,Shepherd of Heroes,NF,11,14
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,11009,151dffde-1227-4a83-b4bb-05736d65deab,ZNR,40,Skyclave Cleric // Skyclave Basilica,NF,4,4
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,11010,02491ab1-1e4e-4d18-b9ad-0917f73a379c,ZNR,163,Skyclave Geopede,NF,2,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,11012,a4dae3c9-d06c-4153-a5de-ba1d84282357,ZNR,204,Skyclave Pick-Axe,NF,4,5
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,11014,e906c376-41b8-4491-beb3-e4e964a6c6bb,ZNR,81,Skyclave Plunder,NF,4,6
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,11015,8f28798f-e92c-4479-806a-14b47620f598,ZNR,253,Skyclave Sentinel,NF,17,18
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,11016,61fc6136-1cf9-4a4a-935b-93cb5fecb0d1,ZNR,126,Skyclave Shadowcat,NF,3,4
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,11017,47c25d13-48bc-4c70-907c-9fb3a5e892cd,ZNR,82,Skyclave Squid,NF,8,9
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,11019,e2728d0e-3561-42d5-9ffb-67e85c24b19b,ZNR,42,Smite the Monstrous,NF,13,14
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,11020,dfabf577-fc3b-4601-aa83-e4d7cf47b9b5,ZNR,164,Sneaking Guide,NF,14,16
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,11023,5f34616c-a5eb-4d1f-a9a3-b003daa04b3d,ZNR,302,Spitfire Lagac,NF,12,13
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,11026,86f0e011-703e-4b84-bf35-e62744be6d18,ZNR,255,Stonework Packbeast,NF,20,21
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,11027,f73f7964-524f-4dfa-a5ab-36d944849bed,ZNR,206,Strength of Solidarity,NF,16,19
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,11028,21d650a2-9a54-4d8f-8600-0b3c93b9e9ea,ZNR,128,Subtle Strike,NF,10,13
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,11030,a1486f0f-d3df-4686-a162-444cbf443deb,ZNR,168,Synchronized Spellcraft,NF,12,13
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,11032,485aabd5-e409-42e3-bcc4-3f5a906e3571,ZNR,210,Tajuru Snarecaster,NF,13,14
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,11033,324b37bf-e3be-4fea-90f2-21902f18624a,ZNR,212,Taunting Arbormage,NF,10,12
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,11034,3a870eb5-abb6-43e0-93f4-075817e7d22b,ZNR,43,Tazeem Raptor,NF,18,19
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,11035,f4462cd0-947a-4241-bc46-08477a435998,ZNR,84,Tazeem Roilmage,NF,13,15
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,11037,6332b181-8cfa-4c99-a681-9a6b30fdd692,ZNR,213,Territorial Scythecat,NF,6,7
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,11038,ed37d194-6d05-4bed-abe9-3e7111d1dad3,ZNR,310,Territorial Scythecat,NF,11,13
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,11040,1f37afa1-fa00-42b5-a3ee-faa9afea7550,ZNR,170,Thundering Rebuke,NF,3,7
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,11042,09af4155-4b86-4362-9c16-092673dd6a65,ZNR,130,Thwart the Grave,NF,4,5
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,11043,a47f8aaf-4c0b-4dcb-aaf5-04d32596e493,ZNR,172,Tormenting Voice,NF,13,15
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,11044,5f0c8d1f-b059-4acf-a8b5-09a46a7595aa,ZNR,214,Turntimber Ascetic,NF,9,13
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,11048,051ba12d-bc8b-44cb-bd2f-04079c2a923b,ZNR,131,Vanquish the Weak,NF,9,10
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,11049,1c471d75-1be4-466c-b754-fe411d95dfe7,ZNR,218,Veteran Adventurer,NF,9,9
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,11050,cfa5fdfe-b0bc-46d7-96de-4164ec6ae3ec,ZNR,219,Vine Gecko,NF,5,7
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,11051,2049e913-24c9-4f2b-a605-a377ecf0c931,ZNR,87,Windrider Wizard,NF,6,7
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,11053,24ca42be-92e7-40ad-953c-8d456e8c1b97,ZNR,88,Zulaport Duelist,NF,12,13
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7953,24236904-efa2-4e92-be2a-8d0d9e4d8f35,OGW,14,Affa Protector,NF,4,11
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7954,0c34dca1-0f07-4f45-8ac4-be5d2645e6fa,OGW,101,Akoum Flameseeker,NF,5,6
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7955,f3186c87-3ee9-4a84-b111-4be8c47b300d,OGW,15,Allied Reinforcements,NF,1,4
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7959,ef651a8d-ae5d-4f3f-8c06-d3a332cbc74d,OGW,161,Bone Saw,NF,8,10
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7960,c829fa64-b7fb-4539-8c1c-ba85a13c8dba,OGW,102,Boulder Salvo,NF,5,10
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7961,f8230516-2ad1-4d8d-8835-368092d123bf,OGW,103,Brute Strength,NF,4,9
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7963,4a28d95b-1918-4d2a-bd12-bee11f155a1a,OGW,105,Cinder Hellion,NF,8,9
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7964,f2877550-7070-459e-ad77-6dfd4774b3f0,OGW,51,Comparative Analysis,NF,6,8
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7965,bbfe4b56-6240-4b9b-99ab-4ef2851b3678,OGW,94,Consuming Sinkhole,NF,5,9
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7966,dc4580ba-862b-4885-bc26-52d8c3885c72,OGW,52,Containment Membrane,NF,6,8
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7969,0b2fb5ba-bd5e-4080-833e-d882fa95636d,OGW,42,Cultivator Drone,NF,3,5
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7972,9343a18d-9370-4abd-94ae-b82d22eb6d0d,OGW,43,Deepfathom Skulker,NF,1,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7975,04745201-9074-4060-aaca-f72e959ac61c,OGW,84,Drana's Chosen,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7977,3326eab0-0f01-4082-b2ce-0a6bdb610f85,OGW,95,Eldrazi Aggressor,NF,6,8
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7978,d85cf69d-be1c-4fc3-9c6a-c4768b8265fa,OGW,130,Elemental Uprising,NF,4,5
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7981,22b8c9a5-af2a-45b3-8d2e-149a7866a073,OGW,18,Expedition Raptor,NF,3,6
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7984,352470a3-03df-4c11-a5a4-68937f16b32d,OGW,111,Goblin Freerunner,NF,11,12
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7985,132673ce-37a6-4ad3-840c-db414d239eff,OGW,45,Gravity Negator,NF,7,10
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7991,c4c94d4a-60cc-4f9a-92c0-c541b526dbf9,OGW,21,Iona's Blessing,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7993,01a3ad34-030f-4f4d-8303-e6b52aa15a3b,OGW,154,Joraga Auxiliary,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7994,83358ad6-2060-4abe-a10f-12611d6f8eae,OGW,58,Jwar Isle Avenger,NF,8,11
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7996,b247f822-4dee-4d8f-8589-6441b3b08a06,OGW,24,Kor Sky Climber,NF,6,8
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7997,4d6e517c-b1b1-4612-9624-7318ce95160f,OGW,5,Kozilek's Pathfinder,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7998,70261477-132f-47b1-8d36-f5bb4853a911,OGW,73,Kozilek's Shrieker,NF,4,5
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7999,8b6b488a-ca8a-4534-b3a7-adaef06dfe77,OGW,74,Kozilek's Translator,NF,5,7
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,8000,f806e66a-d255-4c12-9db1-316128f734e7,OGW,134,Lead by Example,NF,6,7
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,8001,142f1450-1bb2-4876-922a-cf935c1ca671,OGW,135,Loam Larva,NF,5,7
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,8003,50bb6f5d-ec0b-4105-ae7a-edd6dad44dbf,OGW,27,Makindi Aeronaut,NF,10,19
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,8005,6905d9a9-57a9-4b3f-8082-b7ce9fb67d6e,OGW,99,Maw of Kozilek,NF,4,5
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,8007,2629b651-57d6-44c8-815a-e9970553b711,OGW,28,Mighty Leap,NF,7,18
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,8009,5c86d091-b851-45e4-9837-fa97d1cbf08d,OGW,149,Mindmelter,NF,1,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,8012,947f73bf-29ef-46c1-a975-39b577f13b74,OGW,139,Nissa's Judgment,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,8016,e677e69c-524b-48e5-93e0-9d8d7745980d,OGW,75,Oblivion Strike,NF,10,11
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,8017,76f0dc3d-18fa-4b7e-8b79-0c991bc05592,OGW,31,Ondu War Cleric,NF,4,5
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,8022,3439881f-ea25-42c1-8bcd-2fb1c303e966,OGW,100,Reality Hemorrhage,NF,6,11
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,8023,add90158-440d-446f-9759-d12417a15cb3,OGW,76,Reaver Drone,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,8026,49bf3e13-9c20-42f3-b65a-7542a1199d41,OGW,62,Roiling Waters,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,8027,03aa03c7-6963-438a-b345-f3379f38ed97,OGW,142,Saddleback Lagac,NF,10,12
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,8028,6b013036-4027-44ec-a8af-f744de92d4c0,OGW,123,Scion Summoner,NF,6,7
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,8029,0279b835-d690-4e63-99f4-cf5ef21e9e02,OGW,33,Searing Light,NF,5,16
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,8031,67598595-0516-4629-be0f-fbf3c912fc64,OGW,165,Seer's Lantern,NF,1,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,8032,b4fa822f-6469-4424-a485-55fa8a81a48e,OGW,34,Shoulder to Shoulder,NF,4,8
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,8034,68455091-e7c0-4e8d-aa67-5deff0e43a93,OGW,79,Slaughter Drone,NF,13,14
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,8035,db17dd52-efd7-4428-816e-2125701c2094,OGW,117,Sparkmage's Gambit,NF,6,9
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,8036,6a42777a-867c-449b-95b6-b1b646c4e733,OGW,35,Spawnbinder Mage,NF,5,7
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,8037,24f5d72e-c8da-42c4-9e3f-11f2c6be01c9,OGW,124,Stalking Drone,NF,4,5
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,8039,8b69c403-7cb9-4211-a09f-483f5411211f,OGW,37,Stone Haven Outfitter,NF,3,5
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,8044,275bc3b5-64e5-44ce-82f8-78bf64964f1f,OGW,90,Tar Snare,NF,11,12
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,8048,658a73a2-6d98-4d45-b09c-3454dce9c831,OGW,65,Umara Entangler,NF,6,9
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,8049,bd1e5f67-f908-4069-965c-b3599b483527,OGW,80,Unnatural Endurance,NF,6,9
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,8050,eabba630-f11a-4e4f-b369-3fcca65e8723,OGW,91,Untamed Hunger,NF,8,11
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,8051,2d70df44-e03a-4538-b1ce-d56889482251,OGW,92,Vampire Envoy,NF,6,11
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,8052,6cbe5deb-54b6-4ae1-a315-c4a8163ef960,OGW,146,Vines of the Recluse,NF,10,11
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,8056,8bae9c80-97ba-4dd3-9443-31722f3259c4,OGW,82,Witness the End,NF,2,4
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,8057,b6d28860-4da6-4e77-9979-6991cba3904a,OGW,120,Zada's Commando,NF,1,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10004,ff5a5d32-138e-4834-8225-c002a67f1446,THS,155,Commune with the Gods,NF,0,1
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10010,9a09d928-57fc-4d07-ae5b-92765b927d69,THS,117,Deathbellow Raider,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10024,1256e10e-f026-49c1-a280-2d82ffae3ab1,THS,247,Forest,NF,1,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10025,13429a06-5f55-4c55-a0f3-2e2d7cd5b362,THS,248,Forest,NF,1,5
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10051,81fd5abd-07b8-4e17-95fd-c5d0bcae19ae,THS,165,Nessian Courser,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10066,63c6e0ee-0e8b-43d1-a351-c17c91039e7f,THS,233,Plains,NF,0,1
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10074,0bc9641e-4708-480e-aa74-aff75dd8604c,THS,103,Returned Centaur,NF,1,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10102,daf2f822-9da9-45bc-8107-eee273a1d4ea,THS,72,Vaporkin,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,5473,1399aa06-3ea7-4096-adc7-a2622fc43e74,LCI,298,"Akawalli, the Seething Tower",NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,5476,d9b677e9-239e-49f2-9256-e96c2fe81b42,LCI,136,Brazen Blademaster,NF,2,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,5477,92a77d3d-acdf-4652-8f63-ac8b43730aff,LCI,95,Broodrage Mycoid,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,5480,50e1dcc8-39d1-4956-8a3a-4d29ce604023,LCI,139,Calamitous Cave-In,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,5481,86b6abe2-5ab8-405a-902e-b6caee23401d,LCI,96,Canonized in Blood,NF,2,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,5483,d11c463b-7f21-4ebd-bebd-08298b347ab0,LCI,302,Caparocti Sunborn,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,5489,c0fe3ffe-2766-4952-871a-d64de86a1f72,LCI,140,Child of the Volcano,NF,1,4
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,5490,eae4b900-15ea-4066-90f5-7c0c9d241806,LCI,97,Chupacabra Echo,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,5496,95a3dbda-72ff-4fef-9e2a-c6df1d0310a4,LCI,51,Council of Echoes,NF,1,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,5497,b19480b3-4a80-43bc-a500-a2e48195bd1d,LCI,142,Daring Discovery,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,5499,dcd5efc0-33f5-4344-967c-49acaa1510ee,LCI,99,Dead Weight,NF,1,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,5507,169272a2-374f-4bf5-92f3-e8b38a86a823,LCI,104,Echo of Dusk,NF,1,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,5510,f2b40b94-7804-45e6-8b6c-d2204b7f59c8,LCI,149,Etali's Favor,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,5514,fcc7b54f-60e2-4e81-8793-b78c51a48049,LCI,150,Geological Appraiser,NF,2,4
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,5516,735f1236-fcae-4375-bfcb-c20a78d7459e,LCI,152,Goldfury Strider,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,5517,2179ea0b-7118-43ec-a92a-eb3086957d14,LCI,108,Grasping Shadows // Shadows' Lair,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,5522,7c29a7ea-ec78-4ddb-adf5-741e92c31f0f,LCI,275,Hidden Necropolis,NF,2,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,5524,450b1536-324c-4481-ba53-281ddd5697da,LCI,154,Hotfoot Gnome,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,5525,cfaa2a27-d17d-403c-ab82-7c23d22a4eb3,LCI,59,Hurl into History,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,5526,d62df7e6-d02c-43d2-9039-ec5015518085,LCI,155,Idol of the Deep King // Sovereign's Macuahuitl,NF,2,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,5527,a61f8f91-db30-45ce-9de7-2357af09ad6d,LCI,60,Inverted Iceberg // Iceberg Titan,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,5543,4bb9a311-8272-4710-888b-e47d144f11b5,LCI,306,"Nicanzil, Current Conductor",NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,5548,4a5d51fd-29ce-4385-8d70-96e88e28b338,LCI,69,Out of Air,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,5551,659d2cd2-c14f-4357-9d12-1d1e6d588161,LCI,70,Pirate Hat,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,5553,8d812510-5e86-4a00-a731-5777f02a35f3,LCI,160,Plundering Pirate,NF,1,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,5558,024b073d-2bd4-4a6b-868b-d62a8fe09330,LCI,116,Rampaging Spiketail,NF,3,5
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,5560,e038e2be-0408-46f3-8f59-a9e2e06f6efa,LCI,71,Relic's Roar,NF,3,5
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,5562,9471b2ef-3c01-4137-a4e3-ee542677b150,LCI,72,River Herald Scout,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,5564,8ef2d216-9f77-4e0d-8617-14a176103ad2,LCI,163,Rumbling Rockslide,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,5566,9c6d1279-1b01-4553-a1ee-cf1cbc02fb24,LCI,118,Screaming Phantom,NF,1,4
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,5568,685f960d-a143-46a6-85e5-21a809e2dc61,LCI,166,Seismic Monstrosaur,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,5570,6594fae3-9bdf-465c-8c75-8bd7b41fa9fb,LCI,75,Shipwreck Sentry,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,5571,59df4b36-9e0d-4fa4-a3b6-aefac8bd23c8,LCI,76,Sinuous Benthisaur,NF,1,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,5572,c9e438fb-505e-4414-a16e-5e2404900585,LCI,119,Skullcap Snail,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,5574,86c37caf-7604-4d7a-969b-7a3e92b385e1,LCI,77,Song of Stupefaction,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,5578,8f649d6d-1fe7-4fba-bb79-e06bf052fdc0,LCI,79,Staunch Crewmate,NF,1,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,5580,d440c40f-48b5-4856-b64c-4bd67af06984,LCI,167,Sunfire Torch,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,5581,62e9b7c1-d2f3-4880-9c60-96f8e7aa97b7,LCI,168,Sunshot Militia,NF,1,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,5582,14ccd665-7d38-4b03-a37e-e18cf4be35e3,LCI,125,Synapse Necromage,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,5589,63d1d1f4-97e5-4d04-8f16-ef85b2621286,LCI,82,Unlucky Drop,NF,1,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,5590,0a0f446c-b2ff-433e-85c9-771a40c3ba50,LCI,129,Visage of Dread // Dread Osseosaur,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,5591,c9d82ce0-da6f-4284-9fd2-fb9259858f83,LCI,130,Vito's Inquisitor,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,5592,85a77f8a-3167-44b8-8ec2-73e8368e5158,LCI,172,Volatile Wanderglyph,NF,2,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,5594,97d71800-b4f4-444f-999a-f316af3dbfd8,LCI,83,Waterlogged Hulk // Watertight Gondola,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,5595,7df1c541-d19a-40ed-b190-b80c287f72bb,LCI,84,Waterwind Scout,NF,1,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,5596,1370b415-fd5d-4cfd-a562-0b54fd03206c,LCI,85,Waylaying Pirates,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6741,2574fbf2-d6b6-4383-af12-c7c8c306a3bf,MH2,147,Abundant Harvest,NF,6,7
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6742,20d25af0-6e31-423f-a9e7-8aaa1933ae39,MH2,354,Abundant Harvest,NF,5,6
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6747,f0858d67-3e23-42a7-b102-fbbd5beaa7d9,MH2,2,Arcbound Javelineer,NF,14,15
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6749,ce778d40-8af2-4286-92da-cc498212e9f0,MH2,4,Arcbound Prototype,NF,27,29
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6752,f2f4775a-c998-4cfa-8301-c0d9c6d43389,MH2,111,Arcbound Slasher,NF,28,29
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6753,7d7298ed-c7f5-4c55-a2fb-a3f69e4816e7,MH2,112,Arcbound Tracker,NF,23,25
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6756,aa33e775-deb5-4f29-9a2a-05545961db93,MH2,185,Arcus Acolyte,NF,6,7
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6758,0e9654df-7bc1-4a7c-b765-d78bdcd13262,MH2,149,Bannerhide Krushok,NF,16,17
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6762,17ddc384-9233-49d9-8ac6-1add1c9ead6b,MH2,7,Blossoming Calm,NF,1,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6767,03c56145-89da-46ac-9335-1282bd376803,MH2,8,Break Ties,NF,22,25
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6768,8a2e7182-8d1b-42c6-9835-8b0e7527f438,MH2,187,Breathless Knight,NF,19,22
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6774,e31be145-c8c8-41ac-b919-8d5289c27d4a,MH2,119,Captain Ripley Vance,NF,16,17
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6779,fd4bde30-65d9-4ea4-b938-d722ba196be2,MH2,190,Chrome Courier,NF,24,25
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6781,31d0701a-21c4-403f-a3c5-3b448ce8edb2,MH2,191,Combine Chrysalis,NF,7,8
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6784,08ea1f32-fc12-42e9-b11c-a68801842ce0,MH2,154,Crack Open,NF,25,25
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6787,72825595-ea92-44dc-bd3d-544281afd4e2,MH2,224,Dermotaxi,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6788,2048bf3a-e0a5-4db4-a9cb-063aaa9af1eb,MH2,193,Dihada's Ploy,NF,17,19
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6789,d5ce452b-851a-4343-ba31-8dab5741a7ac,MH2,82,Discerning Taste,NF,18,19
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6795,5b7f21db-3e45-4120-a84c-2dbabeb0e272,MH2,13,Fairgrounds Patrol,NF,31,33
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6800,2061d136-35ae-4532-9cdc-031c815585d5,MH2,124,Flame Blitz,NF,2,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6803,20816cc5-e614-4cfc-a7e9-aa7fa63d1234,MH2,85,Flay Essence,NF,4,5
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6804,7ed04a36-6d63-435d-ad87-2a83bb69e548,MH2,42,Floodhound,NF,22,23
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6810,b1218eb5-2a48-4546-b6da-be145d5bc0da,MH2,196,Foundry Helix,NF,29,31
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6811,8437ff33-0185-40a6-8822-8161c0314457,MH2,161,Funnel-Web Recluse,NF,20,22
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6817,905f07b6-62fb-471e-aa0d-9a2eabf30296,MH2,86,Gilt-Blade Prowler,NF,24,25
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6819,1f3a6518-e65f-47c4-916b-02afe48259d6,MH2,413,Glimmer Bairn,NF,11,12
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6820,cc0ab5ce-6ae8-41b6-99b0-92c268517bff,MH2,129,Glimpse of Tomorrow,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6822,419c2a33-e5ae-4bb0-b6c4-392918324a68,MH2,164,Glinting Creeper,NF,10,11
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6823,a4228943-1d57-43ee-89c3-4213d6aa69f5,MH2,14,Glorious Enforcer,NF,14,15
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6827,c585fb92-40f1-4409-920f-2811ba592ef4,MH2,201,Graceful Restoration,NF,16,17
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6831,055e84d3-66dd-4d84-a88a-0a48dfb60236,MH2,88,Hell Mongrel,NF,22,24
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6836,38b4f330-fcac-46b9-bd7f-aab067834c2f,MH2,356,Jade Avenger,NF,13,15
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6842,b68891db-d63b-4abb-915b-e77d9d394f13,MH2,17,Knighted Myr,NF,27,28
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6843,e00d3f44-13e0-4801-9fda-4000323fc0d3,MH2,18,Landscaper Colos,NF,26,27
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6848,8f5b5792-15bf-43b5-be65-e962994fcb32,MH2,20,Lens Flare,NF,25,26
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6850,1f3b3f8f-dc3a-4965-aa27-b82a61a65ca3,MH2,134,Lightning Spear,NF,25,26
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6857,e05b365b-1819-4a81-a220-ccc8256f2693,MH2,382,Marble Gargoyle,NF,14,15
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6858,ba266d0f-b168-4419-88c3-a93920ec5177,MH2,51,Mental Journey,NF,26,28
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6860,71181d57-bf99-4135-8798-17a9635797b9,MH2,135,Mine Collapse,NF,3,5
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6864,ca396149-a70a-4dec-a5c4-d5bfcc34b4f9,MH2,136,Mount Velus Manticore,NF,21,23
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6866,2c6eb30d-766e-4215-b1fb-343618aa1d65,MH2,230,Myr Scrapling,NF,20,21
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6869,e2c79d72-ab4e-4d00-b502-be3078a86a5d,MH2,94,Necromancer's Familiar,NF,12,13
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6873,11321696-12bf-48d6-b323-0d176b59c4fc,MH2,169,Orchard Strider,NF,25,26
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6874,dc341925-b5a7-4fc2-8cc2-b19593895836,MH2,54,Parcel Myr,NF,28,30
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6876,bb43062e-b2e5-4ea3-8122-b6a165937aa5,MH2,55,Phantasmal Dreadmaw,NF,18,19
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6880,008d6956-051b-4029-9f43-4e441d6bab7e,MH2,482,Plains,NF,4,6
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6889,9520d0a1-26dc-491c-903c-c95afe9a53e1,MH2,139,Revolutionist,NF,22,23
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6897,c32b5dcd-ed25-421e-bada-d24677c4a877,MH2,61,Scuttletide,NF,15,17
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6900,b73bebb6-fe22-4a69-8624-21719d5ff822,MH2,62,Shattered Ego,NF,25,26
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6902,ca7f9d96-c99a-4a0f-8343-18864bb20d9c,MH2,140,Skophos Reaver,NF,25,27
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6912,5bff8274-f02a-4455-b4c6-52487bcd6c6e,MH2,213,Storm God's Oracle,NF,25,26
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6915,dbef8127-8ab2-49e4-bd1c-b4d3cf4349f4,MH2,485,Swamp,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6918,40e83964-0b5d-486d-b2b2-58cde9b1914c,MH2,144,Tavern Scoundrel,NF,21,23
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6919,7b03b200-ac3a-487a-aa85-3019129ca110,MH2,215,Terminal Agony,NF,16,17
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6924,024d9c4a-1645-4578-ae6e-3cce26409bec,MH2,239,Tormod's Cryptkeeper,NF,24,26
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6936,0dbee76e-ba83-4701-8a8e-4c202e339a8f,MH2,217,Wavesifter,NF,12,13
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6937,7dcb3e41-afb6-48c5-b099-c37c72029fd7,MH2,109,World-Weary,NF,17,20
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6940,f42590ff-35e1-403f-bfe3-3de97e0a78ce,MH2,110,Young Necromancer,NF,12,15
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10264,042daabd-fb14-466d-89d5-041dcf4c32cf,UMA,44,Aethersnipe,NF,4,8
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10266,997a8598-da6c-4269-8d0d-498fa9fb0137,UMA,83,Appetite for Brains,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10267,d7cb0ebc-f06f-4343-8126-cd7736104680,UMA,123,Arena Athlete,NF,2,10
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10269,6d4659ad-b195-42f1-bd1b-0e25e477b887,UMA,211,Beckon Apparition,NF,2,5
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10271,e6e2668f-d574-40f4-8cb2-03bfdbb1fcc4,UMA,86,Bloodflow Connoisseur,NF,2,7
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10272,aac4e577-2ee8-442e-817f-4b9b049b0761,UMA,159,Boneyard Wurm,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10274,c0891681-75f4-41f3-9bc2-9932b0e87dfb,UMA,125,Brazen Scourge,NF,1,7
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10275,3965bd18-5039-46f5-8482-4423ddb59547,UMA,212,Canker Abomination,NF,2,4
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10276,f5eeaccf-1cad-4cde-9284-f570682b2aa2,UMA,226,Cathodion,NF,1,8
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10277,d7eadf88-cb76-4ada-ac51-8a6eaf809266,UMA,12,Conviction,NF,5,8
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10278,0cd91519-2553-4cb5-9f64-d9f7ac45834a,UMA,90,Crow of Dark Tidings,NF,5,10
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10279,0a1eb7eb-dd5c-48b6-8979-16f4ec053776,UMA,161,Crushing Canopy,NF,2,6
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10280,11d6cf7d-111a-45ed-ab5d-a9656ae89c80,UMA,91,Dark Dabbling,NF,5,9
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10283,5b6a1821-a4ee-49e6-9188-b91bec1bccd2,UMA,49,Deranged Assistant,NF,4,10
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10284,786dbe7d-5472-48c3-a5a7-2bf962ea8849,UMA,213,Dimir Guildmage,NF,1,7
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10285,e1bc7491-cfdc-461a-b190-77a0b1c83457,UMA,214,Double Cleave,NF,2,8
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10287,12cc6142-4d94-4554-abfb-158bcf59012f,UMA,54,Flight of Fancy,NF,3,6
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10289,bffb2860-80f6-4d43-a4ac-ffa023d29915,UMA,56,Forbidden Alchemy,NF,1,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10290,47a667e5-6504-4a85-922a-65df04416d04,UMA,95,Fume Spitter,NF,0,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10293,e8ea27ee-3c23-4357-9c13-2e7b09437864,UMA,96,Ghoulcaller's Accomplice,NF,4,10
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10294,c2efd02b-eca0-4c93-a2f6-fd14565b4d25,UMA,97,Ghoulsteed,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10295,8c7543bd-fc04-4279-98ab-13b242147c42,UMA,18,Gods Willing,NF,1,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10296,1f27abdc-a2e4-4941-a312-32a2605305c0,UMA,166,Golgari Brownscale,NF,5,6
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10297,53c7c51a-9a9c-4c81-81f8-ecb34a62e56b,UMA,100,Grave Scrabbler,NF,1,5
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10298,cc0991ac-b39a-4297-88b8-f0afe51a110a,UMA,101,Grave Strength,NF,1,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10303,c9f86623-edb4-40ad-a1b1-e6789106eb2f,UMA,169,Hero of Leina Tower,NF,1,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10305,22c44a0e-f29c-40f3-9ef5-d0fe8df97472,UMA,170,Hooting Mandrills,NF,1,5
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10308,5f9ebeb3-0440-4988-82d4-6331ed9c9ecd,UMA,59,Iridescent Drake,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10309,b13d273e-6930-4719-9da2-6d9b26ce8fc7,UMA,60,Just the Wind,NF,2,8
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10311,4e75effe-58a6-44bb-9a3b-5b3fd65d60be,UMA,103,Last Gasp,NF,2,9
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10312,0a1c72bb-4197-4668-916d-78dd53dee132,UMA,23,Lotus-Eye Mystics,NF,4,7
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10313,eea8549e-726c-4c71-beaa-01c4a0db225e,UMA,137,Mad Prophet,NF,3,9
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10317,927c8ba1-945a-4328-98e8-0f5db9db9c81,UMA,65,Marang River Prowler,NF,1,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10319,f7873e7b-ea62-4586-97fd-59c097088850,UMA,173,Miming Slime,NF,1,7
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10322,f94d7500-b907-4d29-8e19-465df91877f3,UMA,230,Myr Servitor,NF,1,5
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10323,83467047-d4cb-4d3d-bdcf-f455c42eafe7,UMA,141,Nightbird's Clutches,NF,2,7
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10324,da63d9c8-1c5c-4fc8-b498-381e86205f9e,UMA,108,Offalsnout,NF,4,8
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10325,4764cc04-c302-461a-a0c6-96d200642d7b,UMA,109,Olivia's Dragoon,NF,3,7
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10326,9e3567ee-e92d-4703-bff0-5ec7b0ba4d36,UMA,231,Patchwork Gnomes,NF,3,10
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10327,286a2515-fb16-440a-a46c-d4f523ecae21,UMA,218,Plumeveil,NF,1,5
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10329,3ae2883b-f544-4df0-9cb4-b906fa439dc4,UMA,179,Pulse of Murasa,NF,2,7
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10331,6c5d6485-1fc0-4f56-bcc5-83fa18615733,UMA,28,Rally the Peasants,NF,1,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10334,587d5e4f-2e6b-4477-aaad-31d36e22d95b,UMA,29,Repel the Darkness,NF,3,5
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10335,415753fe-b07c-4339-9188-e56417747909,UMA,205,Reviving Vapors,NF,1,4
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10336,66acf1f4-873a-4a20-aebd-3bf5e31d6e1a,UMA,67,Rise from the Tides,NF,0,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10338,49942f7d-653d-49cd-b41b-3d3881a7dcc9,UMA,33,Ronom Unicorn,NF,4,6
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10340,3bb574f2-7f91-4869-9804-61fe8741f7c1,UMA,220,Safehold Elite,NF,0,10
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10341,a7abb309-4736-405b-b8c6-548985c75e8d,UMA,111,Sanitarium Skeleton,NF,2,7
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10343,fcfb6c78-7b8f-48bf-8e7f-bbda1e75d2a6,UMA,181,Shed Weakness,NF,5,9
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10345,684a9115-9081-4413-9f00-c8c5f5a14b3a,UMA,36,Skyspear Cavalry,NF,5,9
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10346,0cb561d3-6915-414c-b9da-583c7f33221e,UMA,69,Skywing Aven,NF,4,6
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10347,d4e8469a-605d-4819-9ed3-bdf39639beeb,UMA,114,Slum Reaper,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10349,abcb2728-2164-42f2-aace-87d2f8b71fda,UMA,149,Sparkspitter,NF,2,6
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10352,766e0bec-ea09-46d2-8de9-dd152a22378f,UMA,185,Staunch-Hearted Warrior,NF,6,9
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10353,7662b01e-f704-4c20-a180-b40ffc927024,UMA,186,Stingerfling Spider,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10354,a08f07e7-7f0c-4710-a383-c68eae49eda5,UMA,72,Stitched Drake,NF,5,9
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10355,ac62e314-7cd5-45ee-a26e-afeb14164c08,UMA,73,Stitcher's Apprentice,NF,4,8
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10357,8a856894-9749-4f05-9d8e-617d5e0caad0,UMA,75,Sultai Skullkeeper,NF,4,8
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10359,87df78bd-f524-49cf-85a1-a8a4eb5e228c,UMA,40,Tethmos High Priest,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10360,6a112c30-5523-495c-aa6f-76fafbf05e3d,UMA,78,Think Twice,NF,0,1
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10361,1d7cfbbf-b594-4ed0-9fc9-7d3060f02601,UMA,188,Travel Preparations,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10362,646552c9-4ebe-4177-8a4e-c9a2d7953a1d,UMA,224,Turn to Mist,NF,2,8
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10365,000aeafd-77b5-455b-bf99-ad9d5b5368fc,UMA,153,Undying Rage,NF,3,10
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10366,48ea25ec-0434-4ea4-bd59-091eeb84a7e1,UMA,120,Unholy Hunger,NF,5,12
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10367,0ac15c61-e401-457d-a7f6-52b219cf5119,UMA,80,Unstable Mutation,NF,1,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10368,56221ba6-76ec-4f0d-ba13-5dff185a1c6c,UMA,190,Verdant Eidolon,NF,4,7
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10370,7d4c80ab-db70-4930-9e61-bec6b13116ae,UMA,42,Wandering Champion,NF,5,9
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10371,a0192a5d-598e-4882-bd14-0dd02737323e,UMA,210,Warleader's Helix,NF,1,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10372,d72652f7-4dea-46ec-88c0-c639167d8f3e,UMA,82,Whirlwind Adept,NF,4,10
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10373,cbd49ada-5df2-465a-b7c7-0591f69dd640,UMA,192,Wickerbough Elder,NF,0,4
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10374,cacbb75e-2286-4833-a0c4-b4c041f3c967,UMA,193,Wild Hunger,NF,1,4
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,10376,0c2429a3-3604-40ed-8403-b713ac0bb5c4,UMA,43,Wingsteed Rider,NF,2,4
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,8324,402574f8-8785-41a0-8bd6-516b8e97c88f,ORI,1,Akroan Jailer,NF,2,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,8332,0b0e6f1f-4237-4659-80f3-89e9f69cee09,ORI,132,Bellows Lizard,NF,2,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,8337,c41a5e21-b8c1-4ac9-84bd-4f9473133507,ORI,86,Catacomb Slug,NF,3,4
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,8338,4b9f9952-e9e2-4006-a07e-54337c6dee96,ORI,8,Celestial Flare,NF,4,5
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,8342,2d6f8faa-da72-49e0-b1ba-ce0abb27d41e,ORI,50,Claustrophobia,NF,3,6
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,8344,475b0c15-7740-45b6-a2df-f400cc816809,ORI,138,Cobblebrute,NF,2,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,8371,cf7856ff-0cd9-4405-992e-c1aedd5dc50e,ORI,15,Grasp of the Hieromancer,NF,2,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,8378,1bd68d23-293b-4d7b-be4c-7a654bb82c85,ORI,152,Infectious Bloodlust,NF,3,5
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,8379,91b6ba0e-09ea-41fc-bc07-b3f5e931888b,ORI,102,Infernal Scarring,NF,8,9
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,8384,c0472eb1-bc88-4540-a8c7-2eaea69c699d,ORI,259,Island,NF,1,8
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,8391,5257a435-069a-41d2-be76-77bc830296fe,ORI,25,Kytheon's Tactics,NF,1,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,8393,e883797a-81ec-4d9e-a08a-d9d3e9d2a217,ORI,153,Lightning Javelin,NF,5,7
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,8397,a686040e-9fa2-45ca-8c8d-873604ccbdae,ORI,187,Mantle of Webs,NF,0,1
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,8399,51d10dad-3f6f-48a9-9b9d-2598fe2c1764,ORI,26,Mighty Leap,NF,2,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,8402,ad35ae35-4ff2-42d1-bec6-d598e661570a,ORI,267,Mountain,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,8409,b5ff127d-5860-4efe-9c47-a1a9729fc954,ORI,66,Nivix Barrier,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,8410,a0206f3c-05ec-44b5-9009-b9c92b1a3dda,ORI,192,Orchard Spirit,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,8417,671b96a6-e3f4-41a5-8204-47d4ab156d20,ORI,158,Prickleboar,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,8420,db2531d7-245d-4798-b406-13292fb8af73,ORI,159,Ravaging Blaze,NF,6,7
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,8422,3c1dc435-df18-4843-a073-7a2fec1d3066,ORI,115,Reave Soul,NF,3,4
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,8425,1cc67a10-36e1-4561-9ddf-f0c411a7e32c,ORI,196,Rhox Maulers,NF,6,7
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,8434,9b7c2a57-6395-468b-86d5-2f6a834a171c,ORI,118,Shadows of the Past,NF,0,1
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,8453,6297c1d6-3803-46d1-a05a-00571cabdb1b,ORI,201,Titanic Growth,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9612,b692c484-70d4-44af-affd-4b81ba4aa9ea,STX,8,Ageless Guardian,NF,5,6
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9616,600e3022-5d7a-4ee9-8b96-f84639efebb3,STX,63,Arrogant Poet,NF,2,5
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9619,7ff0a529-e2a2-4e58-ae07-aa1f00d104c1,STX,251,Biblioplex Assistant,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9621,c956b5ff-a660-498e-b38d-b2c3ffdb8ff2,STX,164,Biomathematician,NF,4,7
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9622,aaf20d37-fe00-49f8-8bdf-01507a11c0e0,STX,93,Blood Age General,NF,7,10
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9623,4b79c313-9c8b-4801-82c9-b0085cc7eeeb,STX,166,Blood Researcher,NF,1,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9625,ec5f3991-2261-48fb-88a3-80763bd6e58d,STX,65,Brackish Trudge,NF,2,4
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9626,581087f3-818e-4ef9-a63e-d1e4e57eb8e7,STX,38,Burrog Befuddler,NF,3,4
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9628,fa9b2c6d-68d3-4c1c-b41f-2e507d869724,STX,252,Campus Guide,NF,5,9
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9630,bfc412ce-7d7d-4a08-bced-92cd51ac3538,STX,254,Cogwork Archivist,NF,4,6
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9631,4396ecb9-d091-440f-b588-5726af1c0475,STX,11,Combat Professor,NF,3,4
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9635,c0d27cde-3247-4afe-8cdb-f8471a523f08,STX,170,Cram Session,NF,5,8
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9638,2e15ec68-aba9-435c-9061-6326d25a0cef,STX,40,Curate,NF,1,4
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9642,b3ca4775-99b1-4d14-b6bf-831af2d58427,STX,13,Detention Vortex,NF,2,4
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9645,0f17df10-7bdd-426e-9fba-bc287630606d,STX,15,Dueling Coach,NF,2,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9646,503a95b2-6f67-49ba-a1e6-eb75e54af3ed,STX,16,Eager First-Year,NF,4,7
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9648,ca91a029-f42c-4e6c-8946-ab35b3d6d975,STX,182,Elemental Masterpiece,NF,4,5
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9649,aba345c2-e905-4ded-bcb3-ac47ddb45f61,STX,183,Elemental Summoning,NF,6,8
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9651,6d33fd4b-bac0-45cd-9df2-e6cd3b32b9ae,STX,99,Enthusiastic Study,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9655,89322d08-bea6-44c6-a338-65b97cf59b3e,STX,185,Exhilarating Elocution,NF,3,5
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9656,423430e3-5e20-4c2c-bfa9-79089dc1186c,STX,18,Expel,NF,4,5
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9659,e1e87832-4005-409b-8528-0592c5c53746,STX,131,Field Trip,NF,2,4
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9663,908e3b96-3957-46da-ad2f-f587b51f497f,STX,187,Fractal Summoning,NF,4,6
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9665,d166b901-535c-415f-8f66-a82761c55318,STX,103,Fuming Effigy,NF,5,7
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9669,f2bb9ce8-6e63-452c-8417-9f270cbc84a8,STX,104,Grinning Ignus,NF,0,1
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9671,d808b333-fddc-459f-a5d8-ce3b16a4e3b5,STX,106,Heated Debate,NF,4,5
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9672,df9537c6-2041-440b-a943-de02ed4dc019,STX,134,Honor Troll,NF,5,6
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9673,ed30b179-4f42-4009-bd2a-57d5a03043eb,STX,73,Hunt for Specimens,NF,7,8
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9674,57af542d-e061-425e-9a2b-4390583115e0,STX,107,Igneous Inspiration,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9675,07f17db2-b97f-4c8a-8352-525f2f46841a,STX,109,Illustrious Historian,NF,4,7
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9676,abf929a1-4345-4d47-ad2f-7979636bc64d,STX,194,Infuse with Vitality,NF,2,6
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9677,0bcb7390-3432-484c-beb4-58c420cd3b6c,STX,195,Inkling Summoning,NF,2,4
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9680,b1e71cc0-e591-4f03-83c9-ffd2b36f358b,STX,74,Lash of Malice,NF,2,6
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9681,faf97126-20b3-4ef4-808c-8979d1725be4,STX,75,Leech Fanatic,NF,2,4
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9683,8d8c31e3-fca7-4068-9e9c-c7e57a7b7090,STX,198,Lorehold Apprentice,NF,2,4
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9688,3ac42dbf-bda8-4662-aac9-df73dea6ee03,STX,137,Mage Duel,NF,2,5
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9690,3d0b227c-3f8c-468b-b799-d67efe3d2104,STX,77,Mage Hunters' Onslaught,NF,3,5
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9692,6ee104be-6b8b-40e5-b847-b2fff107be47,STX,110,Mascot Interception,NF,2,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9696,2e1c44e1-c5ab-4062-a7ba-ef401eb30290,STX,206,Moldering Karok,NF,2,5
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9699,0fa2d7dc-d077-4ea6-906e-608eb0506110,STX,208,Needlethorn Drake,NF,6,7
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9701,884cce56-95c3-486a-b57e-2b560ab168a2,STX,209,Oggyar Battle-Seer,NF,2,4
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9703,b6488f27-5fae-4e63-95ba-813b3f6c66eb,STX,210,Owlin Shieldmage,NF,1,4
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9704,b91798b7-5135-4f54-ae03-116ec8fdc634,STX,111,Pigment Storm,NF,1,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9705,e72cf420-83ec-44f7-a9eb-fe3587a4921a,STX,22,Pilgrim of the Ages,NF,2,4
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9706,8fe04473-3eda-43a9-a595-6a2624c8e38b,STX,23,Pillardrop Rescuer,NF,4,7
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9707,5455b2d0-4dd7-4a28-a04e-d00c4129b3c6,STX,112,Pillardrop Warden,NF,3,4
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9710,3555e7c1-7995-4cf6-8939-b33337b1ad9b,STX,49,Pop Quiz,NF,3,6
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9712,1e0b5d35-7935-416f-a5d1-8ce141ac4d2d,STX,215,Prismari Pledgemage,NF,2,4
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9714,62225a2e-d2e7-4028-9fe4-531477b46ee9,STX,140,Professor of Zoomancy,NF,5,7
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9715,e1c64bb3-7343-4dfd-a5b7-da0aab63b2b1,STX,84,Professor's Warning,NF,2,4
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9716,3b4e1e78-b388-4f00-b9c0-cd868c10fa8c,STX,85,Promising Duskmage,NF,6,8
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9718,10a20cea-d134-42e5-a020-f83bff3b2d5e,STX,218,Quandrix Cultivator,NF,2,4
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9720,12aae841-22d2-402b-a387-cd1e3ddd7ca2,STX,220,"Quintorius, Field Historian",NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9724,29b93485-5fd3-422d-a3c0-3ea0808c8c48,STX,257,Reflective Golem,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9725,bdd272f6-0541-4f7f-befc-fcabd3556938,STX,50,Reject,NF,3,9
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9726,5f715a3b-802f-4545-916b-f2264eab88b7,STX,223,Relic Sloth,NF,3,5
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9729,7c0f8c8b-3409-458d-9f4d-85c765bebf28,STX,142,Scurrid Colony,NF,1,4
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9731,89b4d702-0b33-42c8-91fb-c40aee2b527c,STX,52,Serpentine Curve,NF,5,8
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9732,8bdc354a-a46f-41b7-a847-554e55458d3c,STX,229,Shadewing Laureate,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9735,96f720ef-f285-4e16-90f8-78d290477d85,STX,233,Silverquill Pledgemage,NF,5,6
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9736,c0f58ce1-97a8-461f-b270-c60f7d4855ab,STX,53,Snow Day,NF,4,5
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9737,b520ff73-5448-4c4a-84e3-001d70e003b5,STX,55,Soothsayer Adept,NF,2,4
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9738,5674d147-8749-4a41-9bd1-cfd221f22c70,STX,235,Spectacle Mage,NF,4,5
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9739,b802d515-cc31-43f4-a3a6-f5228999b216,STX,87,Specter of the Fens,NF,3,5
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9741,11093e53-ec9c-49e2-aea8-b622fa25ccce,STX,143,Spined Karok,NF,4,6
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9742,e3a4f616-90cc-4b8d-afd1-110de76d2b14,STX,236,Spirit Summoning,NF,7,9
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9743,efdd5e4a-a7e2-4c26-a59e-f2070f643db5,STX,237,Spiteful Squad,NF,2,5
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9744,3ac5159a-b3f0-4606-bd01-637f80c2d80e,STX,144,Springmane Cervin,NF,3,6
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9745,e074877e-d19c-44c4-b1b4-c24431fc910b,STX,238,Square Up,NF,4,7
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9746,f9b88771-c23f-44d2-a133-b94c47b33e03,STX,30,Star Pupil,NF,7,10
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9747,5e7bca70-7a9d-41ef-9b82-405b92618204,STX,239,Stonebound Mentor,NF,4,5
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9748,9d6c1d7e-05ae-4b07-9676-41979c465983,STX,32,Stonerise Spirit,NF,3,6
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9749,edc203f2-5462-487b-8101-c7c518fd2680,STX,34,Study Break,NF,3,5
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9754,0cdec1e1-bad7-4112-a560-cbd281d6ad72,STX,88,Tenured Inkcaster,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9756,dc072eb6-5113-4fff-a685-e70b853e9d66,STX,117,Tome Shredder,NF,4,6
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9757,08bdd65f-072b-4b62-badb-9254723d09d6,STX,118,Twinscroll Shaman,NF,2,5
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9758,3a48d897-b6fa-46de-823e-1599b26927a7,STX,89,Umbral Juke,NF,4,5
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9762,4302e624-19c8-47e3-980e-2ef96f2d2fe9,STX,60,Vortex Runner,NF,3,5
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9763,1ac4867a-0f6d-4e2a-9646-cfc53f8fc9fb,STX,61,Waterfall Aerialist,NF,5,7
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9764,958cd2a0-0742-40a7-bc8b-03292e686984,STX,249,Witherbloom Pledgemage,NF,3,4
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7695,4056a168-2438-432f-91e9-8642b74b7478,NEO,44,Acquisition Octopus,NF,4,5
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7697,5273dfbc-5c77-4e2d-87a9-e91823b1b375,NEO,131,Akki Ronin,NF,9,10
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7699,b45b458a-d8cf-4949-a4be-094a9f5dcc77,NEO,132,Akki War Paint,NF,8,10
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7700,6380dd18-4d1a-4bef-8816-a7e6d3bd7eb9,NEO,133,Ambitious Assault,NF,3,6
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7701,088a14a5-86dc-479b-95d3-949c11417da2,NEO,1,Ancestral Katana,NF,8,9
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7703,51f0aad2-fe7f-4a34-9fe5-f29d05516778,NEO,46,Armguard Familiar,NF,9,10
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7705,4b006151-2cf9-4560-8eca-7dd2914d59ef,NEO,327,Asari Captain,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7706,27e3a693-33c7-43a6-b476-0c62487b2ea5,NEO,87,Assassin's Ink,NF,1,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7707,7380e21c-c7ca-4593-be2a-1debe24948e3,NEO,239,Automated Artificer,NF,1,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7709,eddc9685-cbd8-4871-9a73-df5522a8f992,NEO,172,Azusa's Many Journeys // Likeness of the Seeker,NF,1,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7710,47d374fe-85b6-4a0a-8aa4-e399d7ef2950,NEO,173,Bamboo Grove Archer,NF,6,8
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7712,7b5ae4e6-defe-4a29-80be-ff3e3d6da6ab,NEO,174,Bearer of Memory,NF,6,8
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7713,41595691-2fc7-44fa-9787-51ea860e30a0,NEO,4,Befriending the Moths // Imperial Moth,NF,11,14
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7714,c04e99b9-936c-4909-8eb1-b7ef804285ab,NEO,48,Behold the Unspeakable // Vision of the Unspeakable,NF,10,11
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7722,6995e793-950e-4a6b-a57c-a82cb6e47519,NEO,177,Boseiju Reaches Skyward // Branch of Boseiju,NF,0,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7723,dea5f2fa-528c-44a5-b521-786c8bf8a1e6,NEO,240,Bronze Cudgels,NF,1,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7724,a62d178a-1ebe-4063-94d8-7becd8727354,NEO,135,Bronzeplate Boar,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7725,18644d10-f7b6-4e21-89a6-607f7f875d26,NEO,241,Brute Suit,NF,1,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7727,c510211c-56e1-430a-ab8c-7afd5ba234c2,NEO,90,Chainflail Centipede,NF,6,9
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7730,672f7ea0-02e0-40b1-befd-5dca941c4682,NEO,346,Coiling Stalker,NF,16,19
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7732,0e7d6cb2-e9a4-4a67-abae-189180c8c496,NEO,180,Commune with Spirits,NF,5,6
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7733,1b10540a-6e2f-463c-95ae-f9aa5cc8ac42,NEO,49,Covert Technician,NF,4,5
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7735,1a1157a6-a7ec-4bcc-9130-37b4b8d2b5b9,NEO,136,Crackling Emergence,NF,4,7
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7737,c9be2728-034e-42d8-915d-446121747e88,NEO,50,Discover the Impossible,NF,3,4
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7740,7c3f2d53-3ccd-4f74-b7ef-aec22c5bf280,NEO,94,Dokuchi Shadow-Walker,NF,4,5
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7741,333c246e-207d-47c1-a0de-b181bac64d3f,NEO,339,Dokuchi Shadow-Walker,NF,6,8
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7747,2e83641b-d805-4329-9084-fd4dc53dae2b,NEO,10,Eiganjo Exemplar,NF,6,7
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7748,363c9bf0-01a7-494b-af83-f12f1cd7cc2f,NEO,309,Eiganjo Exemplar,NF,11,13
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7750,8952c553-3007-4bde-9e79-ed6597eb712a,NEO,11,Era of Enlightenment // Hand of Enlightenment,NF,12,13
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7752,ef60ba17-84a2-42ac-b137-2af076f4b277,NEO,139,Explosive Entry,NF,3,5
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7753,d8bca5be-ed25-418c-b8a9-6488ff442385,NEO,182,Fade into Antiquity,NF,6,7
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7754,29aff712-7c61-45f4-942c-e9b66a54b22f,NEO,183,Fang of Shigeki,NF,2,4
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7755,6b7cd032-4610-488d-957f-d060cc47a0c8,NEO,347,Fang of Shigeki,NF,6,7
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7756,866c7a04-c2f6-47b4-857a-e206233eda69,NEO,184,Favor of Jukai,NF,2,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7760,01f69cad-a9a0-4e83-a730-60e9274df52e,NEO,333,Futurist Operative,NF,4,5
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7761,f9401c41-7f7c-470b-bf71-fe0358c7c413,NEO,54,Futurist Sentinel,NF,7,8
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7762,7876afdd-66ce-4944-8585-8462806884cb,NEO,186,Geothermal Kami,NF,7,8
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7763,920c6969-2e95-4dc3-ae96-ce98ed02a863,NEO,143,Gift of Wrath,NF,8,9
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7765,6c502823-1997-420d-9129-f5ac16c22497,NEO,15,Golden-Tail Disciple,NF,7,8
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7766,d6e36aa8-e703-47ec-9ebe-8070620ae6e9,NEO,188,Grafted Growth,NF,0,1
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7768,7edd927a-a172-4c62-988d-a1f8d31634d7,NEO,189,Greater Tanuki,NF,0,1
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7771,4803a2e4-0c81-464a-ae7e-8df53942c90b,NEO,190,Harmonious Emergence,NF,4,5
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7772,81dc04a4-be66-411b-b8f9-f31cd34e73ba,NEO,146,"Heiko Yamazaki, the General",NF,4,5
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7773,8f70e516-1a05-4bd3-beae-03534f23ccbf,NEO,321,"Heiko Yamazaki, the General",NF,3,4
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7774,18c5d8f0-a4cc-4418-9d00-463d2b887e8f,NEO,191,Heir of the Ancient Fang,NF,2,5
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7777,9ac3cdff-8d93-483d-8821-f1c10fd46bbf,NEO,192,Historian's Wisdom,NF,4,5
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7778,21e2e8ff-c8f5-4fac-b91b-7e9afe5d04bc,NEO,17,Imperial Oath,NF,8,9
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7781,d6d8ba7c-8c4a-4968-91f9-da5de39e4b3e,NEO,310,Imperial Subduer,NF,11,13
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7782,0791cd1d-0de6-4f77-80ca-af97c1c96228,NEO,100,Inkrise Infiltrator,NF,3,4
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7790,74039ada-823f-4238-9e8c-20ebe25bca7f,NEO,195,Jukai Preserver,NF,5,6
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7791,c1f92ff2-4839-4137-837f-df629eb414bc,NEO,196,Jukai Trainee,NF,6,7
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7792,d48fade4-6722-43d6-8490-facca13fc966,NEO,326,Jukai Trainee,NF,11,12
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7793,430fe2b4-6569-4448-8c1f-5b1a8d0360b1,NEO,269,Jungle Hollow,NF,3,4
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7794,ecf61ccc-d848-4536-bef3-4ff43938f7e4,NEO,103,Kaito's Pursuit,NF,3,5
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7797,cab83087-4b18-46f4-b7fd-ff3758bbda6b,NEO,105,Kami of Terrible Secrets,NF,4,5
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7798,62868629-b5db-42de-80a7-d14c0197f039,NEO,150,Kami's Flare,NF,6,7
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7800,5bf097b4-58b8-4645-8ff7-8e7fb28d4c70,NEO,348,Kappa Tech-Wrecker,NF,3,4
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7801,b371e681-5ffe-45eb-abb1-943cbd57eac7,NEO,151,Kindled Fury,NF,8,9
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7803,64ab6605-6bec-4139-ba32-bd2293eca56f,NEO,152,Kumano Faces Kakkazan // Etching of Kumano,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7804,41c7c4f5-65a4-4bf5-86cc-ceda5d758edb,NEO,107,Lethal Exploit,NF,7,8
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7807,ad7f91ea-8478-44b1-a91e-b0104aca2037,NEO,27,Lucky Offering,NF,7,9
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7808,21e5f3ac-998e-4955-950e-998aefdc5fdb,NEO,110,Malicious Malfunction,NF,4,5
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7813,91dfe421-e8e7-4917-a473-7e73634a7725,NEO,64,Mnemonic Sphere,NF,8,10
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7818,3abc618b-08eb-43b1-8d1a-162f95758143,NEO,335,Moonsnare Specialist,NF,7,8
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7819,7ffde978-5bff-4123-93d6-07b5c5b4f2bd,NEO,30,Mothrider Patrol,NF,2,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7820,f121f03d-91c2-4bdc-b6f7-3f72fa80b75e,NEO,112,Mukotai Ambusher,NF,1,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7821,0671f390-e1d8-4637-8a53-c3c1db895732,NEO,342,Mukotai Ambusher,NF,5,6
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7826,dda1ac62-2bdc-44d3-b0d7-3036574d166a,NEO,115,Nezumi Bladeblesser,NF,3,6
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7827,5b2c3fb0-b3dd-4156-a5e1-ce1290ee8b5b,NEO,318,Nezumi Bladeblesser,NF,6,7
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7830,56679042-6a6e-4a17-99e7-fb54cae56ad7,NEO,252,Ninja's Kunai,NF,5,6
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7832,59293498-e818-4a23-bc29-e2291e314c1f,NEO,311,"Norika Yamazaki, the Poet",NF,4,5
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7833,1d13c088-a6ea-4483-bcb9-a9cacb5e5c80,NEO,117,Okiba Reckoner Raid // Nezumi Road Captain,NF,0,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7836,02c9bfdf-5ba6-4bf1-bd34-a2a0332418fc,NEO,253,Papercraft Decoy,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7837,17ad508e-61d4-4f8d-ac0b-1fee63e01c6c,NEO,156,Peerless Samurai,NF,6,7
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7838,313376be-dd1a-4c56-8865-0050485e361b,NEO,322,Peerless Samurai,NF,7,8
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7840,d3f95be8-fbc7-4536-a924-7d39d45570a7,NEO,75,Reality Heist,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7842,eb09b5a4-04d7-4756-b999-e2739990b080,NEO,32,Regent's Authority,NF,8,10
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7849,e9f7adc3-30c3-4bcd-af85-7f45bdbe1615,NEO,257,Runaway Trash-Bot,NF,2,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7850,040ebcbe-489f-4f08-bf22-d5604c9b8f48,NEO,77,Saiba Trespassers,NF,4,6
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7851,08bead8b-18b1-4b9c-b4f9-c832e3551a5d,NEO,160,Scrapyard Steelbreaker,NF,8,9
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7852,13b686d6-4f83-4962-b9b5-acf410b61238,NEO,258,Searchlight Companion,NF,2,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7853,25fc475a-e4a5-45cd-b77b-675ccd9f465d,NEO,205,Season of Renewal,NF,6,10
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7858,28426a5e-f3bb-4b19-913d-c02150fcf0cd,NEO,36,Seven-Tail Mentor,NF,5,6
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7859,ee8da64b-5ea4-4550-8ece-28b89789c768,NEO,313,Seven-Tail Mentor,NF,13,14
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7860,4a123e4a-544b-4c38-ac88-f2512c52c741,NEO,78,Short Circuit,NF,10,12
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7862,fd8ed7d5-3244-43cf-8c06-ef453ad7ddad,NEO,37,Sky-Blessed Samurai,NF,3,4
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7863,ca0d1463-a4e5-45c3-9ea0-0d743b9f920d,NEO,314,Sky-Blessed Samurai,NF,4,5
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7864,96d24863-b38c-406a-9082-86a3a1b4f180,NEO,79,Skyswimmer Koi,NF,10,12
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7865,4eef6e95-f180-4cd1-a87f-2955afd62865,NEO,164,Sokenzan Smelter,NF,5,6
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7868,835ec87c-2b42-4451-82c9-1858909adb7f,NEO,81,Suit Up,NF,3,4
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7869,f3108df8-db3e-42f5-880a-dfd7065d5a04,NEO,39,Sunblade Samurai,NF,7,8
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7874,9ef2c63b-48e0-441e-8e60-afbbe851694f,NEO,83,Tamiyo's Compleation,NF,3,4
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7875,69a93446-0451-43d3-bea4-fa3f31a43759,NEO,165,Tempered in Solitude,NF,3,4
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7881,ef61be67-1513-41f1-995f-71d92613a241,NEO,262,Towashi Guide-Bot,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7885,5dac35ff-985f-42fd-851c-fd929dcb3a07,NEO,125,Twisted Embrace,NF,6,8
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7886,865dba99-3c69-47fd-8d28-8084379eee11,NEO,281,Uncharted Haven,NF,2,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7888,bfbe1670-555b-45e2-a53d-6e6b56adba12,NEO,127,Unforgiving One,NF,2,4
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7893,1dee4184-5bad-407f-b84d-c8329053def7,NEO,263,Walking Skyscraper,NF,2,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7894,c6219dcf-ed2a-416f-b560-669a560e0cd5,NEO,41,Wanderer's Intervention,NF,8,10
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,7896,d702cf93-49ea-48fd-a268-580003bcd89c,NEO,43,When We Were Young,NF,5,7
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9830,2e95f875-53a5-47bb-adba-b4b55115e9c6,THB,83,Agonizing Remorse,NF,2,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9840,6401b804-176b-481d-8f0f-3b8f4d8056cc,THB,4,Banishing Light,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9842,f1d2c864-d1af-46cf-99e8-5941ac4e9f37,THB,44,Brine Giant,NF,2,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9843,e831fbe5-a724-4c78-ba8e-ac130ff4bc23,THB,232,Bronze Sword,NF,2,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9851,758d8370-001f-49cd-b16d-b3873d8d4118,THB,10,Daybreak Chimera,NF,7,8
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9856,7702eefe-bd30-448a-a7c0-2359645025b0,THB,11,Dreadful Apathy,NF,2,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9865,52e716f5-3660-4766-a07f-a126218ef6de,THB,95,Final Death,NF,7,8
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9866,2cb4ea49-9169-45e9-8122-fc9cf2a7f5da,THB,134,Final Flare,NF,2,4
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9869,b81e056b-4721-4272-b12a-2a948b76aac1,THB,96,Fruit of Tizerus,NF,2,4
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9870,c137d3d0-5cd6-4c9f-9fcf-dc0405013655,THB,97,Funeral Rites,NF,3,4
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9871,500555e2-080f-4f1c-ba8f-0694079140e4,THB,136,Furious Rise,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9872,24492a1a-f269-42dc-88c1-c1c5d00da19a,THB,171,Gift of Strength,NF,2,4
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9874,60073dc8-66ca-40ca-9f06-c3ab69899142,THB,17,Glory Bearers,NF,3,4
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9875,35218adf-9f59-4389-ab0a-af7cf043c222,THB,100,Grim Physician,NF,1,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9878,93c97802-c433-4681-83ca-cf8da2432371,THB,219,Hero of the Nyxborn,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9879,54034896-7ae2-4365-80b5-0f1dc076237c,THB,22,Hero of the Pride,NF,4,4
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9881,cc2758b5-2af6-4eb0-b4f1-7eafa1f2dc92,THB,173,Hyrax Tower Scout,NF,1,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9882,03aad129-f57c-45c1-95a4-462c7d8c4a73,THB,51,Ichthyomorphosis,NF,4,7
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9885,ef69f853-8b29-49ad-98e7-d38eb7dfe6c9,THB,25,Indomitable Will,NF,4,5
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9889,06b4bc3b-e1f7-4353-bbc5-e2c9f25fbdb3,THB,142,Iroas's Blessing,NF,7,9
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9895,63794015-6caf-4242-8e38-fac2bbcbc337,THB,28,Leonin of the Lost Pride,NF,4,6
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9896,cbc9e980-f221-4019-a449-f4e7d9d8d8a6,THB,177,Loathsome Chimera,NF,1,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9898,fb148825-ee65-4557-8d75-dd4c82b74b2d,THB,54,Memory Drain,NF,4,7
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9900,653f45fc-dc37-46b9-8bec-0ee531724918,THB,106,Mire's Grasp,NF,6,7
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9907,0fd721c1-4e6a-47ab-984b-084585cca033,THB,184,Nexus Wardens,NF,2,4
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9912,2de101a7-6fc2-4bd0-99bb-efa559829233,THB,144,Nyxborn Brute,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9913,82a13a36-d8b8-48d6-86fd-7b736f052a8a,THB,191,Nyxborn Colossus,NF,2,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9914,dbb99b0c-7fa0-408e-b15c-9e3487db2a5f,THB,29,Nyxborn Courser,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9915,2fe43738-a99b-458f-a27d-ffeff6db296d,THB,109,Nyxborn Marauder,NF,3,4
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9916,00adf29b-9e34-4f1b-bd81-6ddf6dfa1f44,THB,57,Nyxborn Seaguard,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9917,6a415e3d-4658-429b-af6c-3567fc9bb459,THB,145,Omen of the Forge,NF,3,4
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9918,89f360f3-5fd2-43c3-b352-d176353598c4,THB,192,Omen of the Hunt,NF,3,5
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9919,60555701-e2af-4424-b93c-45a36d80cb46,THB,30,Omen of the Sun,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9921,4eeaf6fa-207f-47c8-9180-f4b1c798982e,THB,146,Oread of Mountain's Blaze,NF,6,7
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9926,906243b6-42f3-49b8-999e-0b154fe1c93b,THB,32,Pious Wayfarer,NF,2,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9927,7302ab08-02d1-43dd-9d99-d009d78ec81a,THB,250,Plains,NF,0,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9930,ac73f5f6-9eed-4a28-b182-6cda530cfb2a,THB,194,Plummet,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9934,d6c5ac5a-05ed-466d-aefd-f5f7cbb67e40,THB,113,Rage-Scarred Berserker,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9935,b74b7e91-1c8d-4845-b77e-6a23ec6cd674,THB,195,Relentless Pursuit,NF,4,5
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9937,5e4f7d3e-1cee-41a9-bc79-e6b475e3f26b,THB,34,Revoke Existence,NF,0,1
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9938,6e13f731-751a-4de6-9792-46467c237d9b,THB,35,Rumbling Sentry,NF,6,8
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9939,1864d154-a3fe-4403-8efa-faa3716c8958,THB,152,Satyr's Cunning,NF,6,7
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9940,28a2d8d9-30dc-4771-91d5-f522a890b15d,THB,114,Scavenging Harpy,NF,3,4
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9943,8769e73a-deff-4df1-b168-03cf5eb4cb59,THB,201,Setessan Training,NF,0,1
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9945,b46486fa-36b6-464f-95cd-55b8509d1b46,THB,202,Skola Grovedancer,NF,1,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9947,2a2a8afe-f6cb-4495-b058-71cc78107de6,THB,154,Skophos Warleader,NF,2,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9955,943cf132-303e-4dc8-89a5-d44cd50699f4,THB,38,Sunmane Pegasus,NF,2,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9963,0d0201ea-efd9-43f2-ac6c-3d6661694046,THB,74,Thirst for Meaning,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9968,a7a0bc41-c06f-40c4-bdba-926cc5d4dc48,THB,78,Triton Waverider,NF,3,5
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9969,1df2d474-82d8-48f8-bb71-248cbd72f93b,THB,41,Triumphant Surge,NF,3,6
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9976,29699f63-c29e-4bb3-badf-7a1f15c4d55b,THB,122,Venomous Hierophant,NF,4,5
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9977,746a1719-d8e4-406e-9709-7504ef5085c7,THB,79,Vexing Gull,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9979,c3eb6b55-fe55-477a-890a-2724e449f4bd,THB,203,Voracious Typhon,NF,5,8
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9981,5bd51685-f0dc-43f8-966d-75710af8be2c,THB,230,Warden of the Chained,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9983,38eac520-99fd-45c4-b091-5ba79a1dafd2,THB,241,Wings of Hubris,NF,2,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,9985,41f43f62-27c9-410d-8095-456dc6e64466,THB,164,Wrap in Flames,NF,2,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6304,1225a342-952e-41de-abbd-8d39f46d4ed8,M19,171,Centaur Courser,NF,5,6
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6309,879ba745-c2c4-4b1d-a1bf-12c585f8b209,M19,10,Daybreak Chaplain,NF,4,5
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6312,b6287d6b-6825-4d18-8ec2-a57cba73bdff,M19,50,Disperse,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6316,8a65d7ee-cf4a-4203-8cf2-f305f57a8e87,M19,176,Druid of Horns,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6317,23dbd061-e84d-40e9-be4b-470198cb139b,M19,177,Druid of the Cowl,NF,2,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6319,a5803a2d-ffcf-4b99-873c-06a8e4c5f527,M19,11,Dwarven Priest,NF,3,4
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6330,f1799c3c-56ab-40f6-a1a5-8ca29eef5930,M19,56,Frilled Sea Serpent,NF,2,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6335,315ab4d1-fd71-4389-8899-b57969af5add,M19,183,Giant Spider,NF,7,9
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6337,b3d9e6b7-bac9-4b93-82d8-69f41b65d50b,M19,187,Greenwood Sentinel,NF,2,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6341,661ea4d0-bff7-4e3b-bdcc-03e456229b87,M19,100,Hired Blade,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6346,dc9c93cf-56e6-4852-853c-d4b5039d06b0,M19,15,Inspired Charge,NF,2,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6347,f078afff-0701-4ee7-b2c8-5a3ccac3fe13,M19,16,Invoke the Divine,NF,4,6
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6351,cd61cbdb-13c5-4ed0-9250-e3735e1fee92,M19,18,Knight of the Tusk,NF,4,5
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6352,b7fe7654-7e46-47fc-a63c-9b69a345d563,M19,19,Knight's Pledge,NF,7,9
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6374,6590833e-2a4c-4206-bc48-18ea956c4a11,M19,32,Pegasus Courser,NF,6,7
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6385,c401dc40-a693-4ff4-99ed-aff9f099013d,M19,117,Rise from the Grave,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6386,4fcef0aa-9afc-4e27-9bff-22755c9f520d,M19,199,Root Snare,NF,4,5
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6387,7e5622e3-db24-437b-a0f2-638ef0b753db,M19,36,Rustwing Falcon,NF,4,5
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6396,921e5398-9361-4153-ba5a-3353d20abb64,M19,120,Sovereign's Bite,NF,0,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6398,3fe96f1c-d7fe-4a45-859a-fbfc7d1d94e6,M19,38,Star-Crowned Stag,NF,5,6
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6400,511922e3-d1ec-4d8c-818f-c42b0248ead0,M19,122,Strangling Spores,NF,2,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,6409,6e7235a5-3459-4385-bbe5-52abbad3f018,M19,202,Talons of Wildwood,NF,4,5
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2156,c5ac0800-7005-4758-809f-9e45ad05401f,CMR,213,Ambush Viper,NF,8,12
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2157,7e6f1894-d1ae-4cfa-b269-66c5e805c868,CMR,5,Ancestral Blade,NF,14,17
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2159,c8ea4afc-80a6-40e4-8f42-d1f11e01b675,CMR,6,Angel of the Dawn,NF,14,17
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2162,ec975c09-2eb4-42a8-a7c7-53fb5bf878aa,CMR,8,Anointer of Valor,NF,16,20
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2164,cfdd9e3c-8e1b-4c6c-b7b7-3061193c9251,CMR,298,Armillary Sphere,NF,1,4
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2165,406f36ed-ea23-4c27-96b9-ed55abda5e8c,CMR,218,Armorcraft Judge,NF,2,4
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2166,5b4ee9f6-57cf-46dc-abb2-e8febaf675a3,CMR,299,Armory of Iroas,NF,1,6
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2167,9cc58279-9382-4541-9c0e-29abfbb01ca4,CMR,57,Aven Surveyor,NF,14,18
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2168,7f2efc92-6283-42d3-ab33-f395216512c0,CMR,58,Azure Fleet Admiral,NF,15,18
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2169,d0c7a01b-7370-4380-9572-9c1cd704a4b3,CMR,109,Bitter Revelation,NF,10,16
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2170,43257263-38d4-402f-a117-4fbf6d7299ec,CMR,110,Bladebrand,NF,11,16
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2171,e0d22e5a-1539-44b4-9cc3-a5327a82e4a3,CMR,164,Brazen Freebooter,NF,9,12
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2172,d51ca49d-4291-432a-962d-811d73530dfb,CMR,165,"Breeches, Brazen Plunderer",NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2173,1d32851b-576f-4d08-964c-5dc4ca2b75a5,CMR,111,Briarblade Adept,NF,14,17
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2177,dcf05875-d9e0-4bde-a0d3-1a4babe3f075,CMR,14,Cage of Hands,NF,15,19
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2178,0214b609-8ab6-4431-a3f4-18bc0072b320,CMR,15,Captain's Call,NF,12,15
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2179,6fdc69df-ad73-4ac2-80ab-c1cc082ab77c,CMR,167,Champion of the Flame,NF,8,12
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2181,09156a35-a1f5-40ee-ba37-f727b33a563f,CMR,62,Confiscate,NF,5,6
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2182,1c719e2c-d391-4798-983a-1dd1ab3c30a9,CMR,113,Corpse Churn,NF,8,15
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2183,9acb4fac-bff5-459d-a660-ad1f0ca00a21,CMR,17,Court Street Denizen,NF,12,16
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2184,067ffb85-e99d-4027-84db-7ed61bc014e5,CMR,171,Crimson Fleet Commodore,NF,5,11
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2185,63ce7ca8-9d2c-40fb-a449-99cdb7eef651,CMR,115,Crow of Dark Tidings,NF,11,14
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2186,7e03d631-0e8b-4d94-9c11-61558e36ffa1,CMR,221,Crushing Vines,NF,11,17
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2188,8be1c317-8d0c-454e-a0b6-237b3589b5cb,CMR,64,Daring Saboteur,NF,3,4
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2189,4a5e7c0f-22c1-4a56-91ca-36084b06c9fd,CMR,117,Defiant Salvager,NF,11,14
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2190,5ce1e4ea-40fa-410f-98a0-acc3ba29f5ca,CMR,118,Demonic Lore,NF,5,6
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2191,397962c8-c8f9-4955-8b48-bde323e50cc8,CMR,65,Deranged Assistant,NF,15,19
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2192,7cb2cf4e-361b-4083-a475-2ddeb6108d52,CMR,119,Dhund Operative,NF,13,17
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2193,66030f1b-cadd-44c6-830d-1056e454d4f5,CMR,18,Dispeller's Capsule,NF,13,20
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2194,4f3ebba3-69ed-4d7f-822c-3c4ca01eebd4,CMR,19,Doomed Traveler,NF,14,17
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2195,8b8486e5-0121-4610-8c86-df1f0935c730,CMR,173,Dragon Egg,NF,7,12
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2196,92544750-33fd-4897-a802-363f7f327ecd,CMR,174,Dragon Mantle,NF,9,13
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2197,2232a9ed-ace1-47a8-ad74-e6ee48ae769f,CMR,120,Elvish Doomsayer,NF,13,15
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2198,e2e566d5-9387-416f-bfde-d09153fd52e3,CMR,223,Elvish Visionary,NF,2,5
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2199,3b2b5b6e-92f2-40a5-9a87-827a6632b29e,CMR,224,Entourage of Trest,NF,12,15
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2200,a0e266da-98dd-45b1-abcb-66656ced3e50,CMR,176,Explosion of Riches,NF,1,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2201,b9d33f57-1a74-4311-901e-e665652c84b5,CMR,122,Exquisite Huntmaster,NF,14,19
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2202,76759fe7-629f-4d1c-8eaa-6e86598c83db,CMR,123,Eyeblight Assassin,NF,14,18
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2203,2e539ab6-fceb-4232-a37c-681ad38d641c,CMR,124,Eyeblight Cullers,NF,9,11
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2204,d57b5640-f495-4b8b-a969-8c10fa47f9d1,CMR,125,Eyeblight Massacre,NF,10,14
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2206,cae61d47-9f77-4c9c-a5a7-1a529c4786fe,CMR,68,Fall from Favor,NF,10,15
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2209,4f3f2179-b0c7-4d07-9c65-5d99fd756fc3,CMR,21,Fencing Ace,NF,5,7
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2210,159a31bc-b1cb-4dc3-9eac-a54fafcf86d6,CMR,226,Fertilid,NF,8,9
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2212,807b78b0-26a4-4bc3-a8b9-3d95ddb33c72,CMR,227,Fin-Clade Fugitives,NF,14,18
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2213,aeecf737-5b9f-4e8b-b0e9-06133a1ab4bb,CMR,22,First Response,NF,5,6
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2216,672c08be-833e-429a-b3ca-4354d0dd5315,CMR,181,Furnace Celebration,NF,2,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2217,3ccba560-a73f-4e05-8017-3329a6d72f3b,CMR,70,Galestrike,NF,13,18
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2218,b508416b-2011-4104-880e-093a73135e96,CMR,129,Ghastly Demise,NF,5,9
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2220,689ed698-a2b4-4256-bacb-a02674d29c81,CMR,229,Gift of Paradise,NF,10,16
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2221,85933f4f-4edf-4f9b-9057-5c43bf08c6f6,CMR,130,Gilt-Leaf Winnower,NF,8,9
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2222,d1db6b0a-1fe5-4058-9374-c565c96ace54,CMR,72,"Glacian, Powerstone Engineer",NF,4,5
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2223,b24b7544-caba-43f8-901c-6992ba371d11,CMR,182,Goblin Trailblazer,NF,13,15
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2224,e988aaa9-12b8-43ed-bf19-14aa03adfab4,CMR,311,Golem Artisan,NF,1,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2225,638dc120-a552-416a-b5dd-91854aa13206,CMR,73,Horizon Scholar,NF,6,9
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2226,cd83b289-b177-4d64-b36e-a432e3a435f1,CMR,316,Howling Golem,NF,3,7
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2230,5a3a62b3-3f61-4589-9fd0-21dc6bc73281,CMR,23,Inspiring Roar,NF,16,21
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2231,30aceb7f-ca08-4985-8220-d48ad01dfdc0,CMR,75,Interpret the Signs,NF,5,6
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2232,7bc8cdd7-e10f-43b3-bd23-8e7daf07102a,CMR,25,Iona's Judgment,NF,12,16
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2234,572accb9-2ff7-40d1-8daf-b505fa6d20ce,CMR,318,Jalum Tome,NF,2,7
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2237,51c249c3-e4e2-4863-b8d7-e5358853021d,CMR,131,"Keskit, the Flesh Sculptor",NF,2,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2238,7145c58a-f32b-4bf5-b8e1-c0f91a535407,CMR,29,Kinsbaile Courier,NF,12,19
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2239,422bbf43-fc91-4fe1-b4b4-80b7071c109e,CMR,76,Kitesail Corsair,NF,15,18
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2240,3c32ab73-480a-45ce-b1b0-fa273a847eea,CMR,77,Kitesail Skirmisher,NF,12,16
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2242,40fa5ea1-bb55-43a0-8205-8649e4ba3b43,CMR,240,Lifecrafter's Gift,NF,14,16
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2243,abe1e25a-5e42-4174-8a18-ddadbbd29ee0,CMR,321,Lumengrid Gargoyle,NF,1,5
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2244,6b809d1c-5eed-42a5-8aec-178696cf983b,CMR,241,Lys Alana Bowmaster,NF,9,13
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2245,27b0c703-4a07-4d3f-b78c-6e4d06242cbf,CMR,132,Maalfeld Twins,NF,13,16
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2248,dc53ea64-7287-4e2b-b674-19dc09a5886a,CMR,81,Merchant Raiders,NF,5,7
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2250,0dad80fa-641f-4825-87cd-e5a445e3905d,CMR,243,Molder Beast,NF,15,17
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2251,7bb0a2da-46a1-4836-bef8-0d7cb5d72b59,CMR,244,Monstrous Onslaught,NF,3,4
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2253,2e793f54-08f3-403b-b498-4d80f48f9cfd,CMR,134,Murder,NF,10,11
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2254,c95069fa-476b-48b1-9360-d0a8abce2b93,CMR,245,Natural Reclamation,NF,13,18
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2255,42d7cbf6-fda8-4608-a3db-43c7a34e141f,CMR,33,Ninth Bridge Patrol,NF,12,15
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2256,5cf84cf6-2b2b-4b6e-9d30-5d19f1496f3e,CMR,139,Noxious Dragon,NF,3,4
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2257,9ad7c0c8-7518-4244-b564-8a087f850210,CMR,140,Null Caller,NF,6,7
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2258,68a687bc-d02c-4a52-9d36-298c5f67e49f,CMR,246,"Numa, Joraga Chieftain",NF,7,9
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2260,103a67e8-5862-4261-9172-badad7f67050,CMR,35,Orzhov Advokist,NF,7,10
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2262,f171abc5-622d-47ce-8da2-efd7261b364d,CMR,37,Patron of the Valiant,NF,4,5
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2264,5adb020b-e498-4609-b152-c9e527aec22d,CMR,330,Perilous Myr,NF,2,9
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2265,840350eb-a6f2-4d59-b325-9512666db702,CMR,142,Phyrexian Rager,NF,11,14
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2266,d3ae50f2-3754-435a-9373-9e9e00872b68,CMR,332,Pilgrim's Eye,NF,4,5
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2267,1318d3d1-e633-4ca8-8356-e2e035b41abe,CMR,333,Pirate's Cutlass,NF,5,9
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2268,babdb143-6bd5-4b7b-83d1-0835be5bb352,CMR,194,Portent of Betrayal,NF,11,13
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2269,4aa99d85-06da-480c-baea-3199014ec495,CMR,334,Prophetic Prism,NF,1,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2270,4c3c70cc-ebde-48e1-8fad-78e1a57d9e42,CMR,85,Prosperous Pirates,NF,14,18
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2271,a5abd177-efed-48fb-ac77-35f5618ba17a,CMR,86,Prying Eyes,NF,12,17
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2273,8effb4d7-b4d8-4de1-b94f-09c2571b1d98,CMR,41,Raise the Alarm,NF,14,18
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2275,c8ca4d17-f8b8-4d0c-a07a-159824321479,CMR,195,Renegade Tactics,NF,2,7
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2277,f82d01a0-3dac-4450-b32d-a283fd504cde,CMR,147,Revenant,NF,6,7
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2278,caff8964-e4d3-499d-957d-9ef280952d79,CMR,196,Ripscale Predator,NF,10,12
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2279,93cb2143-7b58-4df2-9dd5-9d06a7f0c569,CMR,198,Rummaging Goblin,NF,10,14
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2280,2357e30b-a982-43d0-88db-2c4d1ace00a1,CMR,87,Run Away Together,NF,10,14
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2282,d4169284-cf04-4a7e-8da8-6887c17d122c,CMR,88,Sailor of Means,NF,15,17
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2283,87af996b-3f85-4453-9fcb-19078a938f76,CMR,148,Sanitarium Skeleton,NF,13,19
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2284,19ee03d8-a6af-47cb-ada1-d93d9a4de71e,CMR,251,Scaled Behemoth,NF,2,5
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2286,3214f70c-1615-4ebb-a96e-674020ae6af8,CMR,93,Scholar of the Ages,NF,5,7
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2287,f90e96dc-c288-45e5-be2a-0f1ed9090c30,CMR,94,Scrapdiver Serpent,NF,16,21
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2290,ddf05c28-0073-43eb-83c7-0b625e32bfde,CMR,253,Sentinel Spider,NF,14,17
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2292,40fb5161-d0f1-46b2-b5ea-bbde1184d737,CMR,95,"Siani, Eye of the Storm",NF,5,7
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2293,682aebf1-f019-417e-8d72-e54a58349dbe,CMR,254,Sifter Wurm,NF,2,4
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2294,524bf371-c4af-4e88-aeb5-5277039c5aa1,CMR,255,Silverback Shaman,NF,10,14
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2296,3c5ffafc-c5df-4935-b8d5-147d14b96202,CMR,97,Skaab Goliath,NF,16,19
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2298,4faaff1c-0009-4268-b159-418703cedafa,CMR,199,Skyraker Giant,NF,14,19
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2299,2aae3ed1-2c50-4102-af40-bb9d5f28314e,CMR,46,Skywhaler's Shot,NF,15,19
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2301,34d0db14-6c3b-4c0e-bd06-d57a5ceea466,CMR,49,Slith Ascendant,NF,15,19
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2302,9baff239-6400-4ce5-b303-850967fb5ec2,CMR,256,"Slurrk, All-Ingesting",NF,4,5
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2303,fb303206-4fa9-4565-b169-548f7f042b18,CMR,257,Soul's Might,NF,14,18
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2304,28544b17-2c0b-4ccc-b844-4cfdf5ccef4e,CMR,150,Spark Harvest,NF,11,12
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2305,0e5887ed-8f18-42ac-b0c0-c4e02d0fbac3,CMR,202,Sparktongue Dragon,NF,10,14
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2307,aa57617a-c40c-4f59-b627-25eaaaca219d,CMR,100,Spontaneous Mutation,NF,14,21
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2309,027c890a-c317-4a66-aa3a-a8b3d3934f54,CMR,344,Staunch Throneguard,NF,1,5
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2310,e36fef55-f160-4f7d-a105-cb1311c5a5da,CMR,258,Stingerfling Spider,NF,3,4
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2311,911810c3-8338-4b11-a965-7596836b424b,CMR,203,Stonefury,NF,12,19
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2313,dde1230c-56ef-43b5-a4d9-8e8646278da5,CMR,259,Strength of the Pack,NF,2,4
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2315,f0c09a20-1cb7-4a55-a4ad-8368da31da79,CMR,151,Supernatural Stamina,NF,5,9
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2316,9496157a-0c0f-454a-8df4-23089d60ce84,CMR,102,Supreme Will,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2317,d595f2e4-5e22-4330-b2c1-c4317bcafadc,CMR,357,Terramorphic Expanse,NF,3,4
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2318,58b145a2-88ae-4b06-a3f0-1c6a5a479efa,CMR,1,The Prismatic Piper,NF,4,11
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2319,27a4d4b5-4ceb-4497-b507-e85c290a162d,CMR,103,Thirst for Knowledge,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2322,e3e93bdf-1d1a-4afd-84ae-64bc7cac0559,CMR,53,Trusty Packbeast,NF,17,23
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2323,72c4bc9d-099c-4433-9419-f19698ea0413,CMR,292,Tuya Bearclaw,NF,4,6
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2324,3d6a8a49-af7d-472f-8713-80f9075f729f,CMR,205,Undying Rage,NF,12,18
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2325,0ef93646-2405-4e4d-b185-84c391a20362,CMR,206,Valakut Invoker,NF,14,18
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2326,1e1e7f29-ebf0-4630-9b0b-ad45a8043d2f,CMR,207,Volcanic Dragon,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2327,8e42962b-189a-46ea-894b-19edbee75244,CMR,208,Volcanic Torrent,NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2330,2172707e-b8b9-40db-8f0a-cf711732d329,CMR,209,Vow of Lightning,NF,2,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2331,cd613ce5-7f1d-4139-911e-425b3832576a,CMR,262,Vow of Wildness,NF,5,8
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2333,1cc89eca-e350-4a88-abb2-a7115ba8b493,CMR,210,Welding Sparks,NF,10,13
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2334,103dd5c9-6bd5-474f-82ed-bcce289b58bf,CMR,212,Wild Celebrants,NF,10,14
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2336,b2eca8ef-4124-4d51-8805-839366225635,CMR,263,Wildheart Invoker,NF,16,18
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2337,4b85bc1a-d349-417e-a4ea-4471e4f2230d,CMR,264,Wildsize,NF,10,14
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2338,97f5c63d-6aec-47bd-9315-e1da402d9e90,CMR,348,Workshop Assistant,NF,1,4
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2009,46164971-de97-4f79-8470-b6f59f8f5f85,CLB,385,"Imoen, Mystic Trickster",NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2021,9cb68c25-22f4-4e59-aae1-2ebf92efce90,CLB,379,"Lulu, Loyal Hollyphant",NF,1,2
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2061,27f40616-3e92-4c79-b45c-8758c270a2de,CLB,439,"Rilsa Rael, Kingpin",NF,0,1
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2071,1c7e36af-6635-4cae-b601-0a7dabe1beef,CLB,391,"Sarevok, Deathbringer",NF,1,1
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2087,fd3d7517-78fd-42c9-83d0-96b4e13629dc,CLB,151,Summon Undead,NF,1,3
+2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2119,0fbad055-b4b1-45b4-b394-65e893562549,CLB,158,Zhentarim Bandit,NF,0,1
