@@ -6,8 +6,8 @@ never call the Scryfall API per card. Refresh is run manually, e.g. before an
 intake that contains a newly released set.
 
 Usage:
-    python scryfall_mirror.py refresh
-    python scryfall_mirror.py status
+    python -m station.scryfall_mirror refresh
+    python -m station.scryfall_mirror status
 """
 
 import argparse
@@ -22,7 +22,7 @@ from typing import Any, Dict, Iterable, Iterator, List, Optional, Tuple
 import requests
 from psycopg2 import extras
 
-import db
+from station import db
 
 BULK_DATA_URL = "https://api.scryfall.com/bulk-data/default-cards"
 SCRYFALL_HEADERS = {

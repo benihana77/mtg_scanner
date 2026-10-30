@@ -7,9 +7,9 @@ import tempfile
 import unittest
 from unittest import mock
 
-import audit
-import collection_pull
-import repricer
+from station import audit
+from station import collection_pull
+from station import repricer
 
 CONFIG = {
     "pricing": {"adjustment_pct": -1.0, "floor": 0.15},

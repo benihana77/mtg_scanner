@@ -1,6 +1,6 @@
 """Repricer: price listings from ManaPool's market data, flag risers, and record price history.
 
-Base price for each listing (settings in repricer.toml):
+Base price for each listing (settings in config/repricer.toml):
     max(lowest NM listing, market price) * (1 + adjustment_pct / 100), rounded to the cent,
     never below the floor. Foil listings use the foil fields of ManaPool's price feed.
     If the lowest NM listing equals our own price (it may be ours), the price is held or
@@ -11,10 +11,10 @@ those go to a review list. Risers (lowest listing far above market, supply drain
 climbing within the window) use the same formula and are flagged in the report.
 
 Commands:
-    python repricer.py snapshot            # nightly: record price history, never changes prices
-    python repricer.py sync [--apply]      # compare live ManaPool prices with the database
-    python repricer.py run [--preview]     # reprice: drift check, plan, review, push, verify
-    python repricer.py pins | pin ... | unpin ...
+    python -m station.repricer snapshot            # nightly: record price history, never changes prices
+    python -m station.repricer sync [--apply]      # compare live ManaPool prices with the database
+    python -m station.repricer run [--preview]     # reprice: drift check, plan, review, push, verify
+    python -m station.repricer pins | pin ... | unpin ...
 
 The repricer refuses to push while live ManaPool prices differ from the database
 (run `sync --apply` first). Pushes send price only (quantity null).
@@ -32,14 +32,15 @@ from typing import Any, Callable, Dict, List, Optional, Tuple
 from psycopg2 import extras
 from tabulate import tabulate
 
-import db
-import manapool_client
+from station import db
+from station import manapool_client
+from station import CONFIG_DIR
 
-CONFIG_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "repricer.toml")
+CONFIG_PATH = os.path.join(CONFIG_DIR, "repricer.toml")
 
 
 def load_config(path: str = CONFIG_PATH) -> Dict[str, Any]:
-    """Reads repricer.toml."""
+    """Reads config/repricer.toml."""
     with open(path, "rb") as f:
         return tomllib.load(f)
 
@@ -449,7 +450,7 @@ def run_reprice(
     result["drift"] = drift
     if drift["price_drift"] and not preview:
         result["blocked"] = (f"{len(drift['price_drift'])} live ManaPool prices differ from the database. "
-                             "Run 'python repricer.py sync --apply' first.")
+                             "Run 'python -m station.repricer sync --apply' first.")
         return result
 
     as_of, feed = load_feed(config)

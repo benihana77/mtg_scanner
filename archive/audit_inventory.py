@@ -2,7 +2,7 @@
 
 Implements Strategy B:
 1. Interactive wizard to assign physical boxes to the 23 unmapped sets.
-2. Updates 'Manapool Print Format - Set_Box Map.csv' with a backup.
+2. Updates the Set/Box map (config/set_box_map.csv) with a backup.
 3. Generates a physical Token Extraction Walk Sheet (exports/token_extraction_pull_sheet.txt)
    guiding the operator to pull all 363 tokens from their base set boxes (M1..M19).
 4. Verifies that 100% of all 44,295 cards are mapped with 0 unassigned.
@@ -211,8 +211,8 @@ def prompt_for_unmapped_sets(
 
 
 def run_audit(
-    inventory_csv: str = "backups/inventory-manapool-backup-20260920.csv",
-    map_csv: str = "Manapool Print Format - Set_Box Map.csv",
+    inventory_csv: str,
+    map_csv: str = "config/set_box_map.csv",
     interactive: bool = True,
     token_box_label: str = "TOKENS",
     output_dir: str = "exports",
@@ -340,8 +340,8 @@ def run_audit(
 
 def main():
     parser = argparse.ArgumentParser(description="MTG Inventory Audit & Token Strategy B Tool")
-    parser.add_argument("--inventory", default="backups/inventory-manapool-backup-20260920.csv")
-    parser.add_argument("--map", default="Manapool Print Format - Set_Box Map.csv")
+    parser.add_argument("--inventory", required=True, help="Path to ManaPool inventory export CSV")
+    parser.add_argument("--map", default="config/set_box_map.csv")
     parser.add_argument("--non-interactive", action="store_true", help="Do not prompt for unmapped sets")
     parser.add_argument("--token-box", default="TOKENS", help="Box label for dedicated token storage")
     args = parser.parse_args()

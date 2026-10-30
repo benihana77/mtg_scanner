@@ -5,7 +5,7 @@ at the box / section / index the import assigns it, with what to check. Use it t
 the shelves and confirm each one is physically where the database will say it is.
 
 Usage:
-    python special_cases_report.py [--inventory-csv ...] [--output-dir exports]
+    python -m tools.special_cases_report [--inventory-csv ...] [--output-dir exports]
 """
 
 import argparse
@@ -19,7 +19,8 @@ from typing import Any, Dict, List, Tuple
 
 from tabulate import tabulate
 
-import import_live_inventory as ili
+from station import SET_BOX_MAP_CSV
+from station import import_live_inventory as ili
 
 # Check code -> what it means / what to verify. Order is the legend order.
 CHECKS: Dict[str, str] = {
@@ -197,8 +198,8 @@ def write_sheet(flagged: List[Dict[str, Any]], inventory_csv: str, output_dir: s
 def main() -> None:
     """CLI entry point for the special-case check sheet."""
     parser = argparse.ArgumentParser(description="Printable check sheet for unusual cards (read only)")
-    parser.add_argument("--inventory-csv", default="backups/inventory-manapool-audited-20260927.csv")
-    parser.add_argument("--map-csv", default="Manapool Print Format - Set_Box Map.csv")
+    parser.add_argument("--inventory-csv", required=True, help="Path to ManaPool inventory export CSV")
+    parser.add_argument("--map-csv", default=SET_BOX_MAP_CSV)
     parser.add_argument("--output-dir", default="exports")
     args = parser.parse_args()
 

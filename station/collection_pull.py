@@ -12,9 +12,9 @@ Pulled cards are not tracked after they leave inventory; to return a card, put i
 to-be-sorted pile and ingest it again with the normal intake.
 
 Usage:
-    python collection_pull.py search "lightning bolt" [--set M10] [--foil]
-    python collection_pull.py pull "Lightning Bolt" [--qty 4] [--set M10 --number 146] [--foil]
-    python collection_pull.py pull --decklist mydeck.txt [--yes] [--force]
+    python -m station.collection_pull search "lightning bolt" [--set M10] [--foil]
+    python -m station.collection_pull pull "Lightning Bolt" [--qty 4] [--set M10 --number 146] [--foil]
+    python -m station.collection_pull pull --decklist mydeck.txt [--yes] [--force]
 """
 
 import argparse
@@ -28,11 +28,11 @@ from typing import Any, Dict, Iterable, List, Optional, Tuple
 
 from tabulate import tabulate
 
-import db
-import import_live_inventory
-import manapool_client
-import pull_list_optimizer
-import scryfall_mirror
+from station import db
+from station import import_live_inventory
+from station import manapool_client
+from station import pull_list_optimizer
+from station import scryfall_mirror
 
 # "4 Lightning Bolt", "4x Lightning Bolt (M10) 146", "1 Beast // Spider (TMID) 8-11 *F*"
 DECK_LINE_RE = re.compile(

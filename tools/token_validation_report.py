@@ -13,7 +13,7 @@ to the mirror by set code + collector number) and the current one (inventory ->
 scryfall_cards directly).
 
 Usage:
-    python token_validation_report.py [--output-dir exports]
+    python -m tools.token_validation_report [--output-dir exports]
 """
 
 import argparse
@@ -26,8 +26,8 @@ from typing import Any, Dict, List, Tuple
 
 from tabulate import tabulate
 
-import db
-import scryfall_mirror
+from station import db
+from station import scryfall_mirror
 
 TOKEN_SECTION_RE = re.compile(r"^TOKEN(S|-\d+)$", re.IGNORECASE)
 
@@ -198,7 +198,7 @@ def run_report(output_dir: str = "exports") -> Dict[str, Any]:
         RuntimeError: If the Scryfall mirror is empty.
     """
     if scryfall_mirror.get_mirror_status()["card_count"] == 0:
-        raise RuntimeError("scryfall_cards is empty; run 'python scryfall_mirror.py refresh' first.")
+        raise RuntimeError("scryfall_cards is empty; run 'python -m station.scryfall_mirror refresh' first.")
     rows = fetch_inventory_rows()
     mirror = scryfall_mirror.lookup_cards((r["set_code"], str(r["collector_number"])) for r in rows)
     flagged = classify_rows(rows, mirror)

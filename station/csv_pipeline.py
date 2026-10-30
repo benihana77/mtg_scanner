@@ -22,12 +22,11 @@ from typing import Any, Dict, List, Optional, Tuple
 
 from tabulate import tabulate
 
-import db
-import import_live_inventory
-import manapool_client
-import scryfall_mirror
-
-SET_BOX_MAP_CSV = "Manapool Print Format - Set_Box Map.csv"
+from station import db
+from station import import_live_inventory
+from station import manapool_client
+from station import scryfall_mirror
+from station import SET_BOX_MAP_CSV
 
 
 def read_manapool_csv(file_path: str) -> List[Dict[str, Any]]:
@@ -174,7 +173,7 @@ def ingest_csv_batch(
             "status": "unresolved",
             "message": (
                 f"{len(unresolved)} rows are not in the Scryfall mirror; nothing was ingested. "
-                "Refresh the mirror (python scryfall_mirror.py refresh) or fix the CSV, then re-run."
+                "Refresh the mirror (python -m station.scryfall_mirror refresh) or fix the CSV, then re-run."
             ),
             "unresolved": unresolved,
         }

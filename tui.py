@@ -21,13 +21,13 @@ import sys
 import time
 from typing import Any, Dict, List, Optional, Tuple
 
-import db
-import collection_pull
-import csv_pipeline
-import manapool_client
-import pull_list_optimizer
-import repricer
-import scryfall_mirror
+from station import db
+from station import collection_pull
+from station import csv_pipeline
+from station import manapool_client
+from station import pull_list_optimizer
+from station import repricer
+from station import scryfall_mirror
 
 
 def prompt_input(stdscr, prompt_text: str, default_val: str = "") -> str:
@@ -140,7 +140,7 @@ def action_ingest_batch(stdscr) -> None:
 
     # Suggest available CSV files in current directory
     csv_candidates = [f for f in os.listdir(".") if f.endswith(".csv") and "picklist" not in f]
-    default_csv = csv_candidates[0] if csv_candidates else "multiple_sets_all_products_2026-09-20T00-27-05.csv"
+    default_csv = csv_candidates[0] if csv_candidates else ""
 
     csv_path = prompt_input(stdscr, "Enter path to ManaPool CSV", default_csv)
     if not os.path.isfile(csv_path):
@@ -289,7 +289,7 @@ def action_run_picklist(stdscr, use_api: bool = False) -> None:
     if not use_api:
         # Check for picklist CSVs
         picks = [f for f in os.listdir(".") if "picklist" in f and f.endswith(".csv")]
-        default_pick = picks[0] if picks else "picklist-2026-09-20.csv"
+        default_pick = picks[0] if picks else ""
         csv_path = prompt_input(stdscr, "Path to Picklist CSV", default_pick)
         if not os.path.isfile(csv_path):
             show_message_box(stdscr, "Error", [f"Picklist file not found: {csv_path}"])

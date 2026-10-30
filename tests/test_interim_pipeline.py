@@ -21,13 +21,13 @@ import unittest
 import psycopg2
 from psycopg2 import extras
 
-import collection_pull
-import db
-import csv_pipeline
-import manapool_client
-import pull_list_optimizer
-import audit
-import repricer
+from station import collection_pull
+from station import db
+from station import csv_pipeline
+from station import manapool_client
+from station import pull_list_optimizer
+from station import audit
+from station import repricer
 from unittest.mock import MagicMock, patch
 
 
