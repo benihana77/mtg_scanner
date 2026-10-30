@@ -1389,3 +1389,5 @@ applied_at,source,part,inventory_id,product_id,set,number,name,finish,previous_q
 2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2071,1c7e36af-6635-4cae-b601-0a7dabe1beef,CLB,391,"Sarevok, Deathbringer",NF,1,1
 2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2087,fd3d7517-78fd-42c9-83d0-96b4e13629dc,CLB,151,Summon Undead,NF,1,3
 2026-10-29T21:36:53,needs_count_2026-10-29_results.csv,NEEDS-COUNT,2119,0fbad055-b4b1-45b4-b394-65e893562549,CLB,158,Zhentarim Bandit,NF,0,1
+2026-10-29T21:40:49,needs_count_2026-10-29_held_confirmed.csv,NEEDS-COUNT,6826,5a105909-bc6e-478b-b7c4-71e56a2ad1be,MH2,131,Gouged Zealot,NF,28,30
+2026-10-29T21:40:49,needs_count_2026-10-29_held_confirmed.csv,NEEDS-COUNT,2312,71364c64-f91b-4c5b-b8ec-91208bad8da1,CMR,101,Strategic Planning,NF,1,12
