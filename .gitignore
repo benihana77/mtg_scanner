@@ -6,3 +6,4 @@ exports/
 backups/*.dump
 test_exports/
 audits/
+intake/

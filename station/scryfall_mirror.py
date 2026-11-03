@@ -236,6 +236,23 @@ def lookup_cards(keys: Iterable[Tuple[str, str]]) -> Dict[Tuple[str, str], Dict[
         return {(r["set_code"], r["collector_number"].lower()): dict(r) for r in cur.fetchall()}
 
 
+def cards_in_set(set_code: str) -> List[Dict[str, Any]]:
+    """Every mirror card in one set (scryfall_id, name, collector_number, rarity, layout).
+
+    Args:
+        set_code (str): MTG set code; matching is case-insensitive.
+
+    Returns:
+        List[Dict[str, Any]]: Cards in the set, empty if the mirror does not have it.
+    """
+    with db.get_db_cursor(commit=False) as cur:
+        cur.execute(
+            "SELECT scryfall_id, name, collector_number, rarity, layout FROM scryfall_cards WHERE set_code = %s;",
+            (set_code.strip().upper(),),
+        )
+        return [dict(r) for r in cur.fetchall()]
+
+
 def parse_combo_number(set_code: str, number: str) -> Optional[Tuple[Tuple[str, str], Tuple[str, str]]]:
     """Splits a ManaPool double-sided token number into front and back face keys.
 

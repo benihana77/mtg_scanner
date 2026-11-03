@@ -24,7 +24,9 @@ from tabulate import tabulate
 
 from station import db
 from station import import_live_inventory
+from station import intake_sheet
 from station import manapool_client
+from station import repricer
 from station import scryfall_mirror
 from station import SET_BOX_MAP_CSV
 
@@ -140,6 +142,8 @@ def ingest_csv_batch(
        set) and gets its next section (Sec-1 -> Sec-2 -> Sec-3).
     5. Sorts each new section in shelf order and assigns index_num = 1..N.
     6. Commits to the PostgreSQL inventory table and writes ManaPool upload CSVs.
+    7. If the CSV is an intake sheet in intake/, moves it to intake/ingested/ so it can't be
+       ingested twice.
 
     Args:
         file_path (str): Input ManaPool CSV file path.
@@ -147,13 +151,15 @@ def ingest_csv_batch(
             go to the token box).
         section_label (Optional[str]): Optional section override for regular sets.
         output_dir (str): Directory for export files.
-        push_to_api (bool): Whether to push directly to ManaPool API.
+        push_to_api (bool): Whether to push directly to ManaPool API. The push ADDS this
+            batch to each live listing (live quantity + batch quantity, read back to verify).
         interactive (bool): Whether to prompt the user if an unknown set is encountered.
         prompt_callback (Optional[Any]): Callback function to prompt user in custom UI.
 
     Returns:
         Dict[str, Any]: Summary dictionary of the ingestion operation. status is 'success',
-            'empty' or 'unresolved' (with 'unresolved' rows listed).
+            'empty' or 'unresolved' (with 'unresolved' rows listed). 'retired_to' is the sheet's
+            new path if it was moved out of intake/.
     """
     os.makedirs(output_dir, exist_ok=True)
     active_rows = read_manapool_csv(file_path)
@@ -228,9 +234,28 @@ def ingest_csv_batch(
         generated_csvs.append(csv_path)
 
     db.insert_inventory_batch(all_inventory_to_insert)
+    retired_to = intake_sheet.retire_sheet(file_path)
 
+    api_added: Dict[str, int] = {}
+    api_mismatches: List[str] = []
     if push_to_api and manapool_client.is_configured():
-        api_update_count, api_errors = manapool_client.push_inventory_batch(all_inventory_to_insert)
+        # Add to the live listings (live quantity + this batch), never reset them to a total.
+        prices: Dict[str, Optional[int]] = {}
+        for it in all_inventory_to_insert:
+            pid = it["manapool_product_id"]
+            if pid:
+                api_added[pid] = api_added.get(pid, 0) + it["quantity"]
+                price = it["manapool_listed_price"]
+                prices[pid] = None if price is None else int(round(price * 100))
+        try:
+            push = manapool_client.push_added_stock(api_added, prices)
+            api_update_count, api_errors, api_mismatches = push["updated"], push["errors"], push["mismatches"]
+            # Keep every inventory row of a product at the price now live on ManaPool.
+            repricer.set_listed_prices(push["verified_prices"])
+        except Exception as e:
+            # The failure may come before the send or during the read-back after it.
+            api_errors.append(f"Push or read-back failed; check ManaPool with `python -m station.audit push` "
+                              f"before pushing again (the batch IS in the database): {e}")
 
     total_cards = sum(i["quantity"] for i in all_inventory_to_insert)
     return {
@@ -245,6 +270,9 @@ def ingest_csv_batch(
         "upload_csvs": generated_csvs,
         "api_updated": api_update_count,
         "api_errors": api_errors,
+        "api_added_copies": sum(api_added.values()) if api_update_count else 0,
+        "api_mismatches": api_mismatches,
+        "retired_to": retired_to,
     }
 
 
@@ -395,8 +423,12 @@ def main():
             print("Generated ManaPool upload CSVs:")
             for c in res["upload_csvs"]:
                 print(f"  - {c}")
+            if res["retired_to"]:
+                print(f"Moved the sheet to {res['retired_to']}")
             if args.push_api:
-                print(f"ManaPool API Sync: Updated {res['api_updated']} items directly.")
+                print(f"ManaPool API Sync: added {res['api_added_copies']} copies to {res['api_updated']} listings.")
+                if res["api_mismatches"]:
+                    print(f"  [API Warning] {len(res['api_mismatches'])} listings did not read back as sent.", file=sys.stderr)
                 for err in res["api_errors"]:
                     print(f"  [API Warning] {err}", file=sys.stderr)
         else:

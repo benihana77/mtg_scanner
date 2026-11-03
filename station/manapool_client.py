@@ -307,6 +307,39 @@ def fetch_price_feed() -> Tuple[Optional[str], List[Dict[str, Any]]]:
     return body.get("meta", {}).get("as_of"), body.get("data", [])
 
 
+def fetch_single_products(
+    scryfall_ids: Optional[List[str]] = None,
+    product_ids: Optional[List[str]] = None,
+) -> Tuple[Optional[str], List[Dict[str, Any]]]:
+    """Looks up singles in ManaPool's catalog, in stock or not (public, no auth, 100 IDs per request).
+
+    Pass exactly one of scryfall_ids or product_ids. Each card lists every variant
+    (condition x finish x language) with its product_id, low_price and available_quantity.
+    English variants only. Double-faced tokens are not returned for Scryfall ID lookups.
+
+    Returns:
+        Tuple[Optional[str], List[Dict[str, Any]]]: (data 'as_of' ISO timestamp, cards). Prices
+            are integer cents; low_price is 0 when nobody has the variant listed.
+
+    Raises:
+        ValueError: If neither or both ID lists are given.
+        requests.HTTPError: If a lookup fails.
+    """
+    if (scryfall_ids is None) == (product_ids is None):
+        raise ValueError("Pass exactly one of scryfall_ids or product_ids.")
+    key, ids = ("scryfall_ids", scryfall_ids) if scryfall_ids is not None else ("product_ids", product_ids)
+    as_of: Optional[str] = None
+    cards: List[Dict[str, Any]] = []
+    for i in range(0, len(ids), 100):
+        resp = _request("GET", f"{BASE_URL}/products/singles", headers={"User-Agent": "mtg_scanner/1.0"},
+                        params={key: ids[i:i + 100]}, timeout=60)
+        resp.raise_for_status()
+        body = resp.json()
+        as_of = as_of or body.get("meta", {}).get("as_of")
+        cards.extend(body.get("data", []))
+    return as_of, cards
+
+
 def fetch_seller_inventory(page_size: int = 10000) -> List[Dict[str, Any]]:
     """Reads every live listing in the seller's ManaPool inventory (cursor-paged, authenticated).
 
@@ -345,6 +378,48 @@ def _post_inventory(entries: List[Dict[str, Any]]) -> Tuple[int, List[str]]:
         else:
             errors.append(f"Batch {i // 2000 + 1} failed: HTTP {resp.status_code} - {resp.text[:300]}")
     return updated, errors
+
+
+def push_added_stock(
+    added: Dict[str, int],
+    prices: Dict[str, Optional[int]],
+    product_type: str = "mtg_single",
+) -> Dict[str, Any]:
+    """Adds copies to ManaPool listings: sends live quantity + added copies, then reads it back.
+
+    ManaPool's API only sets absolute quantities. The base is the LIVE quantity, read just
+    before sending, not the database total: a copy that sold but has not been picked yet is
+    already off the live listing but still in the database, so the database total would
+    list it again.
+
+    Args:
+        added (Dict[str, int]): product_id -> copies being added.
+        prices (Dict[str, Optional[int]]): product_id -> price in cents (None leaves it unchanged).
+        product_type (str): ManaPool product type.
+
+    Returns:
+        Dict[str, Any]: 'updated' (products sent), 'errors', 'before' and 'sent' (product_id ->
+            live quantity before / quantity sent), 'verified_prices' (product_id -> cents read
+            back) and 'mismatches' (product_ids whose read-back quantity or price differs).
+
+    Raises:
+        RuntimeError: If the API is not configured or live inventory cannot be read.
+    """
+    live = {i["product_id"]: int(i.get("quantity") or 0) for i in fetch_seller_inventory()
+            if i.get("product_type", product_type) == product_type}
+    before = {pid: live.get(pid, 0) for pid in added}
+    sent = {pid: before[pid] + qty for pid, qty in added.items()}
+    entries = [{"product_type": product_type, "product_id": pid, "quantity": qty, "price_cents": prices.get(pid)}
+               for pid, qty in sent.items()]
+    updated, errors = _post_inventory(entries)
+    after = {i["product_id"]: i for i in fetch_seller_inventory() if i.get("product_type", product_type) == product_type}
+    mismatches = [pid for pid, qty in sent.items()
+                  if (after.get(pid) or {}).get("quantity") != qty
+                  or (prices.get(pid) is not None and (after.get(pid) or {}).get("price_cents") != prices[pid])]
+    verified_prices = {pid: after[pid]["price_cents"] for pid in sent
+                       if pid in after and pid not in mismatches and prices.get(pid) is not None}
+    return {"updated": updated, "errors": errors, "before": before, "sent": sent,
+            "verified_prices": verified_prices, "mismatches": mismatches}
 
 
 def push_prices(prices: Dict[str, int], product_type: str = "mtg_single") -> Tuple[int, List[str]]:
