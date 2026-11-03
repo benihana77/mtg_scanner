@@ -2,6 +2,7 @@
 """Curses-based Terminal User Interface (TUI) for MTG Inventory Management.
 
 Provides an interactive console dashboard for:
+N. Building an intake sheet for one set from ManaPool's catalog, counting it, and ingesting it.
 1. Ingesting ManaPool Set CSV batches (with alphabetical sorting and index numbering).
 2. Pushing inventory updates directly to the ManaPool API (or generating upload CSVs).
 3. Pulling live orders from ManaPool and generating optimized pick traversal sheets.
@@ -24,6 +25,7 @@ from typing import Any, Dict, List, Optional, Tuple
 from station import db
 from station import collection_pull
 from station import csv_pipeline
+from station import intake_sheet
 from station import manapool_client
 from station import pull_list_optimizer
 from station import repricer
@@ -131,18 +133,31 @@ def draw_header(stdscr, status_msg: str = "Ready") -> None:
     stdscr.addstr(max_y - 1, 0, f" Status: {status_msg}"[: max_x - 1], curses.color_pair(3))
 
 
-def action_ingest_batch(stdscr) -> None:
-    """Interactive wizard to ingest a ManaPool set CSV batch."""
+def show_paged_message(stdscr, title: str, lines: List[str]) -> None:
+    """Shows a long list in message boxes one screenful at a time."""
+    per_page = max(1, stdscr.getmaxyx()[0] - 10)
+    pages = [lines[i:i + per_page] for i in range(0, len(lines), per_page)] or [[]]
+    for n, page in enumerate(pages, start=1):
+        show_message_box(stdscr, f"{title} ({n}/{len(pages)})" if len(pages) > 1 else title, page)
+
+
+def action_ingest_batch(stdscr, csv_path: Optional[str] = None) -> None:
+    """Interactive wizard to ingest a ManaPool set CSV batch (an intake sheet, or any catalog CSV)."""
     max_y, max_x = stdscr.getmaxyx()
     stdscr.clear()
     draw_header(stdscr, "Ingest ManaPool CSV Batch")
     stdscr.addstr(3, 2, "=== INGEST NEW BATCH FROM CSV ===", curses.A_BOLD)
 
-    # Suggest available CSV files in current directory
-    csv_candidates = [f for f in os.listdir(".") if f.endswith(".csv") and "picklist" not in f]
-    default_csv = csv_candidates[0] if csv_candidates else ""
-
-    csv_path = prompt_input(stdscr, "Enter path to ManaPool CSV", default_csv)
+    if csv_path is None:
+        # Offer the sheets waiting in intake/, newest first
+        pending = intake_sheet.pending_sheets()
+        stdscr.addstr(5, 2, "Sheets waiting in intake/:" if pending else "No sheets waiting in intake/.", curses.color_pair(3))
+        for n, p in enumerate(pending[: max(0, max_y - 12)], start=1):
+            s = intake_sheet.summarize(intake_sheet.read_sheet(p))
+            stdscr.addstr(5 + n, 4, f"{os.path.relpath(p)}  ({s['lines']} lines, {s['cards']} cards, "
+                                    f"${s['value_cents'] / 100:.2f})"[: max_x - 6])
+        stdscr.refresh()
+        csv_path = prompt_input(stdscr, "Enter path to ManaPool CSV", os.path.relpath(pending[0]) if pending else "")
     if not os.path.isfile(csv_path):
         show_message_box(stdscr, "Error", [f"File not found: {csv_path}"])
         return
@@ -194,9 +209,14 @@ def action_ingest_batch(stdscr) -> None:
 
             if push_api:
                 msg_lines.append("")
-                msg_lines.append(f"ManaPool API: Pushed {res['api_updated']} items directly.")
-                if res["api_errors"]:
-                    msg_lines.append(f"Warnings: {len(res['api_errors'])} errors reported.")
+                msg_lines.append(f"ManaPool API: added {res['api_added_copies']} copies to {res['api_updated']} listings.")
+                if res["api_mismatches"]:
+                    msg_lines.append(f"WARNING: {len(res['api_mismatches'])} listings did not read back as sent.")
+                for err in res["api_errors"][:3]:
+                    msg_lines.append(f"Error: {err[:100]}")
+            if res["retired_to"]:
+                msg_lines.append("")
+                msg_lines.append(f"Sheet moved to {os.path.relpath(res['retired_to'])}")
 
             show_message_box(stdscr, "Ingestion Complete", msg_lines)
         else:
@@ -207,6 +227,185 @@ def action_ingest_batch(stdscr) -> None:
 
     except Exception as e:
         show_message_box(stdscr, "Ingestion Error", [f"An error occurred: {e}"])
+
+
+RARITY_CODES = {"common": "C", "uncommon": "U", "rare": "R", "mythic": "M", "special": "S", "bonus": "B"}
+
+
+def count_sheet(stdscr, path: str) -> List[Dict[str, str]]:
+    """Count screen: walk an intake sheet in shelf order and enter quantities.
+
+    Digits type a quantity for the highlighted card (Enter or Up/Down commits it),
+    +/- or Right/Left adjust by one, / finds a card by name or collector number, Q finishes.
+    Every change is saved to the sheet immediately.
+
+    Returns:
+        List[Dict[str, str]]: The sheet rows as saved.
+    """
+    rows = intake_sheet.read_sheet(path)
+    if not rows:
+        return rows
+    mirror = scryfall_mirror.lookup_cards((r["set"], r["number"]) for r in rows)
+    rarity = [RARITY_CODES.get((mirror.get((r["set"].upper(), r["number"].lower())) or {}).get("rarity"), "?") for r in rows]
+    finish = "foil" if rows[0]["finish"] == "FO" else "non-foil"
+    title = f"=== COUNT {rows[0]['set']} ({finish}) : {os.path.basename(path)} ==="
+    sel = top = 0
+    buf = ""
+    last_query = ""
+
+    def qty(i: int) -> int:
+        q = (rows[i].get("quantity") or "").strip()
+        return int(q) if q.isdigit() else 0
+
+    def set_qty(i: int, q: int) -> None:
+        rows[i]["quantity"] = str(max(0, q))
+        intake_sheet.write_sheet(path, rows)
+
+    def commit() -> None:
+        nonlocal buf
+        if buf:
+            set_qty(sel, int(buf))
+            buf = ""
+
+    while True:
+        max_y, max_x = stdscr.getmaxyx()
+        list_h = max(1, max_y - 10)
+        top = max(min(top, sel), sel - list_h + 1)
+        stdscr.erase()
+        draw_header(stdscr, "Count Intake Sheet")
+        stdscr.addstr(3, 2, title[: max_x - 4], curses.A_BOLD)
+        name_w = max(12, min(40, max_x - 52))
+        header = f"{'Qty':>5}  {'Name':<{name_w}} {'No.':<6} R {'Price':>7} {'Low':>7} {'Mkt':>7}  Note"
+        stdscr.addstr(5, 2, header[: max_x - 4], curses.color_pair(3) | curses.A_BOLD)
+        for line in range(min(list_h, len(rows) - top)):
+            i = top + line
+            r = rows[i]
+            market = r["market_price_foil"] if r["finish"] == "FO" else r["market_price"]
+            note = "no data" if not r["market_low"] and not market else ""
+            q = f"{buf}_" if i == sel and buf else str(qty(i))
+            text = (f"{q:>5}  {r['name'][:name_w]:<{name_w}} {r['number'][:6]:<6} {rarity[i]} "
+                    f"{r['price'] or '-':>7} {r['market_low'] or '-':>7} {market or '-':>7}  {note}")
+            if i == sel:
+                attr = curses.A_REVERSE | curses.A_BOLD
+            elif qty(i) > 0:
+                attr = curses.color_pair(4) | curses.A_BOLD
+            else:
+                attr = curses.color_pair(1)
+            stdscr.addstr(6 + line, 2, text[: max_x - 4], attr)
+        s = intake_sheet.summarize(rows)
+        totals = f"Counted: {s['lines']} lines | {s['cards']} cards | ${s['value_cents'] / 100:.2f}    (card {sel + 1} of {len(rows)})"
+        stdscr.addstr(max_y - 3, 2, totals[: max_x - 4], curses.color_pair(4) | curses.A_BOLD)
+        keys = "[0-9] Qty  [Enter] Next  [+/- or Right/Left] Adjust  [/] Find  [Up/Down/PgUp/PgDn] Move  [Q] Done"
+        stdscr.addstr(max_y - 2, 2, keys[: max_x - 4], curses.color_pair(1) | curses.A_DIM)
+        stdscr.refresh()
+
+        ch = stdscr.getch()
+        if ord("0") <= ch <= ord("9"):
+            if len(buf) < 4:
+                buf += chr(ch)
+        elif ch in (curses.KEY_BACKSPACE, 127, 8):
+            buf = buf[:-1]
+        elif ch in (10, 13, curses.KEY_ENTER, curses.KEY_DOWN):
+            commit()
+            sel = min(sel + 1, len(rows) - 1)
+        elif ch == curses.KEY_UP:
+            commit()
+            sel = max(sel - 1, 0)
+        elif ch == curses.KEY_NPAGE:
+            commit()
+            sel = min(sel + list_h, len(rows) - 1)
+        elif ch == curses.KEY_PPAGE:
+            commit()
+            sel = max(sel - list_h, 0)
+        elif ch == curses.KEY_HOME:
+            commit()
+            sel = 0
+        elif ch == curses.KEY_END:
+            commit()
+            sel = len(rows) - 1
+        elif ch in (ord("+"), ord("="), curses.KEY_RIGHT):
+            commit()
+            set_qty(sel, qty(sel) + 1)
+        elif ch in (ord("-"), curses.KEY_LEFT):
+            commit()
+            set_qty(sel, qty(sel) - 1)
+        elif ch == ord("/"):
+            commit()
+            query = prompt_input(stdscr, "Find card name or collector number", last_query)
+            if query:
+                last_query = query
+                hit = intake_sheet.find_row(rows, query, sel)
+                if hit is None:
+                    show_message_box(stdscr, "Not Found", [f"No card matches '{query}'."])
+                else:
+                    sel = hit
+        elif ch == 27:  # Esc: drop a half-typed quantity, or leave
+            if buf:
+                buf = ""
+            else:
+                break
+        elif ch in (ord("q"), ord("Q")):
+            commit()
+            break
+    return rows
+
+
+def action_intake_sheet(stdscr) -> None:
+    """Builds (or resumes) an intake sheet for one set, counts it, and offers to ingest it."""
+    stdscr.clear()
+    draw_header(stdscr, "New Intake Sheet")
+    stdscr.addstr(3, 2, "=== NEW INTAKE SHEET (COUNT A SET) ===", curses.A_BOLD)
+    stdscr.addstr(4, 2, "One set per sheet, NM only. Tokens are handled separately.")
+    set_code = prompt_input(stdscr, "Set code (e.g. SOI)", "").upper()
+    if not set_code:
+        return
+    foil = prompt_input(stdscr, "Foils? (y/n)", "n").lower() == "y"
+
+    path = None
+    existing = intake_sheet.find_unfinished(set_code, foil)
+    if existing and prompt_input(stdscr, f"Resume unfinished {os.path.basename(existing)}? (y/n)", "y").lower() == "y":
+        path = existing
+        if intake_sheet.is_stale(path):
+            show_message_box(stdscr, "Refreshing Prices", ["Prices on this sheet are over a day old; refreshing..."], wait_key=False)
+            try:
+                res = intake_sheet.refresh_prices(path)
+                show_message_box(stdscr, "Prices Refreshed", [f"Updated {res['changed']} prices; kept {res['kept']} edited by hand."])
+            except Exception as e:
+                show_message_box(stdscr, "Refresh Failed", [f"Could not refresh prices: {e}", "Counting with the old prices."])
+
+    if path is None:
+        show_message_box(stdscr, "Building Sheet", [f"Looking up {set_code} in the mirror and on ManaPool..."], wait_key=False)
+        try:
+            res = intake_sheet.create_sheet(set_code, foil=foil)
+        except Exception as e:
+            show_message_box(stdscr, "Sheet Error", [f"Error: {e}"])
+            return
+        missing = [f"  {m['number']:<6} {m['name'][:40]}  ({m['reason']})" for m in res.get("missing", [])]
+        if res["status"] != "created":
+            show_paged_message(stdscr, "No Sheet", [res["message"]] + missing)
+            return
+        path = res["path"]
+        lines = [f"{len(res['rows'])} cards on {os.path.relpath(path)}"]
+        if res["tokens"]:
+            lines.append(f"Left out {res['tokens']} token/emblem cards.")
+        if res["no_data"]:
+            lines.append(f"{res['no_data']} cards have no price data and start at the floor.")
+        if missing:
+            lines += ["", f"{len(missing)} cards in the mirror are NOT on the sheet:"] + missing
+        show_paged_message(stdscr, "Sheet Ready", lines)
+
+    rows = count_sheet(stdscr, path)
+    s = intake_sheet.summarize(rows)
+    stdscr.clear()
+    draw_header(stdscr, "New Intake Sheet")
+    if not s["lines"]:
+        if prompt_input(stdscr, "Nothing counted. Discard this sheet? (y/n)", "y").lower() == "y":
+            intake_sheet.discard_sheet(path)
+        return
+    show_message_box(stdscr, "Sheet Saved", [os.path.relpath(path),
+                                             f"{s['lines']} lines, {s['cards']} cards, ${s['value_cents'] / 100:.2f}"], wait_key=False)
+    if prompt_input(stdscr, "Ingest now? (y/n)", "n").lower() == "y":
+        action_ingest_batch(stdscr, csv_path=path)
 
 
 def action_relocate_box(stdscr) -> None:
@@ -623,26 +822,31 @@ def main_loop(stdscr) -> None:
     curses.init_pair(4, curses.COLOR_GREEN, -1)           # Success / Status
     curses.init_pair(5, curses.COLOR_RED, -1)             # Errors / Warnings
 
+    curses.set_escdelay(25)  # Esc on the count screen responds without the default 1 s wait
+
+    # (key, label, action); a None action quits
     menu_items = [
-        ("[1]", "Ingest ManaPool Set CSV Batch (Sort & Assign Physical Indices)"),
-        ("[2]", "Push Inventory Batch to ManaPool Storefront (API Sync)"),
-        ("[3]", "Pull Live Orders & Generate Pick Sheet (ManaPool API)"),
-        ("[4]", "Process Local Order Picklist CSV (e.g. picklist-*.csv)"),
-        ("[5]", "Browse Physical Inventory (Boxes, Sets, Sections)"),
-        ("[6]", "Relocate Set / Section (Box Shuffle when space runs out)"),
-        ("[7]", "Run System Diagnostics & Connection Check"),
-        ("[8]", "Refresh Local Scryfall Mirror (Default Cards bulk file)"),
-        ("[9]", "Pull Cards for Personal Collection / Deck (search or decklist)"),
-        ("[R]", "Reprice Listings from ManaPool Market Data (preview / review / push)"),
-        ("[P]", "Manage Repricer Price Pins"),
-        ("[Q]", "Quit"),
+        ("N", "New Intake Sheet (count a set, then ingest)", action_intake_sheet),
+        ("1", "Ingest ManaPool Set CSV Batch (Sort & Assign Physical Indices)", action_ingest_batch),
+        ("2", "Push Inventory Batch to ManaPool Storefront (API Sync)", action_ingest_batch),  # ingest offers the push
+        ("3", "Pull Live Orders & Generate Pick Sheet (ManaPool API)", lambda s: action_run_picklist(s, use_api=True)),
+        ("4", "Process Local Order Picklist CSV (e.g. picklist-*.csv)", lambda s: action_run_picklist(s, use_api=False)),
+        ("5", "Browse Physical Inventory (Boxes, Sets, Sections)", action_browse_inventory),
+        ("6", "Relocate Set / Section (Box Shuffle when space runs out)", action_relocate_box),
+        ("7", "Run System Diagnostics & Connection Check", action_diagnostics),
+        ("8", "Refresh Local Scryfall Mirror (Default Cards bulk file)", action_refresh_mirror),
+        ("9", "Pull Cards for Personal Collection / Deck (search or decklist)", action_personal_pull),
+        ("R", "Reprice Listings from ManaPool Market Data (preview / review / push)", action_reprice),
+        ("P", "Manage Repricer Price Pins", action_price_pins),
+        ("Q", "Quit", None),
     ]
+    by_key = {ord(k): a for k, _, a in menu_items} | {ord(k.lower()): a for k, _, a in menu_items}
 
     selected_idx = 0
 
     while True:
         stdscr.clear()
-        draw_header(stdscr, "Select an action using Arrow Keys or Keys (1-9, R, P, Q)")
+        draw_header(stdscr, "Select an action using Arrow Keys or Keys (N, 1-9, R, P, Q)")
 
         max_y, max_x = stdscr.getmaxyx()
         start_y = 4
@@ -650,82 +854,42 @@ def main_loop(stdscr) -> None:
         stdscr.addstr(start_y, 4, "ACTIONS:", curses.color_pair(3) | curses.A_BOLD)
 
         spacing = 2 if start_y + 2 + len(menu_items) * 2 < max_y - 3 else 1
-        for idx, (shortcut, label) in enumerate(menu_items):
+        for idx, (key, label, _) in enumerate(menu_items):
             y = start_y + 2 + (idx * spacing)
             if y >= max_y - 3:
                 break
 
             if idx == selected_idx:
                 stdscr.attron(curses.A_REVERSE | curses.A_BOLD)
-                item_str = f"  -> {shortcut} {label:<65} "
+                item_str = f"  -> [{key}] {label:<65} "
                 stdscr.addstr(y, 4, item_str[: max_x - 8])
                 stdscr.attroff(curses.A_REVERSE | curses.A_BOLD)
             else:
-                stdscr.addstr(y, 4, f"     {shortcut} ", curses.color_pair(3) | curses.A_BOLD)
+                stdscr.addstr(y, 4, f"     [{key}] ", curses.color_pair(3) | curses.A_BOLD)
                 stdscr.addstr(y, 12, f"{label}"[: max_x - 14], curses.color_pair(1))
 
         # Hotkey guide at bottom
-        guide = "[ENTER] Select  |  [1-9/R/P] Direct Jump  |  [Q] Exit Station"
+        guide = "[ENTER] Select  |  [N/1-9/R/P] Direct Jump  |  [Q] Exit Station"
         stdscr.addstr(max_y - 2, max(2, (max_x - len(guide)) // 2), guide, curses.color_pair(1) | curses.A_DIM)
 
         stdscr.refresh()
         ch = stdscr.getch()
 
-        if ch in [ord("q"), ord("Q")]:
-            break
-        elif ch == curses.KEY_UP:
+        if ch == curses.KEY_UP:
             selected_idx = (selected_idx - 1) % len(menu_items)
-        elif ch == curses.KEY_DOWN:
+            continue
+        if ch == curses.KEY_DOWN:
             selected_idx = (selected_idx + 1) % len(menu_items)
-        elif ch in [10, 13, curses.KEY_ENTER]:
-            # Execute selected item
-            choice = selected_idx + 1
-            if choice == 1:
-                action_ingest_batch(stdscr)
-            elif choice == 2:
-                action_ingest_batch(stdscr)  # Ingest wizard offers API push
-            elif choice == 3:
-                action_run_picklist(stdscr, use_api=True)
-            elif choice == 4:
-                action_run_picklist(stdscr, use_api=False)
-            elif choice == 5:
-                action_browse_inventory(stdscr)
-            elif choice == 6:
-                action_relocate_box(stdscr)
-            elif choice == 7:
-                action_diagnostics(stdscr)
-            elif choice == 8:
-                action_refresh_mirror(stdscr)
-            elif choice == 9:
-                action_personal_pull(stdscr)
-            elif choice == 10:
-                action_reprice(stdscr)
-            elif choice == 11:
-                action_price_pins(stdscr)
-            elif choice == 12:
-                break
-        elif ch == ord("1"):
-            action_ingest_batch(stdscr)
-        elif ch == ord("2"):
-            action_ingest_batch(stdscr)
-        elif ch == ord("3"):
-            action_run_picklist(stdscr, use_api=True)
-        elif ch == ord("4"):
-            action_run_picklist(stdscr, use_api=False)
-        elif ch == ord("5"):
-            action_browse_inventory(stdscr)
-        elif ch == ord("6"):
-            action_relocate_box(stdscr)
-        elif ch == ord("7"):
-            action_diagnostics(stdscr)
-        elif ch == ord("8"):
-            action_refresh_mirror(stdscr)
-        elif ch == ord("9"):
-            action_personal_pull(stdscr)
-        elif ch in [ord("r"), ord("R")]:
-            action_reprice(stdscr)
-        elif ch in [ord("p"), ord("P")]:
-            action_price_pins(stdscr)
+            continue
+        if ch in [10, 13, curses.KEY_ENTER]:
+            action = menu_items[selected_idx][2]
+        elif ch in by_key:
+            action = by_key[ch]
+        else:
+            continue
+        if action is None:
+            break
+        action(stdscr)
 
 
 def main():
