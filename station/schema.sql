@@ -57,6 +57,17 @@ CREATE TABLE IF NOT EXISTS price_pins (
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
+-- Order pick ledger: one row per ManaPool order whose stock was deducted, written in the same
+-- transaction as the deduction, so an order is deducted only once (picklist CSVs carry no order ID
+-- and are not recorded). Copies of a recorded order are already out of `inventory`.
+CREATE TABLE IF NOT EXISTS picked_orders (
+    order_id VARCHAR(50) PRIMARY KEY,        -- ManaPool order UUID
+    order_label VARCHAR(50),                 -- e.g. 750676-2640391
+    picked_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,  -- Written as the station's local time
+    lines JSONB NOT NULL,                    -- Deducted rows: inventory_id, product_id, qty, card, location
+    missing JSONB NOT NULL DEFAULT '[]'      -- Order lines not found in stock (nothing deducted for them)
+);
+
 -- Performance Indexes
 CREATE INDEX IF NOT EXISTS idx_scryfall_cards_lookup ON scryfall_cards (set_code, collector_number);
 CREATE INDEX IF NOT EXISTS idx_scryfall_cards_name ON scryfall_cards (name);

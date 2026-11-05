@@ -478,7 +478,11 @@ def action_relocate_box(stdscr) -> None:
 
 
 def action_run_picklist(stdscr, use_api: bool = False) -> None:
-    """Optimizes order picklist traversal route and optionally deducts inventory."""
+    """Builds the optimized pick sheet, shows its orders, then optionally deducts exactly those picks.
+
+    Live API orders already deducted (in the picked_orders ledger) are left off the sheet and
+    listed; each order is deducted at most once. Picklist CSVs are not ledgered.
+    """
     stdscr.clear()
     mode_label = "ManaPool Live API" if use_api else "Local Picklist CSV"
     draw_header(stdscr, f"Order Fulfillment: {mode_label}")
@@ -494,11 +498,8 @@ def action_run_picklist(stdscr, use_api: bool = False) -> None:
             show_message_box(stdscr, "Error", [f"Picklist file not found: {csv_path}"])
             return
 
-    # Ask if stock should be deducted
-    commit_choice = prompt_input(stdscr, "Deduct pulled cards from inventory? (y/n)", "n").lower()
-    commit_flag = (commit_choice == "y")
-
     show_message_box(stdscr, "Optimizing Traversal", [
+        "Fetching orders waiting to ship..." if use_api else "Reading picklist...",
         "Resolving order lines against PostgreSQL inventory...",
         "Sorting pick sequence: Box -> Set -> Section -> Index (tokens: Box -> Section -> Index)...",
     ], wait_key=False)
@@ -507,30 +508,58 @@ def action_run_picklist(stdscr, use_api: bool = False) -> None:
         res = pull_list_optimizer.process_pick_routine(
             source_type="api" if use_api else "csv",
             csv_file=csv_path,
-            commit=commit_flag,
+            commit=False,
         )
-
-        if res.get("status") == "success":
-            lines = [
-                f"Optimal pick sequence calculated!",
-                f"Total Cards to Pull: {res['total_cards']} across {res['total_allocated']} pick steps.",
-                f"Printable Pick Sheet: {os.path.basename(res['sheet_path'])}",
-                f"Location: {res['sheet_path']}",
-            ]
-            if res["unallocated_count"] > 0:
-                lines.append("")
-                lines.append(f"WARNING: {res['unallocated_count']} items were NOT in stock or partially missing!")
-
-            if res["committed"]:
-                lines.append("")
-                lines.append(f"Inventory Deducted: {res['committed_count']} records updated in DB.")
-
-            show_message_box(stdscr, "Pick Sheet Ready", lines)
-        else:
-            show_message_box(stdscr, "Pick Notice", [res.get("message", "No orders to fulfill.")])
-
     except Exception as e:
         show_message_box(stdscr, "Pick Error", [f"Error processing picklist: {e}"])
+        return
+
+    picked_lines = [f"  {o['order_label']} (deducted {o['picked_at']:%Y-%m-%d %H:%M})" for o in res.get("already_picked", [])]
+    if picked_lines:
+        picked_lines.insert(0, "Already picked and deducted, left off this sheet (ship, then mark shipped):")
+    note_lines = [f"[!] {n}" for n in res.get("notes", [])]
+
+    if res.get("status") != "success":
+        show_paged_message(stdscr, "Pick Notice", [res.get("message", "No orders to fulfill.")] + picked_lines + note_lines)
+        return
+
+    lines = [
+        f"Total Cards to Pull: {res['total_cards']} across {res['total_allocated']} pick steps.",
+        f"Printable Pick Sheet: {res['sheet_path']}",
+    ]
+    if res["orders"]:
+        lines.append("Orders on this sheet:")
+        lines += [f"  {o['order_label']}: {o['cards']} cards" + (f", {o['missing']} MISSING" if o["missing"] else "")
+                  for o in res["orders"]]
+    if res["unallocated_count"] > 0:
+        lines.append(f"WARNING: {res['unallocated_count']} items were NOT in stock or partially missing!")
+    lines += picked_lines + note_lines
+    show_paged_message(stdscr, "Pick Sheet Ready", lines)
+
+    if not res["allocated_items"] or (use_api and not res["ledgered"]):
+        return
+    if prompt_input(stdscr, "Pulled these cards? Deduct them from inventory now (once per order)? (y/n)", "n").lower() != "y":
+        show_message_box(stdscr, "Not Deducted", ["Inventory unchanged. Pull the cards, then run this again to deduct."])
+        return
+    labels = None
+    if len(res["orders"]) > 1:
+        only = prompt_input(stdscr, "Only these order labels, comma-separated (empty = all shown)", "")
+        labels = [x.strip() for x in only.split(",") if x.strip()] or None
+
+    try:
+        res = pull_list_optimizer.commit_sheet(res, labels)
+    except Exception as e:
+        show_message_box(stdscr, "Deduction Error", [f"Nothing deducted: {e}"])
+        return
+    lines = [f"Inventory Deducted: {res['committed_count']} records updated in DB."]
+    if res["orders_deducted"]:
+        lines.append(f"Recorded as picked: {', '.join(res['orders_deducted'])}")
+    if res["orders_skipped"]:
+        lines.append(f"Skipped, already picked: {', '.join(res['orders_skipped'])}")
+    if res["source"] == "csv":
+        lines.append("[!] Picklist CSV: not recorded in the order ledger.")
+    lines.append("Next: ship, mark shipped on ManaPool, then check: python -m station.audit push (dry run).")
+    show_message_box(stdscr, "Deducted", lines)
 
 
 def action_browse_inventory(stdscr) -> None:
@@ -707,12 +736,7 @@ def action_personal_pull(stdscr) -> None:
         lines.append(f"Short: {s['request']['name'][:30]} missing {s['missing_qty']} ({why})")
     if res["committed"]:
         lines.append(f"Deducted {sum(p['qty_to_pull'] for p in res['picks'])} cards from inventory.")
-        sync = res["sync"]
-        if sync["mode"] == "api":
-            lines.append(f"ManaPool: updated {sync['updated']} products.")
-        elif sync["mode"] == "csv":
-            lines.append("ManaPool NOT updated. Upload absolute quantities by hand:")
-            lines.append(f"  {sync['csv_path']}")
+        lines += collection_pull.sync_lines(res["sync"])
     elif res["picks"]:
         lines.append("Not confirmed: inventory unchanged.")
     else:

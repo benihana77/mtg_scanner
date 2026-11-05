@@ -12,6 +12,8 @@ Tests:
 5. Box reallocation (Box Shuffle when space runs out).
 6. Fulfillment picklist path optimization (Box -> Set -> Section -> Index).
 7. Stock quantity decrement upon pick commitment.
+8. Live ManaPool orders: needs_shipping paging, foil matching, and deducting each order once
+   through the picked_orders ledger; personal pulls push live - pulled.
 """
 
 import csv
@@ -29,6 +31,39 @@ from station import pull_list_optimizer
 from station import audit
 from station import repricer
 from unittest.mock import MagicMock, patch
+
+
+def fake_orders_api(orders: list, page_size: int = 1):
+    """requests.request stand-in for GET /seller/orders (cursor-paged) and GET /seller/orders/{id}.
+
+    Each order: {"id", "label", "items": [(qty, name, set, number, finish, product_id), ...]}.
+    Order details also carry buyer data, which must never reach the pick items.
+    """
+    calls = []
+
+    def fake(method, url, params=None, **kwargs):
+        calls.append((method, url, dict(params or {})))
+        resp = MagicMock(status_code=200)
+        if url.endswith("/seller/orders"):
+            start = int((params or {}).get("cursor") or 0)
+            page = orders[start:start + page_size]
+            nxt = str(start + page_size) if start + page_size < len(orders) else None
+            resp.json.return_value = {"orders": [{"id": o["id"], "label": o["label"]} for o in page],
+                                      "pagination": {"limit": 100, "next_cursor": nxt}}
+            return resp
+        order = next(o for o in orders if url.endswith("/" + o["id"]))
+        resp.json.return_value = {"order": {
+            "id": order["id"], "label": order["label"], "buyer_id": "buyer-secret",
+            "shipping_address": {"name": "Buyer Name", "line1": "1 Secret St"}, "payment": {"total_cents": 99},
+            "items": [{"quantity": q, "product_id": pid, "product_type": "mtg_single",
+                       "product": {"single": {"name": n, "set": st, "number": num, "condition_id": "NM",
+                                              "finish_id": fin, "language_id": "EN"}}}
+                      for q, n, st, num, fin, pid in order["items"]],
+        }}
+        return resp
+
+    fake.calls = calls
+    return fake
 
 
 class TestMTGInterimPipeline(unittest.TestCase):
@@ -54,7 +89,7 @@ class TestMTGInterimPipeline(unittest.TestCase):
 
         db.DB_NAME = test_db_name
         with db.get_db_cursor() as cur:
-            cur.execute("DROP TABLE IF EXISTS price_history, inventory, cards, scryfall_cards CASCADE;")
+            cur.execute("DROP TABLE IF EXISTS price_history, inventory, cards, scryfall_cards, picked_orders CASCADE;")
         db.init_db()
 
     @classmethod
@@ -67,7 +102,7 @@ class TestMTGInterimPipeline(unittest.TestCase):
     def setUp(self):
         """Empties the test database's inventory and catalog before each test."""
         with db.get_db_cursor() as cur:
-            cur.execute("TRUNCATE inventory, price_history, price_pins, scryfall_cards RESTART IDENTITY;")
+            cur.execute("TRUNCATE inventory, price_history, price_pins, scryfall_cards, picked_orders RESTART IDENTITY;")
         # Use a test Set/Box map (no TOKENS row) instead of the real one.
         self.write_set_box_map({})
 
@@ -425,6 +460,13 @@ class TestMTGInterimPipeline(unittest.TestCase):
         self.assertEqual(stock_after["Dark Ritual"], 2)
         # Island was 4, pulled 2 -> now 2
         self.assertEqual(stock_after["Island"], 2)
+
+        # A picklist CSV has no order IDs: deducted, but not recorded in the order ledger.
+        self.assertIn(pull_list_optimizer.CSV_NOT_LEDGERED, res["notes"])
+        self.assertEqual(res["orders_deducted"], [])
+        with db.get_db_cursor(commit=False) as cur:
+            cur.execute("SELECT COUNT(*) AS n FROM picked_orders;")
+            self.assertEqual(cur.fetchone()["n"], 0)
 
     def test_05_manapool_api_cumulative_quantity_aggregation(self):
         """Verifies that ManaPool API batch push sends CUMULATIVE in-stock totals across all boxes,
@@ -940,9 +982,18 @@ class TestMTGInterimPipeline(unittest.TestCase):
         self.assertTrue(held["Counterspell"]["held_for_orders"])
         self.assertFalse(held["Missing Card"]["found_any"])
 
-        # Commit with the API mocked: ManaPool receives new absolute totals, price left alone (null).
-        with patch.object(collection_pull, "reserved_by_open_orders", return_value=({"pid-cs": 1}, "checked")), \
+        # Commit with the API mocked. One pid-bolt-1 copy sold and is not picked yet: ManaPool already
+        # shows 2 while the database still has 3. The push sends live - pulled (2 - 1 = 1), not the
+        # database total (2), which would list the sold copy again. Price is left alone (null).
+        live_before = [{"product_type": "mtg_single", "product_id": "pid-bolt-1", "quantity": 2},
+                       {"product_type": "mtg_single", "product_id": "pid-bolt-2", "quantity": 2},
+                       {"product_type": "mtg_single", "product_id": "pid-cs", "quantity": 0}]
+        live_after = [{**i, "quantity": {"pid-bolt-1": 1, "pid-bolt-2": 0}.get(i["product_id"], i["quantity"])}
+                      for i in live_before]
+        with patch.object(collection_pull, "reserved_by_open_orders",
+                          return_value=({"pid-cs": 1, "pid-bolt-1": 1}, "checked")), \
              patch.object(manapool_client, "is_configured", return_value=True), \
+             patch.object(manapool_client, "fetch_seller_inventory", side_effect=[live_before, live_after]), \
              patch("requests.request") as mock_post:
             mock_post.return_value = MagicMock(status_code=200)
             res = collection_pull.run_pull(reqs, "deck.txt", confirm=lambda lines: True, output_dir=self.test_dir)
@@ -951,10 +1002,13 @@ class TestMTGInterimPipeline(unittest.TestCase):
         self.assertEqual(res["sync"]["mode"], "api")
         payload = {e["product_id"]: e for e in mock_post.call_args[1]["json"]}
         self.assertEqual(payload["pid-bolt-2"]["quantity"], 0)  # sold out, row kept at 0
-        self.assertEqual(payload["pid-bolt-1"]["quantity"], 2)
+        self.assertEqual(payload["pid-bolt-1"]["quantity"], 1)
         self.assertIsNone(payload["pid-bolt-1"]["price_cents"])
         self.assertNotIn("pid-cs", payload)
-        self.assertEqual(db.get_total_quantities_by_product_ids(["pid-bolt-2", "pid-cs"]), {"pid-bolt-2": 0, "pid-cs": 1})
+        self.assertEqual(res["sync"]["before"], {"pid-bolt-1": 2, "pid-bolt-2": 2})
+        self.assertEqual(res["sync"]["mismatches"], [])
+        self.assertEqual(db.get_total_quantities_by_product_ids(["pid-bolt-1", "pid-bolt-2", "pid-cs"]),
+                         {"pid-bolt-1": 2, "pid-bolt-2": 0, "pid-cs": 1})
 
     def test_13_personal_pull_without_api_writes_sync_csv(self):
         """Without ManaPool credentials the pull still deducts and writes a CSV of absolute quantities."""
@@ -981,6 +1035,7 @@ class TestMTGInterimPipeline(unittest.TestCase):
         self.assertFalse(blocked["committed"])
 
         self.assertEqual(res["sync"]["mode"], "csv")
+        self.assertEqual(res["sync"]["basis"], "database")  # live quantities could not be read
         self.assertIn("not configured", res["order_status"])
         with open(res["sync"]["csv_path"], encoding="utf-8") as f:
             synced = list(csv.DictReader(f))
@@ -1201,6 +1256,147 @@ class TestMTGInterimPipeline(unittest.TestCase):
         self.assertEqual(len(logged), 2)
         self.assertEqual(db.get_total_quantities_by_product_ids(["pid-over"]), {"pid-over": 7})
         self.assertEqual(audit.plan_push(audit.load_rows(), live), {"pid-over": 7, "pid-exact": 3, "pid-under": 2})
+
+    def ingest_order_stock(self) -> None:
+        """Stock for the live-order tests: a non-foil and a foil copy of one card, plus a second card."""
+        rows = [
+            {**self.token_row("TORD", "23", "Emblem Card", layout="normal", qty="3"), "product_id": "pid-nf"},
+            {**self.token_row("TORD", "23", "Emblem Card", layout="normal", qty="1"), "finish": "FO", "product_id": "pid-fo"},
+            {**self.token_row("TORD", "40", "Other Card", layout="normal", qty="2"), "product_id": "pid-other"},
+        ]
+        csv_file = self.create_mock_manapool_csv("orders_stock.csv", rows)
+        csv_pipeline.ingest_csv_batch(csv_file, box_label="TestBox-1", output_dir=self.test_dir)
+
+    def ledger_rows(self) -> dict:
+        with db.get_db_cursor(commit=False) as cur:
+            cur.execute("SELECT order_id, order_label, lines, missing FROM picked_orders;")
+            return {r["order_id"]: dict(r) for r in cur.fetchall()}
+
+    def test_22_fetch_orders_uses_needs_shipping_pages_and_sets_foil(self):
+        """Orders come from needs_shipping=true, every cursor page is read, and is_foil is set (no buyer data)."""
+        api = fake_orders_api([
+            {"id": "o-1", "label": "L-1", "items": [(1, "Emblem Card", "tord", "23", "NF", "pid-nf")]},
+            {"id": "o-2", "label": "L-2", "items": [(1, "Emblem Card", "TORD", "23", "FO", "pid-fo")]},
+        ])
+        with patch.object(manapool_client, "is_configured", return_value=True), \
+             patch("requests.request", side_effect=api):
+            items, errors = manapool_client.fetch_unfulfilled_orders()
+
+        self.assertEqual(errors, [])
+        lists = [params for _, url, params in api.calls if url.endswith("/seller/orders")]
+        self.assertEqual(lists, [{"needs_shipping": "true", "limit": 100},
+                                 {"needs_shipping": "true", "limit": 100, "cursor": "1"}])
+        self.assertEqual([(i["order_label"], i["Set"], i["is_foil"]) for i in items],
+                         [("L-1", "TORD", False), ("L-2", "TORD", True)])
+        self.assertNotIn("Buyer Name", repr(items))
+        self.assertNotIn("buyer-secret", repr(items))
+
+    def test_23_live_order_is_deducted_once(self):
+        """[3] dry run changes nothing; deducting records the order; later runs and stale sheets skip it."""
+        self.ingest_order_stock()
+        order1 = {"id": "o-1", "label": "L-1", "items": [(1, "Emblem Card", "TORD", "23", "FO", "pid-fo")]}
+        order2 = {"id": "o-2", "label": "L-2", "items": [(1, "Emblem Card", "TORD", "23", "NF", "pid-nf"),
+                                                         (1, "Missing Card", "TORD", "99", "NF", "pid-missing")]}
+        order3 = {"id": "o-3", "label": "L-3", "items": [(2, "Other Card", "TORD", "40", "NF", "pid-other")]}
+        stock = lambda: db.get_total_quantities_by_product_ids(["pid-nf", "pid-fo", "pid-other"])
+
+        def run(orders, **kwargs):
+            with patch.object(manapool_client, "is_configured", return_value=True), \
+                 patch("requests.request", side_effect=fake_orders_api(orders)):
+                return pull_list_optimizer.process_pick_routine(source_type="api", output_dir=self.test_dir, **kwargs)
+
+        # Dry run: sheet built (the foil line takes the foil copy), nothing deducted or recorded.
+        dry = run([order1])
+        self.assertEqual(dry["status"], "success")
+        self.assertEqual([(p["manapool_product_id"], p["qty_to_pull"]) for p in dry["allocated_items"]], [("pid-fo", 1)])
+        self.assertEqual(dry["orders"], [{"order_label": "L-1", "cards": 1, "missing": 0}])
+        self.assertFalse(dry["committed"])
+        self.assertEqual(stock(), {"pid-nf": 3, "pid-fo": 1, "pid-other": 2})
+        self.assertEqual(self.ledger_rows(), {})
+
+        # Deduct: stock goes down once and the order is recorded with the rows it took.
+        done = run([order1], commit=True)
+        self.assertEqual(done["orders_deducted"], ["L-1"])
+        self.assertEqual(stock(), {"pid-nf": 3, "pid-fo": 0, "pid-other": 2})
+        ledger = self.ledger_rows()
+        self.assertEqual(ledger["o-1"]["order_label"], "L-1")
+        self.assertEqual([(l["product_id"], l["qty"]) for l in ledger["o-1"]["lines"]], [("pid-fo", 1)])
+
+        # Running [3] again before shipping: the order is skipped, nothing deducted twice.
+        again = run([order1], commit=True)
+        self.assertEqual(again["status"], "empty")
+        self.assertEqual([o["order_label"] for o in again["already_picked"]], ["L-1"])
+        self.assertEqual(stock(), {"pid-nf": 3, "pid-fo": 0, "pid-other": 2})
+
+        # Committing a stale sheet (built before the first deduction) is refused by the ledger too.
+        stale = pull_list_optimizer.commit_pick_deductions(dry["allocated_items"], dry["unallocated_items"])
+        self.assertEqual((stale["lines_updated"], stale["orders_skipped"]), (0, ["L-1"]))
+        self.assertEqual(stock(), {"pid-nf": 3, "pid-fo": 0, "pid-other": 2})
+
+        # New orders arrive: the sheet lists L-1 as already picked; only L-2 is deducted when chosen.
+        sheet = run([order1, order2, order3])
+        self.assertEqual([o["order_label"] for o in sheet["orders"]], ["L-2", "L-3"])
+        self.assertEqual([o["order_label"] for o in sheet["already_picked"]], ["L-1"])
+        with open(sheet["sheet_path"], encoding="utf-8") as f:
+            text = f.read()
+        self.assertIn("ALREADY PICKED", text)
+        self.assertIn("L-1", text)
+        pull_list_optimizer.commit_sheet(sheet, ["L-2"])
+        self.assertEqual(sheet["orders_deducted"], ["L-2"])
+        self.assertEqual(stock(), {"pid-nf": 2, "pid-fo": 0, "pid-other": 2})
+        self.assertEqual([m["name"] for m in self.ledger_rows()["o-2"]["missing"]], ["Missing Card"])
+
+        # Personal-pull reservations ignore picked orders (their copies are already out of the database).
+        with patch.object(manapool_client, "is_configured", return_value=True), \
+             patch("requests.request", side_effect=fake_orders_api([order1, order2, order3])):
+            reserved, status = collection_pull.reserved_by_open_orders()
+        self.assertEqual(reserved, {"pid-other": 2})
+        self.assertIn("2 already-picked orders not held", status)
+
+    def test_24_missing_ledger_table_refuses_live_deduction(self):
+        """Without picked_orders a live dry run still works (with a warning) but deducting is refused."""
+        self.ingest_order_stock()
+        orders = [{"id": "o-1", "label": "L-1", "items": [(1, "Other Card", "TORD", "40", "NF", "pid-other")]}]
+        with db.get_db_cursor() as cur:
+            cur.execute("DROP TABLE picked_orders;")
+        try:
+            with patch.object(manapool_client, "is_configured", return_value=True), \
+                 patch("requests.request", side_effect=fake_orders_api(orders)):
+                dry = pull_list_optimizer.process_pick_routine(source_type="api", output_dir=self.test_dir)
+                refused = pull_list_optimizer.process_pick_routine(source_type="api", commit=True, output_dir=self.test_dir)
+                reserved, _ = collection_pull.reserved_by_open_orders()
+            self.assertEqual(dry["status"], "success")
+            self.assertIn(pull_list_optimizer.LEDGER_MISSING, dry["notes"])
+            self.assertRaises(RuntimeError, pull_list_optimizer.commit_sheet, dry)
+            self.assertEqual(refused["status"], "error")
+            self.assertIn("python -m station.db", refused["message"])
+            self.assertEqual(reserved, {"pid-other": 1})
+            self.assertEqual(db.get_total_quantities_by_product_ids(["pid-other"]), {"pid-other": 2})
+        finally:
+            db.init_db()
+
+    def test_25_push_removed_stock_sends_live_minus_pulled(self):
+        """Removal push: live - removed (never below 0), quantity only, unlisted products not sent, read back."""
+        before = [{"product_type": "mtg_single", "product_id": "p1", "quantity": 3},
+                  {"product_type": "mtg_single", "product_id": "p2", "quantity": 1}]
+        after = [{"product_type": "mtg_single", "product_id": "p1", "quantity": 2},
+                 {"product_type": "mtg_single", "product_id": "p2", "quantity": 1}]
+        with patch.object(manapool_client, "fetch_seller_inventory", side_effect=[before, after]), \
+             patch("requests.request", return_value=MagicMock(status_code=200)) as mock_req:
+            res = manapool_client.push_removed_stock({"p1": 1, "p2": 2, "p3": 1})
+        self.assertEqual(mock_req.call_args[1]["json"], [
+            {"product_type": "mtg_single", "product_id": "p1", "quantity": 2, "price_cents": None},
+            {"product_type": "mtg_single", "product_id": "p2", "quantity": 0, "price_cents": None},
+        ])
+        self.assertEqual(res["unlisted"], ["p3"])
+        self.assertEqual(res["mismatches"], ["p2"])  # read back 1, sent 0
+
+        # Sent but the read-back fails: reported as an error with every product unverified (no exception).
+        with patch.object(manapool_client, "fetch_seller_inventory", side_effect=[before, RuntimeError("HTTP 500")]), \
+             patch("requests.request", return_value=MagicMock(status_code=200)):
+            res = manapool_client.push_removed_stock({"p1": 1})
+        self.assertEqual((res["sent"], res["mismatches"]), ({"p1": 2}, ["p1"]))
+        self.assertIn("Read-back failed", res["errors"][0])
 
 
 if __name__ == "__main__":
