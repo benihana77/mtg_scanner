@@ -75,40 +75,54 @@ def test_connection() -> Tuple[bool, str]:
 
 
 def fetch_unfulfilled_orders() -> Tuple[List[Dict[str, Any]], List[str]]:
-    """Retrieves all active unfulfilled orders and extracts their individual line items.
+    """Retrieves every order waiting to ship and extracts its line items (read only).
+
+    Uses `GET /seller/orders?needs_shipping=true` (ManaPool's operational worklist: open
+    delivery obligation and no shipment evidence yet), paged with `next_cursor`. The older
+    `is_unfulfilled` filter is deprecated and means "seller payout not earned", so shipped
+    orders stayed on it until payout. Only line items are kept from the order details; buyer
+    data (shipping address, buyer id, payment) is never stored or returned.
 
     Returns:
         Tuple[List[Dict[str, Any]], List[str]]: A tuple of:
-            - List of normalized pick items (Qty, Description, Set, Condition, Finish, Lang, Number, Order ID)
-            - List of error or warning strings encountered.
+            - Pick items (Qty, Description, Set, Condition, Finish, is_foil, Lang, Number,
+              order_id, order_label, manapool_product_id, custom_external_id). Empty when no
+              order is waiting to ship.
+            - Errors. Any error means the list may be incomplete.
     """
     if not is_configured():
         return [], ["ManaPool API is not configured. Supply MANAPOOL_EMAIL and MANAPOOL_API_TOKEN in .env"]
 
     orders_url = f"{BASE_URL}/seller/orders"
-    params = {"is_unfulfilled": "true", "limit": 100}
     errors: List[str] = []
     pick_items: List[Dict[str, Any]] = []
 
     try:
-        resp = requests.get(orders_url, headers=get_headers(), params=params, timeout=15)
-        if resp.status_code != 200:
-            return [], [f"Failed to fetch orders (HTTP {resp.status_code}): {resp.text[:200]}"]
-
-        orders_data = resp.json().get("orders", [])
-        if not orders_data:
-            return [], ["No unfulfilled orders found on ManaPool."]
+        orders_data: List[Dict[str, Any]] = []
+        cursor: Optional[str] = None
+        while True:
+            params: Dict[str, Any] = {"needs_shipping": "true", "limit": 100}
+            if cursor:
+                params["cursor"] = cursor
+            resp = _request("GET", orders_url, headers=get_headers(), params=params, timeout=15)
+            if resp.status_code != 200:
+                return [], [f"Failed to fetch orders (HTTP {resp.status_code}): {resp.text[:200]}"]
+            body = resp.json()
+            orders_data.extend(body.get("orders", []))
+            cursor = (body.get("pagination") or {}).get("next_cursor")
+            if not cursor:
+                break
 
         for order in orders_data:
             order_id = order.get("id")
-            order_label = order.get("label", order_id)
+            order_label = order.get("label") or order_id
             if not order_id:
                 continue
 
             # Fetch order details with line items
             detail_url = f"{BASE_URL}/seller/orders/{order_id}"
             time.sleep(0.05)
-            d_resp = requests.get(detail_url, headers=get_headers(), timeout=15)
+            d_resp = _request("GET", detail_url, headers=get_headers(), timeout=15)
             if d_resp.status_code != 200:
                 errors.append(f"Failed to fetch details for order {order_label}: HTTP {d_resp.status_code}")
                 continue
@@ -117,13 +131,13 @@ def fetch_unfulfilled_orders() -> Tuple[List[Dict[str, Any]], List[str]]:
             for item in order_detail.get("items", []):
                 product = item.get("product", {})
                 single = product.get("single", {})
-                
+
                 # Extract fields matching picklist format
                 name = single.get("name", "Unknown Card")
                 set_code = (single.get("set") or "").upper()
                 collector_number = str(single.get("number") or "")
                 condition = single.get("condition_id", "NM")
-                finish = single.get("finish_id", "NF")
+                finish = (single.get("finish_id") or "NF").upper()
                 lang = single.get("language_id", "EN")
                 qty = item.get("quantity", 1)
                 product_id = item.get("product_id")
@@ -135,6 +149,7 @@ def fetch_unfulfilled_orders() -> Tuple[List[Dict[str, Any]], List[str]]:
                     "Set": set_code,
                     "Condition": condition,
                     "Finish": finish,
+                    "is_foil": finish in ("FO", "FOIL"),
                     "Lang": lang,
                     "Number": collector_number,
                     "order_id": order_id,
@@ -420,6 +435,48 @@ def push_added_stock(
                        if pid in after and pid not in mismatches and prices.get(pid) is not None}
     return {"updated": updated, "errors": errors, "before": before, "sent": sent,
             "verified_prices": verified_prices, "mismatches": mismatches}
+
+
+def push_removed_stock(removed: Dict[str, int], product_type: str = "mtg_single") -> Dict[str, Any]:
+    """Takes copies off ManaPool listings: sends live quantity - removed copies, then reads it back.
+
+    The counterpart of `push_added_stock`, for cards leaving inventory outside an order
+    (personal pulls). The base is the LIVE quantity, read just before sending, not the
+    database total: a copy that sold but has not been picked yet is already off the live
+    listing but still in the database, so the database total would list it again.
+    Quantity only (price_cents null, left unchanged); never below 0. Products with no live
+    listing are not sent.
+
+    Args:
+        removed (Dict[str, int]): product_id -> copies taken out.
+        product_type (str): ManaPool product type.
+
+    Returns:
+        Dict[str, Any]: 'updated' (products sent), 'errors', 'before' and 'sent' (product_id ->
+            live quantity before / quantity sent), 'unlisted' (product_ids with no live
+            listing) and 'mismatches' (product_ids whose read-back quantity differs, or every
+            sent product if the read-back failed).
+
+    Raises:
+        RuntimeError: If the API is not configured or live inventory cannot be read before sending.
+    """
+    live = {i["product_id"]: int(i.get("quantity") or 0) for i in fetch_seller_inventory()
+            if i.get("product_type", product_type) == product_type}
+    unlisted = [pid for pid in removed if pid not in live]
+    before = {pid: live[pid] for pid in removed if pid in live}
+    sent = {pid: max(0, before[pid] - qty) for pid, qty in removed.items() if pid in live}
+    if not sent:
+        return {"updated": 0, "errors": [], "before": before, "sent": sent, "unlisted": unlisted, "mismatches": []}
+    updated, errors = _post_inventory([{"product_type": product_type, "product_id": pid, "quantity": qty,
+                                        "price_cents": None} for pid, qty in sent.items()])
+    try:
+        after = {i["product_id"]: i for i in fetch_seller_inventory() if i.get("product_type", product_type) == product_type}
+    except Exception as e:  # sent but unverified: report every product as a mismatch
+        return {"updated": updated, "errors": errors + [f"Read-back failed: {e}"], "before": before, "sent": sent,
+                "unlisted": unlisted, "mismatches": list(sent)}
+    mismatches = [pid for pid, qty in sent.items() if (after.get(pid) or {}).get("quantity") != qty]
+    return {"updated": updated, "errors": errors, "before": before, "sent": sent, "unlisted": unlisted,
+            "mismatches": mismatches}
 
 
 def push_prices(prices: Dict[str, int], product_type: str = "mtg_single") -> Tuple[int, List[str]]:

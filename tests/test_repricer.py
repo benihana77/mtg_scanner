@@ -220,7 +220,7 @@ class TestPersonalPull(unittest.TestCase):
         self.assertIn("Could not check open orders", status)
         with mock.patch.object(collection_pull.manapool_client, "is_configured", return_value=True), \
              mock.patch.object(collection_pull.manapool_client, "fetch_unfulfilled_orders",
-                               return_value=([], ["No unfulfilled orders found on ManaPool."])):
+                               return_value=([], [])):
             self.assertEqual(collection_pull.reserved_by_open_orders()[0], {})
 
 

@@ -72,11 +72,13 @@ Run every command from the repository root.
    - `--set TOKENS` moves every token chunk together, keeping section labels and index numbers.
 
 5. **Order Pull List Optimizer (`station/pull_list_optimizer.py`)**:
-   - Ingests ManaPool picklists either from **live ManaPool API** (`GET /seller/orders?is_unfulfilled=true`) or local CSV exports (`picklist-*.csv`).
-   - Resolves order lines through the Scryfall mirror (same rules as intake) and physical coordinates: `Box -> Set -> Section -> Index` (token chunks: `Box -> Section -> Index`).
+   - Ingests ManaPool picklists either from **live ManaPool API** (`GET /seller/orders?needs_shipping=true`, every page) or local CSV exports (`picklist-*.csv`). Only line items are read from an order; buyer details are never stored or printed.
+   - Resolves order lines through the Scryfall mirror (same rules as intake), matching foil to foil, and physical coordinates: `Box -> Set -> Section -> Index` (token chunks: `Box -> Section -> Index`).
    - **Zero-Backtracking Path Optimization**: Sorts the picking sequence sequentially along the warehouse walking route.
    - Generates printable pick sheets (`exports/pick_sheet_*.txt`) with `[ ]` checkboxes for clipboard picking.
    - Supports stock deduction (`--commit`) directly updating PostgreSQL.
+   - **Each live order is deducted once.** A deduction records the order in the `picked_orders` ledger in the same transaction. Recorded orders are left off later sheets (listed as "already picked") and are never deducted again, even from a sheet printed before the first deduction.
+   - Picklist CSVs have no ManaPool order IDs, so their deductions are **not** recorded: deducting the same CSV twice, or deducting its orders again with the API pick, removes the stock twice. Use the API pick for live orders.
 
 6. **ManaPool API v1 Integration (`station/manapool_client.py`)**:
    - `python -m station.manapool_client` checks credentials with a read-only `GET /account`.
@@ -85,14 +87,14 @@ Run every command from the repository root.
    - `python -m station.manapool_client push-one --product <uuid> [--send]` reads the live listing, shows the payload, and with `--send` pushes just that product's database total and price and reads it back. Use it to list an in-stock product that has no ManaPool listing yet.
    - Endpoints and payloads follow ManaPool's published spec: https://manapool.com/api/docs/v1/openapi.json
    - Direct batch inventory updates via `POST /seller/inventory/product` (up to 2,000 items per request, retried when rate-limited). Quantity syncs send `price_cents: null` and price pushes send `quantity: null`, so each leaves the other field as it is on ManaPool.
-   - Automated unfulfilled order retrieval and item parsing.
+   - Order retrieval for orders waiting to ship (`needs_shipping=true`, cursor-paged). The deprecated `is_unfulfilled` filter means "payout not earned yet", so it keeps shipped orders, and is not used.
    - Graceful fallback to offline CSV mode when API credentials are not set.
 
 7. **Personal Collection Pulls (`station/collection_pull.py`)**:
    - Search in-stock cards by name (case/accent-insensitive), or pull one card or a whole decklist (`4 Lightning Bolt`, `1 Name (SET) 123`, `*F*` for foil).
    - Takes the cheapest in-stock printing first (oldest section first), prints a pull sheet in walk order (`exports/personal_pull_*.txt`), and lists anything missing or short. A row picked from a TUI search pulls exactly that copy (condition and location).
-   - Holds back copies needed by unfulfilled ManaPool orders. If open orders cannot be fully checked (API error, or no API credentials), nothing is pulled unless `--force` is given; the TUI asks before forcing.
-   - On confirmation, deducts the cards and pushes the new absolute quantities (price left unchanged) for just those products to ManaPool; without API credentials (or if the push fails) it writes `exports/manapool_sync_*.csv` to upload by hand.
+   - Holds back copies needed by ManaPool orders waiting to ship. Orders already picked and deducted are not held, since their copies are already out of the database. If open orders cannot be fully checked (API error, or no API credentials), nothing is pulled unless `--force` is given; the TUI asks before forcing.
+   - On confirmation, deducts the cards and takes them off ManaPool: for each product it reads the live quantity, sends live − pulled (quantity only, price unchanged, never below 0), and reads it back. It does not send the database total, because a sold copy that has not been picked is already off the live listing but still in the database, so the database total would list it again. Without API credentials (or if the push fails) it writes `exports/manapool_sync_*.csv` to upload by hand. If live quantities could not be read, that CSV holds database totals; lower any product with an unpicked order before uploading.
 
 8. **Repricer (`station/repricer.py`, settings in `config/repricer.toml`)**:
    - Prices every in-stock listing at max(lowest NM listing, market) −1%, floor $0.15, from ManaPool's public price feed (one request per run).
@@ -136,7 +138,7 @@ pip install -r requirements.txt
 ### 2. Start PostgreSQL and Initialize the Schema
 ```bash
 docker compose up -d
-python -m station.db   # runs schema.sql
+python -m station.db   # runs schema.sql (idempotent: re-run after an update that adds tables, e.g. picked_orders)
 python -m station.scryfall_mirror refresh
 ```
 
@@ -237,15 +239,28 @@ python -m station.csv_pipeline list --box M1
 
 ### Run Order Fulfillment Picklist
 ```bash
-# Preview optimized pick sheet from CSV (no stock deduction)
-python -m station.pull_list_optimizer picklist-<date>.csv
+# Pick sheet for every live order waiting to ship (no stock deduction)
+python -m station.pull_list_optimizer --api
 
-# Process CSV and deduct pulled cards from PostgreSQL inventory
-python -m station.pull_list_optimizer picklist-<date>.csv --commit
-
-# Pull unfulfilled orders directly from ManaPool API and deduct
+# Deduct live orders once pulled (recorded in picked_orders; already-picked orders are skipped)
 python -m station.pull_list_optimizer --api --commit
+python -m station.pull_list_optimizer --api --commit --order 750676-2640391   # only this order (repeatable)
+
+# Picklist CSV (not recorded in the order ledger: deduct a CSV only once)
+python -m station.pull_list_optimizer picklist-<date>.csv
+python -m station.pull_list_optimizer picklist-<date>.csv --commit
 ```
+
+### Fulfilling an Order
+ManaPool lowers the live quantity as soon as an order is placed. The database keeps counting the copy until it is picked and deducted. Until then, anything that pushes database totals would list the sold copy again.
+
+1. **Pick sheet.** TUI [3] (or `python -m station.pull_list_optimizer --api`) and answer `n` to deducting. Print `exports/pick_sheet_<date>.txt`. Orders already deducted are listed as "already picked", not as picks. Lines marked missing are not in stock: find the card or cancel that item on ManaPool.
+2. **Pull.** Walk the sheet and tick each card off.
+3. **Deduct once.** Run TUI [3] again and answer `y`. It deducts exactly the orders it just showed. When it lists more than one order, give the labels you actually pulled, or leave it empty for all. CLI: `--api --commit [--order <label>]`. Each order is recorded in `picked_orders`; later runs skip it.
+4. **Mark shipped on ManaPool.** Once marked shipped, the order leaves the `needs_shipping` list.
+5. **Check:** `python -m station.audit push`. Run it as a dry run, without `--send`. The products you just deducted should not be listed as differing. While other orders are still unpicked, their products show the database one copy higher than ManaPool. That is expected, so don't `--send` until those orders are picked too.
+
+The ledger table is created by `python -m station.db`. Until it exists, [3] still builds sheets but refuses to deduct live orders.
 
 ---
 

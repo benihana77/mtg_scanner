@@ -2,11 +2,12 @@
 
 Search live inventory by name, or feed a decklist, and the tool picks which copies to
 take (cheapest in-stock printing first, oldest section first), prints a pull sheet in
-walk order, deducts the cards from PostgreSQL on confirmation, and pushes the new totals
-for the affected products to ManaPool. If the ManaPool API is not configured or the push
-fails, it writes a CSV of the new absolute quantities to upload by hand.
+walk order, deducts the cards from PostgreSQL on confirmation, and takes the pulled copies
+off the affected ManaPool listings (live quantity - pulled, read back). If the ManaPool API
+is not configured or the push fails, it writes a CSV of absolute quantities to upload by hand.
 
-Copies needed by unfulfilled ManaPool orders are held back unless --force is given.
+Copies needed by ManaPool orders waiting to ship are held back unless --force is given
+(orders already picked and deducted are not held: their copies are out of the database).
 
 Pulled cards are not tracked after they leave inventory; to return a card, put it in the
 to-be-sorted pile and ingest it again with the normal intake.
@@ -152,7 +153,10 @@ def parse_decklist(lines: Iterable[str]) -> Tuple[List[Dict[str, Any]], List[str
 
 
 def reserved_by_open_orders() -> Tuple[Optional[Dict[str, int]], str]:
-    """Quantity per ManaPool product needed by unfulfilled orders.
+    """Quantity per ManaPool product needed by orders waiting to ship and not yet picked.
+
+    Orders in the `picked_orders` ledger are left out: their copies were already deducted
+    from the database, so holding them again would hold copies twice.
 
     Returns:
         Tuple[Optional[Dict[str, int]], str]: (product_id -> reserved qty, or None if the
@@ -161,15 +165,18 @@ def reserved_by_open_orders() -> Tuple[Optional[Dict[str, int]], str]:
     if not manapool_client.is_configured():
         return None, "ManaPool API not configured: open orders were NOT checked."
     items, errors = manapool_client.fetch_unfulfilled_orders()
-    # Any error but "no orders" means some orders may be missing: treat the check as failed.
-    problems = [e for e in errors if "No unfulfilled orders" not in e]
-    if problems:
-        return None, f"Could not check open orders ({len(problems)} errors): {problems[0]}"
+    # Any error means some orders may be missing: treat the check as failed.
+    if errors:
+        return None, f"Could not check open orders ({len(errors)} errors): {errors[0]}"
+    picked = pull_list_optimizer.picked_orders(it.get("order_id") for it in items)
     reserved: Dict[str, int] = defaultdict(int)
     for it in items:
-        if it.get("manapool_product_id"):
+        if it.get("manapool_product_id") and it.get("order_id") not in picked:
             reserved[str(it["manapool_product_id"])] += int(it.get("Qty", 1))
-    return dict(reserved), f"Checked open orders: {sum(reserved.values())} copies across {len(reserved)} products reserved."
+    status = f"Checked open orders: {sum(reserved.values())} copies across {len(reserved)} products reserved."
+    if picked:
+        status += f" {len(picked)} already-picked orders not held."
+    return dict(reserved), status
 
 
 def plan_pulls(
@@ -322,49 +329,66 @@ def write_pull_sheet(
 
 
 def sync_manapool(picks: List[Dict[str, Any]], output_dir: str = "exports") -> Dict[str, Any]:
-    """Pushes new absolute totals for the pulled products to ManaPool, or writes a CSV.
+    """Takes the pulled copies off ManaPool (live quantity - pulled, read back), or writes a CSV.
 
-    Must run after the deduction is committed: quantities are read back from PostgreSQL.
-    The push sets quantity only (price null), so live prices are left alone.
+    Must run after the deduction is committed. The base is the LIVE quantity, read just before
+    sending (`manapool_client.push_removed_stock`), not the database total: a copy that sold but
+    has not been picked yet is already off the live listing but still in the database, so the
+    database total would list it again. Quantity only (price null), so live prices are left
+    alone; products with no live listing are not sent.
+
+    If the API is not configured or the push fails, writes a CSV of absolute quantities to
+    upload by hand: live - pulled when the live listing was read ('basis' 'live'), otherwise the
+    database total ('basis' 'database'; lower any product with an unpicked order before uploading).
 
     Returns:
-        Dict[str, Any]: {'mode': 'api' | 'csv' | 'none', 'updated': int, 'errors': [...], 'csv_path': ...}.
+        Dict[str, Any]: 'mode' ('api' | 'csv' | 'none'), 'updated', 'errors', 'csv_path', 'basis',
+            and from the push 'before' / 'sent' (product_id -> live quantity before / quantity
+            sent), 'unlisted' and 'mismatches' (product_ids).
     """
     by_product: Dict[str, Dict[str, Any]] = {}
+    pulled: Dict[str, int] = defaultdict(int)
     for p in picks:
         if p.get("manapool_product_id"):
             by_product.setdefault(p["manapool_product_id"], p)
+            pulled[p["manapool_product_id"]] += p["qty_to_pull"]
+    result: Dict[str, Any] = {"mode": "none", "updated": 0, "errors": [], "csv_path": None, "basis": None,
+                              "before": {}, "sent": {}, "unlisted": [], "mismatches": []}
     if not by_product:
-        return {"mode": "none", "updated": 0, "errors": ["No ManaPool product IDs on pulled rows."], "csv_path": None}
+        result["errors"] = ["No ManaPool product IDs on pulled rows."]
+        return result
 
-    totals = db.get_total_quantities_by_product_ids(list(by_product))
-    items = [
-        {"manapool_product_id": pid, "quantity": totals.get(pid, 0), "manapool_listed_price": p["manapool_listed_price"]}
-        for pid, p in by_product.items()
-    ]
-
-    errors: List[str] = []
+    targets: Optional[Dict[str, int]] = None
     if manapool_client.is_configured():
         try:
-            updated, errors = manapool_client.push_quantities({it["manapool_product_id"]: it["quantity"] for it in items})
+            push = manapool_client.push_removed_stock(dict(pulled))
+            result.update({k: push[k] for k in ("updated", "errors", "before", "sent", "unlisted", "mismatches")})
+            if not push["errors"]:
+                result.update({"mode": "api", "basis": "live"})
+                return result
+            targets = push["sent"]
         except Exception as e:  # keep the deduction; fall back to the CSV below
-            updated, errors = 0, [f"Push failed: {e}"]
-        if not errors:
-            return {"mode": "api", "updated": updated, "errors": [], "csv_path": None}
+            result["errors"] = [f"Push failed: {e}"]
+    if targets is None:
+        targets = db.get_total_quantities_by_product_ids(list(by_product))
+        result["basis"] = "database"
+    else:
+        result["basis"] = "live"
 
     os.makedirs(output_dir, exist_ok=True)
     path = os.path.join(output_dir, f"manapool_sync_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}.csv")
     with open(path, "w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
         writer.writerow(["product_type", "product_id", "name", "set", "number", "finish", "condition", "price", "quantity"])
-        for it in items:
-            p = by_product[it["manapool_product_id"]]
+        for pid, qty in targets.items():
+            p = by_product[pid]
             writer.writerow([
-                "mtg_single", it["manapool_product_id"], p["name"], p["set_code"], p["collector_number"],
+                "mtg_single", pid, p["name"], p["set_code"], p["collector_number"],
                 "FO" if p["is_foil"] else "NF", p.get("condition") or "NM",
-                p["manapool_listed_price"] if p["manapool_listed_price"] is not None else "", it["quantity"],
+                p["manapool_listed_price"] if p["manapool_listed_price"] is not None else "", qty,
             ])
-    return {"mode": "csv", "updated": 0, "errors": errors, "csv_path": os.path.abspath(path)}
+    result.update({"mode": "csv", "csv_path": os.path.abspath(path)})
+    return result
 
 
 def run_pull(
@@ -419,18 +443,32 @@ def run_pull(
     return result
 
 
+def sync_lines(sync: Dict[str, Any]) -> List[str]:
+    """Human-readable lines describing a `sync_manapool` result (CLI and TUI)."""
+    lines: List[str] = []
+    if sync["mode"] == "api":
+        lines.append(f"ManaPool: took the pulled copies off {sync['updated']} listings (live quantity - pulled).")
+        if sync["mismatches"]:
+            lines.append(f"  Read back: {len(sync['mismatches'])} listings differ from what was sent: "
+                         + ", ".join(sync["mismatches"][:5]))
+    elif sync["mode"] == "csv":
+        lines += [f"  [ManaPool] {e}" for e in sync["errors"]]
+        lines.append(f"ManaPool update failed or not confirmed. Upload these absolute quantities by hand: {sync['csv_path']}")
+        if sync["basis"] == "database":
+            lines.append("  These are database totals: lower any product with an unpicked order by that "
+                         "order's quantity first, or the sold copy is listed again.")
+    else:
+        lines.append(f"ManaPool: nothing to sync ({'; '.join(sync['errors'])}).")
+    if sync["unlisted"]:
+        lines.append(f"  {len(sync['unlisted'])} pulled products have no ManaPool listing (left alone).")
+    return lines
+
+
 def _print_result(res: Dict[str, Any]) -> None:
     if res["committed"]:
         print(f"Deducted {sum(p['qty_to_pull'] for p in res['picks'])} cards from inventory.")
-        sync = res["sync"]
-        if sync["mode"] == "api":
-            print(f"ManaPool: updated {sync['updated']} products.")
-        elif sync["mode"] == "csv":
-            for e in sync["errors"]:
-                print(f"  [ManaPool] {e}", file=sys.stderr)
-            print(f"ManaPool not updated. Upload these absolute quantities by hand: {sync['csv_path']}")
-        else:
-            print(f"ManaPool: nothing to sync ({'; '.join(sync['errors'])}).")
+        for line in sync_lines(res["sync"]):
+            print(line)
     elif res["picks"]:
         print("Not confirmed: inventory unchanged.")
     else:
