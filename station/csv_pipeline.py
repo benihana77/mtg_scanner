@@ -10,7 +10,7 @@ Handles:
 - Shelf-order sorting within sections and sequential index numbers (1, 2, 3... N).
 - Committing to the PostgreSQL inventory table.
 - Generating ManaPool upload CSVs.
-- Relocating sets/sections (or all TOKENS) across boxes when capacity runs out.
+- Relocating a whole set (every section), or every TOKENS chunk, to another box when capacity runs out.
 """
 
 import argparse
@@ -307,40 +307,107 @@ def generate_manapool_upload_csv(
     return os.path.abspath(filepath)
 
 
-def relocate_box(
-    source_box: str,
-    target_box: str,
-    set_code: str,
-    section_label: Optional[str] = None,
-) -> Dict[str, Any]:
-    """Relocates cards for a given shelf set/section from one box to another.
+def plan_relocation(set_code: str, target_box: str) -> Dict[str, Any]:
+    """Checks a whole-set move to another box and summarises it. Nothing is written.
+
+    Every section of the shelf set moves (for 'TOKENS', every TOKEN-n chunk). A target box
+    that matches an existing box label case-insensitively uses that box's spelling.
 
     Args:
-        source_box (str): Current box label.
-        target_box (str): Destination box label.
-        set_code (str): Set code, or 'TOKENS' to move every token chunk together.
-        section_label (Optional[str]): Specific section or None for all sections of that set.
+        set_code (str): Set code (e.g. 'BLC'), or 'TOKENS' for every token chunk.
+        target_box (str): Destination box label (e.g. 'M20'); may be a new box.
 
     Returns:
-        Dict[str, Any]: Summary of relocation result.
+        Dict[str, Any]: 'status' is one of:
+            'ready': with 'set_code', 'target_box', 'sections' (from db.get_shelf_set_sections),
+                'total_lines', 'total_cards', 'source_boxes' (boxes the set is in now),
+                'moving_lines' (rows not already in the target box), 'new_box' and
+                'target_sets' (other shelf sets already in the target box).
+            'invalid', 'not_found', 'already_there' or 'clash' (with 'clashes'): with 'message'.
     """
-    updated_rows = db.relocate_inventory(
-        source_box=source_box,
-        target_box=target_box,
-        set_code=set_code,
-        section_label=section_label,
-    )
+    set_code = set_code.strip().upper()
+    target_box = target_box.strip()
+    if not set_code or not target_box:
+        return {"status": "invalid", "message": "Enter both a set code and a box label."}
 
-    if updated_rows == 0:
-        return {"status": "not_found", "message": f"No cards found matching {source_box} / {set_code}."}
+    sections = db.get_shelf_set_sections(set_code)
+    if not sections:
+        return {"status": "not_found", "message": f"Set {set_code} is not in inventory."}
+
+    boxes = db.get_distinct_boxes()
+    target_box = next((b for b in boxes if b.lower() == target_box.lower()), target_box)
+    source_boxes = sorted({s["box_label"] for s in sections})
+    if source_boxes == [target_box]:
+        return {"status": "already_there", "message": f"{set_code} is already all in {target_box}."}
+
+    clashes = db.find_section_clashes(sections)
+    if clashes:
+        return {
+            "status": "clash",
+            "clashes": clashes,
+            "message": f"{set_code} has the same section label in more than one box, so moving it "
+                       f"would merge two sections. Fix those labels first.",
+        }
 
     return {
-        "status": "success",
-        "updated_rows": updated_rows,
-        "source_box": source_box,
-        "target_box": target_box,
+        "status": "ready",
         "set_code": set_code,
+        "target_box": target_box,
+        "sections": sections,
+        "total_lines": sum(s["total_lines"] for s in sections),
+        "total_cards": sum(s["total_cards"] for s in sections),
+        "source_boxes": source_boxes,
+        "moving_lines": sum(s["total_lines"] for s in sections if s["box_label"] != target_box),
+        "new_box": target_box not in boxes,
+        "target_sets": [s["set_code"].upper() for s in db.get_sets_in_box(target_box)
+                        if s["set_code"].upper() != set_code],
     }
+
+
+def format_relocation_plan(plan: Dict[str, Any]) -> List[str]:
+    """Formats a 'ready' plan from plan_relocation as preview lines for the confirm step."""
+    target = plan["target_box"]
+    if plan["new_box"]:
+        target_note = "new box"
+    elif plan["target_sets"]:
+        target_note = f"also holds {', '.join(plan['target_sets'])}"
+    else:
+        target_note = "holds no other sets"
+    lines = [
+        f"Move {plan['set_code']}: {len(plan['sections'])} sections, {plan['total_lines']} rows, "
+        f"{plan['total_cards']} copies",
+        f"From {', '.join(plan['source_boxes'])} to {target} ({target_note})",
+        "Section labels and index numbers stay the same.",
+        "",
+    ]
+    for s in plan["sections"]:
+        note = "  (already there)" if s["box_label"] == target else ""
+        lines.append(f"  {s['box_label']:<8} {s['section_label']:<9} #{s['min_index']}-{s['max_index']:<5} "
+                     f"{s['total_lines']:>4} rows {s['total_cards']:>5} copies{note}")
+    return lines
+
+
+def relocate_box(set_code: str, target_box: str) -> Dict[str, Any]:
+    """Moves every section of a set (or every TOKEN-n chunk) to another box (Box Shuffle).
+
+    Local database change only: box location is never sent to ManaPool.
+
+    Args:
+        set_code (str): Set code (e.g. 'BLC'), or 'TOKENS' for every token chunk.
+        target_box (str): Destination box label (e.g. 'M20').
+
+    Returns:
+        Dict[str, Any]: The plan from plan_relocation. When it was 'ready', 'status' becomes
+        'success' with 'updated_rows', or 'clash' if the set changed since it was planned.
+    """
+    plan = plan_relocation(set_code, target_box)
+    if plan["status"] != "ready":
+        return plan
+    try:
+        updated_rows = db.relocate_inventory(plan["set_code"], plan["target_box"])
+    except ValueError as e:
+        return {"status": "clash", "message": str(e)}
+    return {**plan, "status": "success", "updated_rows": updated_rows}
 
 
 def list_inventory_table(box_label: Optional[str] = None) -> str:
@@ -389,11 +456,10 @@ def main():
     p_ingest.add_argument("--push-api", action="store_true", help="Push inventory directly to ManaPool API if configured")
 
     # Subcommand: relocate
-    p_reloc = subparsers.add_parser("relocate", help="Relocate set or section between physical boxes (Box Shuffle)")
-    p_reloc.add_argument("--source", required=True, help="Source box label (e.g. Box-1)")
-    p_reloc.add_argument("--target", required=True, help="Target box label (e.g. Box-2)")
-    p_reloc.add_argument("--set", required=True, help="Set code (e.g. ZNR), or TOKENS for all token chunks")
-    p_reloc.add_argument("--section", default=None, help="Optional specific section (e.g. Sec-1)")
+    p_reloc = subparsers.add_parser("relocate", help="Move every section of a set to another box (Box Shuffle)")
+    p_reloc.add_argument("--set", required=True, help="Set code (e.g. BLC), or TOKENS for every token chunk")
+    p_reloc.add_argument("--target", required=True, help="Box to move it to (e.g. M20)")
+    p_reloc.add_argument("--yes", action="store_true", help="Do not ask for confirmation")
 
     # Subcommand: list
     p_list = subparsers.add_parser("list", help="List physical inventory storage sections")
@@ -437,17 +503,22 @@ def main():
                 print(f"  - {r.get('set')} {r.get('number')} {r.get('name')}")
 
     elif args.command == "relocate":
-        print(f"Relocating [{args.set}] from {args.source} to {args.target}...")
-        res = relocate_box(
-            source_box=args.source,
-            target_box=args.target,
-            set_code=args.set,
-            section_label=args.section,
-        )
-        if res.get("status") == "success":
-            print(f"Relocated {res['updated_rows']} inventory items to {args.target}.")
-        else:
-            print(f"Relocation failed: {res.get('message')}")
+        plan = plan_relocation(args.set, args.target)
+        if plan["status"] != "ready":
+            print(f"Nothing moved: {plan['message']}", file=sys.stderr)
+            for sec, boxes in sorted(plan.get("clashes", {}).items()):
+                print(f"  {sec} is in {', '.join(boxes)}", file=sys.stderr)
+            sys.exit(1)
+        for line in format_relocation_plan(plan):
+            print(line)
+        if not args.yes and input(f"Move {plan['set_code']} to {plan['target_box']}? (y/n): ").strip().lower() != "y":
+            print("Cancelled; nothing moved.")
+            return
+        res = relocate_box(plan["set_code"], plan["target_box"])
+        if res["status"] != "success":
+            print(f"Nothing moved: {res['message']}", file=sys.stderr)
+            sys.exit(1)
+        print(f"Moved {res['updated_rows']} rows of {res['set_code']} to {res['target_box']}.")
 
     elif args.command == "list":
         print(list_inventory_table(args.box))

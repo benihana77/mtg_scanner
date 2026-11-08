@@ -9,7 +9,7 @@ Tests:
 2. Section auto-allocation (Sec-1, Sec-2, etc.).
 3. Strict alphabetical sorting by card name & sequential 1..N index assignment.
 4. ManaPool upload CSV generation.
-5. Box reallocation (Box Shuffle when space runs out).
+5. Box Shuffle: moving every section of a set (or every token chunk) to another box, locally only.
 6. Fulfillment picklist path optimization (Box -> Set -> Section -> Index).
 7. Stock quantity decrement upon pick commitment.
 8. Live ManaPool orders: needs_shipping paging, foil matching, and deducting each order once
@@ -314,49 +314,74 @@ class TestMTGInterimPipeline(unittest.TestCase):
         self.assertIn("Sec-1", sections)
         self.assertIn("Sec-2", sections)
 
-    def test_03_box_shuffle_relocation(self):
-        """Verifies the box relocation function when a box runs out of room."""
-        mock_cards = [{
-            "product_type": "mtg_single",
-            "product_id": "00000000-0000-0000-0000-000000000020",
-            "name": "Sol Ring",
-            "set": "TEST",
-            "number": "30",
-            "language": "EN",
-            "finish": "NF",
-            "condition": "NM",
-            "market_low": "1.00",
-            "market_price": "1.50",
-            "market_price_foil": "",
-            "price": "1.50",
-            "quantity": "5",
-        }]
+    def locations(self) -> dict:
+        """inventory_id -> (set_code, box_label, section_label, index_num) for every inventory row."""
+        with db.get_db_cursor(commit=False) as cur:
+            cur.execute("""
+                SELECT i.inventory_id, c.set_code, i.box_label, i.section_label, i.index_num
+                FROM inventory i JOIN scryfall_cards c ON i.scryfall_id = c.scryfall_id;
+            """)
+            return {r["inventory_id"]: (r["set_code"], r["box_label"], r["section_label"], r["index_num"])
+                    for r in cur.fetchall()}
 
-        csv_file = self.create_mock_manapool_csv("shuffle.csv", mock_cards)
-        csv_pipeline.ingest_csv_batch(csv_file, "TestBox-1", output_dir=self.test_dir)
+    def ingest_shuffle_set(self) -> None:
+        """TEST Sec-1 (3 rows, one a TEST-coded token) and Sec-2, plus set OTHR, all in TestBox-1."""
+        batches = [
+            ("shuffle1.csv", [self.token_row("TEST", "30", "Sol Ring", layout="normal", qty="5"),
+                              self.token_row("TEST", "10", "Arcane Signet", layout="normal"),
+                              self.token_row("TEST", "T1", "Goblin")]),
+            ("shuffle2.csv", [self.token_row("TEST", "20", "Lightning Bolt", layout="normal", qty="3")]),
+            ("shuffle3.csv", [self.token_row("OTHR", "1", "Other Card", layout="normal")]),
+        ]
+        for name, rows in batches:
+            csv_file = self.create_mock_manapool_csv(name, rows)
+            csv_pipeline.ingest_csv_batch(csv_file, "TestBox-1", output_dir=self.test_dir,
+                                          prompt_callback=lambda s: "TestBox-1")
 
-        # Relocate TEST set from TestBox-1 to TestBox-2
-        res = csv_pipeline.relocate_box(
-            source_box="TestBox-1",
-            target_box="TestBox-2",
-            set_code="TEST",
-        )
+    def test_03_box_shuffle_moves_every_section(self):
+        """Relocating a set moves all its sections to the new box, keeping section labels and indexes."""
+        self.ingest_shuffle_set()
+        # A sold-out row still holds its place in the section, so it moves too.
+        with db.get_db_cursor() as cur:
+            cur.execute("UPDATE inventory SET quantity = 0 WHERE manapool_product_id = 'pid-TEST-10';")
+        before = self.locations()
+
+        plan = csv_pipeline.plan_relocation(" test ", "TestBox-2")
+        self.assertEqual(plan["status"], "ready")
+        self.assertEqual(plan["set_code"], "TEST")
+        self.assertEqual([s["section_label"] for s in plan["sections"]], ["Sec-1", "Sec-2"])
+        self.assertEqual((plan["total_lines"], plan["total_cards"], plan["moving_lines"]), (3, 8, 3))
+        self.assertEqual(plan["source_boxes"], ["TestBox-1"])
+        self.assertTrue(plan["new_box"])
+        preview = csv_pipeline.format_relocation_plan(plan)
+        self.assertEqual(preview[:2], ["Move TEST: 2 sections, 3 rows, 8 copies", "From TestBox-1 to TestBox-2 (new box)"])
+        self.assertEqual(self.locations(), before)  # planning writes nothing
+
+        # Box location is local only: nothing may reach ManaPool (or any HTTP endpoint).
+        with patch("requests.Session.request") as http:
+            res = csv_pipeline.relocate_box("TEST", "TestBox-2")
+        http.assert_not_called()
 
         self.assertEqual(res["status"], "success")
-        self.assertGreater(res["updated_rows"], 0)
+        self.assertEqual(res["updated_rows"], 3)
+        # Only TEST's Sec-n rows change, and only their box. The TEST-coded token stays in its
+        # TOKEN-1 chunk, and OTHR stays put.
+        expected = {i: (s, "TestBox-2" if s == "TEST" and sec.startswith("Sec-") else box, sec, idx)
+                    for i, (s, box, sec, idx) in before.items()}
+        self.assertEqual(self.locations(), expected)
+        self.assertEqual(self.section_rows("TOKEN-1")[0]["box_label"], "TestBox-1")
 
-        # Verify database shows TestBox-2
-        boxes = db.get_distinct_boxes()
-        self.assertIn("TestBox-2", boxes)
+        # Again: nothing left to move.
+        self.assertEqual(csv_pipeline.relocate_box("TEST", "TestBox-2")["status"], "already_there")
 
-        sets_in_box2 = db.get_sets_in_box("TestBox-2")
-        set_codes = [s["set_code"].upper() for s in sets_in_box2]
-        self.assertIn("TEST", set_codes)
+        # A target typed in another case uses the existing box's label.
+        back = csv_pipeline.plan_relocation("TEST", "testbox-1")
+        self.assertEqual(back["target_box"], "TestBox-1")
+        self.assertFalse(back["new_box"])
+        self.assertIn("From TestBox-2 to TestBox-1 (also holds OTHR, TOKENS)", csv_pipeline.format_relocation_plan(back))
 
-        # Verify old box no longer has TEST set
-        sets_in_box1 = db.get_sets_in_box("TestBox-1")
-        test_in_box1 = any(s["set_code"].upper() == "TEST" for s in sets_in_box1)
-        self.assertFalse(test_in_box1)
+        self.assertEqual(csv_pipeline.plan_relocation("NOPE", "TestBox-2")["status"], "not_found")
+        self.assertEqual(csv_pipeline.plan_relocation("TEST", "  ")["status"], "invalid")
 
     def test_04_picklist_fulfillment_and_stock_deduction(self):
         """Verifies traversal route optimization (Box -> Set -> Sec -> Index) and stock deduction."""
@@ -944,7 +969,12 @@ class TestMTGInterimPipeline(unittest.TestCase):
             csv_file = self.create_mock_manapool_csv(name, rows)
             csv_pipeline.ingest_csv_batch(csv_file, output_dir=self.test_dir, prompt_callback=lambda s: "TestBox-T")
 
-        res = csv_pipeline.relocate_box(source_box="TestBox-T", target_box="TestBox-T2", set_code="TOKENS")
+        # Chunks spread over two boxes all gather in the target box.
+        with db.get_db_cursor() as cur:
+            cur.execute("UPDATE inventory SET box_label = 'TestBox-T3' WHERE section_label = 'TOKEN-2';")
+        res = csv_pipeline.relocate_box("tokens", "TestBox-T2")
+        self.assertEqual(res["status"], "success")
+        self.assertEqual(res["source_boxes"], ["TestBox-T", "TestBox-T3"])
         self.assertEqual(res["updated_rows"], 3)
         self.assertEqual(db.get_token_box(), "TestBox-T2")
         self.assertEqual({r["section_label"] for r in db.get_inventory_summary("TestBox-T2")}, {"TOKEN-1", "TOKEN-2"})
@@ -1397,6 +1427,74 @@ class TestMTGInterimPipeline(unittest.TestCase):
             res = manapool_client.push_removed_stock({"p1": 1})
         self.assertEqual((res["sent"], res["mismatches"]), ({"p1": 2}, ["p1"]))
         self.assertIn("Read-back failed", res["errors"][0])
+
+    def test_26_relocate_refuses_sections_that_would_merge(self):
+        """A set with the same section label in two boxes is refused, and nothing moves."""
+        rows = [self.token_row("TEST", "30", "Sol Ring", layout="normal")]
+        for box in ("TestBox-1", "TestBox-3"):  # sections are numbered per box: Sec-1 in both
+            csv_file = self.create_mock_manapool_csv(f"clash_{box}.csv", rows)
+            csv_pipeline.ingest_csv_batch(csv_file, box, output_dir=self.test_dir)
+        before = self.locations()
+
+        plan = csv_pipeline.plan_relocation("TEST", "TestBox-2")
+        self.assertEqual(plan["status"], "clash")
+        self.assertEqual(plan["clashes"], {"Sec-1": ["TestBox-1", "TestBox-3"]})
+        self.assertEqual(csv_pipeline.relocate_box("TEST", "TestBox-2")["status"], "clash")
+        # The database layer checks again inside its own transaction.
+        with self.assertRaises(ValueError):
+            db.relocate_inventory("TEST", "TestBox-2")
+        self.assertEqual(self.locations(), before)
+
+    def test_27_relocate_cli_and_tui_ask_only_set_and_box(self):
+        """The CLI takes --set/--target and confirms; the TUI asks set, box, then y/n."""
+        import contextlib
+        import io
+        import sys
+        import tui
+
+        self.ingest_shuffle_set()
+        argv = ["csv_pipeline", "relocate", "--set", "test", "--target", "TestBox-2"]
+        out = io.StringIO()
+        with patch.object(sys, "argv", argv), patch("builtins.input", return_value="n") as ask, \
+             contextlib.redirect_stdout(out):
+            csv_pipeline.main()
+        ask.assert_called_once_with("Move TEST to TestBox-2? (y/n): ")
+        self.assertIn("Move TEST: 2 sections, 3 rows, 9 copies", out.getvalue())
+        self.assertEqual(db.get_shelf_set_sections("TEST")[0]["box_label"], "TestBox-1")  # declined
+
+        with patch.object(sys, "argv", argv + ["--yes"]), patch("builtins.input") as ask, \
+             contextlib.redirect_stdout(io.StringIO()):
+            csv_pipeline.main()
+        ask.assert_not_called()
+        self.assertEqual({s["box_label"] for s in db.get_shelf_set_sections("TEST")}, {"TestBox-2"})
+
+        with patch.object(sys, "argv", ["csv_pipeline", "relocate", "--set", "NOPE", "--target", "TestBox-2"]), \
+             contextlib.redirect_stderr(io.StringIO()), self.assertRaises(SystemExit) as exit_:
+            csv_pipeline.main()
+        self.assertEqual(exit_.exception.code, 1)
+
+        # TUI: two questions and a confirm, then every section is in the new box.
+        stdscr = MagicMock()
+        stdscr.getmaxyx.return_value = (40, 120)
+        with patch.object(tui, "curses"), patch.object(tui, "draw_header"), \
+             patch.object(tui, "prompt_input", side_effect=["test", "TestBox-3", "y"]) as prompt, \
+             patch.object(tui, "show_message_box") as box, patch("requests.Session.request") as http:
+            tui.action_relocate_box(stdscr)
+        self.assertEqual(prompt.call_count, 3)
+        self.assertEqual(prompt.call_args_list[2][0][1], "Move TEST to TestBox-3? (y/n)")
+        titles = [c[0][1] for c in box.call_args_list]
+        self.assertEqual(titles, ["Confirm Relocation", "Relocation Complete"])
+        self.assertIn("Moved 3 rows of TEST to TestBox-3.", box.call_args_list[1][0][2])
+        self.assertEqual({s["box_label"] for s in db.get_shelf_set_sections("TEST")}, {"TestBox-3"})
+        http.assert_not_called()
+
+        # An unknown set stops after the first question.
+        with patch.object(tui, "curses"), patch.object(tui, "draw_header"), \
+             patch.object(tui, "prompt_input", side_effect=["nope"]) as prompt, \
+             patch.object(tui, "show_message_box") as box:
+            tui.action_relocate_box(stdscr)
+        self.assertEqual(prompt.call_count, 1)
+        self.assertEqual(box.call_args[0][2], ["Set NOPE is not in inventory."])
 
 
 if __name__ == "__main__":

@@ -293,50 +293,99 @@ def get_sets_in_box(box_label: str) -> List[Dict[str, Any]]:
         return [dict(r) for r in cur.fetchall()]
 
 
-def relocate_inventory(
-    source_box: str,
-    target_box: str,
-    set_code: str,
-    section_label: Optional[str] = None,
-    target_section: Optional[str] = None,
-) -> int:
-    """Moves inventory items for a given shelf set (and optional section) from one box to another.
+def get_shelf_set_sections(set_code: str) -> List[Dict[str, Any]]:
+    """Lists every section of a shelf set with its box, row count, copy count and index range.
 
-    Useful when a physical storage box runs out of capacity and sets or sections need
-    to be shuffled into another box. Pass set_code 'TOKENS' to move every token chunk
-    (TOKEN-1, TOKEN-2, ...) together; section labels and index numbers are kept.
+    Rows with quantity 0 are counted too: they still hold their place in the section.
 
     Args:
-        source_box (str): Current box label (e.g. 'M3').
-        target_box (str): New destination box label (e.g. 'M20').
-        set_code (str): MTG set code (e.g. 'ZNR') or 'TOKENS'.
-        section_label (Optional[str]): If provided, only relocates this specific section.
-        target_section (Optional[str]): If provided, renames the section in the destination box.
+        set_code (str): MTG set code (e.g. 'BLC') or 'TOKENS'.
 
     Returns:
-        int: Number of inventory rows updated.
+        List[Dict[str, Any]]: One dict per (box_label, section_label) with 'total_lines',
+        'total_cards', 'min_index' and 'max_index', in box then section order. Empty if the
+        shelf set is not in inventory.
     """
-    assignments = "box_label = %s"
-    params: List[Any] = [target_box.strip()]
-    if target_section:
-        assignments += ", section_label = %s"
-        params.append(target_section.strip())
-
     query = f"""
-        UPDATE inventory i
-        SET {assignments}
-        FROM scryfall_cards sc
-        WHERE i.scryfall_id = sc.scryfall_id
-          AND i.box_label = %s
-          AND {SHELF_SET_SQL} = UPPER(%s)
+        SELECT
+            i.box_label,
+            i.section_label,
+            COUNT(i.inventory_id) as total_lines,
+            SUM(i.quantity) as total_cards,
+            MIN(i.index_num) as min_index,
+            MAX(i.index_num) as max_index
+        FROM inventory i
+        JOIN scryfall_cards sc ON i.scryfall_id = sc.scryfall_id
+        WHERE {SHELF_SET_SQL} = UPPER(%s)
+        GROUP BY i.box_label, i.section_label
+        ORDER BY i.box_label, LENGTH(i.section_label), i.section_label;
     """
-    params += [source_box.strip(), set_code.strip()]
-    if section_label:
-        query += " AND i.section_label = %s"
-        params.append(section_label.strip())
+    with get_db_cursor(commit=False) as cur:
+        cur.execute(query, (set_code.strip(),))
+        return [dict(r) for r in cur.fetchall()]
 
+
+def find_section_clashes(rows: List[Dict[str, Any]]) -> Dict[str, List[str]]:
+    """Finds section labels of one shelf set that are held in more than one box.
+
+    Moving such a set into a single box would merge two sections with overlapping index numbers.
+
+    Args:
+        rows (List[Dict[str, Any]]): Rows or sections of one shelf set, each with 'box_label'
+            and 'section_label'.
+
+    Returns:
+        Dict[str, List[str]]: section_label -> sorted box labels, for each clashing label only.
+    """
+    boxes: Dict[str, set] = {}
+    for r in rows:
+        boxes.setdefault(r["section_label"], set()).add(r["box_label"])
+    return {sec: sorted(b) for sec, b in boxes.items() if len(b) > 1}
+
+
+def relocate_inventory(set_code: str, target_box: str) -> int:
+    """Moves every section of a shelf set into one box, in a single transaction.
+
+    Used when a physical storage box runs out of capacity: all of the set's sections
+    (Sec-1, Sec-2, ...) move to target_box. Pass set_code 'TOKENS' to move every token
+    chunk (TOKEN-1, TOKEN-2, ...) instead; a token row is never moved by its real set code.
+    Section labels and index numbers are kept, so the shelf order inside each section is
+    unchanged. Only box_label is written: box location is local and never sent to ManaPool.
+
+    Args:
+        set_code (str): MTG set code (e.g. 'BLC') or 'TOKENS'.
+        target_box (str): Destination box label (e.g. 'M20').
+
+    Returns:
+        int: Number of inventory rows updated (rows already in target_box are not counted).
+
+    Raises:
+        ValueError: If one of the set's section labels is held in more than one box. Nothing
+            is changed.
+    """
+    set_code = set_code.strip()
+    target_box = target_box.strip()
     with get_db_cursor() as cur:
-        cur.execute(query + ";", tuple(params))
+        cur.execute(f"""
+            SELECT i.box_label, i.section_label
+            FROM inventory i
+            JOIN scryfall_cards sc ON i.scryfall_id = sc.scryfall_id
+            WHERE {SHELF_SET_SQL} = UPPER(%s)
+            FOR UPDATE OF i;
+        """, (set_code,))
+        clashes = find_section_clashes(cur.fetchall())
+        if clashes:
+            detail = "; ".join(f"{sec} in {', '.join(b)}" for sec, b in sorted(clashes.items()))
+            raise ValueError(f"{set_code.upper()} has the same section label in more than one box ({detail}).")
+
+        cur.execute(f"""
+            UPDATE inventory i
+            SET box_label = %s
+            FROM scryfall_cards sc
+            WHERE i.scryfall_id = sc.scryfall_id
+              AND {SHELF_SET_SQL} = UPPER(%s)
+              AND i.box_label <> %s;
+        """, (target_box, set_code, target_box))
         return cur.rowcount
 
 
