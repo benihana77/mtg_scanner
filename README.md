@@ -68,8 +68,11 @@ Run every command from the repository root.
    - A sheet ingested from `intake/` moves to `intake/ingested/`, so it can't be ingested twice.
 
 4. **Box Capacity Management & "Box Shuffle" (`relocate`)**:
-   - Easily move an entire set or a specific section from one storage box to another when a box runs out of capacity.
-   - `--set TOKENS` moves every token chunk together, keeping section labels and index numbers.
+   - When a box runs out of room, move a whole set to another box: give the set code (e.g. `BLC`) and the target box (e.g. `M20`), check the preview (sections, rows, copies, current box or boxes, new box or not) and confirm.
+   - Every section of the set (`Sec-1`, `Sec-2`, ...) moves in one transaction, with section labels and index numbers unchanged, so the shelf order inside each section stays the same. Single sections are not moved on their own.
+   - `TOKENS` moves every token chunk (`TOKEN-1`, `TOKEN-2`, ...) from whatever box it is in. Token rows never move with their real set code.
+   - Refused if the set has the same section label in two boxes (the move would merge two sections).
+   - Local only: only `box_label` changes and nothing is sent to ManaPool. `config/set_box_map.csv` is not changed; later intake finds the set's new box from inventory.
 
 5. **Order Pull List Optimizer (`station/pull_list_optimizer.py`)**:
    - Ingests ManaPool picklists either from **live ManaPool API** (`GET /seller/orders?needs_shipping=true`, every page) or local CSV exports (`picklist-*.csv`). Only line items are read from an order; buyer details are never stored or printed.
@@ -190,14 +193,11 @@ python -m station.csv_pipeline ingest batch.csv --push-api
 
 ### Relocate Set Between Boxes (Box Shuffle)
 ```bash
-# Move set ZNR from M3 to M4 when M3 is full
-python -m station.csv_pipeline relocate --source M3 --target M4 --set ZNR
+# Move every section of BLC to box M20 (shows what will move, then asks y/n)
+python -m station.csv_pipeline relocate --set BLC --target M20
 
-# Move a single section
-python -m station.csv_pipeline relocate --source M3 --target M4 --set ZNR --section Sec-1
-
-# Move every token chunk to a new box
-python -m station.csv_pipeline relocate --source M19 --target M20 --set TOKENS
+# Move every token chunk to a new box, without the confirm prompt
+python -m station.csv_pipeline relocate --set TOKENS --target M20 --yes
 ```
 
 ### Pull Cards for a Personal Collection

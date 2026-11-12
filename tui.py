@@ -8,7 +8,7 @@ N. Building an intake sheet for one set from ManaPool's catalog, counting it, an
 3. Pulling live orders from ManaPool and generating optimized pick traversal sheets.
 4. Processing local picklist CSV files.
 5. Browsing physical inventory breakdown (Boxes, Sets, Sections, Index ranges).
-6. Relocating sets, sections or all TOKENS between boxes (Box Shuffle when space runs out).
+6. Moving a whole set (every section), or every TOKENS chunk, to another box (Box Shuffle when space runs out).
 7. Connection diagnostics.
 8. Refreshing the local Scryfall mirror (scryfall_cards).
 9. Pulling cards for a personal collection / deck (search, decklist, ManaPool sync).
@@ -409,70 +409,48 @@ def action_intake_sheet(stdscr) -> None:
 
 
 def action_relocate_box(stdscr) -> None:
-    """The Box Shuffle function: relocates a set or section when a box runs out of room."""
+    """The Box Shuffle function: moves every section of a set to another box when a box runs out of room."""
+    max_x = stdscr.getmaxyx()[1]
     stdscr.clear()
     draw_header(stdscr, "Relocate Set / Box Shuffle")
-    stdscr.addstr(3, 2, "=== RELOCATE SET / SECTION (BOX SHUFFLE) ===", curses.A_BOLD)
-    stdscr.addstr(4, 2, "Transfer cards to another box when physical storage capacity is reached.")
+    stdscr.addstr(3, 2, "=== RELOCATE SET (BOX SHUFFLE) ===", curses.A_BOLD)
+    stdscr.addstr(4, 2, "Moves every section of a set to another box. Section labels and index numbers stay the same."[: max_x - 4])
 
     boxes = db.get_distinct_boxes()
     if not boxes:
         show_message_box(stdscr, "Notice", ["No inventory found in database to relocate."])
         return
-
-    # Show existing boxes and contents
-    stdscr.addstr(6, 2, "Current Box Contents:", curses.color_pair(3) | curses.A_BOLD)
-    row_idx = 7
-    for b in boxes:
-        sets = db.get_sets_in_box(b)
-        set_summary = ", ".join(f"{s['set_code'].upper()} ({s['total_cards']} cards)" for s in sets)
-        stdscr.addstr(row_idx, 4, f"* {b:<10}: {set_summary}"[: stdscr.getmaxyx()[1] - 6])
-        row_idx += 1
-
+    stdscr.addstr(6, 2, f"Boxes in use: {', '.join(boxes)}"[: max_x - 4], curses.color_pair(3))
     stdscr.refresh()
 
-    source_box = prompt_input(stdscr, "Source Box to move from", boxes[0])
-    if source_box not in boxes:
-        show_message_box(stdscr, "Error", [f"Box '{source_box}' does not exist in inventory."])
+    set_code = prompt_input(stdscr, "Set code to move (e.g. BLC, or TOKENS for every token chunk)").upper()
+    if not set_code:
+        return
+    if not db.get_shelf_set_sections(set_code):
+        show_message_box(stdscr, "Error", [f"Set {set_code} is not in inventory."])
         return
 
-    sets_in_src = db.get_sets_in_box(source_box)
-    if not sets_in_src:
-        show_message_box(stdscr, "Error", [f"No sets found in {source_box}."])
+    target_box = prompt_input(stdscr, f"Box to move {set_code} to (e.g. M20)")
+    if not target_box:
         return
-
-    default_set = sets_in_src[0]["set_code"].upper()
-    set_code = prompt_input(stdscr, "Set Code to relocate (e.g. ZNR, or TOKENS for all token chunks)", default_set).upper()
-
-    sec_filter = prompt_input(stdscr, "Specific Section to move (leave empty for ALL sections of this set)", "")
-    actual_sec = sec_filter if sec_filter else None
-
-    target_box = prompt_input(stdscr, "Destination Box Label (e.g. Box-2 or new box)", "Box-2")
-
-    confirm = prompt_input(stdscr, f"Confirm moving [{set_code}] from {source_box} -> {target_box}? (y/n)", "y")
-    if confirm.lower() != "y":
-        return
-
-    show_message_box(stdscr, "Relocating", ["Updating database records..."], wait_key=False)
 
     try:
-        res = csv_pipeline.relocate_box(
-            source_box=source_box,
-            target_box=target_box,
-            set_code=set_code,
-            section_label=actual_sec,
-        )
+        plan = csv_pipeline.plan_relocation(set_code, target_box)
+        if plan["status"] != "ready":
+            clashes = [f"  {sec} is in {', '.join(b)}" for sec, b in sorted(plan.get("clashes", {}).items())]
+            show_message_box(stdscr, "Nothing Moved", [plan["message"]] + clashes)
+            return
 
-        if res.get("status") == "success":
-            lines = [
-                f"Successfully relocated {res['updated_rows']} items to {target_box}!",
-                f"Source: {source_box}  -->  Target: {target_box}",
-                f"Set: {set_code}",
-            ]
-            show_message_box(stdscr, "Relocation Complete", lines)
+        show_message_box(stdscr, "Confirm Relocation", csv_pipeline.format_relocation_plan(plan), wait_key=False)
+        if prompt_input(stdscr, f"Move {set_code} to {plan['target_box']}? (y/n)", "n").lower() != "y":
+            return
+
+        res = csv_pipeline.relocate_box(set_code, plan["target_box"])
+        if res["status"] == "success":
+            show_message_box(stdscr, "Relocation Complete",
+                             [f"Moved {res['updated_rows']} rows of {set_code} to {res['target_box']}."])
         else:
-            show_message_box(stdscr, "Notice", [res.get("message", "Relocation failed.")])
-
+            show_message_box(stdscr, "Nothing Moved", [res["message"]])
     except Exception as e:
         show_message_box(stdscr, "Error", [f"Relocation failed: {e}"])
 
@@ -856,7 +834,7 @@ def main_loop(stdscr) -> None:
         ("3", "Pull Live Orders & Generate Pick Sheet (ManaPool API)", lambda s: action_run_picklist(s, use_api=True)),
         ("4", "Process Local Order Picklist CSV (e.g. picklist-*.csv)", lambda s: action_run_picklist(s, use_api=False)),
         ("5", "Browse Physical Inventory (Boxes, Sets, Sections)", action_browse_inventory),
-        ("6", "Relocate Set / Section (Box Shuffle when space runs out)", action_relocate_box),
+        ("6", "Relocate Set to Another Box (Box Shuffle when space runs out)", action_relocate_box),
         ("7", "Run System Diagnostics & Connection Check", action_diagnostics),
         ("8", "Refresh Local Scryfall Mirror (Default Cards bulk file)", action_refresh_mirror),
         ("9", "Pull Cards for Personal Collection / Deck (search or decklist)", action_personal_pull),
