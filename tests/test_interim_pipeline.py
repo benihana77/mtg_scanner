@@ -1339,7 +1339,7 @@ class TestMTGInterimPipeline(unittest.TestCase):
         dry = run([order1])
         self.assertEqual(dry["status"], "success")
         self.assertEqual([(p["manapool_product_id"], p["qty_to_pull"]) for p in dry["allocated_items"]], [("pid-fo", 1)])
-        self.assertEqual(dry["orders"], [{"order_label": "L-1", "cards": 1, "missing": 0}])
+        self.assertEqual(dry["orders"], [{"key": "A", "order_label": "L-1", "cards": 1, "missing": 0}])
         self.assertFalse(dry["committed"])
         self.assertEqual(stock(), {"pid-nf": 3, "pid-fo": 1, "pid-other": 2})
         self.assertEqual(self.ledger_rows(), {})

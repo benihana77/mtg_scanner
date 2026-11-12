@@ -78,7 +78,7 @@ Run every command from the repository root.
    - Ingests ManaPool picklists either from **live ManaPool API** (`GET /seller/orders?needs_shipping=true`, every page) or local CSV exports (`picklist-*.csv`). Only line items are read from an order; buyer details are never stored or printed.
    - Resolves order lines through the Scryfall mirror (same rules as intake), matching foil to foil, and physical coordinates: `Box -> Set -> Section -> Index` (token chunks: `Box -> Section -> Index`).
    - **Zero-Backtracking Path Optimization**: Sorts the picking sequence sequentially along the warehouse walking route.
-   - Generates printable pick sheets (`exports/pick_sheet_*.txt`) with `[ ]` checkboxes for clipboard picking.
+   - Generates printable pick sheets (`exports/pick_sheet_*.txt`) with `[ ]` checkboxes for clipboard picking. Every line fits 80 characters, so each pick prints on one line: orders are shown by a short letter (`A`, `B`, ...) listed with its full order label in the header, and long card names are cut to fit.
    - Supports stock deduction (`--commit`) directly updating PostgreSQL.
    - **Each live order is deducted once.** A deduction records the order in the `picked_orders` ledger in the same transaction. Recorded orders are left off later sheets (listed as "already picked") and are never deducted again, even from a sheet printed before the first deduction.
    - Picklist CSVs have no ManaPool order IDs, so their deductions are **not** recorded: deducting the same CSV twice, or deducting its orders again with the API pick, removes the stock twice. Use the API pick for live orders.
@@ -256,7 +256,7 @@ ManaPool lowers the live quantity as soon as an order is placed. The database ke
 
 1. **Pick sheet.** TUI [3] (or `python -m station.pull_list_optimizer --api`) and answer `n` to deducting. Print `exports/pick_sheet_<date>.txt`. Orders already deducted are listed as "already picked", not as picks. Lines marked missing are not in stock: find the card or cancel that item on ManaPool.
 2. **Pull.** Walk the sheet and tick each card off.
-3. **Deduct once.** Run TUI [3] again and answer `y`. It deducts exactly the orders it just showed. When it lists more than one order, give the labels you actually pulled, or leave it empty for all. CLI: `--api --commit [--order <label>]`. Each order is recorded in `picked_orders`; later runs skip it.
+3. **Deduct once.** Run TUI [3] again and answer `y`. It deducts exactly the orders it just showed. When it lists more than one order, give the letters (from the sheet) or labels of the orders you actually pulled, or leave it empty for all. CLI: `--api --commit [--order <label>]`. Each order is recorded in `picked_orders`; later runs skip it.
 4. **Mark shipped on ManaPool.** Once marked shipped, the order leaves the `needs_shipping` list.
 5. **Check:** `python -m station.audit push`. Run it as a dry run, without `--send`. The products you just deducted should not be listed as differing. While other orders are still unpicked, their products show the database one copy higher than ManaPool. That is expected, so don't `--send` until those orders are picked too.
 

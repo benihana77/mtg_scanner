@@ -17,14 +17,16 @@ import datetime
 import os
 import re
 import sys
+import textwrap
 from typing import Any, Dict, Iterable, List, Optional, Tuple
 
 from psycopg2 import extras
-from tabulate import tabulate
 
 from station import db
 from station import manapool_client
 from station import scryfall_mirror
+
+SHEET_WIDTH = 80  # Characters per printed line (plain text on a Letter/A4 page)
 
 LEDGER_MISSING = ("Order ledger table picked_orders is missing: run `python -m station.db` once. "
                   "Until then already-deducted orders cannot be detected and deducting live orders is refused.")
@@ -247,8 +249,12 @@ def generate_pick_sheet_file(
     source_label: str = "ManaPool",
     already_picked: Optional[List[Dict[str, Any]]] = None,
     notes: Optional[List[str]] = None,
+    orders: Optional[List[Dict[str, Any]]] = None,
 ) -> str:
-    """Exports a formatted printable pick sheet with [ ] checkboxes for clipboard use.
+    """Exports a printable pick sheet with [ ] checkboxes, at most SHEET_WIDTH characters wide.
+
+    Each order is shown by its short key (A, B, ...) with a key-to-label list in the header,
+    so rows fit one printed line; card names are cut to the room that is left.
 
     Args:
         allocated (List[Dict[str, Any]]): Sorted allocated picks.
@@ -258,6 +264,8 @@ def generate_pick_sheet_file(
         already_picked (Optional[List[Dict[str, Any]]]): Orders left off because their stock
             was already deducted (order_label, picked_at).
         notes (Optional[List[str]]): Warnings printed under the header.
+        orders (Optional[List[Dict[str, Any]]]): `summarize_orders` output (live API orders).
+            None or empty leaves out the order column (picklist CSV lines have no real orders).
 
     Returns:
         str: Absolute path to the generated pick sheet.
@@ -268,86 +276,88 @@ def generate_pick_sheet_file(
     filepath = os.path.join(output_dir, filename)
 
     total_cards = sum(p["qty_to_pull"] for p in allocated)
+    keys = {o["order_label"]: o["key"] for o in orders or []}
+    rule = "=" * SHEET_WIDTH
 
-    header = f"""========================================================================================
-                     MANAPOOL FULFILLMENT OPTIMIZED PICK SHEET
-========================================================================================
- Date:       {today_str}
- Source:     {source_label}
- Total:      {total_cards} cards to pull across {len(allocated)} pick steps
- Path:       Sorted by Box -> Set -> Section -> Index (token chunks: Box -> Section -> Index)
-========================================================================================
-"""
+    lines = [
+        rule,
+        "MANAPOOL FULFILLMENT PICK SHEET".center(SHEET_WIDTH).rstrip(),
+        rule,
+        f" Date:    {today_str}",
+        f" Source:  {source_label}",
+        f" Total:   {total_cards} cards to pull across {len(allocated)} pick steps",
+        " Path:    Box > Set > Section > Index (token chunks: Box > Section > Index)",
+    ]
+    key_width = max((len(k) for k in keys.values()), default=0)
+    for n, o in enumerate(orders or []):
+        counts = f"{o['cards']} cards" + (f", {o['missing']} MISSING" if o["missing"] else "")
+        lines.append(f" {'Orders:' if n == 0 else '':<8} {o['key']:<{key_width}}  {o['order_label']}  {counts}")
+    lines.append(rule)
     for note in notes or []:
-        header += f" [!] {note}\n"
+        lines += textwrap.wrap(note, SHEET_WIDTH, initial_indent=" [!] ", subsequent_indent="     ")
     if notes:
-        header += "========================================================================================\n"
-    table_rows = []
-    for seq, p in enumerate(allocated, start=1):
-        foil_str = "FOIL" if p["is_foil"] else "NF"
-        table_rows.append([
-            f"#{seq:02d}",
-            p["box_label"],
-            p["set_code"],
-            p["section_label"],
-            f"#{p['index_num']:03d}",
-            p["name"][:30],
-            p["collector_number"],
-            foil_str,
-            p["qty_to_pull"],
-            p["order_label"],
-            "[   ]",
-        ])
+        lines.append(rule)
 
-    table_text = tabulate(
-        table_rows,
-        headers=["Seq", "Box", "Set", "Section", "Index", "Card Name", "Num", "Finish", "Qty", "Order", "Done"],
-        tablefmt="simple",
+    finish = lambda foil: "FOIL" if foil else "NF"
+    order_col = ["Ord"] if keys else []
+    table_rows = [
+        [p["box_label"], p["set_code"], p["section_label"], f"{p['index_num']:03d}", p["name"],
+         p["collector_number"], finish(p["is_foil"]), p["qty_to_pull"]]
+        + ([keys.get(p["order_label"], "")] if keys else []) + ["[ ]"]
+        for p in allocated
+    ]
+    lines += _text_table(
+        ["Box", "Set", "Sec", "Idx", "Card Name", "Num", "Fin", "Qty"] + order_col + ["Done"],
+        table_rows, name_col=4, right={3, 5, 7},
     )
 
-    unallocated_text = ""
     if unallocated:
-        unallocated_text = "\n\n========================================================================================\n"
-        unallocated_text += " [!] OUT OF STOCK / UNALLOCATED ITEMS (REQUIRES ATTENTION):\n"
-        unallocated_text += "========================================================================================\n"
-        un_rows = []
-        for u in unallocated:
-            foil_str = "FOIL" if u["is_foil"] else "NF"
-            un_rows.append([
-                u["Description"][:35],
-                u["Set"],
-                u["Number"],
-                foil_str,
-                u["missing_qty"],
-                u.get("order_label", ""),
-            ])
-        unallocated_text += tabulate(
-            un_rows,
-            headers=["Card Name", "Set", "Num", "Finish", "Missing Qty", "Order"],
-            tablefmt="simple",
+        lines += ["", rule, " [!] OUT OF STOCK / NOT ALLOCATED (needs attention):", rule]
+        lines += _text_table(
+            ["Card Name", "Set", "Num", "Fin", "Missing"] + order_col,
+            [[u["Description"], u["Set"], u["Number"], finish(u["is_foil"]), u["missing_qty"]]
+             + ([keys.get(u.get("order_label"), "")] if keys else []) for u in unallocated],
+            name_col=0, right={2, 4},
         )
 
-    picked_text = ""
     if already_picked:
-        picked_text = "\n\n========================================================================================\n"
-        picked_text += " ALREADY PICKED - stock deducted earlier, not on this sheet (ship them, then mark shipped):\n"
-        picked_text += "========================================================================================\n"
-        picked_text += tabulate(
+        lines += ["", rule, " ALREADY PICKED: deducted earlier, not on this sheet (ship, then mark shipped)", rule]
+        lines += _text_table(
+            ["Order", "Deducted at"],
             [[o["order_label"], f"{o['picked_at']:%Y-%m-%d %H:%M}"] for o in already_picked],
-            headers=["Order", "Deducted at"],
-            tablefmt="simple",
         )
 
+    lines.append(rule)
     with open(filepath, "w", encoding="utf-8") as f:
-        f.write(header)
-        f.write(table_text)
-        if unallocated_text:
-            f.write(unallocated_text)
-        if picked_text:
-            f.write(picked_text)
-        f.write("\n========================================================================================\n")
+        f.write("\n".join(lines) + "\n")
 
     return os.path.abspath(filepath)
+
+
+def _text_table(
+    headers: List[str],
+    rows: List[List[Any]],
+    name_col: Optional[int] = None,
+    right: Iterable[int] = (),
+) -> List[str]:
+    """Plain-text table lines: columns as wide as their widest cell, two spaces apart.
+
+    The `name_col` column gets whatever is left of SHEET_WIDTH and longer values are cut,
+    so the table fits a printed page. Columns in `right` are right-aligned.
+    """
+    cells = [[str(c) for c in r] for r in rows]
+    widths = [max([len(h)] + [len(r[i]) for r in cells]) for i, h in enumerate(headers)]
+    if name_col is not None:
+        room = SHEET_WIDTH - 2 * (len(headers) - 1) - sum(w for i, w in enumerate(widths) if i != name_col)
+        widths[name_col] = max(len(headers[name_col]), min(widths[name_col], room))
+    right = set(right)
+
+    def line(row: List[str]) -> str:
+        return "  ".join(
+            c[:w].rjust(w) if i in right else c[:w].ljust(w) for i, (c, w) in enumerate(zip(row, widths))
+        ).rstrip()
+
+    return [line(headers), "  ".join("-" * w for w in widths)] + [line(r) for r in cells]
 
 
 def ledger_exists() -> bool:
@@ -445,14 +455,28 @@ def summarize_orders(
     allocated: List[Dict[str, Any]],
     unallocated: List[Dict[str, Any]],
 ) -> List[Dict[str, Any]]:
-    """Per-order totals for a sheet: order_label, cards to pull and cards missing, in first-seen order."""
+    """Per-order totals for a sheet, in first-seen (walk) order.
+
+    Each entry has the order's short sheet key ('A', 'B', ... 'Z', 'AA', ...), order_label,
+    cards to pull and cards missing.
+    """
     orders: Dict[str, Dict[str, Any]] = {}
     for p in allocated:
         orders.setdefault(p["order_label"], {"order_label": p["order_label"], "cards": 0, "missing": 0})["cards"] += p["qty_to_pull"]
     for u in unallocated:
         label = u.get("order_label", "")
         orders.setdefault(label, {"order_label": label, "cards": 0, "missing": 0})["missing"] += u["missing_qty"]
-    return list(orders.values())
+    return [{"key": order_key(n), **o} for n, o in enumerate(orders.values())]
+
+
+def order_key(n: int) -> str:
+    """Short sheet key for the n-th order (0-based): A..Z, then AA, AB, ..."""
+    key = ""
+    n += 1
+    while n:
+        n, r = divmod(n - 1, 26)
+        key = chr(ord("A") + r) + key
+    return key
 
 
 def commit_sheet(res: Dict[str, Any], order_labels: Optional[Iterable[str]] = None) -> Dict[str, Any]:
@@ -463,7 +487,8 @@ def commit_sheet(res: Dict[str, Any], order_labels: Optional[Iterable[str]] = No
 
     Args:
         res (Dict[str, Any]): A successful `process_pick_routine` result.
-        order_labels (Optional[Iterable[str]]): Only these orders (label or order ID); None = all.
+        order_labels (Optional[Iterable[str]]): Only these orders (sheet key such as 'A', label
+            or order ID); None = all.
 
     Returns:
         Dict[str, Any]: `res` updated with committed, committed_count, orders_deducted, orders_skipped.
@@ -475,7 +500,8 @@ def commit_sheet(res: Dict[str, Any], order_labels: Optional[Iterable[str]] = No
         raise RuntimeError(LEDGER_MISSING)
     allocated, unallocated = res["allocated_items"], res["unallocated_items"]
     if order_labels is not None:
-        wanted = {str(o).strip() for o in order_labels}
+        by_key = {o["key"]: o["order_label"] for o in res.get("orders", [])}
+        wanted = {by_key.get(str(o).strip().upper(), str(o).strip()) for o in order_labels}
         allocated = [p for p in allocated if p["order_label"] in wanted or p.get("order_id") in wanted]
         unallocated = [u for u in unallocated if u.get("order_label") in wanted or u.get("order_id") in wanted]
     done = commit_pick_deductions(allocated, unallocated)
@@ -552,6 +578,7 @@ def process_pick_routine(
         return {"status": "empty", "message": message, "already_picked": already_picked, "notes": notes}
 
     allocated, unallocated = resolve_and_optimize_picks(pick_items)
+    orders = summarize_orders(allocated, unallocated) if source_type == "api" else []
 
     sheet_path = generate_pick_sheet_file(
         allocated=allocated,
@@ -560,6 +587,7 @@ def process_pick_routine(
         source_label=source_label,
         already_picked=already_picked,
         notes=notes,
+        orders=orders,
     )
 
     res: Dict[str, Any] = {
@@ -571,7 +599,7 @@ def process_pick_routine(
         "unallocated_count": len(unallocated),
         "allocated_items": allocated,
         "unallocated_items": unallocated,
-        "orders": summarize_orders(allocated, unallocated) if source_type == "api" else [],
+        "orders": orders,
         "already_picked": already_picked,
         "ledgered": ledgered,
         "notes": notes,
@@ -618,7 +646,7 @@ def main():
     if res.get("status") == "success":
         print(f"\nSuccessfully optimized pick sequence!")
         for o in res["orders"]:
-            print(f"  Order {o['order_label']}: {o['cards']} cards" + (f", {o['missing']} MISSING" if o["missing"] else ""))
+            print(f"  {o['key']}  Order {o['order_label']}: {o['cards']} cards" + (f", {o['missing']} MISSING" if o["missing"] else ""))
         print(f"Cards to Pull: {res['total_cards']} across {res['total_allocated']} pick steps.")
         print(f"Printable Pick Sheet: {res['sheet_path']}")
         if res["unallocated_count"] > 0:

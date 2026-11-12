@@ -507,7 +507,7 @@ def action_run_picklist(stdscr, use_api: bool = False) -> None:
     ]
     if res["orders"]:
         lines.append("Orders on this sheet:")
-        lines += [f"  {o['order_label']}: {o['cards']} cards" + (f", {o['missing']} MISSING" if o["missing"] else "")
+        lines += [f"  {o['key']}  {o['order_label']}: {o['cards']} cards" + (f", {o['missing']} MISSING" if o["missing"] else "")
                   for o in res["orders"]]
     if res["unallocated_count"] > 0:
         lines.append(f"WARNING: {res['unallocated_count']} items were NOT in stock or partially missing!")
@@ -521,7 +521,7 @@ def action_run_picklist(stdscr, use_api: bool = False) -> None:
         return
     labels = None
     if len(res["orders"]) > 1:
-        only = prompt_input(stdscr, "Only these order labels, comma-separated (empty = all shown)", "")
+        only = prompt_input(stdscr, "Only these orders, letters or labels, comma-separated (empty = all shown)", "")
         labels = [x.strip() for x in only.split(",") if x.strip()] or None
 
     try:
