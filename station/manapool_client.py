@@ -14,7 +14,7 @@ from typing import Any, Dict, List, Optional, Tuple
 import requests
 from dotenv import load_dotenv
 
-from station import db
+from station import db, mode
 
 load_dotenv()
 
@@ -267,6 +267,10 @@ def push_inventory_batch(
     """
     if not is_configured():
         return 0, ["ManaPool API is not configured. Cannot push inventory."]
+    try:
+        mode.ensure_writes_allowed(db.DB_NAME)
+    except mode.ModeError as e:
+        return 0, [str(e)]
 
     url = f"{BASE_URL}/seller/inventory/product"
     batch_size = 2000
@@ -293,7 +297,12 @@ def push_inventory_batch(
 
 
 def _request(method: str, url: str, max_retries: int = 3, **kwargs: Any) -> requests.Response:
-    """Sends a request, waiting and retrying when ManaPool rate-limits it (HTTP 429 + Retry-After)."""
+    """Sends a request, waiting and retrying when ManaPool rate-limits it (HTTP 429 + Retry-After).
+
+    Every method but GET is a write and must pass `mode.ensure_writes_allowed` first (raises ModeError).
+    """
+    if method.upper() != "GET":
+        mode.ensure_writes_allowed(db.DB_NAME)
     for attempt in range(max_retries + 1):
         resp = requests.request(method, url, **kwargs)
         if resp.status_code != 429 or attempt == max_retries:
@@ -572,7 +581,7 @@ def push_one_product(product_id: str, send: bool = False) -> Dict[str, Any]:
 def preview_push(
     set_codes: Optional[List[str]] = None,
     baseline_csv: Optional[str] = None,
-    output_dir: str = "exports",
+    output_dir: str = mode.EXPORTS_DIR,
 ) -> Dict[str, Any]:
     """Dry run: shows exactly what a push of the current database would send. Sends nothing.
 
@@ -667,7 +676,7 @@ def push_changed(
     set_codes: Optional[List[str]] = None,
     baseline_csv: Optional[str] = None,
     send: bool = False,
-    output_dir: str = "exports",
+    output_dir: str = mode.EXPORTS_DIR,
 ) -> Dict[str, Any]:
     """Pushes the quantity of products that differ from the baseline (or are new), then verifies.
 
@@ -719,12 +728,12 @@ def main() -> None:
     p_prev = sub.add_parser("preview-push", help="Dry run: show what a push of the database would send (sends nothing)")
     p_prev.add_argument("--set", dest="sets", action="append", help="Set code to include (repeatable); default all")
     p_prev.add_argument("--baseline", help="ManaPool inventory export to compare against (omit to show the payload only)")
-    p_prev.add_argument("--output-dir", default="exports")
+    p_prev.add_argument("--output-dir", default=mode.EXPORTS_DIR)
     p_chg = sub.add_parser("push-changed", help="Push only products that differ from the baseline, then verify each")
     p_chg.add_argument("--set", dest="sets", action="append", required=True, help="Set code to include (repeatable)")
     p_chg.add_argument("--baseline", required=True, help="Fresh ManaPool inventory export to compare against")
     p_chg.add_argument("--send", action="store_true", help="Actually send; without it only lists what would be sent")
-    p_chg.add_argument("--output-dir", default="exports")
+    p_chg.add_argument("--output-dir", default=mode.EXPORTS_DIR)
     p_one = sub.add_parser("push-one", help="Push one product's database total (reads the live listing before/after)")
     p_one.add_argument("--product", required=True, help="ManaPool product UUID")
     p_one.add_argument("--send", action="store_true", help="Actually send; without it only reads and shows the payload")

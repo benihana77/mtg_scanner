@@ -23,10 +23,13 @@ from typing import Any, Dict, Iterable, List, Optional, Tuple
 from psycopg2 import extras
 
 from station import db
+from station import mode
 from station import manapool_client
 from station import scryfall_mirror
 
 SHEET_WIDTH = 80  # Characters per printed line (plain text on a Letter/A4 page)
+# First line of every pick or pull sheet printed in dev mode (station/mode.py).
+DEV_SHEET_WARNING = "*** DEV MODE: built from a development database. Do not pull cards from it. ***"
 
 LEDGER_MISSING = ("Order ledger table picked_orders is missing: run `python -m station.db` once. "
                   "Until then already-deducted orders cannot be detected and deducting live orders is refused.")
@@ -245,7 +248,7 @@ def resolve_and_optimize_picks(
 def generate_pick_sheet_file(
     allocated: List[Dict[str, Any]],
     unallocated: List[Dict[str, Any]],
-    output_dir: str = "exports",
+    output_dir: str = mode.EXPORTS_DIR,
     source_label: str = "ManaPool",
     already_picked: Optional[List[Dict[str, Any]]] = None,
     notes: Optional[List[str]] = None,
@@ -288,6 +291,8 @@ def generate_pick_sheet_file(
         f" Total:   {total_cards} cards to pull across {len(allocated)} pick steps",
         " Path:    Box > Set > Section > Index (token chunks: Box > Section > Index)",
     ]
+    if mode.current_mode() == mode.DEV:
+        lines[1:1] = [DEV_SHEET_WARNING.center(SHEET_WIDTH).rstrip()]
     key_width = max((len(k) for k in keys.values()), default=0)
     for n, o in enumerate(orders or []):
         counts = f"{o['cards']} cards" + (f", {o['missing']} MISSING" if o["missing"] else "")
@@ -518,7 +523,7 @@ def process_pick_routine(
     source_type: str = "csv",
     csv_file: Optional[str] = None,
     commit: bool = False,
-    output_dir: str = "exports",
+    output_dir: str = mode.EXPORTS_DIR,
     order_labels: Optional[Iterable[str]] = None,
 ) -> Dict[str, Any]:
     """Runs the complete pick list optimization routine from CSV or ManaPool API.
@@ -622,7 +627,7 @@ def main():
     parser.add_argument("--commit", action="store_true", help="Commit deductions to PostgreSQL inventory")
     parser.add_argument("--order", dest="orders", action="append",
                         help="Only this order label (repeatable); default every order waiting to ship")
-    parser.add_argument("--output-dir", default="exports", help="Directory for generated pick sheet")
+    parser.add_argument("--output-dir", default=mode.EXPORTS_DIR, help="Directory for generated pick sheet")
 
     args = parser.parse_args()
 

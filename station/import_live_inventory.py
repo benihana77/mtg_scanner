@@ -31,6 +31,7 @@ from psycopg2 import extras
 from tabulate import tabulate
 
 from station import db
+from station import mode
 from station import scryfall_mirror
 from station import SET_BOX_MAP_CSV
 
@@ -394,7 +395,7 @@ def import_live_inventory(
     map_csv: str = SET_BOX_MAP_CSV,
     unmapped_box: str = "Unassigned",
     rebuild: bool = False,
-    output_dir: str = "exports",
+    output_dir: str = mode.EXPORTS_DIR,
 ) -> Dict[str, Any]:
     """Imports a ManaPool inventory backup, mapped to physical boxes and the Scryfall mirror.
 
@@ -468,7 +469,7 @@ def main():
         action="store_true",
         help="Drop cards/inventory/price_history, recreate from schema.sql and insert (otherwise preview only)",
     )
-    parser.add_argument("--output-dir", default="exports", help="Directory for the import summary file")
+    parser.add_argument("--output-dir", default=mode.EXPORTS_DIR, help="Directory for the import summary file")
 
     args = parser.parse_args()
 

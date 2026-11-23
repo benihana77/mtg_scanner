@@ -33,6 +33,7 @@ from psycopg2 import extras
 from tabulate import tabulate
 
 from station import db
+from station import mode
 from station import manapool_client
 from station import CONFIG_DIR
 
@@ -363,7 +364,7 @@ def plan_reprice(
 
 
 def write_report(plan: List[Dict[str, Any]], decisions: Dict[str, Optional[int]], header: List[str],
-                 output_dir: str = "exports") -> Tuple[str, str]:
+                 output_dir: str = mode.EXPORTS_DIR) -> Tuple[str, str]:
     """Writes the run report (.txt) and a full CSV of every planned price."""
     os.makedirs(output_dir, exist_ok=True)
     stamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -427,7 +428,7 @@ def run_reprice(
     confirm: Optional[Callable[[List[str]], bool]] = None,
     preview: bool = False,
     config: Optional[Dict[str, Any]] = None,
-    output_dir: str = "exports",
+    output_dir: str = mode.EXPORTS_DIR,
 ) -> Dict[str, Any]:
     """Runs a reprice: drift check, plan, review, confirm, price-only push, verify, update DB.
 
@@ -583,7 +584,7 @@ def main() -> None:
     p_sync.add_argument("--apply", action="store_true", help="Copy live prices into the database")
     p_run = sub.add_parser("run", help="Reprice (drift check, plan, review, push, verify)")
     p_run.add_argument("--preview", action="store_true", help="Plan and report only; push nothing")
-    p_run.add_argument("--output-dir", default="exports")
+    p_run.add_argument("--output-dir", default=mode.EXPORTS_DIR)
     sub.add_parser("pins", help="List pinned products")
     p_pin = sub.add_parser("pin", help="Pin a product so the repricer leaves it alone (or holds a fixed price)")
     p_pin.add_argument("--product", help="ManaPool product id")

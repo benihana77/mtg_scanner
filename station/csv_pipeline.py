@@ -23,6 +23,7 @@ from typing import Any, Dict, List, Optional, Tuple
 from tabulate import tabulate
 
 from station import db
+from station import mode
 from station import import_live_inventory
 from station import intake_sheet
 from station import manapool_client
@@ -125,7 +126,7 @@ def ingest_csv_batch(
     file_path: str,
     box_label: Optional[str] = None,
     section_label: Optional[str] = None,
-    output_dir: str = "exports",
+    output_dir: str = mode.EXPORTS_DIR,
     push_to_api: bool = False,
     interactive: bool = True,
     prompt_callback: Optional[Any] = None,
@@ -230,15 +231,17 @@ def ingest_csv_batch(
                 "index_num": idx,
             })
 
-        csv_path = generate_manapool_upload_csv(set_code=shelf_set, rows=rows, output_dir=output_dir)
-        generated_csvs.append(csv_path)
+        if mode.current_mode() != mode.DEV:  # a dev batch must never be uploadable to the live store
+            generated_csvs.append(generate_manapool_upload_csv(set_code=shelf_set, rows=rows, output_dir=output_dir))
 
     db.insert_inventory_batch(all_inventory_to_insert)
     retired_to = intake_sheet.retire_sheet(file_path)
 
     api_added: Dict[str, int] = {}
     api_mismatches: List[str] = []
-    if push_to_api and manapool_client.is_configured():
+    if push_to_api and mode.current_mode() == mode.DEV:
+        api_errors.append("Dev mode: the batch is in the development database only; nothing was sent to ManaPool.")
+    elif push_to_api and manapool_client.is_configured():
         # Add to the live listings (live quantity + this batch), never reset them to a total.
         prices: Dict[str, Optional[int]] = {}
         for it in all_inventory_to_insert:
@@ -279,7 +282,7 @@ def ingest_csv_batch(
 def generate_manapool_upload_csv(
     set_code: str,
     rows: List[Dict[str, Any]],
-    output_dir: str = "exports",
+    output_dir: str = mode.EXPORTS_DIR,
 ) -> str:
     """Generates a clean CSV containing only positive quantity rows for ManaPool web upload.
 
@@ -452,7 +455,7 @@ def main():
     p_ingest.add_argument("csv_file", help="Path to ManaPool set CSV file")
     p_ingest.add_argument("--box", default=None, help="Optional target box override (auto-resolved per set by default)")
     p_ingest.add_argument("--section", default=None, help="Optional section override (defaults to auto-allocated Sec-X)")
-    p_ingest.add_argument("--output-dir", default="exports", help="Directory for generated export files")
+    p_ingest.add_argument("--output-dir", default=mode.EXPORTS_DIR, help="Directory for generated export files")
     p_ingest.add_argument("--push-api", action="store_true", help="Push inventory directly to ManaPool API if configured")
 
     # Subcommand: relocate
@@ -486,7 +489,7 @@ def main():
                 print(f"  - Set {s_code} -> Box {b_lbl} / {res['set_sections'][s_code]}")
             if res["skipped_non_singles"]:
                 print(f"Skipped {res['skipped_non_singles']} non-single rows.")
-            print("Generated ManaPool upload CSVs:")
+            print("Generated ManaPool upload CSVs:" if res["upload_csvs"] else "No ManaPool upload CSVs (dev mode).")
             for c in res["upload_csvs"]:
                 print(f"  - {c}")
             if res["retired_to"]:

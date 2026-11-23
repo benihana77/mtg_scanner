@@ -18,6 +18,8 @@ import psycopg2
 from psycopg2 import extras
 from dotenv import load_dotenv
 
+from station import mode
+
 # Load environment variables from .env file
 load_dotenv()
 
@@ -41,7 +43,9 @@ def get_connection():
 
     Raises:
         psycopg2.OperationalError: If unable to connect to the PostgreSQL instance.
+        mode.ModeError: If dev mode would open the live database.
     """
+    mode.ensure_db_allowed(DB_NAME)
     try:
         return psycopg2.connect(
             host=DB_HOST,

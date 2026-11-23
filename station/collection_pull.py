@@ -30,6 +30,7 @@ from typing import Any, Dict, Iterable, List, Optional, Tuple
 from tabulate import tabulate
 
 from station import db
+from station import mode
 from station import import_live_inventory
 from station import manapool_client
 from station import pull_list_optimizer
@@ -280,7 +281,7 @@ def write_pull_sheet(
     shortfalls: List[Dict[str, Any]],
     label: str,
     order_status: str,
-    output_dir: str = "exports",
+    output_dir: str = mode.EXPORTS_DIR,
 ) -> str:
     """Writes a printable personal pull sheet in walk order.
 
@@ -295,6 +296,8 @@ def write_pull_sheet(
     value = sum(p["qty_to_pull"] * float(p["manapool_listed_price"] or 0) for p in picks)
 
     with open(path, "w", encoding="utf-8") as f:
+        if mode.current_mode() == mode.DEV:
+            f.write(pull_list_optimizer.DEV_SHEET_WARNING.center(88).rstrip() + "\n")
         f.write(f"""========================================================================================
                           PERSONAL COLLECTION PULL SHEET
 ========================================================================================
@@ -328,7 +331,7 @@ def write_pull_sheet(
     return os.path.abspath(path)
 
 
-def sync_manapool(picks: List[Dict[str, Any]], output_dir: str = "exports") -> Dict[str, Any]:
+def sync_manapool(picks: List[Dict[str, Any]], output_dir: str = mode.EXPORTS_DIR) -> Dict[str, Any]:
     """Takes the pulled copies off ManaPool (live quantity - pulled, read back), or writes a CSV.
 
     Must run after the deduction is committed. The base is the LIVE quantity, read just before
@@ -340,6 +343,7 @@ def sync_manapool(picks: List[Dict[str, Any]], output_dir: str = "exports") -> D
     If the API is not configured or the push fails, writes a CSV of absolute quantities to
     upload by hand: live - pulled when the live listing was read ('basis' 'live'), otherwise the
     database total ('basis' 'database'; lower any product with an unpicked order before uploading).
+    In dev mode nothing is sent and no CSV is written ('mode' 'none').
 
     Returns:
         Dict[str, Any]: 'mode' ('api' | 'csv' | 'none'), 'updated', 'errors', 'csv_path', 'basis',
@@ -356,6 +360,9 @@ def sync_manapool(picks: List[Dict[str, Any]], output_dir: str = "exports") -> D
                               "before": {}, "sent": {}, "unlisted": [], "mismatches": []}
     if not by_product:
         result["errors"] = ["No ManaPool product IDs on pulled rows."]
+        return result
+    if mode.current_mode() == mode.DEV:  # no push, and no upload CSV that could reach the live store by hand
+        result["errors"] = ["Dev mode: ManaPool was not changed and no upload CSV was written."]
         return result
 
     targets: Optional[Dict[str, int]] = None
@@ -396,7 +403,7 @@ def run_pull(
     label: str,
     confirm: Any = None,
     force: bool = False,
-    output_dir: str = "exports",
+    output_dir: str = mode.EXPORTS_DIR,
 ) -> Dict[str, Any]:
     """Plans a pull, writes the sheet, and on confirmation deducts stock and syncs ManaPool.
 
@@ -494,7 +501,7 @@ def main() -> None:
     p_pull.add_argument("--decklist", help="Decklist file ('4 Lightning Bolt', '1 Name (SET) 123', '*F*' for foil)")
     p_pull.add_argument("--yes", action="store_true", help="Do not ask for confirmation")
     p_pull.add_argument("--force", action="store_true", help="Also pull copies held for open ManaPool orders")
-    p_pull.add_argument("--output-dir", default="exports")
+    p_pull.add_argument("--output-dir", default=mode.EXPORTS_DIR)
 
     args = parser.parse_args()
 
