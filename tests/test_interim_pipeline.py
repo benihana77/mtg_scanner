@@ -27,6 +27,7 @@ from station import collection_pull
 from station import db
 from station import csv_pipeline
 from station import manapool_client
+from station import mode
 from station import pull_list_optimizer
 from station import audit
 from station import repricer
@@ -88,6 +89,12 @@ class TestMTGInterimPipeline(unittest.TestCase):
         admin.close()
 
         db.DB_NAME = test_db_name
+        # The suite stands in for the live store: ManaPool HTTP is mocked, so its pushes
+        # may pass the live-mode, live-database write guard (station/mode.py).
+        cls.mode_patches = [patch.dict(os.environ, {"MTG_MODE": mode.LIVE}),
+                            patch.object(mode, "LIVE_DB_NAME", test_db_name)]
+        for p in cls.mode_patches:
+            p.start()
         with db.get_db_cursor() as cur:
             cur.execute("DROP TABLE IF EXISTS price_history, inventory, cards, scryfall_cards, picked_orders CASCADE;")
         db.init_db()
@@ -95,6 +102,8 @@ class TestMTGInterimPipeline(unittest.TestCase):
     @classmethod
     def tearDownClass(cls):
         """Restores the live database name and cleans up test exports directory."""
+        for p in cls.mode_patches:
+            p.stop()
         db.DB_NAME = cls.live_db_name
         if os.path.exists(cls.test_dir):
             shutil.rmtree(cls.test_dir)

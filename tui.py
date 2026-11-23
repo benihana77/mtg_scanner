@@ -27,6 +27,7 @@ from station import collection_pull
 from station import csv_pipeline
 from station import intake_sheet
 from station import manapool_client
+from station import mode
 from station import pull_list_optimizer
 from station import repricer
 from station import scryfall_mirror
@@ -114,7 +115,11 @@ def draw_header(stdscr, status_msg: str = "Ready") -> None:
     stdscr.attroff(curses.color_pair(2) | curses.A_BOLD)
 
     # Connection and stock metrics
-    api_status = "Connected (Live API)" if manapool_client.is_configured() else "Offline (CSV Mode)"
+    dev = mode.current_mode() == mode.DEV
+    if not manapool_client.is_configured():
+        api_status = "Offline (CSV Mode)"
+    else:
+        api_status = "Read only (dev mode)" if dev else "Connected (Live API)"
     db_name = db.DB_NAME
     
     try:
@@ -126,7 +131,7 @@ def draw_header(stdscr, status_msg: str = "Ready") -> None:
     except Exception:
         stats_str = "Stock: Database query error"
 
-    status_line = f" DB: {db_name} | ManaPool: {api_status} | {stats_str}"
+    status_line = f" {'DEV MODE' if dev else 'LIVE'} | DB: {db_name} | ManaPool: {api_status} | {stats_str}"
     stdscr.addstr(1, 0, status_line[: max_x - 1], curses.color_pair(4))
 
     # Bottom status bar
@@ -151,7 +156,9 @@ def action_ingest_batch(stdscr, csv_path: Optional[str] = None) -> None:
     if csv_path is None:
         # Offer the sheets waiting in intake/, newest first
         pending = intake_sheet.pending_sheets()
-        stdscr.addstr(5, 2, "Sheets waiting in intake/:" if pending else "No sheets waiting in intake/.", curses.color_pair(3))
+        where = os.path.relpath(intake_sheet.INTAKE_DIR) + "/"
+        stdscr.addstr(5, 2, f"Sheets waiting in {where}:" if pending else f"No sheets waiting in {where}.",
+                      curses.color_pair(3))
         for n, p in enumerate(pending[: max(0, max_y - 12)], start=1):
             s = intake_sheet.summarize(intake_sheet.read_sheet(p))
             stdscr.addstr(5 + n, 4, f"{os.path.relpath(p)}  ({s['lines']} lines, {s['cards']} cards, "
@@ -203,7 +210,10 @@ def action_ingest_batch(stdscr, csv_path: Optional[str] = None) -> None:
             if res["skipped_non_singles"]:
                 msg_lines.append(f"Skipped {res['skipped_non_singles']} non-single rows.")
             msg_lines.append("")
-            msg_lines.append("Generated ManaPool Upload CSVs:")
+            if res["upload_csvs"]:
+                msg_lines.append("Generated ManaPool Upload CSVs:")
+            else:
+                msg_lines.append("No ManaPool upload CSVs (dev mode).")
             for c in res["upload_csvs"]:
                 msg_lines.append(f"  {os.path.basename(c)}")
 
@@ -896,6 +906,11 @@ def main_loop(stdscr) -> None:
 
 def main():
     """Runs the curses TUI."""
+    try:
+        mode.check_pairing(db.DB_NAME)
+    except mode.ModeError as e:
+        print(f"Not starting: {e}", file=sys.stderr)
+        sys.exit(1)
     try:
         curses.wrapper(main_loop)
     except KeyboardInterrupt:

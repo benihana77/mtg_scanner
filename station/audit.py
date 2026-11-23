@@ -37,9 +37,10 @@ from tabulate import tabulate
 
 from station import db
 from station import manapool_client
+from station import mode
 from station import ROOT
 
-AUDIT_DIR = os.path.join(ROOT, "audits")
+AUDIT_DIR = mode.data_dir("audits")  # dev mode: dev/audits
 APPLIED_LOG = os.path.join(AUDIT_DIR, "applied_counts.csv")
 # Listings lowered to ManaPool's (conservative) quantity until counted; holds the previous DB quantity.
 NEEDS_COUNT = os.path.join(AUDIT_DIR, "needs_count.csv")

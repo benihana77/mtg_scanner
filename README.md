@@ -13,6 +13,7 @@ mtg_scanner/
 ├── tui.py                 # Curses TUI: python tui.py
 ├── station/               # Daily tools and the shared library: python -m station.<module>
 │   ├── db.py, schema.sql  #   PostgreSQL connection and schema
+│   ├── mode.py            #   Dev/live mode guard (MTG_MODE)
 │   ├── scryfall_mirror.py #   Local Scryfall mirror
 │   ├── manapool_client.py #   ManaPool API client and push tools
 │   ├── intake_sheet.py    #   Intake sheets: one set's ManaPool catalog CSV, priced, to count
@@ -20,7 +21,7 @@ mtg_scanner/
 │   ├── pull_list_optimizer.py, collection_pull.py  # Order picking, personal pulls
 │   ├── repricer.py, audit.py                       # Pricing, physical audits
 │   └── import_live_inventory.py                    # Full rebuild from a ManaPool export (rare)
-├── tools/                 # Occasional reports: python -m tools.<module>
+├── tools/                 # Occasional reports, dev_db.py (dev database copy): python -m tools.<module>
 ├── archive/               # Finished one-time code, kept for reference (not maintained)
 ├── tests/                 # python -m unittest discover -s tests
 ├── config/                # repricer.toml, set_box_map.csv (set -> box)
@@ -157,12 +158,35 @@ SCRYFALL_USER_AGENT=mtg_scanner/1.0
 # Optional: For live ManaPool API integration
 MANAPOOL_EMAIL=your_email@example.com
 MANAPOOL_API_TOKEN=mpat_your_token_here
+
+# Optional: live (default when unset) or dev; see "Development Mode" below
+MTG_MODE=live
 ```
 
 ### 4. Launch the Curses TUI
 ```bash
 python tui.py
 ```
+The header shows `LIVE` or `DEV MODE`. The TUI refuses to start if the mode and `DB_NAME` don't match.
+
+### Development Mode (Scanning Station Work)
+Scanning-station development runs on a copy of the live database and never touches the store:
+```bash
+# On the database host: copy the live database into mtg_inventory_dev (live is only read)
+python -m tools.dev_db refresh            # --replace to overwrite an existing copy
+python -m tools.dev_db status             # sizes and inventory totals of both databases
+```
+A dev checkout (for example on the Pi) sets `MTG_MODE=dev` and `DB_NAME=mtg_inventory_dev` in its `.env`, plus `DB_HOST` set to the database host's address. On the home computer, leave `.env` on live (the nightly snapshot cron uses it) and start dev runs with the settings on the command line:
+```bash
+MTG_MODE=dev DB_NAME=mtg_inventory_dev python tui.py
+```
+Dev mode:
+- refuses to open the live database (`mtg_inventory`)
+- refuses every ManaPool write; catalog, price and inventory reads, previews and dry runs still work
+- writes intake sheets, exports and audit files under `dev/` (git-ignored), never into the live `intake/`, `exports/` or `audits/`
+- writes no ManaPool upload CSVs, and marks every pick and pull sheet "DEV MODE ... Do not pull cards from it"
+
+ManaPool writes also need the live database in live mode, so a copy or test database can never be pushed to the store. In dev mode, don't do anything to the store's boxes: dev sheets describe the copy, not the shelves.
 
 ---
 

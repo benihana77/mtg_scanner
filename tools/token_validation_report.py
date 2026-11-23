@@ -27,6 +27,7 @@ from typing import Any, Dict, List, Tuple
 from tabulate import tabulate
 
 from station import db
+from station import mode
 from station import scryfall_mirror
 
 TOKEN_SECTION_RE = re.compile(r"^TOKEN(S|-\d+)$", re.IGNORECASE)
@@ -117,7 +118,7 @@ def _walk_key(r: Dict[str, Any]) -> Tuple[Any, ...]:
     )
 
 
-def write_report(flagged: List[Dict[str, Any]], total_rows: int, output_dir: str = "exports") -> Tuple[str, str]:
+def write_report(flagged: List[Dict[str, Any]], total_rows: int, output_dir: str = mode.EXPORTS_DIR) -> Tuple[str, str]:
     """Writes the walk sheet (.txt) and CSV for flagged rows.
 
     Args:
@@ -185,7 +186,7 @@ def write_report(flagged: List[Dict[str, Any]], total_rows: int, output_dir: str
     return os.path.abspath(txt_path), os.path.abspath(csv_path)
 
 
-def run_report(output_dir: str = "exports") -> Dict[str, Any]:
+def run_report(output_dir: str = mode.EXPORTS_DIR) -> Dict[str, Any]:
     """Builds the token validation report from the live database.
 
     Args:
@@ -210,7 +211,7 @@ def run_report(output_dir: str = "exports") -> Dict[str, Any]:
 def main() -> None:
     """CLI entry point for the token validation report."""
     parser = argparse.ArgumentParser(description="Report tokens / non-tokens filed in the wrong place (read only)")
-    parser.add_argument("--output-dir", default="exports", help="Directory for the report files")
+    parser.add_argument("--output-dir", default=mode.EXPORTS_DIR, help="Directory for the report files")
     args = parser.parse_args()
 
     result = run_report(args.output_dir)

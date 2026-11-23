@@ -18,6 +18,8 @@ from typing import Any, Dict, List, Optional, Tuple
 
 from tabulate import tabulate
 
+from station import mode
+
 
 def load_raw_set_box_rows(map_path: str) -> List[Dict[str, str]]:
     """Loads all raw rows from the Set_Box Map CSV preserving order and headers."""
@@ -345,6 +347,8 @@ def main():
     parser.add_argument("--non-interactive", action="store_true", help="Do not prompt for unmapped sets")
     parser.add_argument("--token-box", default="TOKENS", help="Box label for dedicated token storage")
     args = parser.parse_args()
+    if mode.current_mode() == mode.DEV:  # it rewrites config/set_box_map.csv, which live intake reads
+        sys.exit("Not running in dev mode: this tool rewrites config/set_box_map.csv.")
 
     run_audit(
         inventory_csv=args.inventory,

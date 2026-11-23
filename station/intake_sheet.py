@@ -39,11 +39,12 @@ from tabulate import tabulate
 from station import ROOT
 from station import db
 from station import manapool_client
+from station import mode
 from station import repricer
 from station import scryfall_mirror
 from station.import_live_inventory import _set_sort_key, collector_number_sort_key, name_sort_key
 
-INTAKE_DIR = os.path.join(ROOT, "intake")
+INTAKE_DIR = mode.data_dir("intake")  # dev mode: dev/intake
 
 # Same columns, same order, as ManaPool's website catalog export.
 SHEET_COLUMNS = [

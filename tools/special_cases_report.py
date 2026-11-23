@@ -20,6 +20,7 @@ from typing import Any, Dict, List, Tuple
 from tabulate import tabulate
 
 from station import SET_BOX_MAP_CSV
+from station import mode
 from station import import_live_inventory as ili
 
 # Check code -> what it means / what to verify. Order is the legend order.
@@ -200,7 +201,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Printable check sheet for unusual cards (read only)")
     parser.add_argument("--inventory-csv", required=True, help="Path to ManaPool inventory export CSV")
     parser.add_argument("--map-csv", default=SET_BOX_MAP_CSV)
-    parser.add_argument("--output-dir", default="exports")
+    parser.add_argument("--output-dir", default=mode.EXPORTS_DIR)
     args = parser.parse_args()
 
     plan = ili.plan_import(args.inventory_csv, args.map_csv)
